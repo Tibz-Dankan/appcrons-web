@@ -15,6 +15,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // <html lang="en" data-theme="dark">
+    // TODO: add dynamic changing of themes
     <html lang="en">
       <body className={inter.className}>{children}</body>
     </html>
