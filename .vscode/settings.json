@@ -1,3 +1,10 @@
 {
-  "cSpell.words": ["daisyui", "tailwindcss"]
+  "cSpell.words": [
+    "daisyui",
+    "formik",
+    "Signin",
+    "tailwindcss",
+    "tanstack",
+    "zustand"
+  ]
 }

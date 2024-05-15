@@ -1,5 +1,18 @@
-import React from "react";
+"use client";
+import React, { ReactNode } from "react";
+import ReactQueryProvider from "./reactQuery";
+// import NotificationProvider from "./notification";
 
-export default function Providers() {
-  return <div>app providers</div>;
+interface ProvidersProps {
+  children: ReactNode;
 }
+
+export const Providers: React.FC<ProvidersProps> = (props) => {
+  return (
+    <ReactQueryProvider>
+      {/* <NotificationProvider> */}
+      {props.children}
+      {/* </NotificationProvider> */}
+    </ReactQueryProvider>
+  );
+};
