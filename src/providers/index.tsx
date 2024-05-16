@@ -1,7 +1,7 @@
 "use client";
 import React, { ReactNode } from "react";
 import ReactQueryProvider from "./reactQuery";
-// import NotificationProvider from "./notification";
+import ReduxProvider from "./redux";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -10,9 +10,7 @@ interface ProvidersProps {
 export const Providers: React.FC<ProvidersProps> = (props) => {
   return (
     <ReactQueryProvider>
-      {/* <NotificationProvider> */}
-      {props.children}
-      {/* </NotificationProvider> */}
+      <ReduxProvider>{props.children}</ReduxProvider>
     </ReactQueryProvider>
   );
 };

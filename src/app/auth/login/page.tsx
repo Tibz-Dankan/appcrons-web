@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useRef } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -8,12 +8,16 @@ import { Spinner } from "@/shared/loader/spinner";
 import { InputField } from "@/shared/inputField";
 import Button from "@/shared/button";
 import { TSigninInPut } from "@/types/auth";
-import { useNotificationStore } from "@/store/notification";
 import { AuthService } from "@/services/auth.service";
 import Link from "next/link";
+import { useAppDispatch } from "@/hooks/redux";
+import {
+  hideCardNotification,
+  showCardNotification,
+} from "@/store/actions/notification";
 
 const Login: React.FC = () => {
-  const { showCardNotification, hideCardNotification } = useNotificationStore();
+  const dispatch = useAppDispatch();
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
@@ -21,10 +25,10 @@ const Login: React.FC = () => {
       console.log("Log in successful");
     },
     onError: (error: any) => {
-      showCardNotification({ type: "error", message: error.message });
+      dispatch(showCardNotification({ type: "error", message: error.message }));
       console.log("Error: ", error.message);
       setTimeout(() => {
-        hideCardNotification();
+        dispatch(hideCardNotification());
       }, 5000);
     },
   });
@@ -61,19 +65,11 @@ const Login: React.FC = () => {
 
   return (
     <Fragment>
-      <div
-        className="min-h-screen grid place-items-center py-28
-         relative bg-gray-200"
-      >
-        <div
-          className="bg-blue-100 w-[100vw] h-[60vh] 
-          absolute top-0 left-0 right-0 rounded-b-[60%] z-0"
-        />
-
+      <div className="">
         <form
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-0 items-center w-[90%] sm:w-[480px]
-          bg-gray-50 shadow-md p-8 rounded-md z-[1]"
+          bg-gray-50s shadow-md p-8 rounded-md z-[1]"
         >
           <Link href="/">
             <img src="/logo/png" alt="logo" className="w-28" />
