@@ -28,7 +28,7 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
     <Fragment>
       <div
         className="relative pt-4 flex flex-col items-start 
-         justify-center gap-1 w-full text-gray-800"
+         justify-center gap-1 w-full text-gray-800s"
       >
         {formik.errors[`${name}`] && formik.touched[`${name}`] && (
           <p className="absolute top-0 left-0 text-sm text-red-600">

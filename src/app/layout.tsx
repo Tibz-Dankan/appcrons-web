@@ -17,9 +17,9 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
+    // TODO: add dynamic changing of themes
     <Providers>
-      {/* // <html lang="en" data-theme="dark">
-    // TODO: add dynamic changing of themes */}
+      {/* <html lang="en" data-theme="dark"> */}
       <html lang="en">
         <body className={inter.className}>
           <NotificationInitializer />

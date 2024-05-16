@@ -15,6 +15,7 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
+import Image from "next/image";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -65,14 +66,18 @@ const Login: React.FC = () => {
 
   return (
     <Fragment>
-      <div className="">
+      <div
+        className="flex items-center justify-center min-h-[100vh] 
+        min-w-[100vw] bg-green-500s"
+      >
         <form
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-0 items-center w-[90%] sm:w-[480px]
           bg-gray-50s shadow-md p-8 rounded-md z-[1]"
         >
           <Link href="/">
-            <img src="/logo/png" alt="logo" className="w-28" />
+            {/* <img src="/logo.png" alt="logo" className="w-28" /> */}
+            <Image src="/logo.png" width={100} height={100} alt="logo" />
           </Link>
           <p className="text-center text-2xl font-semibold">Log in</p>
           <InputField type="email" name="email" formik={formik} />
