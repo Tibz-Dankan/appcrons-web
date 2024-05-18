@@ -36,6 +36,7 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
           </p>
         )}
         <div className="w-full relative">
+          {/* To add styling for the for the input element */}
           <input
             type={getFieldType()}
             id={name}
