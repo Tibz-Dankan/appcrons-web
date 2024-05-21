@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers";
-import NotificationInitializer from "@/shared/notificationInitializer";
+import NotificationInitializer from "@/app/shared/notificationInitializer";
 
 const inter = Inter({ subsets: ["latin"] });
 
