@@ -23,7 +23,14 @@ const Login: React.FC = () => {
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
     onSuccess: (auth: any) => {
-      console.log("Log in successful");
+      console.log("login successful");
+      // TODO: To remove successful notification
+      // dispatch(
+      //   showCardNotification({ type: "success", message: auth.message })
+      // );
+      // setTimeout(() => {
+      //   dispatch(hideCardNotification());
+      // }, 5000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));

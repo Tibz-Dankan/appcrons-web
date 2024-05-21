@@ -166,7 +166,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
   return (
     <Fragment>
       <div
-        className="relative z-[-1000] grid place-items-center
+        className="relative z-[-100] grid place-items-center
          w-full animate-slideDown"
       >
         <div
