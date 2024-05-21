@@ -8,20 +8,27 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
+  theme: {
+    extend: {
+      colors: {
+        "color-primary": "var(--color-primary)",
+        "color-secondary": "var(--color-secondary)",
+        "color-tertiary": "var(--color-tertiary)",
+      },
+    },
+  },
   daisyui: {
     themes: [
       {
         light: {
-          // ...require("daisyui/src/theming/themes")["light"],
           ...daisyuiThemes["light"],
-          primary: "#0ca678", //Teal-7
+          primary: "#087f5b", //Teal-9
           secondary: "#1098ad", //Cyan-7
         },
         dark: {
-          // ...require("daisyui/src/theming/themes")["dark"],
           ...daisyuiThemes["dark"],
-          primary: "#0ca678", //Teal-7
-          secondary: "#1098ad", //Cyan-7
+          primary: "#087f5b", //Teal-9
+          secondary: "#1098ad", //Cyan-7",
         },
       },
     ],
@@ -30,3 +37,13 @@ const config: Config = {
   plugins: [daisyui],
 };
 export default config;
+
+// Dark mode text colors
+// --color-primary: #e9ecef; /*primary color for text, border, etc*/
+// --color-secondary: #868e96; /*secondary color for text, border, etc*/
+// --color-tertiary: #495057; /*tertiary color for text, border, cards etc*/
+
+// Light mode text colors
+// --color-primary: #343a40; /*primary color for text, border, etc*/
+// --color-secondary: #868e96; /*secondary color for text, border, etc*/
+// --color-tertiary: #e9ecef; /*tertiary color for text, border, cards etc*/

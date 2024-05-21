@@ -3,15 +3,21 @@
 @tailwind utilities;
 
 :root {
-  --my-color: #fff;
+  --color-primary: #343a40; /*primary color for text, border, etc*/
+  --color-secondary: #ced4da; /*secondary color for text, border, etc*/
+  --color-tertiary: #f8f9fa; /*tertiary color for text, border, cards etc*/
 }
 [data-theme="dark"] {
-  --my-color: #252b30;
+  --color-primary: #ced4da; /*primary color for text, border, etc*/
+  --color-secondary: #495057; /*secondary color for text, border, etc*/
+  --color-tertiary: #252b30; /*tertiary color for text, border, cards etc*/
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --my-color: #252b30;
+    --color-primary: #ced4da; /*primary color for text, border, etc*/
+    --color-secondary: #495057; /*secondary color for text, border, etc*/
+    --color-tertiary: #252b30; /*tertiary color for text, border, cards etc*/
   }
 }
 

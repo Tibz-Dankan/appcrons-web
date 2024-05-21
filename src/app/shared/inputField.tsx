@@ -27,16 +27,15 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
   return (
     <Fragment>
       <div
-        className="relative pt-4 flex flex-col items-start 
+        className="relative pt-6 flex flex-col items-start 
          justify-center gap-1 w-full text-gray-800s"
       >
         {formik.errors[`${name}`] && formik.touched[`${name}`] && (
-          <p className="absolute top-0 left-0 text-sm text-red-600s text-error">
+          <p className="absolute top-0 left-0 text-sm text-error first-letter:uppercase">
             {formik.errors[`${name}`]}
           </p>
         )}
         <div className="w-full relative">
-          {/* To add styling for the for the input element */}
           <input
             type={getFieldType()}
             id={name}
@@ -45,12 +44,11 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
             onChange={formik.handleChange}
             value={formik.values[`${name}`]}
             placeholder={placeholder}
-            // className="input input-bordered w-full max-w-xs"
-            className="p-2 outline-none rounded border-[1px]
-            border-gray-500 focus:border-[1px] focus:border-primary
-            transition-all text-sm w-full focus:outline-none 
+            className="p-2 outline-none rounded-md border-[1px]
+            border-color-secondary focus:border-[1px] focus:border-primary
+            transition-all text-sm w-full focus:outline-none
             focus:shadow-[0px_0px_0px_4px_rgba(12,166,120,0.3)]
-            text-gray-800"
+            text-color-primary"
           />
 
           {isPasswordField && (
@@ -63,7 +61,7 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
                   <IconContext.Provider
                     value={{
                       size: "1.4rem",
-                      color: "#495057",
+                      color: "#868e96",
                     }}
                   >
                     <PiEyeLight />
@@ -78,7 +76,7 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
                   <IconContext.Provider
                     value={{
                       size: "1.4rem",
-                      color: "#495057",
+                      color: "#868e96",
                     }}
                   >
                     <PiEyeSlashLight />

@@ -67,45 +67,57 @@ const Login: React.FC = () => {
   return (
     <Fragment>
       <div
-        className="flex items-center justify-center min-h-[100vh] 
-        min-w-[100vw] bg-green-500s"
+        className="flex flex-col items-center justify-center gap-12
+         min-h-[100vh] min-w-[100vw]"
       >
-        <form
-          onSubmit={formik.handleSubmit}
-          className="flex flex-col gap-0 items-center w-[90%] sm:w-[480px]
-          bg-gray-50s shadow-md p-8 rounded-md z-[1]"
-        >
+        <div className="w-full flex flex-col items-center">
           <Link href="/">
-            {/* <img src="/logo.png" alt="logo" className="w-28" /> */}
             <Image src="/logo.png" width={100} height={100} alt="logo" />
           </Link>
-          <p className="text-center text-2xl font-semibold">Log in</p>
+          <p className="text-center text-2xl text-color-primary">
+            Log in to AppCrons
+          </p>
+        </div>
+        <form
+          onSubmit={formik.handleSubmit}
+          className="flex flex-col gap-0 items-center w-[90%] sm:w-96
+          border-[1px] border-color-secondary bg-color-tertiary p-8 
+          rounded-md z-[1] text-color-primary"
+        >
           <InputField type="email" name="email" formik={formik} />
           <InputField type="password" name="password" formik={formik} />
-          {!isPending && (
-            <Button
-              label="Log in"
-              type="submit"
-              aria-disabled={isPending}
-              className="mt-6 font-semibold"
-            />
-          )}
-          {isPending && (
-            <div className="py-[6px] font-semibold text-gray-100">
-              <Spinner label="Logging in" className="w-5 h-5 text-gray-100" />
-            </div>
-          )}
-          <div className="mt-4 space-y-4">
-            <p className="text-center hover:underline hover:text-blue-500 cursor-pointer">
-              <Link href="/auth/forgot-password">Forgot password</Link>
+          <Button
+            label={
+              <>
+                {!isPending && <span>Log in</span>}
+                {isPending && (
+                  <Spinner
+                    label="Logging in"
+                    className="w-5 h-5 text-gray-100"
+                  />
+                )}
+              </>
+            }
+            type="submit"
+            aria-disabled={isPending}
+            className="w-full mt-6 font-semibold"
+          />
+          <div className="w-full mt-4 space-y-4s flex justify-between gap-4">
+            <p
+              className="text-center text-color-primary hover:underline
+              hover:text-blue-500 cursor-pointer"
+            >
+              <Link href="/auth/forgot-password">Forgot password?</Link>
             </p>
-            <p className="hover:underline hover:text-blue-500 cursor-pointer">
-              <Link href="/auth/signup" className="underline">
-                Create account
-              </Link>
+            <p
+              className="hover:underline text-color-primary hover:text-blue-500 
+              cursor-pointer"
+            >
+              <Link href="/auth/signup">Create account</Link>
             </p>
           </div>
         </form>
+        {/* Footer here */}
       </div>
     </Fragment>
   );
