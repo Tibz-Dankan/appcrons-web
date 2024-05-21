@@ -1,6 +1,4 @@
 import type { Config } from "tailwindcss";
-import daisyui from "daisyui";
-import daisyuiThemes from "daisyui/src/theming/themes";
 
 const config: Config = {
   content: [
@@ -8,25 +6,41 @@ const config: Config = {
     "./src/components/**/*.{js,ts,jsx,tsx,mdx}",
     "./src/app/**/*.{js,ts,jsx,tsx,mdx}",
   ],
-  daisyui: {
-    themes: [
-      {
-        light: {
-          // ...require("daisyui/src/theming/themes")["light"],
-          ...daisyuiThemes["light"],
-          primary: "#0ca678", //Teal-7
-          secondary: "#1098ad", //Cyan-7
+  theme: {
+    screens: {
+      sm: "640px",
+      md: "768px",
+      lg: "1024px",
+      xl: "1280px",
+      "2xl": "1536px",
+    },
+    extend: {
+      colors: {
+        primary: "#0ca678",
+        primaryLight: "#96f2d7",
+        primaryDark: "#087f5b",
+        "gray-opacity": "rgba(0, 0, 0, 0.15)",
+        info: "#5BC0DE",
+        warning: "#F0AD4E",
+        error: "#f03e3e",
+        success: "#55C57A",
+      },
+      animation: {
+        slideDown: "slideDown 0.5s ease-out forwards",
+        moveInnerLoaderToRight: "moveInnerLoaderToRight 0.8s infinite ease-out",
+      },
+      keyframes: {
+        slideDown: {
+          "0%": { opacity: "0", transform: "translateY(-150px)" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
         },
-        dark: {
-          // ...require("daisyui/src/theming/themes")["dark"],
-          ...daisyuiThemes["dark"],
-          primary: "#0ca678", //Teal-7
-          secondary: "#1098ad", //Cyan-7
+        moveInnerLoaderToRight: {
+          "0%": { left: "0%" },
+          "100%": { left: "45%" },
         },
       },
-    ],
+    },
   },
-
-  plugins: [daisyui],
+  plugins: [],
 };
 export default config;

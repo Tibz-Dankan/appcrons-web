@@ -12,7 +12,10 @@ const Button: React.FC<ButtonProps> = (props) => {
   return (
     <Fragment>
       <button
-        className={twMerge("btn btn-active btn-primary", props.className)}
+        className={twMerge(
+          "text-gray-50 bg-primary p-2 text-center rounded w-full outline-none",
+          props.className
+        )}
         type={props.type}
         onClick={props.onClick}
       >
