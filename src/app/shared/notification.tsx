@@ -33,7 +33,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
 
   if (type === "success") {
     notificationElement = (
-      <div role="alert" className="alert alert-success">
+      <div role="alert" className="alert alert-success rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
@@ -59,7 +59,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
     );
   } else if (type === "error") {
     notificationElement = (
-      <div role="alert" className="alert alert-error">
+      <div role="alert" className="alert alert-error rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
@@ -85,7 +85,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
     );
   } else if (type === "info") {
     notificationElement = (
-      <div role="alert" className="alert alert-info">
+      <div role="alert" className="alert alert-info rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           fill="none"
@@ -111,7 +111,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
     );
   } else if (type === "warning") {
     notificationElement = (
-      <div role="alert" className="alert alert-warning">
+      <div role="alert" className="alert alert-warning rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
@@ -137,7 +137,7 @@ export const Notification: React.FC<NotificationProps> = (props) => {
     );
   } else {
     notificationElement = (
-      <div role="alert" className="alert alert-success">
+      <div role="alert" className="alert alert-info rounded-md">
         <svg
           xmlns="http://www.w3.org/2000/svg"
           className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
@@ -166,11 +166,16 @@ export const Notification: React.FC<NotificationProps> = (props) => {
   return (
     <Fragment>
       <div
-        className={`fixed top-5 right-5  z-[10000] 
-        flex flex-col items-center justify-start w-72
-        sm:w-80`}
+        className="relative z-[-1000] grid place-items-center
+         w-full animate-slideDown"
       >
-        {notificationElement}
+        <div
+          className="absolute top-5 right-5s  z-[10000] 
+           flex flex-col items-center justify-start w-72
+           sm:w-80"
+        >
+          {notificationElement}
+        </div>
       </div>
     </Fragment>
   );

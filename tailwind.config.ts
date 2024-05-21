@@ -15,6 +15,15 @@ const config: Config = {
         "color-secondary": "var(--color-secondary)",
         "color-tertiary": "var(--color-tertiary)",
       },
+      animation: {
+        slideDown: "slideDown 0.5s ease-out forwards",
+      },
+      keyframes: {
+        slideDown: {
+          "0%": { opacity: "0", transform: "translateY(-150px)" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
+        },
+      },
     },
   },
   daisyui: {
