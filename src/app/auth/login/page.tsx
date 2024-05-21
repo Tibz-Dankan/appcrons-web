@@ -84,8 +84,18 @@ const Login: React.FC = () => {
           border-[1px] border-color-secondary bg-color-tertiary p-8 
           rounded-md z-[1] text-color-primary"
         >
-          <InputField type="email" name="email" formik={formik} />
-          <InputField type="password" name="password" formik={formik} />
+          <InputField
+            type="email"
+            name="email"
+            placeholder="Email address"
+            formik={formik}
+          />
+          <InputField
+            type="password"
+            name="password"
+            placeholder="Password"
+            formik={formik}
+          />
           <Button
             label={
               <>
