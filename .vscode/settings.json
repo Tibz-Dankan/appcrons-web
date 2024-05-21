@@ -5,6 +5,7 @@
     "formik",
     "reduxjs",
     "Signin",
+    "Signup",
     "tailwindcss",
     "tanstack",
     "zustand"
