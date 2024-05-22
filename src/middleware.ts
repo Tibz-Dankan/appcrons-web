@@ -8,12 +8,14 @@ export const middleware = (request: NextRequest) => {
   console.log("In the middleware...");
   console.log("request.nextUrl.pathname->", request.nextUrl.pathname);
   // Permit all common routes
-  if (routes.common.includes(request.nextUrl.pathname)) {
+  // if (routes.common.includes(request.nextUrl.pathname)) {
+  if (request.nextUrl.pathname.includes("/" || "/docs")) {
     return;
   }
 
   // Permit all auth routes
-  if (routes.auth.includes(request.nextUrl.pathname)) {
+  // if (routes.auth.includes(request.nextUrl.pathname)) {
+  if (request.nextUrl.pathname.includes("/auth")) {
     return;
   }
 
