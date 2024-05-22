@@ -16,21 +16,21 @@ import {
   showCardNotification,
 } from "@/store/actions/notification";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
+import { Session } from "@/lib/session";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
     onSuccess: (auth: any) => {
-      console.log("login successful");
-      // TODO: To remove successful notification
-      // dispatch(
-      //   showCardNotification({ type: "success", message: auth.message })
-      // );
-      // setTimeout(() => {
-      //   dispatch(hideCardNotification());
-      // }, 5000);
+      console.log("login successful", auth);
+      delete auth["message"];
+      delete auth["status"];
+      new Session().create(auth);
+      router.push("/dashboard");
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
