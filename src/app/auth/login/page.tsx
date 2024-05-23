@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useRef } from "react";
+import React, { Fragment, useRef, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -17,22 +17,20 @@ import {
 } from "@/store/actions/notification";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
-import { Session } from "@/lib/session";
+import { authenticate } from "@/store/actions/auth";
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
+  const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
-    onSuccess: (auth: any) => {
-      console.log("login successful", auth);
-      // delete auth["message"];
-      // delete auth["status"];
-      // new Session().create(auth);
-      router.push(
-        `/auth/authorize?accessToken=${auth.accessToken}&user=${auth.user}`
-      );
+    onSuccess: async (auth: any) => {
+      setIsRedirecting(() => true);
+      dispatch(await authenticate(auth.accessToken, auth.user));
+      // setIsRedirecting(() => false);
+      router.push("/dashboard");
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -73,6 +71,8 @@ const Login: React.FC = () => {
     },
   });
 
+  const showDefaultBtnLabel = !isPending && !isRedirecting;
+
   return (
     <Fragment>
       <div
@@ -108,17 +108,23 @@ const Login: React.FC = () => {
           <Button
             label={
               <>
-                {!isPending && <span>Log in</span>}
+                {showDefaultBtnLabel && <span>Log in</span>}
                 {isPending && (
                   <Spinner
                     label="Logging in"
                     className="w-5 h-5 text-gray-100"
                   />
                 )}
+                {isRedirecting && (
+                  <Spinner
+                    label="Redirecting"
+                    className="w-5 h-5 text-gray-100"
+                  />
+                )}
               </>
             }
             type="submit"
-            aria-disabled={isPending}
+            aria-disabled={isPending || isRedirecting}
             className="w-full mt-6 font-semibold"
           />
           <div className="w-full mt-4 space-y-4s flex justify-between gap-4">

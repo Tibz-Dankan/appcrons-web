@@ -5,8 +5,8 @@ import { jwtDecode } from "jwt-decode";
 import { routes } from "@/routes";
 
 export const middleware = (request: NextRequest) => {
-  console.log("In the middleware...");
-  console.log("request.nextUrl.pathname->", request.nextUrl.pathname);
+  console.log("req pathname: ", request.nextUrl.pathname);
+
   // Permit all common routes
   // if (routes.common.includes(request.nextUrl.pathname)) {
   if (request.nextUrl.pathname.includes("/" || "/docs")) {
