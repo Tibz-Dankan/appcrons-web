@@ -37,7 +37,12 @@ const SignUp: React.FC = () => {
       setIsRedirecting(() => true);
       dispatch(await authenticate(auth.accessToken, auth.user));
       // setIsRedirecting(() => false);
-      router.push("/dashboard");
+    },
+    onSettled: (_: any) => {
+      window.history.replaceState(null, "", "/dashboard");
+      setTimeout(() => {
+        router.refresh();
+      }, 1000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));

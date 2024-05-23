@@ -30,11 +30,13 @@ const Login: React.FC = () => {
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);
       dispatch(await authenticate(auth.accessToken, auth.user));
-      setIsRedirecting(() => false);
+      // setIsRedirecting(() => false);
     },
-    onSettled: (data: any) => {
-      console.log("about to redirect... to dashboard");
-      router.push("/dashboard");
+    onSettled: (_: any) => {
+      window.history.replaceState(null, "", "/dashboard");
+      setTimeout(() => {
+        router.refresh();
+      }, 1000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
