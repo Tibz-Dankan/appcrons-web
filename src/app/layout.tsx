@@ -3,8 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers";
 import NotificationInitializer from "@/app/shared/notificationInitializer";
-// import { useValidateSession } from "@/hooks/useValidateSession";
-import { ValidateSession } from "./auth/ValidateSession";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,15 +16,12 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const validateSession = useValidateSession()
-  // useValidateSession;
   return (
     // TODO: add dynamic changing of themes
     <Providers>
       {/* <html lang="en" data-theme="dark"> */}
       <html lang="en">
         <body className={inter.className}>
-          {/* <ValidateSession /> */}
           <NotificationInitializer />
           {children}
         </body>
