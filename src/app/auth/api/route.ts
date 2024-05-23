@@ -4,8 +4,6 @@ import { NextResponse } from "next/server";
 export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
-  console.log("Authenticating user...");
-
   const accessToken = searchParams.get("accessToken")!;
   const user = JSON.parse(searchParams.get("user")!);
 
