@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useRef, useState } from "react";
+import React, { Fragment, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -17,6 +17,7 @@ import {
 } from "@/store/actions/notification";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
+
 import { authenticate } from "@/store/actions/auth";
 
 const Login: React.FC = () => {
@@ -29,7 +30,10 @@ const Login: React.FC = () => {
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);
       dispatch(await authenticate(auth.accessToken, auth.user));
-      // setIsRedirecting(() => false);
+      setIsRedirecting(() => false);
+    },
+    onSettled: (data: any) => {
+      console.log("about to redirect... to dashboard");
       router.push("/dashboard");
     },
     onError: (error: any) => {
