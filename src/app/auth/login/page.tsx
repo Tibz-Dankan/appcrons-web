@@ -31,11 +31,9 @@ const Login: React.FC = () => {
       setIsRedirecting(() => true);
       dispatch(await authenticate(auth.accessToken, auth.user));
       // setIsRedirecting(() => false);
-    },
-    onSettled: (_: any) => {
       window.history.replaceState(null, "", "/dashboard");
       setTimeout(() => {
-        router.refresh();
+        location.reload();
       }, 1000);
     },
     onError: (error: any) => {

@@ -27,7 +27,6 @@ const SignUp: React.FC = () => {
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signUp,
     onSuccess: async (auth: any) => {
-      console.log("signup successful", auth);
       dispatch(
         showCardNotification({ type: "success", message: auth.message })
       );
@@ -37,12 +36,10 @@ const SignUp: React.FC = () => {
       setIsRedirecting(() => true);
       dispatch(await authenticate(auth.accessToken, auth.user));
       // setIsRedirecting(() => false);
-    },
-    onSettled: (_: any) => {
       window.history.replaceState(null, "", "/dashboard");
       setTimeout(() => {
-        router.refresh();
-      }, 1000);
+        location.reload();
+      }, 5000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
