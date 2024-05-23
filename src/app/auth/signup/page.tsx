@@ -33,11 +33,13 @@ const SignUp: React.FC = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-      delete auth["message"];
-      delete auth["status"];
+      // delete auth["message"];
+      // delete auth["status"];
       // authenticate(auth);
-      new Session().create(auth);
-      router.push("/dashboard");
+      // new Session().create(auth);
+      router.push(
+        `/auth/authorize?accessToken=${auth.accessToken}&user=${auth.user}`
+      );
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));

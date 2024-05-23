@@ -27,10 +27,12 @@ const Login: React.FC = () => {
     mutationFn: new AuthService().signIn,
     onSuccess: (auth: any) => {
       console.log("login successful", auth);
-      delete auth["message"];
-      delete auth["status"];
-      new Session().create(auth);
-      router.push("/dashboard");
+      // delete auth["message"];
+      // delete auth["status"];
+      // new Session().create(auth);
+      router.push(
+        `/auth/authorize?accessToken=${auth.accessToken}&user=${auth.user}`
+      );
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
