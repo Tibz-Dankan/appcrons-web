@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers";
 import NotificationInitializer from "@/app/shared/notificationInitializer";
+import { AppLayout } from "@/app/layouts/appLayout";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -23,7 +24,7 @@ export default function RootLayout({
       <html lang="en">
         <body className={inter.className}>
           <NotificationInitializer />
-          {children}
+          <AppLayout>{children}</AppLayout>
         </body>
       </html>
     </Providers>
