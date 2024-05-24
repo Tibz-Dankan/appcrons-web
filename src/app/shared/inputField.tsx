@@ -45,10 +45,10 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
             value={formik.values[`${name}`]}
             placeholder={placeholder}
             className="p-2 outline-none rounded-md border-[1px]
-            border-color-secondary focus:border-[1px] focus:border-primary
+            border-color-2 focus:border-[1px] focus:border-primary
             transition-all text-sm w-full focus:outline-none
             focus:shadow-[0px_0px_0px_4px_rgba(12,166,120,0.3)]
-            text-color-primary"
+            text-color-1"
           />
 
           {isPasswordField && (

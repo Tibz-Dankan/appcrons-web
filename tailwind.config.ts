@@ -11,9 +11,9 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "color-primary": "var(--color-primary)",
-        "color-secondary": "var(--color-secondary)",
-        "color-tertiary": "var(--color-tertiary)",
+        "color-1": "var(--color-1)",
+        "color-2": "var(--color-2)",
+        "color-3": "var(--color-3)",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",

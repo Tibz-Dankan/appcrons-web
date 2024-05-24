@@ -87,15 +87,15 @@ const Login: React.FC = () => {
           <Link href="/">
             <Image src="/logo.png" width={100} height={100} alt="logo" />
           </Link>
-          <p className="text-center text-2xl text-color-primary">
+          <p className="text-center text-2xl text-color-1">
             Log in to AppCrons
           </p>
         </div>
         <form
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-          border-[1px] border-color-secondary bg-color-tertiary p-8 
-          rounded-md z-[1] text-color-primary"
+          border-[1px] border-color-2 bg-color-3 p-8 
+          rounded-md z-[1] text-color-1"
         >
           <InputField
             type="email"
@@ -133,13 +133,13 @@ const Login: React.FC = () => {
           />
           <div className="w-full mt-4 space-y-4s flex justify-between gap-4">
             <p
-              className="text-center text-color-primary hover:underline
+              className="text-center text-color-1 hover:underline
               hover:text-blue-500 cursor-pointer"
             >
               <Link href="/auth/forgot-password">Forgot password?</Link>
             </p>
             <p
-              className="hover:underline text-color-primary hover:text-blue-500 
+              className="hover:underline text-color-1 hover:text-blue-500 
               cursor-pointer"
             >
               <Link href="/auth/signup">Create account</Link>
