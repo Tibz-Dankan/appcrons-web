@@ -28,10 +28,10 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
     <Fragment>
       <div
         className="relative pt-6 flex flex-col items-start 
-         justify-center gap-1 w-full text-gray-800s"
+         justify-center gap-1 w-full text-color-text-primary"
       >
         {formik.errors[`${name}`] && formik.touched[`${name}`] && (
-          <p className="absolute top-0 left-0 text-sm text-error first-letter:uppercase">
+          <p className="absolute top-0 left-0 text-sm text-red-500 first-letter:uppercase">
             {formik.errors[`${name}`]}
           </p>
         )}
@@ -45,10 +45,10 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
             value={formik.values[`${name}`]}
             placeholder={placeholder}
             className="p-2 outline-none rounded-md border-[1px]
-            border-color-2 focus:border-[1px] focus:border-primary
+            border-color-border-primary focus:border-[1px] focus:border-primary
             transition-all text-sm w-full focus:outline-none
             focus:shadow-[0px_0px_0px_4px_rgba(12,166,120,0.3)]
-            text-color-1"
+            text-color-text-primary bg-color-bg-primary"
           />
 
           {isPasswordField && (

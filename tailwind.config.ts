@@ -1,6 +1,4 @@
 import type { Config } from "tailwindcss";
-import daisyui from "daisyui";
-import daisyuiThemes from "daisyui/src/theming/themes";
 
 const config: Config = {
   content: [
@@ -11,9 +9,14 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
-        "color-1": "var(--color-1)",
-        "color-2": "var(--color-2)",
-        "color-3": "var(--color-3)",
+        primary: "#087f5b", //Teal-9
+        secondary: "#1098ad", //Cyan-7
+        "color-text-primary": "var(--color-text-primary)",
+        "color-text-secondary": "var(--color-text-secondary)",
+        "color-border-primary": "var(--color-border-primary)",
+        "color-bg-primary": "var(--color-bg-primary)",
+        "color-bg-secondary": "var(--color-bg-secondary)",
+        "color-bg-tertiary": "var(--color-bg-tertiary)",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
@@ -26,33 +29,6 @@ const config: Config = {
       },
     },
   },
-  daisyui: {
-    themes: [
-      {
-        light: {
-          ...daisyuiThemes["light"],
-          primary: "#087f5b", //Teal-9
-          secondary: "#1098ad", //Cyan-7
-        },
-        dark: {
-          ...daisyuiThemes["dark"],
-          primary: "#087f5b", //Teal-9
-          secondary: "#1098ad", //Cyan-7",
-        },
-      },
-    ],
-  },
-
-  plugins: [daisyui],
+  plugins: [],
 };
 export default config;
-
-// Dark mode text colors
-// --color-primary: #e9ecef; /*primary color for text, border, etc*/
-// --color-secondary: #868e96; /*secondary color for text, border, etc*/
-// --color-tertiary: #495057; /*tertiary color for text, border, cards etc*/
-
-// Light mode text colors
-// --color-primary: #343a40; /*primary color for text, border, etc*/
-// --color-secondary: #868e96; /*secondary color for text, border, etc*/
-// --color-tertiary: #e9ecef; /*tertiary color for text, border, cards etc*/

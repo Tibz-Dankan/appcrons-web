@@ -4,6 +4,7 @@ import "./globals.css";
 import { Providers } from "@/providers";
 import NotificationInitializer from "@/app/shared/notificationInitializer";
 import { AppLayout } from "@/app/layouts/appLayout";
+import { ThemeAppProvider } from "@/providers/themeProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -18,13 +19,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    // TODO: add dynamic changing of themes
     <Providers>
-      {/* <html lang="en" data-theme="dark"> */}
-      <html lang="en">
+      <html lang="en" suppressHydrationWarning>
         <body className={inter.className}>
-          <NotificationInitializer />
-          <AppLayout>{children}</AppLayout>
+          <ThemeAppProvider>
+            <NotificationInitializer />
+            <AppLayout>{children}</AppLayout>
+          </ThemeAppProvider>
         </body>
       </html>
     </Providers>
