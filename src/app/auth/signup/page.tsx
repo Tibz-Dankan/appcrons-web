@@ -94,19 +94,18 @@ const SignUp: React.FC = () => {
           <Link href="/">
             <Image src="/logo.png" width={100} height={100} alt="logo" />
           </Link>
-          <p
-            className="text-center text-color-1
-            flex flex-col"
-          >
+          <p className="text-center flex flex-col">
             <span className="text-2xl">Welcome to AppCrons</span>
-            <span>Let's create your account</span>
+            <span className="text-color-text-secondary">
+              Let's create your account
+            </span>
           </p>
         </div>
         <form
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-          border-[1px] border-color-2 bg-color-3 p-8 
-          rounded-md z-[1] text-color-1"
+          border-[1px] border-color-border-primary bg-color-bg-secondary p-8 
+          rounded-md z-[1]"
         >
           <InputField
             type="text"
