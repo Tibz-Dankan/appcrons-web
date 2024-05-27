@@ -4,7 +4,7 @@ export type TSearchInput = {
   accessToken: string;
 };
 
-type TRequest = {
+export type TRequest = {
   id: string;
   appId: string;
   statusCode: number;
@@ -14,7 +14,7 @@ type TRequest = {
   deletedAt: string | null;
 };
 
-type TRequestTime = {
+export type TRequestTime = {
   id: string;
   appId: string;
   start: string;
