@@ -9,6 +9,7 @@ import apps from "@/app/app/data/apps.json";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
 import { RequestList } from "@/app/request/requestList";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
+import { DeleteApp } from "@/app/app/deleteApp";
 
 export default function MyApp() {
   // TODO: Fetch app data based on the id from the url
@@ -77,7 +78,7 @@ export default function MyApp() {
 
       <EnableDisableApp appId={app.id} isDisabled={app.isDisabled} />
       {/* Delete app functionality */}
-      <div>Delete app operation</div>
+      <DeleteApp appId={app.id} />
     </div>
   );
 }
