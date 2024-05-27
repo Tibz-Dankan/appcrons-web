@@ -1,0 +1,148 @@
+{
+  "apps": [
+    {
+      "id": "0500f52e-f798-41fa-85b5-c8c155044325",
+      "userId": "f3ad1797-17c1-42d6-9195-ee0a2ab63ff6",
+      "name": "DoceaseV2 Dankan's Copy",
+      "url": "https://docease-backendv2-9dyj.onrender.com/active",
+      "requestInterval": "5",
+      "isDisabled": false,
+      "requests": [
+        {
+          "id": "0537d0bf-7cc9-4ea8-aa5f-086d2f8d3649",
+          "appId": "0500f52e-f798-41fa-85b5-c8c155044325",
+          "statusCode": 200,
+          "duration": 877,
+          "startedAt": "2024-05-26T23:40:00.100732+03:00",
+          "createdAt": "2024-05-26T23:40:00.97847+03:00",
+          "deletedAt": null
+        }
+      ],
+      "requestTimes": [
+        {
+          "id": "6dddd83d-aeac-437d-972e-ec567333961f",
+          "appId": "0500f52e-f798-41fa-85b5-c8c155044325",
+          "start": "8:00:00",
+          "end": "23:40:00",
+          "timeZone": "Europe/Berlin",
+          "createdAt": "0001-01-01T02:27:16+02:27",
+          "updatedAt": "2024-05-10T22:07:55.540034+03:00",
+          "deletedAt": null
+        }
+      ],
+      "createdAt": "2024-05-08T14:50:50.488142+03:00",
+      "updatedAt": "2024-05-09T16:29:55.011594+03:00",
+      "deletedAt": null
+    },
+    {
+      "id": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+      "userId": "f3ad1797-17c1-42d6-9195-ee0a2ab63ff6",
+      "name": "CryptoPile",
+      "url": "https://cryptopile-backend.onrender.com/active",
+      "requestInterval": "5",
+      "isDisabled": false,
+      "requests": [
+        {
+          "id": "0a8b2299-f82e-4346-8c7b-ff6cdec93549",
+          "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+          "statusCode": 404,
+          "duration": 859,
+          "startedAt": "2024-05-26T21:00:00.014439+03:00",
+          "createdAt": "2024-05-26T21:00:00.874244+03:00",
+          "deletedAt": null
+        }
+      ],
+      "requestTimes": [
+        {
+          "id": "1c2aac97-7f42-46d2-85f1-1274380ed434",
+          "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+          "start": "11:00:00",
+          "end": "21:00:00",
+          "timeZone": "Africa/Nairobi",
+          "createdAt": "2024-05-09T12:19:30.082746+03:00",
+          "updatedAt": "2024-05-09T12:19:30.082746+03:00",
+          "deletedAt": null
+        },
+        {
+          "id": "a9eb6ad8-d049-48c2-8a10-67bd88a22a46",
+          "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+          "start": "8:00:00",
+          "end": "9:30:00",
+          "timeZone": "Africa/Nairobi",
+          "createdAt": "2024-05-09T12:21:18.757384+03:00",
+          "updatedAt": "2024-05-09T12:21:18.757384+03:00",
+          "deletedAt": null
+        },
+        {
+          "id": "1484eab9-be9d-4b51-b39e-5460a0c9222c",
+          "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+          "start": "00:00:00",
+          "end": "2:00:00",
+          "timeZone": "Africa/Nairobi",
+          "createdAt": "0001-01-01T02:27:16+02:27",
+          "updatedAt": "2024-05-09T13:27:00.100587+03:00",
+          "deletedAt": null
+        },
+        {
+          "id": "8fa81d2c-31ba-4343-ac01-c38f7a870474",
+          "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+          "start": "4:00:00",
+          "end": "5:00:00",
+          "timeZone": "Africa/Nairobi",
+          "createdAt": "2024-05-09T13:42:59.994557+03:00",
+          "updatedAt": "2024-05-09T13:42:59.994557+03:00",
+          "deletedAt": null
+        }
+      ],
+      "createdAt": "2024-02-09T00:07:04.696666+03:00",
+      "updatedAt": "2024-05-09T22:20:42.22177+03:00",
+      "deletedAt": null
+    },
+    {
+      "id": "cad19002-7589-4e36-b7a5-f9e69a75ee8e",
+      "userId": "f3ad1797-17c1-42d6-9195-ee0a2ab63ff6",
+      "name": "SEG",
+      "url": "https://seg-backend.onrender.com/active",
+      "requestInterval": "5",
+      "isDisabled": false,
+      "requests": [
+        {
+          "id": "d14fd858-59cc-447c-b658-d2112891ebe6",
+          "appId": "cad19002-7589-4e36-b7a5-f9e69a75ee8e",
+          "statusCode": 404,
+          "duration": 761,
+          "startedAt": "2024-05-26T23:45:00.026575+03:00",
+          "createdAt": "2024-05-26T23:45:00.793434+03:00",
+          "deletedAt": null
+        }
+      ],
+      "requestTimes": [],
+      "createdAt": "2024-02-09T00:05:01.260015+03:00",
+      "updatedAt": "2024-05-12T10:29:39.776678+03:00",
+      "deletedAt": null
+    },
+    {
+      "id": "bbcb4f5d-8156-4278-a0ee-0cd9de63d43d",
+      "userId": "f3ad1797-17c1-42d6-9195-ee0a2ab63ff6",
+      "name": "Docease",
+      "url": "https://docease-backend-v2.onrender.com/active",
+      "requestInterval": "5",
+      "isDisabled": false,
+      "requests": [
+        {
+          "id": "58ded788-a814-41fc-8bf9-9d37bfa509e3",
+          "appId": "bbcb4f5d-8156-4278-a0ee-0cd9de63d43d",
+          "statusCode": 404,
+          "duration": 919,
+          "startedAt": "2024-05-26T23:45:00.026393+03:00",
+          "createdAt": "2024-05-26T23:45:00.946285+03:00",
+          "deletedAt": null
+        }
+      ],
+      "requestTimes": [],
+      "createdAt": "2024-02-08T23:09:07.287186+03:00",
+      "updatedAt": "2024-05-12T11:11:40.231835+03:00",
+      "deletedAt": null
+    }
+  ]
+}
