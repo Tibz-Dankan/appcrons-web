@@ -8,6 +8,7 @@ import { RequestTimeRangeCard } from "@/app/request/requestTimeRangeCard";
 import apps from "@/app/app/data/apps.json";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
 import { RequestList } from "@/app/request/requestList";
+import { EnableDisableApp } from "@/app/app/enableDisableApp";
 
 export default function MyApp() {
   // TODO: Fetch app data based on the id from the url
@@ -71,10 +72,10 @@ export default function MyApp() {
         </div>
       </div>
       {/* App Request Time paginated */}
-      {/* <div>App's latest requests in the table</div> */}
       <RequestList appId={app.id} />
       {/* Disable/Enable App */}
-      <div>Disable/Enable</div>
+
+      <EnableDisableApp appId={app.id} isDisabled={app.isDisabled} />
       {/* Delete app functionality */}
       <div>Delete app operation</div>
     </div>
