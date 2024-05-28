@@ -1,9 +1,9 @@
-import { url } from "@/constants";
+import { backendURL } from "@/constants";
 import { TSigninInPut, TSignupInput } from "@/types/auth";
 
 export class AuthService {
   signIn = async ({ email, password }: TSigninInPut) => {
-    const response = await fetch(`${url}/auth/signin`, {
+    const response = await fetch(`${backendURL}/auth/signin`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -22,7 +22,7 @@ export class AuthService {
   };
 
   signUp = async ({ name, email, password }: TSignupInput) => {
-    const response = await fetch(`${url}/auth/signup`, {
+    const response = await fetch(`${backendURL}/auth/signup`, {
       method: "POST",
       body: JSON.stringify({
         name,
@@ -42,7 +42,7 @@ export class AuthService {
   };
 
   forgotPassword = async ({ email }: { email: string }) => {
-    const response = await fetch(`${url}/auth/forgot-password`, {
+    const response = await fetch(`${backendURL}/auth/forgot-password`, {
       method: "POST",
       body: JSON.stringify({
         email,
@@ -60,12 +60,15 @@ export class AuthService {
   };
 
   resetPassword = async ({ resetToken }: { resetToken: string }) => {
-    const response = await fetch(`${url}/auth/reset-password/${resetToken}`, {
-      method: "PATCH",
-      headers: {
-        "Content-type": "application/json",
-      },
-    });
+    const response = await fetch(
+      `${backendURL}/auth/reset-password/${resetToken}`,
+      {
+        method: "PATCH",
+        headers: {
+          "Content-type": "application/json",
+        },
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();

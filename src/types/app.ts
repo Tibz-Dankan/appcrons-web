@@ -4,6 +4,13 @@ export type TSearchInput = {
   accessToken: string;
 };
 
+export type TPostApp = {
+  name: string;
+  url: string;
+  requestInterval: string;
+  accessToken: string;
+};
+
 export type TRequest = {
   id: string;
   appId: string;
