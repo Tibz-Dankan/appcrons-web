@@ -96,9 +96,9 @@ export const AppList: React.FC<AppListProps> = (props) => {
                     onColor={"#12b886"}
                     offHandleColor={"#495057"}
                     onHandleColor={"#087f5b"}
-                    diameter={56}
+                    diameter={20}
                     height={12}
-                    width={48}
+                    width={40}
                     className={"-pl-2"}
                   />
                 </td>
