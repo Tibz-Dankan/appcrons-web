@@ -46,6 +46,9 @@ export const ThemeController = () => {
         }
         offColor={"#adb5bd"}
         onColor={"#495057"}
+        offHandleColor={"#f8f9fa"}
+        onHandleColor={"#0ca678"}
+        diameter={18}
       />
     </div>
   );

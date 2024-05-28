@@ -1,4 +1,6 @@
 import React from "react";
+import { twMerge } from "tailwind-merge";
+
 export const SunIcon: React.FC = (props: any) => (
   <svg
     aria-hidden="true"
@@ -7,7 +9,7 @@ export const SunIcon: React.FC = (props: any) => (
     role="presentation"
     viewBox="0 0 24 24"
     width="20px"
-    className="text-[#e9ecef]"
+    className={twMerge(`text-[#e9ecef]`, props.className)}
     {...props}
   >
     <g fill="currentColor">
