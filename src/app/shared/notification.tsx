@@ -1,5 +1,9 @@
-import React, { Fragment, ReactNode } from "react";
+import React, { ReactNode } from "react";
 import { IconContext } from "react-icons";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { MdErrorOutline } from "react-icons/md";
+import { MdOutlineWarningAmber } from "react-icons/md";
+import { IoMdInformationCircleOutline } from "react-icons/io";
 import { IoCloseOutline } from "react-icons/io5";
 
 interface NotificationProps {
@@ -19,7 +23,7 @@ const NotificationIcon: React.FC<NotificationIconProps> = (props) => {
     <IconContext.Provider
       value={{
         size: props.size ? props.size : "1.4rem",
-        color: props.color ? props.color : "#343a40",
+        color: `${props.color}`,
       }}
     >
       {props.children}
@@ -28,155 +32,93 @@ const NotificationIcon: React.FC<NotificationIconProps> = (props) => {
 };
 
 export const Notification: React.FC<NotificationProps> = (props) => {
-  const { type, onClose, message } = props;
-  let notificationElement: ReactNode;
+  const type = props.type;
+  let bgColor;
+  let textColor;
+  let borderColor;
+  let icon;
+  let title;
 
   if (type === "success") {
-    notificationElement = (
-      <div role="alert" className="alert alert-success rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span className="text-[#e9ecef]">{message}</span>
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            <NotificationIcon size="1.4rem" color="#e9ecef">
-              <IoCloseOutline />
-            </NotificationIcon>
-          </span>
-        </div>
-      </div>
+    title = "success";
+    icon = (
+      <NotificationIcon color="#55C57A">
+        <IoMdCheckmarkCircleOutline />
+      </NotificationIcon>
     );
+    bgColor = "bg-[#55C57A]";
+    textColor = "text-[#55C57A]";
+    borderColor = "border-[#55C57A]";
   } else if (type === "error") {
-    notificationElement = (
-      <div role="alert" className="alert alert-error rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span className="text-[#e9ecef]">{message}</span>
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            <NotificationIcon size="1.4rem" color="#e9ecef">
-              <IoCloseOutline />
-            </NotificationIcon>
-          </span>
-        </div>
-      </div>
+    title = "error";
+    icon = (
+      <NotificationIcon color="#D9534F">
+        <MdErrorOutline />
+      </NotificationIcon>
     );
+    bgColor = "bg-[#D9534F]";
+    textColor = "text-[#D9534F]";
+    borderColor = "border-[#D9534F]";
   } else if (type === "info") {
-    notificationElement = (
-      <div role="alert" className="alert alert-info rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          className="stroke-current shrink-0 w-6 h-6 text-[#e9ecef]"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-          ></path>
-        </svg>
-        <span className="text-[#e9ecef]">{message}</span>
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            <NotificationIcon size="1.4rem" color="#e9ecef">
-              <IoCloseOutline />
-            </NotificationIcon>
-          </span>
-        </div>
-      </div>
+    title = "info";
+    icon = (
+      <NotificationIcon color="#5BC0DE">
+        <IoMdInformationCircleOutline />
+      </NotificationIcon>
     );
+    bgColor = "bg-[#5BC0DE]";
+    textColor = "text-[#5BC0DE]";
+    borderColor = "border-[#5BC0DE]";
   } else if (type === "warning") {
-    notificationElement = (
-      <div role="alert" className="alert alert-warning rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
-          />
-        </svg>
-        <span className="text-[#e9ecef]">{message}</span>
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            <NotificationIcon size="1.4rem" color="#e9ecef">
-              <IoCloseOutline />
-            </NotificationIcon>
-          </span>
-        </div>
-      </div>
+    title = "warning";
+    icon = (
+      <NotificationIcon color="#F0AD4E">
+        <MdOutlineWarningAmber />
+      </NotificationIcon>
     );
+    bgColor = "bg-[#F0AD4E]";
+    textColor = "text-[#F0AD4E]";
+    borderColor = "border-[#F0AD4E]";
   } else {
-    notificationElement = (
-      <div role="alert" className="alert alert-info rounded-md">
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          className="stroke-current shrink-0 h-6 w-6 text-[#e9ecef]"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
-          />
-        </svg>
-        <span className="text-[#e9ecef]">{message}</span>
-        <div>
-          <span className="cursor-pointer" onClick={onClose}>
-            <NotificationIcon size="1.4rem" color="#e9ecef">
-              <IoCloseOutline />
-            </NotificationIcon>
-          </span>
-        </div>
-      </div>
+    title = "info";
+    icon = (
+      <NotificationIcon color="#5BC0DE">
+        <IoMdInformationCircleOutline />
+      </NotificationIcon>
     );
+    bgColor = "bg-[#5BC0DE]";
+    textColor = "text-[#5BC0DE]";
+    borderColor = "border-[#5BC0DE]";
   }
 
   return (
-    <Fragment>
+    <div className="w-full fixed top-0 grid place-items-center">
       <div
-        className="relative z-[-100] grid place-items-center
-         w-full animate-slideDown"
+        className={`border-[1px] border-color-border-primary 
+         absolute top-5 z-[10000] flex w-72 animate-slideDown
+         flex-col items-start rounded-[2px] 
+         bg-color-bg-secondary py-2 pl-6 text-lg shadow-2xl`}
       >
-        <div
-          className="absolute top-5 right-5s  z-[10000] 
-           flex flex-col items-center justify-start w-72
-           sm:w-80"
+        <span
+          className="absolute right-3 top-3 cursor-pointer"
+          onClick={props.onClose}
         >
-          {notificationElement}
+          <NotificationIcon color="#868e96" size="1.4rem">
+            <IoCloseOutline />
+          </NotificationIcon>
+        </span>
+        <div
+          className={`absolute left-0 top-0 h-full w-3 ${bgColor}
+           border-y-[1px] rounded-l-[2px] ${borderColor}`}
+        />
+        <div className={`flex items-center justify-start gap-3 ${textColor}`}>
+          <div>{icon}</div>
+          <span className="first-letter:uppercase">{title}</span>
+        </div>
+        <div className="text-color-text-primary">
+          <span className="text-sm leading-[4px]">{props.message}</span>
         </div>
       </div>
-    </Fragment>
+    </div>
   );
 };
