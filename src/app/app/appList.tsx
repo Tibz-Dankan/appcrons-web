@@ -1,9 +1,10 @@
 "use client";
 
+import React from "react";
 import { TApp } from "@/types/app";
 import { elapsedTime } from "@/utils/elapsedTime";
 import { truncateString } from "@/utils/truncateString";
-import React from "react";
+import { ToggleSwitch } from "@/app/shared/toggleSwitch";
 
 interface AppListProps {
   showListHead?: boolean;
@@ -24,7 +25,6 @@ export const AppList: React.FC<AppListProps> = (props) => {
         className="border-separate border-spacing-0 
          w-full overflow-x-auto"
       >
-        {/* <caption className=""></caption> */}
         {showListHead && (
           <thead>
             <tr
@@ -70,7 +70,20 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className={`px-2 border-r-[1px] border-color-border-primary
                   ${isLastElement(apps, index) && "rounded-br-md"}`}
                 >
-                  {app.isDisabled}
+                  <ToggleSwitch
+                    onCheck={() => {}}
+                    checked={!app.isDisabled}
+                    checkedIcon={<div />}
+                    uncheckedIcon={<div />}
+                    offColor={"#adb5bd"}
+                    onColor={"#12b886"}
+                    offHandleColor={"#495057"}
+                    onHandleColor={"#087f5b"}
+                    diameter={56}
+                    height={12}
+                    width={48}
+                    className={"-pl-2"}
+                  />
                 </td>
               </tr>
             );
