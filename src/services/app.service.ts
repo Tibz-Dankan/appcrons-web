@@ -3,7 +3,7 @@ import { TPostApp, TSearchInput } from "@/types/app";
 
 export class AppService {
   post = async ({ name, url, requestInterval, accessToken }: TPostApp) => {
-    const response = await fetch(`${backendURL}/api/v1/apps/post`, {
+    const response = await fetch(`${backendURL}/apps/post`, {
       method: "POST",
       body: JSON.stringify({
         name,
