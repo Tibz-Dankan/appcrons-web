@@ -4,8 +4,13 @@ import Switch from "react-switch";
 interface ToggleSwitchProps {
   checked: boolean;
   disabled?: boolean;
+  diameter?: number;
+  width?: number;
+  height?: number;
   offColor?: string; // hexadecimal
   onColor?: string; //hexadecimal
+  offHandleColor?: string; // hexadecimal
+  onHandleColor?: string; //hexadecimal
   checkedIcon?: JSX.Element;
   uncheckedIcon?: JSX.Element;
   onCheck: (value: boolean) => void;
@@ -25,8 +30,13 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = (props) => {
         onChange={onChangeHandler}
         checked={checked}
         disabled={props.disabled ? props.disabled : false}
+        handleDiameter={props.diameter}
+        width={props.width}
+        height={props.height}
         offColor={props.offColor}
         onColor={props.onColor}
+        offHandleColor={props.offHandleColor}
+        onHandleColor={props.onHandleColor}
         checkedIcon={props.checkedIcon}
         uncheckedIcon={props.uncheckedIcon}
         className="flex items-center justify-between"
