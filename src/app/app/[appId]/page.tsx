@@ -10,8 +10,11 @@ import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
 import { RequestList } from "@/app/request/requestList";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
 import { DeleteApp } from "@/app/app/deleteApp";
+import { useParams } from "next/navigation";
 
 export default function MyApp() {
+  const { appId } = useParams();
+  console.log("appId:", appId);
   // TODO: Fetch app data based on the id from the url
   // TODO: To dynamically change the icon color basing on the theme
   // TODO: To apply the application name in the favicon
