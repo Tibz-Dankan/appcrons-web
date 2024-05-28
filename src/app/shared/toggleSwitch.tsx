@@ -40,7 +40,7 @@ export const ToggleSwitch: React.FC<ToggleSwitchProps> = (props) => {
         checkedIcon={props.checkedIcon}
         uncheckedIcon={props.uncheckedIcon}
         className="flex items-center justify-between"
-        activeBoxShadow="0 0 2px 3px #0ca678"
+        activeBoxShadow="0 0 0px 0px #495057"
       />
     </label>
   );
