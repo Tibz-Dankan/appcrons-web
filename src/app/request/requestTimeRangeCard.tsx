@@ -15,7 +15,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
         className="border-b-[1px] border-color-border-primary p-4
          bg-color-bg-secondary flex items-center justify-center rounded-t-md"
       >
-        <span>{requestTimeList[0].timeZone}</span>
+        <span>{requestTimeList[0]?.timeZone}</span>
       </div>
       <div className="grid grid-cols-3 gap-2 p-4">
         {requestTimeList.map((requestTime, index) => (
@@ -25,10 +25,9 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
             p-2 bg-color-bg-secondary border-[1px] border-color-border-primary
             rounded-md"
           >
-            {/* TO convert the time into 12 hour format */}
-            <span>{requestTime.start}</span>
+            <span>{requestTime?.start}</span>
             <span>-</span>
-            <span>{requestTime.end}</span>
+            <span>{requestTime?.end}</span>
           </p>
         ))}
       </div>

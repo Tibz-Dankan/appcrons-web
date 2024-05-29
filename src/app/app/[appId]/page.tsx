@@ -111,7 +111,7 @@ export default function MyApp() {
       )}
       {/* App Request Time paginated */}
       {app && (
-        <div>
+        <div className="space-y-8">
           <RequestList appId={app.id} />
           {/* Disable/Enable App */}
           <EnableDisableApp appId={app.id} isDisabled={app.isDisabled} />
