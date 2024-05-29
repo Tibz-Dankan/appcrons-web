@@ -49,7 +49,7 @@ export class AppDate {
 
   weekdayMonthDate() {
     const dayOfWeek = this.date.toLocaleDateString("en-US", {
-      weekday: "long",
+      weekday: "short",
     });
     const month = this.date.toLocaleDateString("en-US", { month: "short" });
     const dayOfMonth = this.buildDayMonthPostfix(this.date.getDate());
@@ -95,6 +95,15 @@ export class AppDate {
     if (date < yesterdayEnd) {
       return this.monthDayYear();
     }
+  }
+
+  dateTime() {
+    const date = new Date(this.date.getTime());
+    if (date < this.midnight) {
+      return `${this.weekdayMonthDate()}, ${this.time()}`;
+    }
+
+    return this.time();
   }
 
   time() {

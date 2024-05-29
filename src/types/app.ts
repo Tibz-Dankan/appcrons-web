@@ -14,6 +14,11 @@ export type TGetApp = {
   accessToken: string;
 };
 
+export type TGetRequestsByApp = {
+  appId: string;
+  accessToken: string;
+};
+
 export type TPostApp = {
   name: string;
   url: string;
