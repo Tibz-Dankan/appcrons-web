@@ -15,15 +15,24 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
+import { getAccessToken } from "@/utils/getAccessToken";
 
 export const PostApp: React.FC = () => {
   const dispatch = useAppDispatch();
 
+  const accessToken = getAccessToken();
+
   const { isPending, mutate } = useMutation({
     mutationFn: new AppService().post,
-    onSuccess: async (auth: any) => {
-      console.log("");
+    onSuccess: async (response: any) => {
+      console.log("response: ", response);
       // call onPostApp fn to send new app data to the parent component
+      dispatch(
+        showCardNotification({ type: "success", message: response.message })
+      );
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -38,18 +47,17 @@ export const PostApp: React.FC = () => {
     name: "",
     url: "",
     requestInterval: "",
-    accessToken: "",
+    accessToken: accessToken,
   };
 
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
-      email: Yup.string().max(255).required("email is required"),
-      password: Yup.string()
-        .max(255)
-        .min(5)
-        .max(30)
-        .required("password is required"),
+      name: Yup.string().max(255).required("name is required"),
+      url: Yup.string().max(255).required("url is required"),
+      requestInterval: Yup.string()
+        .max(2)
+        .required("request interval is required"),
     }),
 
     onSubmit: async (values, helpers) => {
