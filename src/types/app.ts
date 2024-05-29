@@ -4,6 +4,16 @@ export type TSearchInput = {
   accessToken: string;
 };
 
+export type TGetAppByUser = {
+  userId: string;
+  accessToken: string;
+};
+
+export type TGetApp = {
+  appId: string;
+  accessToken: string;
+};
+
 export type TPostApp = {
   name: string;
   url: string;
