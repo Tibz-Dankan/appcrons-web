@@ -3,6 +3,10 @@ import { TAuth } from "@/types/auth";
 import { clientURL } from "@/constants";
 
 export const authenticate = (accessToken: string, user: TAuth) => {
+  localStorage.setItem(
+    "session",
+    JSON.stringify({ accessToken: accessToken, user: user })
+  );
   return async (dispatch: any) => {
     const response = await fetch(
       `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
@@ -24,9 +28,6 @@ export const authenticate = (accessToken: string, user: TAuth) => {
       throw new Error(error.message);
     }
 
-    localStorage.setItem(
-      "session",
-      JSON.stringify({ accessToken: accessToken, user: user })
-    );
+    return await response.json();
   };
 };
