@@ -1,5 +1,5 @@
 import { backendURL } from "@/constants";
-import { TGetAppByUser, TPostApp, TSearchInput } from "@/types/app";
+import { TGetApp, TGetAppByUser, TPostApp, TSearchInput } from "@/types/app";
 
 export class AppService {
   post = async ({ name, url, requestInterval, accessToken }: TPostApp) => {
@@ -34,6 +34,22 @@ export class AppService {
         },
       }
     );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  get = async ({ appId, accessToken }: TGetApp) => {
+    const response = await fetch(`${backendURL}/apps/get/${appId}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       const error = await response.json();

@@ -44,7 +44,7 @@ const Dashboard = () => {
       {/*TODO: Temporary Loading spinner (To be removed)  */}
       {isPending && (
         <div className="w-full grid place-items-center">
-          <Spinner className="w-20 h-20" />
+          <Spinner className="w-10 h-10" />
         </div>
       )}
       {apps && <AppList apps={apps} />}
