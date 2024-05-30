@@ -16,6 +16,7 @@ export type TGetApp = {
 
 export type TGetRequestsByApp = {
   appId: string;
+  before: string;
   accessToken: string;
 };
 
