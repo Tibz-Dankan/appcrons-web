@@ -7,6 +7,7 @@ import { ToggleSwitch } from "@/app/shared/toggleSwitch";
 import { clientURL } from "@/constants";
 import { useRouter } from "next/navigation";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
+import { EnableDisableApp } from "@/app/app/enableDisableApp";
 
 interface AppListProps {
   showListHead?: boolean;
@@ -102,20 +103,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className={`px-2 border-r-[1px] border-color-border-primary
                   ${isLastElement(apps, index) && "rounded-br-md"}`}
                 >
-                  <ToggleSwitch
-                    onCheck={() => {}}
-                    checked={!app.isDisabled}
-                    checkedIcon={<div />}
-                    uncheckedIcon={<div />}
-                    offColor={"#adb5bd"}
-                    onColor={"#12b886"}
-                    offHandleColor={"#495057"}
-                    onHandleColor={"#087f5b"}
-                    diameter={20}
-                    height={12}
-                    width={40}
-                    className={"-pl-2"}
-                  />
+                  <EnableDisableApp app={app} />
                 </td>
               </tr>
             );

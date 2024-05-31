@@ -27,6 +27,16 @@ export type TPostApp = {
   accessToken: string;
 };
 
+export type TDisableApp = {
+  appId: string;
+  accessToken: string;
+};
+
+export type TEnableApp = {
+  appId: string;
+  accessToken: string;
+};
+
 export type TRequest = {
   id: string;
   appId: string;

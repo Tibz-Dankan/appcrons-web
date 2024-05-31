@@ -123,7 +123,7 @@ export default function MyApp() {
         <div className="space-y-8">
           <RequestList appId={app.id} />
           {/* Disable/Enable App */}
-          <EnableDisableApp appId={app.id} isDisabled={app.isDisabled} />
+          <EnableDisableApp app={app} />
           {/* Delete app functionality */}
           <DeleteApp appId={app.id} />
         </div>

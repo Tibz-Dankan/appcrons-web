@@ -173,7 +173,6 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
         //     onClick={() => loadNextRequestsHandler()}
         //   />
         // </div> */}
-      //{" "}
     </div>
   );
 };
