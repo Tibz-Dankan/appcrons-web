@@ -90,11 +90,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className="px-2 cursor-pointer"
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  {showLastRequest(app) && (
-                    <LastRequestItem
-                      startedAt={app.requests ? app.requests[0]?.startedAt : ""}
-                    />
-                  )}
+                  {showLastRequest(app) && <LastRequestItem app={app} />}
                   {!showLastRequest(app) && (
                     <span className="font-semibold">N/A</span>
                   )}

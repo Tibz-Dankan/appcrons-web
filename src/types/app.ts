@@ -71,3 +71,19 @@ export type TApp = {
   updatedAt: string;
   deletedAt: string | null;
 };
+
+export type TAppLiveRequest = TApp & {
+  userId: string;
+  message: string;
+};
+
+// JS object containing key-value
+// of the apps live requests
+export type TAppLiveRequestMap = {
+  apps: any;
+};
+
+export type TAppLiveRequestPayload = {
+  appId: string;
+  app: TAppLiveRequest;
+};
