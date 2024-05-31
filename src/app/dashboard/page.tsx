@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { PostApp } from "@/app/app/postApp";
 import { SearchApps } from "@/app/app/searchApps";
 import { AppList } from "@/app/app/appList";
@@ -18,11 +18,12 @@ import { TApp } from "@/types/app";
 
 const Dashboard = () => {
   const [apps, setApps] = useState<TApp[]>([]);
+  const [isPosted, setIsPosted] = useState<boolean>(false);
   const accessToken = getAccessToken();
   const userId = getUserId();
   const dispatch = useAppDispatch();
 
-  const { isLoading, error, data } = useQuery({
+  const { isLoading } = useQuery({
     queryKey: [`apps-${userId}`],
     queryFn: () =>
       new AppService().getByUser({ userId: userId, accessToken: accessToken }),
@@ -37,9 +38,20 @@ const Dashboard = () => {
     },
   });
 
+  const onPostAppHandler = (app: TApp) => {
+    const existingApps = apps;
+    existingApps.unshift(app);
+
+    setApps(() => existingApps);
+    setIsPosted(() => true);
+  };
+
+  // Trigger component re-render to update appList
+  useEffect(() => {}, [apps, setApps, isPosted]);
+
   return (
     <div className="w-full min-h-[90vh]">
-      <PostApp />
+      <PostApp onPost={onPostAppHandler} />
       <SearchApps onSuccess={() => {}} />
       {/*TODO: Temporary Loading spinner (To be removed)  */}
       {isLoading && (

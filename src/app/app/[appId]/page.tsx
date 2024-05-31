@@ -19,6 +19,7 @@ import {
 import { useAppDispatch } from "@/hooks/redux";
 import { getAccessToken } from "@/utils/getAccessToken";
 import { Spinner } from "@/app/shared/loader/spinner";
+import { TApp } from "@/types/app";
 
 export default function MyApp() {
   // TODO: To dynamically change the icon color basing on the theme
@@ -41,6 +42,15 @@ export default function MyApp() {
   });
 
   const app = data && data.data.app;
+
+  const showRequestTimesRange = (app: TApp): boolean => {
+    const isNull: boolean = app.requestTimes === null;
+    const haveNoFirstElement =
+      app.requestTimes && app.requestTimes[0] == undefined;
+
+    if (isNull || haveNoFirstElement) return false;
+    return true;
+  };
 
   return (
     <div className="p-4 space-y-8 text-sm">
@@ -95,7 +105,9 @@ export default function MyApp() {
                   {app.url}
                 </Link>
               </p>
-              <RequestTimeRangeCard requestTime={app.requestTimes} />
+              {showRequestTimesRange(app) && (
+                <RequestTimeRangeCard requestTime={app.requestTimes} />
+              )}
             </div>
           </div>
           <div>

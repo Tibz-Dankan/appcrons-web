@@ -55,8 +55,8 @@ export type TApp = {
   url: string;
   requestInterval: string;
   isDisabled: boolean;
-  requests: TRequest[];
-  requestTimes: TRequestTime[];
+  requests: TRequest[] | null;
+  requestTimes: TRequestTime[] | null;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;

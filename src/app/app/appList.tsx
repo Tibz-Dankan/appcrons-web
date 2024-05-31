@@ -26,6 +26,14 @@ export const AppList: React.FC<AppListProps> = (props) => {
     router.push(`${clientURL}/app/${appId}`);
   };
 
+  const showLastRequest = (app: TApp): boolean => {
+    const isNull: boolean = app.requests === null;
+    const haveNoFirstElement = app.requests && app.requests[0] == undefined;
+
+    if (isNull || haveNoFirstElement) return false;
+    return true;
+  };
+
   return (
     <div className="p-4">
       <table
@@ -81,7 +89,14 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className="px-2 cursor-pointer"
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  <LastRequestItem startedAt={app.requests[0]?.startedAt} />
+                  {showLastRequest(app) && (
+                    <LastRequestItem
+                      startedAt={app.requests ? app.requests[0]?.startedAt : ""}
+                    />
+                  )}
+                  {!showLastRequest(app) && (
+                    <span className="font-semibold">N/A</span>
+                  )}
                 </td>
                 <td
                   className={`px-2 border-r-[1px] border-color-border-primary
