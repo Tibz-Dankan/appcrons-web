@@ -28,26 +28,23 @@ export default function MyApp() {
   const dispatch = useAppDispatch();
   const accessToken = getAccessToken();
 
-  const { isPending, error, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: [`app-${appId}`],
     queryFn: () =>
       new AppService().get({ appId: appId, accessToken: accessToken }),
+    onError: (error: any) => {
+      dispatch(showCardNotification({ type: "error", message: error.message }));
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
+    },
   });
-
-  useEffect(() => {
-    if (!error) return;
-
-    dispatch(showCardNotification({ type: "error", message: error.message }));
-    setTimeout(() => {
-      dispatch(hideCardNotification());
-    }, 5000);
-  }, [error]);
 
   const app = data && data.data.app;
 
   return (
     <div className="p-4 space-y-8 text-sm">
-      {isPending && (
+      {isLoading && (
         <div className="w-full grid place-items-center">
           <Spinner className="w-10 h-10" />
         </div>

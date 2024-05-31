@@ -22,7 +22,7 @@ interface SearchAppsProps {
 export const SearchApps: React.FC<SearchAppsProps> = (props) => {
   const dispatch = useAppDispatch();
 
-  const { isPending, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().search,
     onSuccess: async (data: any) => {
       console.log("data:: ", data);
@@ -82,7 +82,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
           <Button
             label={
               <>
-                {!isPending && (
+                {!isLoading && (
                   <IconContext.Provider
                     value={{
                       size: "1.4rem",
@@ -92,11 +92,11 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
                     <CiSearch />
                   </IconContext.Provider>
                 )}
-                {isPending && <Spinner className="w-5 h-5 text-[#868e96]" />}
+                {isLoading && <Spinner className="w-5 h-5 text-[#868e96]" />}
               </>
             }
             type="submit"
-            aria-disabled={isPending}
+            aria-disabled={isLoading}
             className="px-0 py-0 h-auto absolute top-2 right-2
             bg-color-bg-primary"
           />

@@ -25,7 +25,7 @@ const Login: React.FC = () => {
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
-  const { isPending, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);
@@ -75,7 +75,7 @@ const Login: React.FC = () => {
     },
   });
 
-  const showDefaultBtnLabel = !isPending && !isRedirecting;
+  const showDefaultBtnLabel = !isLoading && !isRedirecting;
 
   return (
     <Fragment>
@@ -111,7 +111,7 @@ const Login: React.FC = () => {
             label={
               <>
                 {showDefaultBtnLabel && <span>Log in</span>}
-                {isPending && (
+                {isLoading && (
                   <Spinner
                     label="Logging in"
                     className="w-5 h-5 text-gray-100"
@@ -126,7 +126,7 @@ const Login: React.FC = () => {
               </>
             }
             type="submit"
-            aria-disabled={isPending || isRedirecting}
+            aria-disabled={isLoading || isRedirecting}
             className="w-full mt-6 font-semibold"
           />
           <div className="w-full mt-4 space-y-4s flex justify-between gap-4">

@@ -22,7 +22,7 @@ export const PostApp: React.FC = () => {
 
   const accessToken = getAccessToken();
 
-  const { isPending, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().post,
     onSuccess: async (response: any) => {
       console.log("response: ", response);
@@ -106,8 +106,8 @@ export const PostApp: React.FC = () => {
             <Button
               label={
                 <>
-                  {!isPending && <span>Add</span>}
-                  {isPending && (
+                  {!isLoading && <span>Add</span>}
+                  {isLoading && (
                     <Spinner
                       label="Logging in"
                       className="w-5 h-5 text-gray-100"
@@ -116,7 +116,7 @@ export const PostApp: React.FC = () => {
                 </>
               }
               type="submit"
-              aria-disabled={isPending}
+              aria-disabled={isLoading}
               className="w-full mt-6 font-semibold"
             />
           </form>

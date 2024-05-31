@@ -81,7 +81,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className="px-2 cursor-pointer"
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  <LastRequestItem startedAt={app.requests[0].startedAt} />
+                  <LastRequestItem startedAt={app.requests[0]?.startedAt} />
                 </td>
                 <td
                   className={`px-2 border-r-[1px] border-color-border-primary

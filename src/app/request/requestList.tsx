@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { getAccessToken } from "@/utils/getAccessToken";
 import { useAppDispatch } from "@/hooks/redux";
@@ -31,7 +31,7 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
   const appId = props.appId;
   console.log("appId :", appId);
 
-  const { isPending, error, data } = useQuery({
+  const { isLoading, data } = useQuery({
     queryKey: [`app-requests-${appId}-${before}`],
     queryFn: () =>
       new RequestService().getByApp({
@@ -39,16 +39,13 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
         before: before,
         accessToken: accessToken,
       }),
+    onError: (error: any) => {
+      dispatch(showCardNotification({ type: "error", message: error.message }));
+      setTimeout(() => {
+        dispatch(hideCardNotification());
+      }, 5000);
+    },
   });
-
-  useEffect(() => {
-    if (!error) return;
-
-    dispatch(showCardNotification({ type: "error", message: error.message }));
-    setTimeout(() => {
-      dispatch(hideCardNotification());
-    }, 5000);
-  }, [error, before]);
 
   const requests: TRequest[] = data && data.data.requests;
 
@@ -103,7 +100,7 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
 
   return (
     <div className="p-4 space-y-8">
-      {isPending && (
+      {isLoading && (
         <div className="w-full grid place-items-center">
           <Spinner className="w-10 h-10" />
         </div>
