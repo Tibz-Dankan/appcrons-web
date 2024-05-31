@@ -10,23 +10,26 @@ import {
   showCardNotification,
 } from "@/store/actions/notification";
 import { AppService } from "@/services/app.service";
-import { TPostApp } from "@/types/app";
+import { TApp, TPostApp } from "@/types/app";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
 import { getAccessToken } from "@/utils/getAccessToken";
 
-export const PostApp: React.FC = () => {
+interface PostAppProps {
+  onPost: (app: TApp) => void;
+}
+
+export const PostApp: React.FC<PostAppProps> = (props) => {
   const dispatch = useAppDispatch();
 
   const accessToken = getAccessToken();
 
-  const { isPending, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().post,
     onSuccess: async (response: any) => {
-      console.log("response: ", response);
-      // call onPostApp fn to send new app data to the parent component
+      props.onPost(response.app);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
@@ -106,8 +109,8 @@ export const PostApp: React.FC = () => {
             <Button
               label={
                 <>
-                  {!isPending && <span>Add</span>}
-                  {isPending && (
+                  {!isLoading && <span>Add</span>}
+                  {isLoading && (
                     <Spinner
                       label="Logging in"
                       className="w-5 h-5 text-gray-100"
@@ -116,7 +119,7 @@ export const PostApp: React.FC = () => {
                 </>
               }
               type="submit"
-              aria-disabled={isPending}
+              aria-disabled={isLoading}
               className="w-full mt-6 font-semibold"
             />
           </form>

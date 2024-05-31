@@ -24,7 +24,7 @@ const SignUp: React.FC = () => {
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
-  const { isPending, mutate } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: new AuthService().signUp,
     onSuccess: async (auth: any) => {
       dispatch(
@@ -82,7 +82,7 @@ const SignUp: React.FC = () => {
     },
   });
 
-  const showDefaultBtnLabel = !isPending && !isRedirecting;
+  const showDefaultBtnLabel = !isLoading && !isRedirecting;
 
   return (
     <Fragment>
@@ -129,7 +129,7 @@ const SignUp: React.FC = () => {
             label={
               <>
                 {showDefaultBtnLabel && <span>Create</span>}
-                {isPending && (
+                {isLoading && (
                   <Spinner label="Creating" className="w-5 h-5 text-gray-100" />
                 )}
                 {isRedirecting && (
@@ -141,7 +141,7 @@ const SignUp: React.FC = () => {
               </>
             }
             type="submit"
-            aria-disabled={isPending || isRedirecting}
+            aria-disabled={isLoading || isRedirecting}
             className="w-full mt-6 font-semibold"
           />
           <div className="w-full mt-4 flex justify-center">

@@ -7,6 +7,7 @@ import { ToggleSwitch } from "@/app/shared/toggleSwitch";
 import { clientURL } from "@/constants";
 import { useRouter } from "next/navigation";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
+import { EnableDisableApp } from "@/app/app/enableDisableApp";
 
 interface AppListProps {
   showListHead?: boolean;
@@ -24,6 +25,14 @@ export const AppList: React.FC<AppListProps> = (props) => {
 
   const navigateToAppPage = (appId: string) => {
     router.push(`${clientURL}/app/${appId}`);
+  };
+
+  const showLastRequest = (app: TApp): boolean => {
+    const isNull: boolean = app.requests === null;
+    const haveNoFirstElement = app.requests && app.requests[0] == undefined;
+
+    if (isNull || haveNoFirstElement) return false;
+    return true;
   };
 
   return (
@@ -81,26 +90,16 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className="px-2 cursor-pointer"
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  <LastRequestItem startedAt={app.requests[0].startedAt} />
+                  {showLastRequest(app) && <LastRequestItem app={app} />}
+                  {!showLastRequest(app) && (
+                    <span className="font-semibold">N/A</span>
+                  )}
                 </td>
                 <td
                   className={`px-2 border-r-[1px] border-color-border-primary
                   ${isLastElement(apps, index) && "rounded-br-md"}`}
                 >
-                  <ToggleSwitch
-                    onCheck={() => {}}
-                    checked={!app.isDisabled}
-                    checkedIcon={<div />}
-                    uncheckedIcon={<div />}
-                    offColor={"#adb5bd"}
-                    onColor={"#12b886"}
-                    offHandleColor={"#495057"}
-                    onHandleColor={"#087f5b"}
-                    diameter={20}
-                    height={12}
-                    width={40}
-                    className={"-pl-2"}
-                  />
+                  <EnableDisableApp app={app} />
                 </td>
               </tr>
             );

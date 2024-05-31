@@ -27,6 +27,16 @@ export type TPostApp = {
   accessToken: string;
 };
 
+export type TDisableApp = {
+  appId: string;
+  accessToken: string;
+};
+
+export type TEnableApp = {
+  appId: string;
+  accessToken: string;
+};
+
 export type TRequest = {
   id: string;
   appId: string;
@@ -55,9 +65,25 @@ export type TApp = {
   url: string;
   requestInterval: string;
   isDisabled: boolean;
-  requests: TRequest[];
-  requestTimes: TRequestTime[];
+  requests: TRequest[] | null;
+  requestTimes: TRequestTime[] | null;
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
+};
+
+export type TAppLiveRequest = TApp & {
+  userId: string;
+  message: string;
+};
+
+// JS object containing key-value
+// of the apps live requests
+export type TAppLiveRequestMap = {
+  apps: any;
+};
+
+export type TAppLiveRequestPayload = {
+  appId: string;
+  app: TAppLiveRequest;
 };
