@@ -3,6 +3,8 @@ name: "Deploy To Netlify"
 on:
   push:
   pull_request:
+    branches:
+      - master
     types: ["opened", "edited", "synchronize"]
   release:
     types: ["published"]
