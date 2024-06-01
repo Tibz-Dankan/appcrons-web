@@ -1,6 +1,9 @@
 name: "Deploy To Netlify"
 
 on:
+  push:
+  pull_request:
+    types: ["opened", "edited", "synchronize"]
   release:
     types: ["published"]
 
