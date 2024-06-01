@@ -12,9 +12,14 @@ export async function GET(request: Request) {
     user: user,
   });
 
-  const destinationUrl = new URL("/dashboard", new URL(request.url).origin);
-  const response = NextResponse.redirect(destinationUrl, { status: 302 });
-  response.headers.set("Set-Cookie", JSON.stringify(sessionCookie));
+  // const destinationUrl = new URL("/dashboard", new URL(request.url).origin);
+  // const response = NextResponse.redirect(destinationUrl, { status: 302 });
+  // response.headers.set("Set-Cookie", JSON.stringify(sessionCookie));
+  // let response = NextResponse.next();
+  // response.headers.set("Set-Cookie", JSON.stringify(sessionCookie));
 
-  return response;
+  return new Response("", {
+    status: 200,
+    headers: { "Set-Cookie": JSON.stringify(sessionCookie) },
+  });
 }

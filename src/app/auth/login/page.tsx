@@ -29,16 +29,16 @@ const Login: React.FC = () => {
     mutationFn: new AuthService().signIn,
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);
-      dispatch(await authenticate(auth.accessToken, auth.user));
-      // setIsRedirecting(() => false);
+      await authenticate(auth.accessToken, auth.user);
+      setIsRedirecting(() => false);
       window.history.replaceState(null, "", "/dashboard");
       setTimeout(() => {
         location.reload();
       }, 1000);
     },
     onError: (error: any) => {
+      setIsRedirecting(() => false);
       dispatch(showCardNotification({ type: "error", message: error.message }));
-      console.log("Error: ", error.message);
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
@@ -111,7 +111,7 @@ const Login: React.FC = () => {
             label={
               <>
                 {showDefaultBtnLabel && <span>Log in</span>}
-                {isLoading && (
+                {isLoading && !isRedirecting && (
                   <Spinner
                     label="Logging in"
                     className="w-5 h-5 text-gray-100"

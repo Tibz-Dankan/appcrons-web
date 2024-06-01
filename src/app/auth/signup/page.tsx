@@ -33,17 +33,18 @@ const SignUp: React.FC = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+
       setIsRedirecting(() => true);
-      dispatch(await authenticate(auth.accessToken, auth.user));
-      // setIsRedirecting(() => false);
+      await authenticate(auth.accessToken, auth.user);
       window.history.replaceState(null, "", "/dashboard");
       setTimeout(() => {
+        setIsRedirecting(() => false);
         location.reload();
       }, 5000);
     },
     onError: (error: any) => {
+      setIsRedirecting(() => false);
       dispatch(showCardNotification({ type: "error", message: error.message }));
-      console.log("Error: ", error.message);
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
