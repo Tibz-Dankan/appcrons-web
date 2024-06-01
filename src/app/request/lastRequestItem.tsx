@@ -36,6 +36,8 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
       console.log("Inside progress useEffect");
       const updatedApp = appLiveRequest?.apps[`${app.id}`] as TAppLiveRequest;
 
+      console.log("updated app from store:", updatedApp);
+
       if (updatedApp?.id) return;
       const updatedAppLastRequestId = updatedApp?.requests
         ? updatedApp.requests[0]?.id
@@ -43,11 +45,13 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
       if (updatedAppLastRequestId === lastRequestId) {
         setInProgress(() => true);
+        console.log("inProgress :", inProgress);
       } else {
         // TODO: to include a setTimeout of minimum 3 seconds and maximum 35 seconds
         // If max 30 secs then fall back the original request started at date
         setInProgress(() => false);
         setLastRequestId(() => updatedAppLastRequestId);
+        console.log("inProgress :", inProgress);
       }
     };
     updateRequestInProgressHandler();
@@ -55,7 +59,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
   return (
     <div>
-      {inProgress && <SyncLoader label={"In progress"} />}
+      {inProgress && <SyncLoader label={"In progress"} className="w-6 h-6" />}
       {!inProgress && <span>{elapseTime}</span>}
     </div>
   );
