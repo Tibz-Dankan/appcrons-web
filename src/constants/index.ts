@@ -6,6 +6,6 @@ if (!process.env.NODE_ENV || process.env.NODE_ENV === "development") {
   clientURL = "http://localhost:3000";
 } else {
   backendURL = "https://keep-active-backend-v2.onrender.com/api/v1";
-  clientURL = "prod url";
+  clientURL = "https://appcrons.netlify.app";
 }
 export { backendURL, clientURL };
