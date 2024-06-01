@@ -130,7 +130,7 @@ const SignUp: React.FC = () => {
             label={
               <>
                 {showDefaultBtnLabel && <span>Create</span>}
-                {isLoading && (
+                {isLoading && !isRedirecting && (
                   <Spinner label="Creating" className="w-5 h-5 text-gray-100" />
                 )}
                 {isRedirecting && (
