@@ -3,6 +3,7 @@ import { twMerge } from "tailwind-merge";
 
 interface SyncLoaderProps {
   className?: string;
+  labelClassName?: string;
   label?: string;
 }
 
@@ -14,7 +15,7 @@ export const SyncLoader: React.FC<SyncLoaderProps> = (props) => {
         width="1em"
         height="1em"
         viewBox="0 0 24 24"
-        className={twMerge("text-gray-600", props.className)}
+        className={twMerge("[&>*]:text-color-text-primary", props.className)}
       >
         <circle cx="4" cy="12" r="3" fill="currentColor">
           <animate
@@ -49,7 +50,11 @@ export const SyncLoader: React.FC<SyncLoaderProps> = (props) => {
           />
         </circle>
       </svg>
-      <span>{props?.label && props.label}</span>
+      <span
+        className={twMerge("text-color-text-primary", props.labelClassName)}
+      >
+        {props?.label && props.label}
+      </span>
     </div>
   );
 };
