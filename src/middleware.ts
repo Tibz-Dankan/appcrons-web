@@ -8,8 +8,12 @@ export const middleware = (request: NextRequest) => {
 
   // TODO: implement redirectTo, functionality
 
-  // Check for user session to restrict access to protected routes
-  if (request.nextUrl.pathname.includes("/dashboard" || "/app")) {
+  const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
+  const isAppRoute = request.nextUrl.pathname.startsWith("/app");
+
+  const protectedRoute = isDashboardRoute || isAppRoute;
+
+  if (protectedRoute) {
     const session = request.cookies.get("session")?.value;
     if (!session) {
       return NextResponse.redirect(new URL("/auth/login", request.url));
