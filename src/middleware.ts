@@ -10,7 +10,6 @@ export const middleware = (request: NextRequest) => {
 
   const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
   const isAppRoute = request.nextUrl.pathname.startsWith("/app");
-
   const protectedRoute = isDashboardRoute || isAppRoute;
 
   if (protectedRoute) {
