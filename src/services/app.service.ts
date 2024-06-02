@@ -6,12 +6,40 @@ import {
   TGetAppByUser,
   TPostApp,
   TSearchInput,
+  TUpdateApp,
 } from "@/types/app";
 
 export class AppService {
   post = async ({ name, url, requestInterval, accessToken }: TPostApp) => {
     const response = await fetch(`${backendURL}/apps/post`, {
       method: "POST",
+      body: JSON.stringify({
+        name,
+        url,
+        requestInterval,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  update = async ({
+    appId,
+    name,
+    url,
+    requestInterval,
+    accessToken,
+  }: TUpdateApp) => {
+    const response = await fetch(`${backendURL}/apps/update/${appId}`, {
+      method: "PATCH",
       body: JSON.stringify({
         name,
         url,
@@ -115,4 +143,6 @@ export class AppService {
     }
     return await response.json();
   };
+
+  // TODO: To add authenticate API here
 }

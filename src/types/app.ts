@@ -27,6 +27,14 @@ export type TPostApp = {
   accessToken: string;
 };
 
+export type TUpdateApp = {
+  appId:string;
+  name: string;
+  url: string;
+  requestInterval: string;
+  accessToken: string;
+};
+
 export type TDisableApp = {
   appId: string;
   accessToken: string;

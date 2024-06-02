@@ -1,8 +1,7 @@
 "use client";
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { GiPokecog } from "react-icons/gi";
-import { RiEdit2Fill } from "react-icons/ri";
 import Link from "next/link";
 import { RequestTimeRangeCard } from "@/app/request/requestTimeRangeCard";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
@@ -20,11 +19,12 @@ import { useAppDispatch } from "@/hooks/redux";
 import { getAccessToken } from "@/utils/getAccessToken";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
+import { UpdateApp } from "../updateApp";
 
 export default function MyApp() {
   // TODO: To dynamically change the icon color basing on the theme
   // TODO: To apply the application name in the favicon
-
+  const [app, setApp] = useState<TApp>();
   const appId = useParams()["appId"] as string;
   const dispatch = useAppDispatch();
   const accessToken = getAccessToken();
@@ -33,6 +33,10 @@ export default function MyApp() {
     queryKey: [`app-${appId}`],
     queryFn: () =>
       new AppService().get({ appId: appId, accessToken: accessToken }),
+    onSuccess: (response) => {
+      console.log("response: ", response);
+      setApp(() => response.data.app);
+    },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
       setTimeout(() => {
@@ -41,7 +45,14 @@ export default function MyApp() {
     },
   });
 
-  const app = data && data.data.app;
+  const onUpdateAppHandler = (app: TApp) => {
+    console.log("app in the update handler: ", app);
+    setApp(() => app);
+    // TODO: maybe is updated
+  };
+
+  // Trigger component re-render to update app data
+  // useEffect(() => {}, [app, setApp, isUpdated]);
 
   const showRequestTimesRange = (app: TApp): boolean => {
     const isNull: boolean = app.requestTimes === null;
@@ -80,19 +91,7 @@ export default function MyApp() {
                 </span>
                 <span className="text-sm uppercase">Application</span>
               </p>
-              <p className="flex items-center gap-2 cursor-pointer">
-                <span>
-                  <IconContext.Provider
-                    value={{
-                      size: "1.2rem",
-                      color: "#868e96",
-                    }}
-                  >
-                    <RiEdit2Fill />
-                  </IconContext.Provider>
-                </span>
-                <span className="text-sm">Edit</span>
-              </p>
+              <UpdateApp app={app} onUpdate={onUpdateAppHandler} />
             </div>
             <div className="flex flex-col justify-center gap-2 mt-2">
               <p className="text-xl font-semibold">{app.name}</p>
@@ -106,14 +105,14 @@ export default function MyApp() {
                 </Link>
               </p>
               {showRequestTimesRange(app) && (
-                <RequestTimeRangeCard requestTime={app.requestTimes} />
+                <RequestTimeRangeCard requestTime={app.requestTimes!} />
               )}
             </div>
           </div>
           <div>
             <PostRequestTimeRange
               appId={app.id}
-              requestTime={app.requestTimes}
+              requestTime={app.requestTimes!}
             />
           </div>
         </div>
