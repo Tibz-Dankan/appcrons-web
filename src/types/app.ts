@@ -28,7 +28,7 @@ export type TPostApp = {
 };
 
 export type TUpdateApp = {
-  appId:string;
+  appId: string;
   name: string;
   url: string;
   requestInterval: string;
@@ -54,6 +54,21 @@ export type TRequest = {
   createdAt: string;
   deletedAt: string | null;
 };
+
+// "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
+// "start": "4:00:00",
+// "end": "5:00:00",
+// "timeZone": "Africa/Nairobi"
+
+export type TPostRequestTime = {
+  appId: string;
+  start: string;
+  end: string;
+  timeZone: string;
+  accessToken: string;
+};
+
+export type TUpdateRequestTime = TPostRequestTime & {};
 
 export type TRequestTime = {
   id: string;
