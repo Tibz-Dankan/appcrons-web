@@ -34,8 +34,10 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
             focus:shadow-[0px_0px_0px_4px_rgba(12,166,120,0.3)]
             text-color-text-primary bg-color-bg-primary"
           >
-            {options.map((option) => (
-              <option value={option}>{option}</option>
+            {options.map((option, index) => (
+              <option value={option} key={index}>
+                {option}
+              </option>
             ))}
           </select>
           <div
