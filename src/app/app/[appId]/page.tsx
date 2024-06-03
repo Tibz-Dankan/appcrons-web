@@ -113,6 +113,7 @@ export default function MyApp() {
             <PostRequestTimeRange
               appId={app.id}
               requestTime={app.requestTimes!}
+              onPost={() => {}}
             />
           </div>
         </div>
