@@ -1,0 +1,32 @@
+{
+  "allTimeZones": [
+    "Africa/Cairo",
+    "Africa/Johannesburg",
+    "Africa/Lagos",
+    "Africa/Nairobi",
+    "America/Argentina/Buenos_Aires",
+    "America/Chicago",
+    "America/Denver",
+    "America/Los_Angeles",
+    "America/New_York",
+    "America/Sao_Paulo",
+    "Asia/Bangkok",
+    "Asia/Dubai",
+    "Asia/Hong_Kong",
+    "Asia/Kolkata",
+    "Asia/Kuala_Lumpur",
+    "Asia/Shanghai",
+    "Asia/Singapore",
+    "Asia/Tokyo",
+    "Australia/Sydney",
+    "Europe/Berlin",
+    "Europe/Istanbul",
+    "Europe/London",
+    "Europe/Moscow",
+    "Europe/Paris",
+    "Pacific/Auckland",
+    "Pacific/Fiji",
+    "Pacific/Honolulu",
+    "Pacific/Pago_Pago"
+  ]
+}
