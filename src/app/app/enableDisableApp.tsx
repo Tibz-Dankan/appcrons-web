@@ -6,9 +6,8 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { AppService } from "@/services/app.service";
-import { getAccessToken } from "@/utils/getAccessToken";
 import { Spinner } from "@/app/shared/loader/spinner";
 interface EnableDisableAppProps {
   app: TApp;
@@ -17,7 +16,8 @@ interface EnableDisableAppProps {
 export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
   const app = props.app;
   const [isEnabled, setIsEnabled] = useState<boolean>(!app.isDisabled);
-  const accessToken = getAccessToken();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
+
   const dispatch = useAppDispatch();
 
   const { isLoading, mutate } = useMutation({

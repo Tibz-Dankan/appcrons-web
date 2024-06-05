@@ -3,7 +3,7 @@
 import React from "react";
 import Button from "@/app/shared/button";
 import { Modal } from "@/app/shared/modal";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
   hideCardNotification,
@@ -15,7 +15,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
-import { getAccessToken } from "@/utils/getAccessToken";
 import { IconContext } from "react-icons";
 import { RiEdit2Fill } from "react-icons/ri";
 
@@ -27,7 +26,7 @@ interface PostAppProps {
 export const UpdateApp: React.FC<PostAppProps> = (props) => {
   const dispatch = useAppDispatch();
 
-  const accessToken = getAccessToken();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
 
   const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().update,

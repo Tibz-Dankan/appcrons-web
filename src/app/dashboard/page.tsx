@@ -5,10 +5,8 @@ import { PostApp } from "@/app/app/postApp";
 import { SearchApps } from "@/app/app/searchApps";
 import { AppList } from "@/app/app/appList";
 import { useQuery } from "@tanstack/react-query";
-import { getAccessToken } from "@/utils/getAccessToken";
-import { getUserId } from "@/utils/getUserId";
 import { AppService } from "@/services/app.service";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   hideCardNotification,
   showCardNotification,
@@ -19,8 +17,9 @@ import { TApp } from "@/types/app";
 const Dashboard = () => {
   const [apps, setApps] = useState<TApp[]>([]);
   const [isPosted, setIsPosted] = useState<boolean>(false);
-  const accessToken = getAccessToken();
-  const userId = getUserId();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const userId = useAppSelector((state) => state.auth.user.id);
+
   const dispatch = useAppDispatch();
 
   const { isLoading } = useQuery({
