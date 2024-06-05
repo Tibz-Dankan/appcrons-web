@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { getAccessToken } from "@/utils/getAccessToken";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   hideCardNotification,
   showCardNotification,
@@ -19,7 +18,7 @@ interface RequestListProps {
 
 export const RequestList: React.FC<RequestListProps> = (props) => {
   const dispatch = useAppDispatch();
-  const accessToken = getAccessToken();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
   const router = useRouter();
   const searchParams = useSearchParams();
   // const [disableNextHandler, setDisableNextHandler] = useState(false);
