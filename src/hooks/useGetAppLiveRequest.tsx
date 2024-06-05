@@ -7,15 +7,13 @@ import {
 } from "@/store/actions/notification";
 
 import { EventSourcePolyfill } from "event-source-polyfill";
-import { getAccessToken } from "@/utils/getAccessToken";
-import { getUserId } from "@/utils/getUserId";
 import { TAppLiveRequest } from "@/types/app";
-import { useAppDispatch } from "./redux";
+import { useAppDispatch, useAppSelector } from "./redux";
 import { updateAppLiveRequest } from "@/store/actions/appLiveRequests";
 
 export const useGetAppLiveRequest = async () => {
-  const accessToken = getAccessToken();
-  const userId = getUserId();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const userId = useAppSelector((state) => state.auth.user.id);
 
   const dispatch: any = useAppDispatch();
 
