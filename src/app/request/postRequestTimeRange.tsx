@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/app/shared/button";
 import { Modal } from "@/app/shared/modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
@@ -18,6 +18,8 @@ import { InputSelect } from "@/app/shared/inputSelect";
 import times from "@/app/request/data/times.json";
 import appData from "@/app/app/data/apps.json";
 import { TimeZoneSelect } from "@/app/shared/timeZoneSelect";
+import { validateTimeRange } from "@/utils/validateTimeRange";
+import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
 
 interface PostRequestTimeRangeProps {
   app: TApp;
@@ -35,6 +37,10 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
 
   const timeOptions = times.times;
+  const [validateReqTimeRange, setValidateReqTimeRange] = useState<{
+    isValid: boolean;
+    message: string;
+  }>({ isValid: false, message: "" });
 
   const getAppTimezone = (): string => {
     if (hasTimeZone) {
@@ -87,7 +93,13 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
 
     onSubmit: async (values, helpers) => {
       try {
-        mutate(values);
+        mutate({
+          appId: app.id,
+          start: convertTo24HourFormat(values.start),
+          end: convertTo24HourFormat(values.end),
+          timeZone: getAppTimezone(),
+          accessToken: accessToken,
+        });
       } catch (err: any) {
         helpers.setStatus({ success: false });
         helpers.setSubmitting(false);
@@ -109,6 +121,25 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
 
   // const requestTimeList = app.requestTimes as TRequestTime[];
   const requestTimeList = appData.apps[1].requestTimes as TRequestTime[]; // To be removed
+
+  useEffect(() => {
+    const validateTimeRangeHandler = () => {
+      if (!formik.values.start || !formik.values.end) return;
+      const validator = validateTimeRange(
+        requestTimeList,
+        convertTo24HourFormat(formik.values.start),
+        convertTo24HourFormat(formik.values.end)
+      );
+
+      console.log("validator : ", validator);
+
+      setValidateReqTimeRange({
+        isValid: validator.isValid,
+        message: validator.message,
+      });
+    };
+    validateTimeRangeHandler();
+  }, [formik.values.start, formik.values.end]);
 
   return (
     <div className="w-full flex items-center justify-end p-4">
@@ -165,7 +196,30 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
               className="flex flex-col gap-0 items-center w-[90%] sm:w-full
               bg-color-bg-secondary rounded-md z-[1]"
             >
-              {/* <div>Errors</div> */}
+              <div className="w-full">
+                {validateReqTimeRange.isValid &&
+                  validateReqTimeRange.message && (
+                    <div
+                      className="border-[1px] border-color-border-primary rounded-md
+                       p-2 w-full mb-2"
+                    >
+                      <p className="text-green-500 text-[14px] text-start">
+                        {validateReqTimeRange.message}
+                      </p>
+                    </div>
+                  )}
+                {!validateReqTimeRange.isValid &&
+                  validateReqTimeRange.message && (
+                    <div
+                      className="border-[1px] border-color-border-primary rounded-md
+                       p-2 w-full mb-2"
+                    >
+                      <p className="text-red-500 text-[14px] text-start">
+                        {validateReqTimeRange.message}
+                      </p>
+                    </div>
+                  )}
+              </div>
               <div className="w-full flex items-center gap-4 justify-between">
                 <div className="w-full -space-y-4">
                   <label htmlFor="Start" className="text-sm">
