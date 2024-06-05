@@ -15,8 +15,7 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-import { useAppDispatch } from "@/hooks/redux";
-import { getAccessToken } from "@/utils/getAccessToken";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { UpdateApp } from "../updateApp";
@@ -27,7 +26,7 @@ export default function MyApp() {
   const [app, setApp] = useState<TApp>();
   const appId = useParams()["appId"] as string;
   const dispatch = useAppDispatch();
-  const accessToken = getAccessToken();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
 
   const { isLoading, data } = useQuery({
     queryKey: [`app-${appId}`],
@@ -111,8 +110,9 @@ export default function MyApp() {
           </div>
           <div>
             <PostRequestTimeRange
-              appId={app.id}
-              requestTime={app.requestTimes!}
+              app={app}
+              // appId={app.id}
+              // requestTime={app.requestTimes!}
               onPost={() => {}}
             />
           </div>
