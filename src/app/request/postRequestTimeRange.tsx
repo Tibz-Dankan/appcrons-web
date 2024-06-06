@@ -20,6 +20,11 @@ import appData from "@/app/app/data/apps.json";
 import { TimeZoneSelect } from "@/app/shared/timeZoneSelect";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
+import { IconContext } from "react-icons";
+import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+import { MdErrorOutline } from "react-icons/md";
+import { truncateString } from "@/utils/truncateString";
+import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 
 interface PostRequestTimeRangeProps {
   app: TApp;
@@ -84,11 +89,8 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
-      name: Yup.string().max(255).required("name is required"),
-      url: Yup.string().max(255).required("url is required"),
-      requestInterval: Yup.string()
-        .max(2)
-        .required("request interval is required"),
+      start: Yup.string().max(255).required("start time is required"),
+      end: Yup.string().max(255).required("end time is required"),
     }),
 
     onSubmit: async (values, helpers) => {
@@ -97,7 +99,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
           appId: app.id,
           start: convertTo24HourFormat(values.start),
           end: convertTo24HourFormat(values.end),
-          timeZone: getAppTimezone(),
+          timeZone: values.timeZone,
           accessToken: accessToken,
         });
       } catch (err: any) {
@@ -112,12 +114,9 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
   });
 
   const onSelectTimeZoneHandler = (timeZone: string) => {
-    console.log("timeZone: ", timeZone);
     if (!timeZone) return;
     formik.values.timeZone = timeZone;
   };
-
-  console.log("formik.values:", formik.values);
 
   // const requestTimeList = app.requestTimes as TRequestTime[];
   const requestTimeList = appData.apps[1].requestTimes as TRequestTime[]; // To be removed
@@ -137,9 +136,20 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
         isValid: validator.isValid,
         message: validator.message,
       });
+
+      if (!validator.isValid) {
+        formik.errors.start = validator.message;
+        formik.errors.end = validator.message;
+      }
     };
     validateTimeRangeHandler();
   }, [formik.values.start, formik.values.end]);
+
+  const showTimeRangeSuccessMessage =
+    validateReqTimeRange.isValid && !!validateReqTimeRange.message;
+  const showTimeRangeErrorMessage =
+    !validateReqTimeRange.isValid && !!validateReqTimeRange.message;
+  const isDisabledSubmitBtn = isLoading || showTimeRangeErrorMessage;
 
   return (
     <div className="w-full flex items-center justify-end p-4">
@@ -158,72 +168,120 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
           <div
             className="flex flex-col gap-4 items-center w-[90%] sm:w-96
              border-[1px]  border-color-border-primary p-8
-             bg-color-bg-secondary rounded-md"
+             bg-color-bg-secondary rounded-md max-h-[70vh] overflow-x-auto"
           >
             <div className="flex items-center justify-between gap-4 w-full">
-              <p className="">{app.name}</p>
-              {hasTimeZone ? (
-                <p className="space-x-2 text-sm">
-                  <span>Time Zone:</span>
+              <p className="font-semibold">{truncateString(app.name, 40)}</p>
+            </div>
+            {hasTimeZone && (
+              <div className="w-full space-y-1">
+                <span className="text-sm text-color-text-secondary">
+                  Timezone
+                </span>
+                <p
+                  className="border-[1px] border-color-border-primary rounded-md 
+                   text-sm p-2"
+                >
                   <span>{getAppTimezone()}</span>
                 </p>
-              ) : (
-                <div>
-                  <TimeZoneSelect onSelect={onSelectTimeZoneHandler} />
-                </div>
-              )}
-            </div>
-            {/* Existing requestTimeRange list */}
-            <div
-              className="grid grid-cols-2 gap-2 p-4 bg-color-bg-secondary
-               border-[1px] border-color-border-primary rounded-md "
-            >
-              {requestTimeList.map((requestTime, index) => (
-                <p
-                  key={index}
-                  className="flex items-center justify-center gap-2 
+              </div>
+            )}
+            {!hasTimeZone && (
+              <div className="w-full space-y-1">
+                <label
+                  htmlFor="Start"
+                  className="text-sm text-color-text-secondary"
+                >
+                  Select Timezone
+                </label>
+                <TimeZoneSelect onSelect={onSelectTimeZoneHandler} />
+              </div>
+            )}
+            <div className="w-full space-y-1">
+              <span className="text-sm text-color-text-secondary">
+                Existing Time Ranges
+              </span>
+              <div
+                className="grid grid-cols-2 gap-2 p-4 bg-color-bg-secondary
+                border-[1px] border-color-border-primary rounded-md"
+              >
+                {/* TODO: organize time ranges based on the start time in ascending order */}
+                {requestTimeList.map((requestTime, index) => (
+                  <p
+                    key={index}
+                    className="flex items-center justify-center gap-1 
                      p-2 bg-color-bg-secondary border-[1px] border-color-border-primary
                      rounded-md text-[12px]"
-                >
-                  <span>{requestTime?.start}</span>
-                  <span>-</span>
-                  <span>{requestTime?.end}</span>
-                </p>
-              ))}
+                  >
+                    <span>{convertTo12HourFormat(requestTime?.start)}</span>
+                    <span>-</span>
+                    <span>{convertTo12HourFormat(requestTime?.end)}</span>
+                  </p>
+                ))}
+              </div>
             </div>
             <form
               onSubmit={formik.handleSubmit}
               className="flex flex-col gap-0 items-center w-[90%] sm:w-full
               bg-color-bg-secondary rounded-md z-[1]"
             >
+              <div className="w-full mb-2">
+                <p
+                  className="text-[12px] text-color-text-primary
+                   p-2 border-[1px] border-color-border-primary rounded-md"
+                >
+                  Choose Time Range by selecting Start and End time below
+                </p>
+              </div>
               <div className="w-full">
-                {validateReqTimeRange.isValid &&
-                  validateReqTimeRange.message && (
-                    <div
-                      className="border-[1px] border-color-border-primary rounded-md
-                       p-2 w-full mb-2"
-                    >
-                      <p className="text-green-500 text-[14px] text-start">
-                        {validateReqTimeRange.message}
-                      </p>
-                    </div>
-                  )}
-                {!validateReqTimeRange.isValid &&
-                  validateReqTimeRange.message && (
-                    <div
-                      className="border-[1px] border-color-border-primary rounded-md
-                       p-2 w-full mb-2"
-                    >
-                      <p className="text-red-500 text-[14px] text-start">
-                        {validateReqTimeRange.message}
-                      </p>
-                    </div>
-                  )}
+                {showTimeRangeSuccessMessage && (
+                  <div
+                    className="border-[1px] border-color-border-primary rounded-md
+                    p-2 w-full mb-2 flex justify-start items-start gap-2"
+                  >
+                    <span>
+                      <IconContext.Provider
+                        value={{
+                          size: "1.2rem",
+                          color: "#55C57A",
+                        }}
+                      >
+                        <IoMdCheckmarkCircleOutline />
+                      </IconContext.Provider>
+                    </span>
+                    <p className="text-[#55C57A] text-[14px] text-start">
+                      {validateReqTimeRange.message}
+                    </p>
+                  </div>
+                )}
+                {showTimeRangeErrorMessage && (
+                  <div
+                    className="border-[1px] border-color-border-primary rounded-md
+                    p-2 w-full mb-2 flex justify-start items-start gap-2"
+                  >
+                    <span>
+                      <IconContext.Provider
+                        value={{
+                          size: "1.2rem",
+                          color: "#D9534F",
+                        }}
+                      >
+                        <MdErrorOutline />
+                      </IconContext.Provider>
+                    </span>
+                    <p className="text-[#D9534F] text-[14px] text-start">
+                      {validateReqTimeRange.message}
+                    </p>
+                  </div>
+                )}
               </div>
               <div className="w-full flex items-center gap-4 justify-between">
-                <div className="w-full -space-y-4">
-                  <label htmlFor="Start" className="text-sm">
-                    Start
+                <div className="w-full -space-y-5">
+                  <label
+                    htmlFor="Start"
+                    className="text-sm text-color-text-secondary"
+                  >
+                    Start time
                   </label>
                   <InputSelect
                     label="start"
@@ -231,9 +289,12 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
                     formik={formik}
                   />
                 </div>
-                <div className="w-full -space-y-4">
-                  <label htmlFor="End" className="text-sm">
-                    End
+                <div className="w-full -space-y-5">
+                  <label
+                    htmlFor="End"
+                    className="text-sm text-color-text-secondary"
+                  >
+                    End time
                   </label>
                   <InputSelect
                     label="end"
@@ -246,7 +307,15 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
               <Button
                 label={
                   <>
-                    {!isLoading && <span>Submit</span>}
+                    {!isLoading && (
+                      <span
+                        className={`${
+                          showTimeRangeErrorMessage && "text-[#adb5bd]"
+                        }`}
+                      >
+                        Submit
+                      </span>
+                    )}
                     {isLoading && (
                       <Spinner
                         label="processing"
@@ -256,7 +325,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
                   </>
                 }
                 type="submit"
-                aria-disabled={isLoading}
+                disabled={isDisabledSubmitBtn}
                 className="w-full mt-6 font-semibold"
               />
             </form>

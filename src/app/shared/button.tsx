@@ -6,6 +6,7 @@ interface ButtonProps extends React.HTMLAttributes<HTMLButtonElement> {
   label: ReactNode;
   type: "submit" | "reset" | "button";
   onClick?: () => void;
+  disabled?: boolean;
 }
 
 const Button: React.FC<ButtonProps> = (props) => {
@@ -14,11 +15,12 @@ const Button: React.FC<ButtonProps> = (props) => {
       <button
         className={twMerge(
           `flex items-center justify-center bg-primary h-10 
-           py-2 px-4 rounded-md text-gray-200`,
+           py-2 px-4 rounded-md text-gray-200 disabled:opacity-80`,
           props.className
         )}
         type={props.type}
         onClick={props.onClick}
+        disabled={props.disabled}
       >
         {props.label}
       </button>
