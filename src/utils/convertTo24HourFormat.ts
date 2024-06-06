@@ -21,10 +21,3 @@ export const convertTo24HourFormat = (time: string): string => {
 
   return `${hours24}:${minutes24}:00`;
 };
-
-// // Examples
-// console.log(convertTo24HourFormat("3:00PM")); // "15:00:00"
-// console.log(convertTo24HourFormat("2:00AM")); // "02:00:00"
-// console.log(convertTo24HourFormat("11:30PM")); // "23:30:00"
-// console.log(convertTo24HourFormat("12:00AM")); // "00:00:00"
-// console.log(convertTo24HourFormat("12:00PM")); // "12:00:00"
