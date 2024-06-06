@@ -42,7 +42,7 @@ export const validateTimeRange = (
       ) {
         return {
           isValid: false,
-          message: `The provided time range (${convertTo12HourFormat(
+          message: `The selected time range (${convertTo12HourFormat(
             start
           )} - ${convertTo12HourFormat(
             end
@@ -87,7 +87,7 @@ export const validateTimeRange = (
     ) {
       return {
         isValid: false,
-        message: `The provided time range (${convertTo12HourFormat(
+        message: `The selected time range (${convertTo12HourFormat(
           start
         )} - ${convertTo12HourFormat(
           end
@@ -100,6 +100,6 @@ export const validateTimeRange = (
 
   return {
     isValid: true,
-    message: "The provided time range is valid",
+    message: "The selected time range is valid",
   };
 };

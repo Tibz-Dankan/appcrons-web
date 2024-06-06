@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import timeZones from "@/app/shared/data/timezone.json";
 import { TriangleDownIcon } from "./Icons/triangleDownIcon";
 import { Timezone } from "@/utils/timezone";
@@ -11,6 +11,10 @@ export const TimeZoneSelect: React.FC<TimeZoneSelectProps> = (props) => {
   const options = timeZones.allTimeZones;
   const timeZoneInstance = new Timezone(options);
   const [value, setValue] = useState(timeZoneInstance.getDeviceTimeZone());
+
+  useEffect(() => {
+    props.onSelect(value);
+  }, [value]);
 
   const onChangeHandler = (event: any) => {
     setValue(() => event.target.value);
