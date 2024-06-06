@@ -15,6 +15,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
+import { InputSelect } from "../shared/inputSelect";
 
 interface PostAppProps {
   onPost: (app: TApp) => void;
@@ -48,7 +49,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   const initialValues: TPostApp = {
     name: "",
     url: "",
-    requestInterval: "",
+    requestInterval: "5",
     accessToken: accessToken,
   };
 
@@ -76,6 +77,8 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
     },
   });
 
+  const intervalOptions = ["5", "10", "15"];
+
   return (
     <div className="w-full flex items-center justify-end p-4">
       <Modal openModalElement={<Button type="button" label={"New App"} />}>
@@ -99,10 +102,9 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
               placeholder="URL"
               formik={formik}
             />
-            <InputField
-              type="text"
-              name="requestInterval"
-              placeholder="Select Request Interval"
+            <InputSelect
+              label="requestInterval"
+              options={intervalOptions}
               formik={formik}
             />
             <Button
@@ -118,7 +120,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
                 </>
               }
               type="submit"
-              aria-disabled={isLoading}
+              disabled={isLoading}
               className="w-full mt-6 font-semibold"
             />
           </form>
