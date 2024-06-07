@@ -17,6 +17,7 @@ import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
 import { IconContext } from "react-icons";
 import { RiEdit2Fill } from "react-icons/ri";
+import { InputSelect } from "../shared/inputSelect";
 
 interface PostAppProps {
   app: TApp;
@@ -82,6 +83,8 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
     },
   });
 
+  const intervalOptions = ["5", "10", "15"];
+
   return (
     <div className="w-full flex items-center justify-end p-4">
       <Modal
@@ -121,12 +124,17 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
               placeholder="URL"
               formik={formik}
             />
-            <InputField
+            <InputSelect
+              label="requestInterval"
+              options={intervalOptions}
+              formik={formik}
+            />
+            {/* <InputField
               type="text"
               name="requestInterval"
               placeholder="Select Request Interval"
               formik={formik}
-            />
+            /> */}
             <Button
               label={
                 <>
