@@ -16,7 +16,6 @@ import { Spinner } from "@/app/shared/loader/spinner";
 import { RequestService } from "@/services/request.service";
 import { InputSelect } from "@/app/shared/inputSelect";
 import times from "@/app/request/data/times.json";
-import appData from "@/app/app/data/apps.json";
 import { TimeZoneSelect } from "@/app/shared/timeZoneSelect";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
@@ -118,8 +117,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     formik.values.timeZone = timeZone;
   };
 
-  // const requestTimeList = app.requestTimes as TRequestTime[];
-  const requestTimeList = appData.apps[1].requestTimes as TRequestTime[]; // To be removed
+  const requestTimeList = app.requestTimes as TRequestTime[];
 
   useEffect(() => {
     const validateTimeRangeHandler = () => {
@@ -129,8 +127,6 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
         convertTo24HourFormat(formik.values.start),
         convertTo24HourFormat(formik.values.end)
       );
-
-      console.log("validator : ", validator);
 
       setValidateReqTimeRange({
         isValid: validator.isValid,
