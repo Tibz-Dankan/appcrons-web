@@ -23,13 +23,25 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     ? appLiveRequest?.apps[`${app.id}`].requests[0]?.id
     : "";
 
+  // update startedAt value at the start of every minute
   useEffect(() => {
-    const timerId = setTimeout(() => {
+    const updateElapsedTime = () => {
       setElapseTime(elapsedTime(startedAt));
-    }, 60000);
+    };
 
-    return () => clearTimeout(timerId);
-  }, [elapseTime]);
+    const now = new Date();
+    const delayToNextMinute =
+      (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
+
+    const initialTimeoutId = setTimeout(() => {
+      updateElapsedTime();
+      const intervalId = setInterval(updateElapsedTime, 60000);
+
+      return () => clearInterval(intervalId);
+    }, delayToNextMinute);
+
+    return () => clearTimeout(initialTimeoutId);
+  }, [startedAt]);
 
   useEffect(() => {
     const updateRequestInProgressHandler = () => {
