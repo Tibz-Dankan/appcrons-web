@@ -68,7 +68,9 @@ export type TPostRequestTime = {
   accessToken: string;
 };
 
-export type TUpdateRequestTime = TPostRequestTime & {};
+export type TUpdateRequestTime = TPostRequestTime & {
+  requestTimeId: string;
+};
 
 export type TRequestTime = {
   id: string;

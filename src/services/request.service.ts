@@ -1,5 +1,9 @@
 import { backendURL } from "@/constants";
-import { TGetRequestsByApp, TPostRequestTime } from "@/types/app";
+import {
+  TGetRequestsByApp,
+  TPostRequestTime,
+  TUpdateRequestTime,
+} from "@/types/app";
 
 export class RequestService {
   getByApp = async ({ appId, before, accessToken }: TGetRequestsByApp) => {
@@ -41,6 +45,38 @@ export class RequestService {
         Authorization: `Bearer ${accessToken}`,
       },
     });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  updateRequestTimeRange = async ({
+    requestTimeId,
+    appId,
+    start,
+    end,
+    timeZone,
+    accessToken,
+  }: TUpdateRequestTime) => {
+    const response = await fetch(
+      `${backendURL}/requests/update-request-time/${requestTimeId}`,
+      {
+        method: "PATCH",
+        body: JSON.stringify({
+          appId: appId,
+          start: start,
+          end: end,
+          timeZone: timeZone,
+        }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
 
     if (!response.ok) {
       const error = await response.json();

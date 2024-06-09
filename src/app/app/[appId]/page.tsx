@@ -103,9 +103,7 @@ export default function MyApp() {
                   {app.url}
                 </Link>
               </p>
-              {showRequestTimesRange(app) && (
-                <RequestTimeRangeCard requestTime={app.requestTimes!} />
-              )}
+              {showRequestTimesRange(app) && <RequestTimeRangeCard app={app} />}
             </div>
           </div>
           <div>
