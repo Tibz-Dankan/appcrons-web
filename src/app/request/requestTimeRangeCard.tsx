@@ -15,7 +15,6 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
   props
 ) => {
   const requestTimeList = props.app.requestTimes as TRequestTime[];
-  // UpdateRequestTimeRange
 
   return (
     <div className="border-[1px] border-color-border-primary rounded-md">
