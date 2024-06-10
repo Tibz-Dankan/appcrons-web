@@ -1,6 +1,6 @@
 "use client";
 
-import React, { useState, Fragment, ReactNode } from "react";
+import React, { useState, Fragment, ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { twMerge } from "tailwind-merge";
 import { IconContext } from "react-icons";
@@ -20,6 +20,7 @@ interface ModalProps {
   openModalElement: ReactNode;
   children: ReactNode;
   className?: string;
+  closed?: boolean;
 }
 
 const ModalOverlay: React.FC<ModalOverlayProps> = (props) => {
@@ -71,6 +72,16 @@ export const Modal: React.FC<ModalProps> = (props) => {
     body.appendChild(portalElement);
   };
   createAppendPortalElement();
+
+  useEffect(() => {
+    const autoCloseHandler = () => {
+      const isClosed = props.closed !== undefined && props.closed;
+      if (!isClosed) return;
+      setIsOpen(() => !isClosed);
+    };
+
+    autoCloseHandler();
+  }, [props.closed]);
 
   return (
     <Fragment>

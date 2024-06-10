@@ -72,6 +72,11 @@ export type TUpdateRequestTime = TPostRequestTime & {
   requestTimeId: string;
 };
 
+export type TDeleteRequestTime = {
+  requestTimeId: string;
+  accessToken: string;
+};
+
 export type TRequestTime = {
   id: string;
   appId: string;

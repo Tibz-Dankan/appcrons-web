@@ -6,6 +6,7 @@ import { UpdateRequestTimeRange } from "@/app/request/updateRequestTimeRange";
 import { IconContext } from "react-icons";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
+import { DeleteRequestTimeRange } from "./deleteRequestTimeRange";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -42,7 +43,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
                gap-2"
             >
               {/* Delete Time Range */}
-              <UpdateRequestTimeRange
+              <DeleteRequestTimeRange
                 requestTimeId={requestTime.id}
                 app={props.app}
                 openModalElement={
@@ -57,7 +58,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
                     </IconContext.Provider>
                   </span>
                 }
-                onUpdate={() => {}}
+                onDelete={() => {}}
               />
               {/* Edit Time Range */}
               <UpdateRequestTimeRange
