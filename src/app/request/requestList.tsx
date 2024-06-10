@@ -7,10 +7,10 @@ import {
 } from "@/store/actions/notification";
 import { RequestService } from "@/services/request.service";
 import { TRequest } from "@/types/app";
-import { Spinner } from "../shared/loader/spinner";
+import { Spinner } from "@/app/shared/loader/spinner";
 import { AppDate } from "@/utils/date";
 import { useRouter, useSearchParams } from "next/navigation";
-// import Button from "../shared/button";
+import Button from "@/app/shared/button";
 
 interface RequestListProps {
   appId: string;
@@ -21,8 +21,8 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const router = useRouter();
   const searchParams = useSearchParams();
-  // const [disableNextHandler, setDisableNextHandler] = useState(false);
-  // const [disablePrevHandler, setDisablePrevHandler] = useState(true);
+  const [disableNextHandler, setDisableNextHandler] = useState(false);
+  const [disablePrevHandler, setDisablePrevHandler] = useState(true);
 
   const before = searchParams.get("before") ? searchParams.get("before")! : "";
   console.log("before: ", before);
@@ -56,46 +56,46 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     return new AppDate(date).dateTime();
   };
 
-  // const loadNextRequestsHandler = () => {
-  //   const createdAtBefore = requests[requests.length - 1].createdAt;
-  //   const twelveHourMillSec = 12 * 1000 * 60 * 60;
-  //   const requestDiffInMillSec =
-  //     new Date().getTime() - new Date(createdAtBefore).getTime();
+  const loadNextRequestsHandler = () => {
+    const createdAtBefore = requests[requests.length - 1].createdAt;
+    const twelveHourMillSec = 12 * 1000 * 60 * 60;
+    const requestDiffInMillSec =
+      new Date().getTime() - new Date(createdAtBefore).getTime();
 
-  //   const disabled: boolean = requestDiffInMillSec >= twelveHourMillSec;
+    const disabled: boolean = requestDiffInMillSec >= twelveHourMillSec;
 
-  //   if (disabled) {
-  //     setDisableNextHandler(() => true);
-  //     console.log("next handler disabled::", disabled);
-  //     return;
-  //   }
+    if (disabled) {
+      setDisableNextHandler(() => true);
+      console.log("next handler disabled::", disabled);
+      return;
+    }
 
-  //   const currentParams = new URLSearchParams(searchParams);
-  //   currentParams.set("before", createdAtBefore);
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("before", createdAtBefore);
 
-  //   router.push(`?before=${createdAtBefore}`);
-  // };
+    router.push(`?before=${createdAtBefore}`);
+  };
 
-  // const loadPrevRequestsHandler = () => {
-  //   const createdAtBefore = requests[0].createdAt;
-  //   const fiveMinuteMillSec = 5 * 1000 * 60;
-  //   const requestDiffInMillSec =
-  //     new Date().getTime() - new Date(createdAtBefore).getTime();
+  const loadPrevRequestsHandler = () => {
+    const createdAtBefore = requests[0].createdAt;
+    const fiveMinuteMillSec = 5 * 1000 * 60;
+    const requestDiffInMillSec =
+      new Date().getTime() - new Date(createdAtBefore).getTime();
 
-  //   // validate next btn
-  //   const disabled: boolean = requestDiffInMillSec <= fiveMinuteMillSec;
+    // validate next btn
+    const disabled: boolean = requestDiffInMillSec <= fiveMinuteMillSec;
 
-  //   if (disabled) {
-  //     setDisablePrevHandler(() => true);
-  //     console.log("prev handler disabled::", disabled);
-  //     return;
-  //   }
+    if (disabled) {
+      setDisablePrevHandler(() => true);
+      console.log("prev handler disabled::", disabled);
+      return;
+    }
 
-  //   const currentParams = new URLSearchParams(searchParams);
-  //   currentParams.set("before", createdAtBefore);
+    const currentParams = new URLSearchParams(searchParams);
+    currentParams.set("before", createdAtBefore);
 
-  //   router.push(`?before=${createdAtBefore}`);
-  // };
+    router.push(`?before=${createdAtBefore}`);
+  };
 
   return (
     <div className="p-4 space-y-8">
@@ -157,21 +157,22 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
           </tbody>
         </table>
       )}
-      {/* {requests && ()}                          */}
-      {/* // <div className="w-full flex items-center justify-end gap-2">
-        //   <Button
-        //     label={"Previous"}
-        //     type={"button"}
-        //     aria-disabled={disablePrevHandler}
-        //     onClick={() => loadPrevRequestsHandler()}
-        //   />
-        //   <Button
-        //     label={"Next"}
-        //     type={"button"}
-        //     aria-disabled={disableNextHandler}
-        //     onClick={() => loadNextRequestsHandler()}
-        //   />
-        // </div> */}
+      {requests && (
+        <div className="w-full flex items-center justify-end gap-2">
+          <Button
+            label={"Previous"}
+            type={"button"}
+            disabled={disablePrevHandler}
+            onClick={() => loadPrevRequestsHandler()}
+          />
+          <Button
+            label={"Next"}
+            type={"button"}
+            disabled={disableNextHandler}
+            onClick={() => loadNextRequestsHandler()}
+          />
+        </div>
+      )}
     </div>
   );
 };
