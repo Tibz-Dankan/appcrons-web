@@ -1,5 +1,6 @@
 import { backendURL } from "@/constants";
 import {
+  TDeleteRequestTime,
   TGetRequestsByApp,
   TPostRequestTime,
   TUpdateRequestTime,
@@ -71,6 +72,28 @@ export class RequestService {
           end: end,
           timeZone: timeZone,
         }),
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  deleteRequestTimeRange = async ({
+    requestTimeId,
+    accessToken,
+  }: TDeleteRequestTime) => {
+    const response = await fetch(
+      `${backendURL}/requests/delete-request-time/${requestTimeId}`,
+      {
+        method: "Delete",
         headers: {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
