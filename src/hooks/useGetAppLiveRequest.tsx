@@ -36,6 +36,9 @@ export const useGetAppLiveRequest = async () => {
 
       const parsedUserId = parsedData.userId;
       if (!parsedUserId) return;
+
+      parsedData.arrivedAt = new Date(Date.now()).toISOString();
+      console.log("parsedData.arrivedAt :", parsedData.arrivedAt);
       dispatch(updateAppLiveRequest({ appId: parsedData.id, app: parsedData }));
     };
 

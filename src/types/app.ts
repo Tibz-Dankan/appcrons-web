@@ -105,6 +105,7 @@ export type TApp = {
 export type TAppLiveRequest = TApp & {
   userId: string;
   message: string;
+  arrivedAt: string;
 };
 
 // JS object containing key-value

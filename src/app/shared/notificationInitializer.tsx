@@ -5,7 +5,7 @@ import { Notification } from "./notification";
 import React, { useEffect } from "react";
 import { TAuth } from "@/types/auth";
 import { authActions } from "@/store";
-// import { useGetAppLiveRequest } from "@/hooks/useGetAppLiveRequest";
+import { useGetAppLiveRequest } from "@/hooks/useGetAppLiveRequest";
 
 const NotificationInitializer: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -14,7 +14,7 @@ const NotificationInitializer: React.FC = () => {
   };
   const notification = useAppSelector((state) => state.notification);
 
-  // useGetAppLiveRequest();
+  useGetAppLiveRequest();
 
   useEffect(() => {
     const tryLogin = async () => {
