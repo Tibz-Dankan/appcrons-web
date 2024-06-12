@@ -14,8 +14,6 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
   const app = props.app;
   const startedAt = app.requests ? app.requests[0]?.startedAt : "";
   const lastReqId = app.requests ? app.requests[0]?.id : "";
-  const [requestStartedAt, setRequestStartedAt] = useState(startedAt);
-  const [elapseTime, setElapseTime] = useState(elapsedTime(startedAt));
   const [lastRequestId, setLastRequestId] = useState<string>(lastReqId);
   const [inProgress, setInProgress] = useState<boolean>(false);
   const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
@@ -24,10 +22,32 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     ? appLiveRequest?.apps[`${app.id}`].arrivedAt
     : "";
 
+  const appLastRequestStartedAt = appLiveRequest?.apps[`${app.id}`]?.requests
+    ? appLiveRequest?.apps[`${app.id}`].requests[0]?.startedAt
+    : "";
+
+  const [requestStartedAt, setRequestStartedAt] = useState(
+    appLastRequestStartedAt ? appLastRequestStartedAt : startedAt
+  );
+  const [elapseTime, setElapseTime] = useState(
+    elapsedTime(appLastRequestStartedAt ? appLastRequestStartedAt : startedAt)
+  );
+
   // update startedAt value at the start of every minute
   useEffect(() => {
     const updateElapsedTime = () => {
-      setElapseTime(elapsedTime(requestStartedAt));
+      let updatedStartAt: string;
+
+      if (
+        appLastRequestStartedAt &&
+        new Date(appLastRequestStartedAt) > new Date(requestStartedAt)
+      ) {
+        updatedStartAt = appLastRequestStartedAt;
+      }
+      updatedStartAt = requestStartedAt;
+
+      setElapseTime(() => elapsedTime(updatedStartAt));
+      // setElapseTime(elapsedTime(requestStartedAt));
     };
 
     const now = new Date();
@@ -42,7 +62,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     }, delayToNextMinute);
 
     return () => clearTimeout(initialTimeoutId);
-  }, [requestStartedAt]);
+  }, [requestStartedAt, appLastRequestStartedAt]);
 
   useEffect(() => {
     const updateRequestInProgressHandler = () => {
@@ -51,7 +71,8 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
       console.log("updated app from store:", updatedApp);
 
-      if (!updatedApp?.id) return;
+      if (!updatedApp?.id || updatedApp?.id !== app.id) return;
+
       const updatedAppLastRequestId = updatedApp?.requests
         ? updatedApp.requests[0]?.id
         : "";
@@ -61,9 +82,14 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
         : "";
 
       if (updatedAppLastRequestId === lastRequestId) {
+        const nowSeconds = new Date(Date.now()).getSeconds();
+        const arrivedAtSeconds = new Date(appLastRequestArrivedAt).getSeconds();
+        const isExpiredArrivedAt = nowSeconds - arrivedAtSeconds >= 1;
+        if (isExpiredArrivedAt) return;
+
         console.log("inProgress :", inProgress);
         setInProgress(() => true);
-        // Stop a loader after 32 seconds when
+        // Stop a SyncLoader after 32 seconds when
         // the backend doesn't respond
         const timeoutId = setTimeout(() => {
           setRequestStartedAt(() => startedAt);
@@ -77,7 +103,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
       if (updatedAppLastRequestId !== lastRequestId) {
         console.log("inProgress :", inProgress);
-        // Delay hiding(stopping) SyncLoader for 2 seconds
+        // Delay hiding(stopping) SyncLoader for 3 seconds
         const timeoutId = setTimeout(() => {
           setRequestStartedAt(() => startedAt);
           setElapseTime(() => elapsedTime(startedAt));
