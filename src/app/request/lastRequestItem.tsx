@@ -4,7 +4,7 @@ import { useAppSelector } from "@/hooks/redux";
 import { TApp, TAppLiveRequest } from "@/types/app";
 import { elapsedTime } from "@/utils/elapsedTime";
 import React, { useEffect, useState } from "react";
-import { SyncLoader } from "@/app/shared/loader/syncLoader";
+import { SettingsLoaderIcon } from "@/app/shared/loader/settingsLoader";
 
 interface LastRequestItemProps {
   app: TApp;
@@ -118,8 +118,19 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
   }, [appLastRequestArrivedAt]);
 
   return (
-    <div>
-      {inProgress && <SyncLoader label={"In progress"} className="w-6 h-6" />}
+    <div className="flex items-center justify-start w-36">
+      {inProgress && (
+        <div
+          className="flex items-center justify-center bg-color-bg-secondary 
+           rounded-md p-2 w-32"
+        >
+          <SettingsLoaderIcon
+            label={"In progress"}
+            className="w-5 h-5"
+            labelClassName="font-semibold"
+          />
+        </div>
+      )}
       {!inProgress && <span>{elapseTime}</span>}
     </div>
   );
