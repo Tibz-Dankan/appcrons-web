@@ -109,7 +109,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
           setElapseTime(() => elapsedTime(startedAt));
           setLastRequestId(() => updatedAppLastRequestId);
           setInProgress(() => false);
-        }, 2000);
+        }, 5000);
 
         return () => clearTimeout(timeoutId);
       }
