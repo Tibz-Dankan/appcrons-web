@@ -36,13 +36,14 @@ export const useGetAppLiveRequest = async () => {
 
       const parsedUserId = parsedData.userId;
       if (!parsedUserId) return;
+
+      parsedData.arrivedAt = new Date(Date.now()).toISOString();
+      console.log("parsedData.arrivedAt :", parsedData.arrivedAt);
       dispatch(updateAppLiveRequest({ appId: parsedData.id, app: parsedData }));
     };
 
     const onerror = async (error: any) => {
       if (error.status === 401) {
-        console.log("", error);
-        eventSource.close();
         dispatch(
           showCardNotification({ type: "error", message: error.message })
         );
@@ -54,7 +55,11 @@ export const useGetAppLiveRequest = async () => {
 
     eventSource.onmessage = onmessage;
     eventSource.onerror = onerror;
-  }, [dispatch, accessToken]);
+
+    return () => {
+      eventSource.close();
+    };
+  }, [accessToken, userId, dispatch]);
 
   return {};
 };

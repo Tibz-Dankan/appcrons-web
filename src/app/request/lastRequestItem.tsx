@@ -14,19 +14,40 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
   const app = props.app;
   const startedAt = app.requests ? app.requests[0]?.startedAt : "";
   const lastReqId = app.requests ? app.requests[0]?.id : "";
-  const [elapseTime, setElapseTime] = useState(elapsedTime(startedAt));
   const [lastRequestId, setLastRequestId] = useState<string>(lastReqId);
   const [inProgress, setInProgress] = useState<boolean>(false);
   const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
 
-  const appLastRequestIdFromStore = appLiveRequest?.apps[`${app.id}`]?.requests
-    ? appLiveRequest?.apps[`${app.id}`].requests[0]?.id
+  const appLastRequestArrivedAt = appLiveRequest?.apps[`${app.id}`]?.arrivedAt
+    ? appLiveRequest?.apps[`${app.id}`].arrivedAt
     : "";
+
+  const appLastRequestStartedAt = appLiveRequest?.apps[`${app.id}`]?.requests
+    ? appLiveRequest?.apps[`${app.id}`].requests[0]?.startedAt
+    : "";
+
+  const [requestStartedAt, setRequestStartedAt] = useState(
+    appLastRequestStartedAt ? appLastRequestStartedAt : startedAt
+  );
+  const [elapseTime, setElapseTime] = useState(
+    elapsedTime(appLastRequestStartedAt ? appLastRequestStartedAt : startedAt)
+  );
 
   // update startedAt value at the start of every minute
   useEffect(() => {
     const updateElapsedTime = () => {
-      setElapseTime(elapsedTime(startedAt));
+      let updatedStartAt: string;
+
+      if (
+        appLastRequestStartedAt &&
+        new Date(appLastRequestStartedAt) > new Date(requestStartedAt)
+      ) {
+        updatedStartAt = appLastRequestStartedAt;
+      }
+      updatedStartAt = requestStartedAt;
+
+      setElapseTime(() => elapsedTime(updatedStartAt));
+      // setElapseTime(elapsedTime(requestStartedAt));
     };
 
     const now = new Date();
@@ -41,7 +62,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     }, delayToNextMinute);
 
     return () => clearTimeout(initialTimeoutId);
-  }, [startedAt]);
+  }, [requestStartedAt, appLastRequestStartedAt]);
 
   useEffect(() => {
     const updateRequestInProgressHandler = () => {
@@ -50,24 +71,51 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
       console.log("updated app from store:", updatedApp);
 
-      if (updatedApp?.id) return;
+      if (!updatedApp?.id || updatedApp?.id !== app.id) return;
+
       const updatedAppLastRequestId = updatedApp?.requests
         ? updatedApp.requests[0]?.id
         : "";
 
+      const startedAt = updatedApp?.requests
+        ? updatedApp.requests[0]?.startedAt
+        : "";
+
       if (updatedAppLastRequestId === lastRequestId) {
+        const nowSeconds = new Date(Date.now()).getSeconds();
+        const arrivedAtSeconds = new Date(appLastRequestArrivedAt).getSeconds();
+        const isExpiredArrivedAt = nowSeconds - arrivedAtSeconds >= 1;
+        if (isExpiredArrivedAt) return;
+
+        console.log("inProgress :", inProgress);
         setInProgress(() => true);
+        // Stop a SyncLoader after 32 seconds when
+        // the backend doesn't respond
+        const timeoutId = setTimeout(() => {
+          setRequestStartedAt(() => startedAt);
+          setElapseTime(() => elapsedTime(startedAt));
+          setLastRequestId(() => updatedAppLastRequestId);
+          setInProgress(() => false);
+        }, 32000);
+
+        return () => clearTimeout(timeoutId);
+      }
+
+      if (updatedAppLastRequestId !== lastRequestId) {
         console.log("inProgress :", inProgress);
-      } else {
-        // TODO: to include a setTimeout of minimum 3 seconds and maximum 35 seconds
-        // If max 30 secs then fall back the original request started at date
-        setInProgress(() => false);
-        setLastRequestId(() => updatedAppLastRequestId);
-        console.log("inProgress :", inProgress);
+        // Delay hiding(stopping) SyncLoader for 3 seconds
+        const timeoutId = setTimeout(() => {
+          setRequestStartedAt(() => startedAt);
+          setElapseTime(() => elapsedTime(startedAt));
+          setLastRequestId(() => updatedAppLastRequestId);
+          setInProgress(() => false);
+        }, 5000);
+
+        return () => clearTimeout(timeoutId);
       }
     };
     updateRequestInProgressHandler();
-  }, [appLastRequestIdFromStore]);
+  }, [appLastRequestArrivedAt]);
 
   return (
     <div>
