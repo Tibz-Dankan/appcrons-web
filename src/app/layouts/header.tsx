@@ -4,6 +4,7 @@ import { ThemeController } from "@/app/shared/themeController";
 import { CurrentUser } from "@/app/shared/currentUser";
 
 export const Header: React.FC = () => {
+  // TODO: to add link on dashboard pages
   return (
     <header
       className="w-full flex items-center justify-between 
