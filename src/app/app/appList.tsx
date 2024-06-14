@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TApp } from "@/types/app";
 import { truncateString } from "@/utils/truncateString";
 import { ToggleSwitch } from "@/app/shared/toggleSwitch";
@@ -8,16 +8,16 @@ import { clientURL } from "@/constants";
 import { useRouter } from "next/navigation";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
+import { useAppSelector } from "@/hooks/redux";
 
 interface AppListProps {
   showListHead?: boolean;
-  apps: TApp[];
 }
 
 export const AppList: React.FC<AppListProps> = (props) => {
   const showListHead = props.showListHead ? props.showListHead : true;
-  const apps = props.apps;
   const router = useRouter();
+  const apps = useAppSelector((state) => state.app.apps);
 
   const isLastElement = (list: any[], index: number): boolean => {
     return index === list.length - 1;
@@ -35,6 +35,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
     return true;
   };
 
+  // TODO: to cater for no last request when rendering the progress loader
   return (
     <div className="p-4">
       <table

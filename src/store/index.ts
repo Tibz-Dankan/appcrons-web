@@ -2,12 +2,14 @@ import { configureStore } from "@reduxjs/toolkit";
 import { notificationSlice } from "./reducers/notification";
 import { authSlice } from "./reducers/auth";
 import { appLiveRequestSlice } from "./reducers/appLiveRequests";
+import { appSlice } from "./reducers/app";
 
 export const makeStore = () => {
   return configureStore({
     reducer: {
       auth: authSlice.reducer,
       notification: notificationSlice.reducer,
+      app: appSlice.reducer,
       appLiveRequest: appLiveRequestSlice.reducer,
     },
   });
@@ -21,4 +23,5 @@ export type AppDispatch = AppStore["dispatch"];
 // Store update actions
 export const authActions = authSlice.actions;
 export const notificationActions = notificationSlice.actions;
+export const appActions = appSlice.actions;
 export const appLiveRequestActions = appLiveRequestSlice.actions;
