@@ -9,6 +9,7 @@ import { useRouter } from "next/navigation";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
 import { useAppSelector } from "@/hooks/redux";
+import { NextRequestTime } from "../request/nextRequestTime";
 
 interface AppListProps {
   showListHead?: boolean;
@@ -56,6 +57,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
               </th>
               <th className="px-2 py-4 text-start">URL</th>
               <th className="px-2 py-4 text-start">Last Request</th>
+              <th className="px-2 py-4 text-start">Next Request</th>
               <th
                 className="px-2 py-4 text-start border-r-[1px] 
                 border-color-border-primary rounded-tr-md"
@@ -95,6 +97,12 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   {!showLastRequest(app) && (
                     <span className="font-semibold">N/A</span>
                   )}
+                </td>
+                <td
+                  className="px-2 cursor-pointer"
+                  onClick={() => navigateToAppPage(app.id)}
+                >
+                  <NextRequestTime appId={app.id} />
                 </td>
                 <td
                   className={`px-2 border-r-[1px] border-color-border-primary
