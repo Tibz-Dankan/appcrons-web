@@ -1,10 +1,11 @@
 "use client";
 
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { TApp, TAppLiveRequest } from "@/types/app";
-import { elapsedTime } from "@/utils/elapsedTime";
 import React, { useEffect, useState } from "react";
 import { SettingsLoaderIcon } from "@/app/shared/loader/settingsLoader";
+import { updateOneApp } from "@/store/actions/app";
+import { LastRequestTime } from "@/app/request/lastRequestTime";
 
 interface LastRequestItemProps {
   app: TApp;
@@ -15,42 +16,18 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     state.app.apps.find((app) => app.id == props.app.id)
   ) as TApp;
 
-  const startedAt = app.requests ? app.requests[0]?.startedAt : "";
-  const lastReqId = app.requests ? app.requests[0]?.id : "";
-  const [lastRequestId, setLastRequestId] = useState<string>(lastReqId);
+  const lastRequestId = app.requests ? app.requests[0]?.id : "";
   const [inProgress, setInProgress] = useState<boolean>(false);
   const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
+  const updatedApp = appLiveRequest?.apps[`${app.id}`] as TAppLiveRequest;
 
   const appLastRequestArrivedAt = appLiveRequest?.apps[`${app.id}`]?.arrivedAt
     ? appLiveRequest?.apps[`${app.id}`].arrivedAt
     : "";
 
-  const [elapseTime, setElapseTime] = useState(elapsedTime(startedAt));
-
-  // update startedAt value at the start of every minute
-  useEffect(() => {
-    const updateElapsedTime = () => {
-      setElapseTime(() => elapsedTime(startedAt));
-    };
-
-    const now = new Date();
-    const delayToNextMinute =
-      (60 - now.getSeconds()) * 1000 - now.getMilliseconds();
-
-    const initialTimeoutId = setTimeout(() => {
-      updateElapsedTime();
-      const intervalId = setInterval(updateElapsedTime, 60000);
-
-      return () => clearInterval(intervalId);
-    }, delayToNextMinute);
-
-    return () => clearTimeout(initialTimeoutId);
-  }, [startedAt]);
-
+  const dispatch: any = useAppDispatch();
   useEffect(() => {
     const updateRequestInProgressHandler = () => {
-      const updatedApp = appLiveRequest?.apps[`${app.id}`] as TAppLiveRequest;
-
       if (!updatedApp?.id || updatedApp?.id !== app.id) return;
 
       const updatedAppLastRequestId = updatedApp?.requests
@@ -74,10 +51,10 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
       }
 
       if (updatedAppLastRequestId !== lastRequestId) {
+        dispatch(updateOneApp({ app: updatedApp }));
+
         // Delay hiding Loader for 5 seconds
         const timeoutId = setTimeout(() => {
-          setElapseTime(() => elapsedTime(startedAt));
-          setLastRequestId(() => updatedAppLastRequestId);
           setInProgress(() => false);
         }, 5000);
 
@@ -101,7 +78,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
           />
         </div>
       )}
-      {!inProgress && <span>{elapseTime}</span>}
+      {!inProgress && <LastRequestTime appId={props.app.id} />}
     </div>
   );
 };
