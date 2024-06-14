@@ -13,6 +13,7 @@ import {
 } from "@/store/actions/notification";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
+import { updateApps } from "@/store/actions/app";
 
 const Dashboard = () => {
   const [apps, setApps] = useState<TApp[]>([]);
@@ -28,6 +29,7 @@ const Dashboard = () => {
       new AppService().getByUser({ userId: userId, accessToken: accessToken }),
     onSuccess: (response) => {
       setApps(() => response.data.apps);
+      dispatch(updateApps({ apps: response.data.apps }));
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -42,6 +44,7 @@ const Dashboard = () => {
     existingApps.unshift(app);
 
     setApps(() => existingApps);
+    dispatch(updateApps({ apps: existingApps }));
     setIsPosted(() => true);
   };
 
@@ -58,7 +61,7 @@ const Dashboard = () => {
           <Spinner className="w-10 h-10" />
         </div>
       )}
-      {apps[0] && <AppList apps={apps} />}
+      {apps[0] && <AppList />}
     </div>
   );
 };

@@ -102,6 +102,14 @@ export type TApp = {
   deletedAt: string | null;
 };
 
+export type TAppPayload = {
+  app: TApp;
+};
+
+export type TAppListPayload = {
+  apps: TApp[];
+};
+
 export type TAppLiveRequest = TApp & {
   userId: string;
   message: string;
