@@ -1,5 +1,3 @@
-// import { removeMinusCharPrefix } from "./removeMinusCharPrefix";
-
 const ONE_SEC_MILL_SEC = 1000;
 const ONE_MIN_MILL_SEC = 1000 * 60;
 const ONE_HOUR_MILL_SEC = 1000 * 60 * 60;
@@ -44,16 +42,17 @@ const years = (millSecs: number) => {
 };
 
 export const elapsedTime = (dateStr: string) => {
-  const candidateDateMillSec = new Date(dateStr).getTime();
+  const date = new Date(dateStr);
+  date.setSeconds(0, 0); // Set seconds and milliseconds to zero
+
+  const candidateDateMillSec = date.getTime();
   const currentDateMillSec = new Date(Date.now()).getTime();
 
   const millSecDiff = removeMinusCharPrefix(
     currentDateMillSec - candidateDateMillSec
   );
 
-  if (millSecDiff < ONE_MIN_MILL_SEC) {
-    // if (seconds(millSecDiff) === 1) return "1 second";
-    // return `${seconds(millSecDiff)} seconds`;
+  if (millSecDiff < ONE_MIN_MILL_SEC || seconds(millSecDiff) === 0) {
     return "now";
   }
 
