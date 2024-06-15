@@ -15,14 +15,20 @@ export const NextRequestTime: React.FC<NextRequestTimeProps> = (props) => {
 
   const getNextRequestSchedule = (): string => {
     const nextRequestTime = determineNextRequestTime(app);
-    if (nextRequestTime === "N/A") return nextRequestTime;
+    if (nextRequestTime.date === "N/A") return nextRequestTime.date;
+    if (nextRequestTime.status === "tomorrow") {
+      // return ` ${new AppDate(nextRequestTime.date).time()} ${
+      //   nextRequestTime.status
+      // }`;
+      return ` ${new AppDate(nextRequestTime.date).time()}, ${"Tomorrow"}`;
+    }
 
-    return new AppDate(nextRequestTime).time();
+    return new AppDate(nextRequestTime.date).time();
   };
 
   return (
     <div>
-      <span>{getNextRequestSchedule()}</span>
+      <span className="first-letter:uppercase">{getNextRequestSchedule()}</span>
     </div>
   );
 };
