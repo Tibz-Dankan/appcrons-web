@@ -31,19 +31,43 @@ export const determineNextRequestTime = (
     return { date: "N/A", status: "unknown" };
   }
 
+  const hasRequests = !!app.requests && app.requests.length > 0;
+  const hasRequestTimes = !!app.requestTimes && app.requestTimes.length > 0;
+
   const requestIntervalMinutes = parseInt(app.requestInterval, 10);
   const lastRequestStartedAt = new Date(app.requests[0].startedAt);
-  const nextRequestTime = new Date(
+
+  // get the timezone
+  const deviceTimezone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+  const appTimezone = (app.requestTimes &&
+    app?.requestTimes[0]?.timeZone) as string;
+  const timezone = hasRequestTimes ? appTimezone : deviceTimezone;
+
+  // get currentTime in the application timezone
+  const currentTimeStringWithTimezone = moment(new Date())
+    .tz(timezone)
+    .format();
+  const currentTime = new Date(currentTimeStringWithTimezone);
+  console.log("application name:", app.name);
+  console.log("currentTime:", currentTime);
+  console.log("timezone:", timezone);
+  console.log("requestTimes:", app.requestTimes);
+
+  // get nextRequestTime in the application timezone
+  const nextRequestDate = new Date(
     lastRequestStartedAt.getTime() + requestIntervalMinutes * 60000
-  ); //TODO: add the timezone
-  const currentTime = new Date(); //TODO: To add a timezone
+  );
+  const nextRequestTimeStringWithTimezone = moment(nextRequestDate, true)
+    .tz(timezone)
+    .format();
+  const nextRequestTime = new Date(nextRequestTimeStringWithTimezone);
+
+  console.log("nextRequestTime:", nextRequestTime);
+
   const nextRequestInMinutes =
     nextRequestTime.getHours() * 60 + nextRequestTime.getMinutes();
   const currentTimeInMinutes =
     currentTime.getHours() * 60 + currentTime.getMinutes();
-
-  const hasRequests = !!app.requests && app.requests.length > 0;
-  const hasRequestTimes = !!app.requestTimes && app.requestTimes.length > 0;
 
   if (hasRequests && !hasRequestTimes) {
     if (nextRequestInMinutes - currentTimeInMinutes > 15) {
@@ -93,7 +117,7 @@ export const determineNextRequestTime = (
       const nextRequestTimeISOString = new AppDate(
         nextRequestTime
       ).add24HourTimeFormatToDate(requestTimes[i + 1].start);
-      return { date: nextRequestTimeISOString, status: "tomorrow" };
+      return { date: nextRequestTimeISOString, status: "today" };
     }
 
     const lastElementEndInMinutes = isLastRequestTime ? endInMinutes : 0;
