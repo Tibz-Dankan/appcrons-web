@@ -123,13 +123,28 @@ export class AppDate {
     return `${formattedHour}:${formattedMinute}`;
   }
 
-  addTimeToDate(time: string) {
+  add12HourTimeFormatToDate(time: string) {
     const [hours, minutes] = time.split(":").map(Number);
     const resultDate = new Date(this.date);
     resultDate.setHours(0, 0, 0, 0);
 
     resultDate.setHours(resultDate.getHours() + hours);
     resultDate.setMinutes(resultDate.getMinutes() + minutes);
+
+    return resultDate.toISOString();
+  }
+
+  /**  Takes in 24 hour format in e.g 4:00:00
+   adds to the supplied date and returns
+   an ISOString */
+  add24HourTimeFormatToDate(time: string) {
+    const [hours, minutes, seconds] = time.split(":").map(Number);
+    const resultDate = new Date(this.date);
+    resultDate.setHours(0, 0, 0, 0);
+
+    resultDate.setHours(resultDate.getHours() + hours);
+    resultDate.setMinutes(resultDate.getMinutes() + minutes);
+    resultDate.setSeconds(resultDate.getSeconds() + seconds);
 
     return resultDate.toISOString();
   }
