@@ -19,8 +19,9 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { UpdateApp } from "../updateApp";
+import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 
-export default function MyApp() {
+const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
   // TODO: To apply the application name in the favicon
   const [app, setApp] = useState<TApp>();
@@ -128,4 +129,6 @@ export default function MyApp() {
       )}
     </div>
   );
-}
+};
+
+export default PageAuthWrapper(MyApp);

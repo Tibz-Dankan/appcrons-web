@@ -14,8 +14,9 @@ import {
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { updateApps } from "@/store/actions/app";
+import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 
-const Dashboard = () => {
+const Dashboard: React.FC = () => {
   const [apps, setApps] = useState<TApp[]>([]);
   const [isPosted, setIsPosted] = useState<boolean>(false);
   const accessToken = useAppSelector((state) => state.auth.accessToken);
@@ -66,4 +67,4 @@ const Dashboard = () => {
   );
 };
 
-export default Dashboard;
+export default PageAuthWrapper(Dashboard);
