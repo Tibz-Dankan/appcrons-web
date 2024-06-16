@@ -17,6 +17,7 @@ const config: Config = {
         "color-bg-primary": "var(--color-bg-primary)",
         "color-bg-secondary": "var(--color-bg-secondary)",
         "color-bg-tertiary": "var(--color-bg-tertiary)",
+        "color-divide-primary":"var(--color-divide-primary)"
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
