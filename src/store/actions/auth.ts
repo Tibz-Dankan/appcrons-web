@@ -1,5 +1,6 @@
 import { TAuth } from "@/types/auth";
 import { clientURL } from "@/constants";
+import { authActions } from "@/store";
 
 export const authenticate = async (accessToken: string, user: TAuth) => {
   const response = await fetch(
@@ -19,4 +20,10 @@ export const authenticate = async (accessToken: string, user: TAuth) => {
   );
 
   // return await response.json();
+};
+
+export const logout = () => {
+  return (dispatch: any) => {
+    dispatch(authActions.logout());
+  };
 };
