@@ -1,4 +1,4 @@
-import { backendURL } from "@/constants";
+import { backendURL, clientURL } from "@/constants";
 import { TSigninInPut, TSignupInput } from "@/types/auth";
 
 export class AuthService {
@@ -75,5 +75,22 @@ export class AuthService {
       throw new Error(error.message);
     }
     return await response.json();
+  };
+
+  logOut = async () => {
+    const response = await fetch(`${clientURL}/auth/api/logout`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+
+    // return await response.json();
+    return {};
   };
 }

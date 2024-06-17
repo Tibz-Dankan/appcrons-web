@@ -1,17 +1,14 @@
-import { Session } from "@/lib/session";
+"use client";
 import { getFirstLetter } from "@/utils/getFirstLetter";
 import React from "react";
 import { NavDropDown } from "@/app/shared/navDropDown";
 import { ChevronDownIcon } from "@/app/shared/Icons/chevronDownIcon";
 import { truncateString } from "@/utils/truncateString";
+import { useAppSelector } from "@/hooks/redux";
 
 export const CurrentUser: React.FC = () => {
-  const session = new Session().get();
-  if (!session) {
-    return <span>No User</span>;
-  }
+  const user = useAppSelector((state) => state.auth.user);
 
-  const user = session.user;
   return (
     <NavDropDown>
       <div className="flex items-center justify-center gap-2">

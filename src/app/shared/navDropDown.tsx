@@ -12,9 +12,11 @@ import { useAppSelector } from "@/hooks/redux";
 import { PersonIcon } from "@/app/shared/Icons/personIcon";
 import { ReactNode } from "react";
 import { SettingsIcon } from "@/app/shared/Icons/settingsIcon";
-import { LogoutIcon } from "@/app/shared/Icons/logoutIcon";
+// import { LogoutIcon } from "@/app/shared/Icons/logoutIcon";
 import { useRouter } from "next/navigation";
 import { truncateString } from "@/utils/truncateString";
+// import { clearSession } from "@/app/auth/actions";
+import { LogOut } from "@/app/auth/logout";
 
 interface NavDropDownProps {
   children: ReactNode;
@@ -28,18 +30,8 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
   const username = useAppSelector((state) => state.auth.user.name);
   const router = useRouter();
 
-  const deleteAllCookiesClientSide = () => {
-    const allCookies = document.cookie.split(";");
-
-    allCookies.forEach((cookie) => {
-      const cookieName = cookie.split("=")[0].trim();
-      document.cookie = `${cookieName}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
-    });
-  };
-
   const logoutHandler = () => {
-    deleteAllCookiesClientSide();
-    router.push("/auth/login");
+    router.push("/auth/logout");
   };
 
   return (
@@ -116,14 +108,17 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
                     focus
                       ? "bg-gray-100s bg-color-bg-secondary text-gray-900s"
                       : "text-gray-700s ",
-                    "block px-4 py-2 text-sm text-color-text-primary"
+                    ""
                   )}
-                  onClick={() => logoutHandler()}
+                  // onClick={() => {
+                  //   clearSession(), logoutHandler();
+                  // }}
                 >
-                  <div className="flex items-center justify-start gap-4">
+                  <LogOut />
+                  {/* <div className="flex items-center justify-start gap-4">
                     <LogoutIcon />
                     <span>Log out</span>
-                  </div>
+                  </div> */}
                 </div>
               )}
             </MenuItem>
