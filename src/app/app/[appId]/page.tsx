@@ -20,8 +20,9 @@ import { TApp } from "@/types/app";
 import { UpdateApp } from "../updateApp";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Modal } from "@/app/shared/modal";
-import { RiEdit2Fill } from "react-icons/ri";
 import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
+import { UpdateAppCard } from "@/app/app/updateAppCard";
+import { FiEdit } from "react-icons/fi";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -96,14 +97,14 @@ const MyApp: React.FC = () => {
                     <span>
                       <IconContext.Provider
                         value={{
-                          size: "1.2rem",
+                          size: "1.0rem",
                           color: "#868e96",
                         }}
                       >
-                        <RiEdit2Fill />
+                        <FiEdit />
                       </IconContext.Provider>
                     </span>
-                    <span className="text-sm">Edit</span>
+                    <span className="text-sm">Update</span>
                   </p>
                 }
               >
@@ -138,6 +139,8 @@ const MyApp: React.FC = () => {
       {app && (
         <div className="space-y-8">
           <RequestList appId={app.id} />
+          {/* Update App */}
+          <UpdateAppCard app={app} />
           {/* Disable/Enable App */}
           <EnableDisableAppCard app={app} />
           {/* Delete app functionality */}
