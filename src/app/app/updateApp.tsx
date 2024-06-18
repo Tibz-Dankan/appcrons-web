@@ -2,7 +2,6 @@
 
 import React from "react";
 import Button from "@/app/shared/button";
-import { Modal } from "@/app/shared/modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -15,9 +14,8 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
-import { IconContext } from "react-icons";
-import { RiEdit2Fill } from "react-icons/ri";
 import { InputSelect } from "../shared/inputSelect";
+import { updateOneApp } from "@/store/actions/app";
 
 interface PostAppProps {
   app: TApp;
@@ -35,6 +33,7 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
       console.log("update response: ", response);
 
       props.onUpdate(response.app);
+      dispatch(updateOneApp({ app: response.app }));
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
@@ -86,74 +85,45 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
   const intervalOptions = ["5", "10", "15"];
 
   return (
-    <div className="w-full flex items-center justify-end p-4">
-      <Modal
-        openModalElement={
-          <p className="flex items-center gap-2 cursor-pointer">
-            <span>
-              <IconContext.Provider
-                value={{
-                  size: "1.2rem",
-                  color: "#868e96",
-                }}
-              >
-                <RiEdit2Fill />
-              </IconContext.Provider>
-            </span>
-            <span className="text-sm">Edit</span>
-          </p>
-        }
+    <div className="">
+      <form
+        onSubmit={formik.handleSubmit}
+        className="flex flex-col gap-0 items-center w-[90%] sm:w-96
+         p-8 bg-color-bg-primary rounded-md z-[1]"
       >
-        <div className="">
-          <form
-            onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-             border-[1px]  border-color-border-primary p-8
-             bg-color-bg-secondary rounded-md z-[1]"
-          >
-            <InputField
-              type="text"
-              name="name"
-              placeholder="Application Name"
-              formik={formik}
-            />
-            {/* TODO: to add more information about the url */}
-            <InputField
-              type="text"
-              name="url"
-              placeholder="URL"
-              formik={formik}
-            />
-            <InputSelect
-              label="requestInterval"
-              options={intervalOptions}
-              formik={formik}
-            />
-            {/* <InputField
-              type="text"
-              name="requestInterval"
-              placeholder="Select Request Interval"
-              formik={formik}
-            /> */}
-            <Button
-              label={
-                <>
-                  {!isLoading && <span>Add</span>}
-                  {isLoading && (
-                    <Spinner
-                      label="Logging in"
-                      className="w-5 h-5 text-gray-100"
-                    />
-                  )}
-                </>
-              }
-              type="submit"
-              aria-disabled={isLoading}
-              className="w-full mt-6 font-semibold"
-            />
-          </form>
+        <div
+          className="border-[1px] border-color-border-primary
+           rounded-md p-4 w-full bg-color-bg-secondary text-center"
+        >
+          <p>Edit application information</p>
         </div>
-      </Modal>
+        <InputField
+          type="text"
+          name="name"
+          placeholder="Application Name"
+          formik={formik}
+        />
+        {/* TODO: to add more information about the url */}
+        <InputField type="text" name="url" placeholder="URL" formik={formik} />
+        <InputSelect
+          label="requestInterval"
+          options={intervalOptions}
+          formik={formik}
+        />
+        <Button
+          label={
+            <>
+              {!isLoading && <span>Save Changes</span>}
+              {isLoading && (
+                <Spinner label="saving" className="w-5 h-5 text-gray-100" />
+              )}
+            </>
+          }
+          type="submit"
+          disabled={isLoading}
+          className="w-full mt-6 font-semibold"
+        />
+      </form>
     </div>
   );
 };

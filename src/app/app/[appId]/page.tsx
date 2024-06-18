@@ -20,6 +20,8 @@ import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { UpdateApp } from "../updateApp";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
+import { Modal } from "@/app/shared/modal";
+import { RiEdit2Fill } from "react-icons/ri";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -46,13 +48,10 @@ const MyApp: React.FC = () => {
   });
 
   const onUpdateAppHandler = (app: TApp) => {
-    console.log("app in the update handler: ", app);
     setApp(() => app);
-    // TODO: maybe is updated
   };
 
-  // Trigger component re-render to update app data
-  // useEffect(() => {}, [app, setApp, isUpdated]);
+  // TODO: add on delete handler here
 
   const showRequestTimesRange = (app: TApp): boolean => {
     const isNull: boolean = app.requestTimes === null;
@@ -74,7 +73,7 @@ const MyApp: React.FC = () => {
       {app && (
         <div
           className="flex items-start justify-between gap-4
-        border-b-[1px] border-color-border-primary pb-8"
+           border-b-[1px] border-color-border-primary pb-8"
         >
           <div className="flex flex-col items-start justify-center">
             <div className="w-40 flex items-center justify-between gap-4">
@@ -91,7 +90,25 @@ const MyApp: React.FC = () => {
                 </span>
                 <span className="text-sm uppercase">Application</span>
               </p>
-              <UpdateApp app={app} onUpdate={onUpdateAppHandler} />
+              <Modal
+                openModalElement={
+                  <p className="flex items-center gap-2 cursor-pointer">
+                    <span>
+                      <IconContext.Provider
+                        value={{
+                          size: "1.2rem",
+                          color: "#868e96",
+                        }}
+                      >
+                        <RiEdit2Fill />
+                      </IconContext.Provider>
+                    </span>
+                    <span className="text-sm">Edit</span>
+                  </p>
+                }
+              >
+                <UpdateApp app={app} onUpdate={onUpdateAppHandler} />
+              </Modal>
             </div>
             <div className="flex flex-col justify-center gap-2 mt-2">
               <p className="text-xl font-semibold">{app.name}</p>
