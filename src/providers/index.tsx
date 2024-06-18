@@ -2,6 +2,7 @@
 import React, { ReactNode } from "react";
 import ReactQueryProvider from "./reactQuery";
 import ReduxProvider from "./redux";
+import { IsClientCtxProvider } from "./isClient";
 
 interface ProvidersProps {
   children: ReactNode;
@@ -10,7 +11,9 @@ interface ProvidersProps {
 export const Providers: React.FC<ProvidersProps> = (props) => {
   return (
     <ReactQueryProvider>
-      <ReduxProvider>{props.children}</ReduxProvider>
+      <ReduxProvider>
+        <IsClientCtxProvider>{props.children}</IsClientCtxProvider>
+      </ReduxProvider>
     </ReactQueryProvider>
   );
 };
