@@ -144,5 +144,21 @@ export class AppService {
     return await response.json();
   };
 
+  delete = async ({ appId, accessToken }: TDisableApp) => {
+    const response = await fetch(`${backendURL}/apps/delete/${appId}`, {
+      method: "DELETE",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
   // TODO: To add authenticate API here
 }

@@ -15,7 +15,8 @@ const Button: React.FC<ButtonProps> = (props) => {
       <button
         className={twMerge(
           `flex items-center justify-center bg-primary h-10 
-           py-2 px-4 rounded-md text-gray-200 disabled:opacity-80`,
+           py-2 px-4 rounded-md text-gray-200 disabled:opacity-80
+           disabled:cursor-not-allowed`,
           props.className
         )}
         type={props.type}

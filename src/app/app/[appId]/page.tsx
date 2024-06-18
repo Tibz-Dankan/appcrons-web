@@ -144,7 +144,7 @@ const MyApp: React.FC = () => {
           {/* Disable/Enable App */}
           <EnableDisableAppCard app={app} />
           {/* Delete app functionality */}
-          <DeleteApp appId={app.id} />
+          <DeleteApp app={app} />
         </div>
       )}
     </div>
