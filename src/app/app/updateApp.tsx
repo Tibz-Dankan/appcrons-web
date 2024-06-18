@@ -93,7 +93,7 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
           className="border-[1px] border-color-border-primary
            rounded-md p-4 w-full bg-color-bg-secondary text-center"
         >
-          <p>Edit application information</p>
+          <p>Update Application Information</p>
         </div>
         <InputField
           type="text"
