@@ -5,6 +5,7 @@ import ReactDOM from "react-dom";
 import { twMerge } from "tailwind-merge";
 import { IconContext } from "react-icons";
 import { IoClose } from "react-icons/io5";
+import { useIsClient } from "@/hooks/useIsClient";
 
 interface ModalOverlayProps {
   onClose: () => void;
@@ -65,7 +66,10 @@ export const Modal: React.FC<ModalProps> = (props) => {
   const onOpenHandler = () => setIsOpen(() => !isOpen);
   const onCloseHandler = () => setIsOpen(() => !isOpen);
 
+  const isClient = useIsClient();
+
   const createAppendPortalElement = () => {
+    if (!isClient) return;
     const portalElement = document.createElement("div");
     portalElement.setAttribute("id", "portal");
     const body = document.body;
