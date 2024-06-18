@@ -30,8 +30,6 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
   const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().update,
     onSuccess: async (response: any) => {
-      console.log("update response: ", response);
-
       props.onUpdate(response.app);
       dispatch(updateOneApp({ app: response.app }));
       dispatch(
