@@ -9,8 +9,10 @@ import {
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { AppService } from "@/services/app.service";
 import { Spinner } from "@/app/shared/loader/spinner";
+import { updateOneApp } from "@/store/actions/app";
 interface EnableDisableAppProps {
   app: TApp;
+  onEnableDisable: (app: TApp) => void;
 }
 
 export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
@@ -23,8 +25,9 @@ export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
   const { isLoading, mutate } = useMutation({
     mutationFn: isEnabled ? new AppService().disable : new AppService().enable,
     onSuccess: async (response: any) => {
-      // TODO: maybe parse updated app data to the parent component
       setIsEnabled(() => !response.app.isDisabled);
+      dispatch(updateOneApp({ app: response.app }));
+      props.onEnableDisable(response.app);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );

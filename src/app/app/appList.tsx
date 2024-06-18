@@ -1,9 +1,8 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { TApp } from "@/types/app";
 import { truncateString } from "@/utils/truncateString";
-import { ToggleSwitch } from "@/app/shared/toggleSwitch";
 import { clientURL } from "@/constants";
 import { useRouter } from "next/navigation";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
@@ -108,7 +107,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   className={`px-2 border-r-[1px] border-color-border-primary
                   ${isLastElement(apps, index) && "rounded-br-md"}`}
                 >
-                  <EnableDisableApp app={app} />
+                  <EnableDisableApp app={app} onEnableDisable={() => {}} />
                 </td>
               </tr>
             );

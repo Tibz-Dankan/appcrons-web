@@ -1,12 +1,11 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import { IconContext } from "react-icons";
 import { GiPokecog } from "react-icons/gi";
 import Link from "next/link";
 import { RequestTimeRangeCard } from "@/app/request/requestTimeRangeCard";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
 import { RequestList } from "@/app/request/requestList";
-import { EnableDisableApp } from "@/app/app/enableDisableApp";
 import { DeleteApp } from "@/app/app/deleteApp";
 import { useParams } from "next/navigation";
 import { AppService } from "@/services/app.service";
@@ -22,6 +21,7 @@ import { UpdateApp } from "../updateApp";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Modal } from "@/app/shared/modal";
 import { RiEdit2Fill } from "react-icons/ri";
+import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -139,7 +139,7 @@ const MyApp: React.FC = () => {
         <div className="space-y-8">
           <RequestList appId={app.id} />
           {/* Disable/Enable App */}
-          <EnableDisableApp app={app} />
+          <EnableDisableAppCard app={app} />
           {/* Delete app functionality */}
           <DeleteApp appId={app.id} />
         </div>
