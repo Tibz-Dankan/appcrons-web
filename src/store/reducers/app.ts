@@ -12,6 +12,15 @@ export const appSlice = createSlice({
     update(state, action: PayloadAction<TAppListPayload>) {
       state.apps = action.payload.apps;
     },
+
+    addOne(state, action: PayloadAction<TAppPayload>) {
+      const foundApp = state.apps.find((app) => {
+        return app.id === action.payload.app.id;
+      });
+      if (foundApp?.id) return;
+
+      state.apps.unshift(action.payload.app);
+    },
     updateOne(state, action: PayloadAction<TAppPayload>) {
       const appIndex: number = state.apps.findIndex((app) => {
         return app.id === action.payload.app.id;

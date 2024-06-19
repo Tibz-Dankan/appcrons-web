@@ -41,11 +41,6 @@ const Dashboard: React.FC = () => {
   });
 
   const onPostAppHandler = (app: TApp) => {
-    const existingApps = apps;
-    existingApps.unshift(app);
-
-    setApps(() => existingApps);
-    dispatch(updateApps({ apps: existingApps }));
     setIsPosted(() => true);
   };
 
@@ -54,8 +49,8 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="w-full min-h-[90vh]">
-      <PostApp onPost={onPostAppHandler} />
-      <SearchApps onSuccess={() => {}} />
+      <PostApp onPost={() => {}} />
+      <SearchApps onSuccess={onPostAppHandler} />
       {/*TODO: Temporary Loading spinner (To be removed)  */}
       {isLoading && (
         <div className="w-full grid place-items-center">
