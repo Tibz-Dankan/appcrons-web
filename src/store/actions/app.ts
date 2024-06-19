@@ -7,6 +7,12 @@ export const updateApps = (apps: TAppListPayload) => {
   };
 };
 
+export const addOneApp = (app: TAppPayload) => {
+  return async (dispatch: any) => {
+    dispatch(appActions.addOne(app));
+  };
+};
+
 export const updateOneApp = (app: TAppPayload) => {
   return async (dispatch: any) => {
     dispatch(appActions.updateOne(app));

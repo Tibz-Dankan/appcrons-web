@@ -14,6 +14,7 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import { AppService } from "@/services/app.service";
 import { useRouter } from "next/navigation";
+import { deleteOneApp } from "@/store/actions/app";
 
 interface DeleteAppProps {
   app: TApp;
@@ -31,15 +32,24 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
   const { isLoading, mutate } = useMutation({
     mutationFn: new AppService().delete,
     onSuccess: (response: any) => {
+      dispatch(deleteOneApp(app.id));
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
       setTimeout(() => {
+        showCardNotification({
+          type: "info",
+          message: "Redirecting to dashboard",
+        });
+      }, 3000);
+      setTimeout(() => {
         dispatch(hideCardNotification());
-      }, 5000);
+      }, 6000);
 
       setIsClosedModal(() => true);
-      router.push("/dashboard");
+      setTimeout(() => {
+        router.push("/dashboard");
+      }, 7000);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));

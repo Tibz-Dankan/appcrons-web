@@ -16,6 +16,7 @@ import * as Yup from "yup";
 import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
 import { InputSelect } from "../shared/inputSelect";
+import { addOneApp } from "@/store/actions/app";
 
 interface PostAppProps {
   onPost: (app: TApp) => void;
@@ -30,6 +31,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
     mutationFn: new AppService().post,
     onSuccess: async (response: any) => {
       props.onPost(response.app);
+      dispatch(addOneApp({ app: response.app }));
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
