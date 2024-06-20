@@ -10,6 +10,7 @@ const config: Config = {
     extend: {
       colors: {
         primary: "#087f5b", //Teal-9
+        "primary-light": "#0ca678", //Teal-7
         secondary: "#1098ad", //Cyan-7
         "color-text-primary": "var(--color-text-primary)",
         "color-text-secondary": "var(--color-text-secondary)",
