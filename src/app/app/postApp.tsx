@@ -16,7 +16,7 @@ import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
 import { InputSelect } from "../shared/inputSelect";
 import { addOneApp } from "@/store/actions/app";
-import { useRouter } from "next/router";
+import { useRouter } from "next/navigation";
 
 interface PostAppProps {
   onPost: (app: TApp) => void;
@@ -40,7 +40,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
         dispatch(hideCardNotification());
       }, 5000);
 
-      router.push(`/app${response.app.id}`);
+      router.push(`/app/${response.app.id}`);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -107,9 +107,9 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       <Button
         label={
           <>
-            {!isLoading && <span>Add</span>}
+            {!isLoading && <span>Create</span>}
             {isLoading && (
-              <Spinner label="Logging in" className="w-5 h-5 text-gray-100" />
+              <Spinner label="creating" className="w-5 h-5 text-gray-100" />
             )}
           </>
         }
