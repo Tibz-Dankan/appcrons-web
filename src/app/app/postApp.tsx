@@ -16,6 +16,7 @@ import { InputField } from "../shared/inputField";
 import { Spinner } from "../shared/loader/spinner";
 import { InputSelect } from "../shared/inputSelect";
 import { addOneApp } from "@/store/actions/app";
+import { useRouter } from "next/router";
 
 interface PostAppProps {
   onPost: (app: TApp) => void;
@@ -23,6 +24,7 @@ interface PostAppProps {
 
 export const PostApp: React.FC<PostAppProps> = (props) => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
 
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 
@@ -37,6 +39,8 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+
+      router.push(`/app${response.app.id}`);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
