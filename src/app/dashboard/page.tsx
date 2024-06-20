@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-import { PostApp } from "@/app/app/postApp";
+// import { PostApp } from "@/app/app/postApp";
 import { SearchApps } from "@/app/app/searchApps";
 import { AppList } from "@/app/app/appList";
 import { useQuery } from "@tanstack/react-query";
@@ -49,8 +49,9 @@ const Dashboard: React.FC = () => {
 
   return (
     <div className="w-full min-h-[90vh]">
-      <PostApp onPost={() => {}} />
-      <SearchApps onSuccess={onPostAppHandler} />
+      <div className="mt-8">
+        <SearchApps onSuccess={onPostAppHandler} />
+      </div>
       {/*TODO: Temporary Loading spinner (To be removed)  */}
       {isLoading && (
         <div className="w-full grid place-items-center">
