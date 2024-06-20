@@ -2,7 +2,6 @@
 
 import React from "react";
 import Button from "@/app/shared/button";
-import { Modal } from "@/app/shared/modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -82,52 +81,38 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   const intervalOptions = ["5", "10", "15"];
 
   return (
-    <div className="w-full flex items-center justify-end p-4">
-      <Modal openModalElement={<Button type="button" label={"New App"} />}>
-        <div className="">
-          <form
-            onSubmit={formik.handleSubmit}
-            className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-             border-[1px]  border-color-border-primary p-8
-             bg-color-bg-secondary rounded-md z-[1]"
-          >
-            <InputField
-              type="text"
-              name="name"
-              placeholder="Application Name"
-              formik={formik}
-            />
-            {/* TODO: to add more information about the url */}
-            <InputField
-              type="text"
-              name="url"
-              placeholder="URL"
-              formik={formik}
-            />
-            <InputSelect
-              label="requestInterval"
-              options={intervalOptions}
-              formik={formik}
-            />
-            <Button
-              label={
-                <>
-                  {!isLoading && <span>Add</span>}
-                  {isLoading && (
-                    <Spinner
-                      label="Logging in"
-                      className="w-5 h-5 text-gray-100"
-                    />
-                  )}
-                </>
-              }
-              type="submit"
-              disabled={isLoading}
-              className="w-full mt-6 font-semibold"
-            />
-          </form>
-        </div>
-      </Modal>
-    </div>
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col gap-0 items-center w-[90%] sm:w-96
+      border-[1px]  border-color-border-primary p-8
+      bg-color-bg-secondary rounded-md z-[1]"
+    >
+      <InputField
+        type="text"
+        name="name"
+        placeholder="Application Name"
+        formik={formik}
+      />
+      {/* TODO: to add more information about the url */}
+      <InputField type="text" name="url" placeholder="URL" formik={formik} />
+      <InputSelect
+        label="requestInterval"
+        options={intervalOptions}
+        formik={formik}
+      />
+      <Button
+        label={
+          <>
+            {!isLoading && <span>Add</span>}
+            {isLoading && (
+              <Spinner label="Logging in" className="w-5 h-5 text-gray-100" />
+            )}
+          </>
+        }
+        type="submit"
+        disabled={isLoading}
+        className="w-full mt-6 font-semibold"
+      />
+    </form>
   );
 };

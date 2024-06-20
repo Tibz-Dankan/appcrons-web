@@ -13,6 +13,8 @@ body {
   --color-bg-secondary: #f1f3f5; /*gray-1 open colors*/
   --color-bg-tertiary: #f1f3f5; /*gray-1 open colors*/
   --color-divide-primary: #dee2e6; /*gray-3 open colors*/
+  --color-header-tab-bg-active: #ced4da; /*gray-4 open colors*/
+  --color-header-tab-text-active: #343a40; /*gray-8 open colors*/
 }
 
 [data-theme="dark"],
@@ -26,6 +28,8 @@ body {
   --color-bg-secondary: #24292f;
   --color-bg-tertiary: #0d1117;
   --color-divide-primary: #495057; /*gray-7 open colors*/
+  --color-header-tab-bg-active: #24292f;
+  --color-header-tab-text-active: #ced4da; /*gray-4 open colors*/
 }
 
 /* #0d1117 -header-color dark */

@@ -17,7 +17,9 @@ const config: Config = {
         "color-bg-primary": "var(--color-bg-primary)",
         "color-bg-secondary": "var(--color-bg-secondary)",
         "color-bg-tertiary": "var(--color-bg-tertiary)",
-        "color-divide-primary":"var(--color-divide-primary)"
+        "color-divide-primary": "var(--color-divide-primary)",
+        "header-tab-bg": "var(--color-header-tab-bg-active)",
+        "header-tab-text": "var(--color-header-tab-text-active)",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
