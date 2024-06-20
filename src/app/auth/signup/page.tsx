@@ -36,10 +36,9 @@ const SignUp: React.FC = () => {
 
       setIsRedirecting(() => true);
       await authenticate(auth.accessToken, auth.user);
-      window.history.replaceState(null, "", "/dashboard");
       setTimeout(() => {
         setIsRedirecting(() => false);
-        location.reload();
+        router.push("/dashboard");
       }, 5000);
     },
     onError: (error: any) => {
