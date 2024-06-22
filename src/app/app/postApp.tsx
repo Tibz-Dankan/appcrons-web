@@ -39,8 +39,6 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
-
-      router.push(`/app/${response.app.id}`);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -87,9 +85,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-      border-[1px]  border-color-border-primary p-8
-      bg-color-bg-secondary rounded-md z-[1]"
+      className="flex flex-col gap-0 items-center w-[90%] sm:w-96"
     >
       <InputField
         type="text"
