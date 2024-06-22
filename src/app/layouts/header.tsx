@@ -9,10 +9,7 @@ import { useAppSelector } from "@/hooks/redux";
 import Link from "next/link";
 import { DashboardIcon } from "@/app/shared/Icons/dashboardIcon";
 import { DocumentIcon } from "@/app/shared/Icons/documentIcon";
-import { Modal } from "@/app/shared/modal";
-import Button from "@/app/shared/button";
-import { PostApp } from "@/app/app/postApp";
-import { PlusIcon } from "../shared/Icons/plusIcon";
+import { PostAppLayout } from "@/app/app/postAppLayout";
 
 export const Header: React.FC = () => {
   const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
@@ -63,7 +60,7 @@ export const Header: React.FC = () => {
               </Link>
             </div>
             <div>
-              <Modal
+              {/* <Modal
                 openModalElement={
                   <Button
                     type="button"
@@ -78,7 +75,8 @@ export const Header: React.FC = () => {
                 }
               >
                 <PostApp onPost={() => {}} />
-              </Modal>
+              </Modal> */}
+              <PostAppLayout />
             </div>
           </div>
           <div className="flex items-center gap-4">
