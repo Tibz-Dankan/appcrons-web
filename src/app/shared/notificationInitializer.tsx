@@ -4,6 +4,7 @@ import { hideCardNotification } from "@/store/actions/notification";
 import { Notification } from "./notification";
 import React from "react";
 import { useGetAppLiveRequest } from "@/hooks/useGetAppLiveRequest";
+import { PageLoader } from "@/app/shared/loader/pageLoader";
 
 const NotificationInitializer: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -16,6 +17,8 @@ const NotificationInitializer: React.FC = () => {
 
   return (
     <div>
+      <PageLoader />{" "}
+      {/*TODO: to use redux for conditionally rendering the loader*/}
       {notification.showCardNotification && (
         <div>
           <Notification

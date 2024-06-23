@@ -10,6 +10,7 @@ import Link from "next/link";
 import { DashboardIcon } from "@/app/shared/Icons/dashboardIcon";
 import { DocumentIcon } from "@/app/shared/Icons/documentIcon";
 import { PostAppLayout } from "@/app/app/postAppLayout";
+import { AppLink } from "@/app/shared/AppLink";
 
 export const Header: React.FC = () => {
   const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
@@ -40,24 +41,41 @@ export const Header: React.FC = () => {
              border-color-border-primary rounded-md p-1"
           >
             <div>
-              <Link
+              <AppLink
                 href="/dashboard"
                 className={`flex items-center justify-center gap-2
                 rounded-md p-1 px-3 ${isDashboardPath && "bg-header-tab-bg"}`}
               >
                 <DashboardIcon className="text-header-tab-text" />
                 <span>Dashboard</span>
-              </Link>
+              </AppLink>
+              {/* <Link
+                href="/dashboard"
+                className={`flex items-center justify-center gap-2
+                rounded-md p-1 px-3 ${isDashboardPath && "bg-header-tab-bg"}`}
+              >
+                <DashboardIcon className="text-header-tab-text" />
+                <span>Dashboard</span>
+              </Link> */}
             </div>
             <div>
-              <Link
+              <AppLink
                 href="/docs"
                 className={`flex items-center justify-center gap-2
                  rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}`}
               >
                 <DocumentIcon className="text-header-tab-text" />
                 <span>Docs</span>
-              </Link>
+              </AppLink>
+
+              {/* <Link
+                href="/docs"
+                className={`flex items-center justify-center gap-2
+                 rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}`}
+              >
+                <DocumentIcon className="text-header-tab-text" />
+                <span>Docs</span>
+              </Link> */}
             </div>
             <div>
               {/* <Modal
