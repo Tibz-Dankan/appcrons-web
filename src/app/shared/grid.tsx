@@ -3,12 +3,15 @@ import { twMerge } from "tailwind-merge";
 
 interface GridProps {
   className?: string;
+  rows?: number;
+  columns?: number;
 }
 
 export const Grid: React.FC<GridProps> = (props) => {
   const generateRows = () => {
     const rows = [];
-    for (let i = 1; i <= 20; i++) {
+    const totalRows = props.rows ? props.rows : 25;
+    for (let i = 1; i <= totalRows; i++) {
       rows.push(i);
     }
     return rows;
@@ -16,7 +19,8 @@ export const Grid: React.FC<GridProps> = (props) => {
 
   const generateColumns = () => {
     const columns = [];
-    for (let i = 1; i <= 30; i++) {
+    const totalColumns = props.columns ? props.columns : 25;
+    for (let i = 1; i <= totalColumns; i++) {
       columns.push(i);
     }
     return columns;
@@ -26,31 +30,23 @@ export const Grid: React.FC<GridProps> = (props) => {
   const columns = generateColumns();
 
   return (
-    <table
-      className={twMerge(
-        `border-separate border-spacing-0 w-full overflow-x-hidden`,
-        props.className
-      )}
-    >
-      <tbody>
-        {rows.map((_, index) => (
-          <tr
-            className={`[&>*]:border-b-[1px] 
-             [&>*]:border-color-border-primary border-color-border-primary
-             ${index === 0 && "border-t-[1px]"}`}
-            key={index}
-          >
-            {columns.map((_, index) => (
-              <td
-                key={index}
-                className={`p-4 border-r-[1px] 
-                 ${index === 0 && "border-l-[1px]"} 
-                 border-color-border-primary cursor-pointer`}
-              ></td>
-            ))}
-          </tr>
-        ))}
-      </tbody>
-    </table>
+    <div className={twMerge(`w-full flex flex-col`, props.className)}>
+      {rows.map((rowIndex) => (
+        <div
+          key={rowIndex}
+          className={`flex items-center
+           ${rowIndex === 0 && "[&>*]:border-t-[1px]"}`}
+        >
+          {columns.map((colIndex) => (
+            <div
+              key={`${rowIndex}-${colIndex}`}
+              className={`border-b-[1px] border-r-[1px] 
+              ${colIndex === 0 && "border-l-[1px]"} 
+              border-color-border-primary w-full aspect-square cursor-pointer`}
+            ></div>
+          ))}
+        </div>
+      ))}
+    </div>
   );
 };
