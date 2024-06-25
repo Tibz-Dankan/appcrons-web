@@ -1,13 +1,13 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-interface GridProps {
+interface GridProps extends React.HTMLAttributes<HTMLDivElement> {
   className?: string;
   rows?: number;
   columns?: number;
 }
 
-export const Grid: React.FC<GridProps> = (props) => {
+export const Grid: React.FC<GridProps> = ({ ...props }) => {
   const generateRows = () => {
     const rows = [];
     const totalRows = props.rows ? props.rows : 25;
@@ -30,7 +30,10 @@ export const Grid: React.FC<GridProps> = (props) => {
   const columns = generateColumns();
 
   return (
-    <div className={twMerge(`w-full flex flex-col`, props.className)}>
+    <div
+      className={twMerge(`w-full flex flex-col`, props.className)}
+      {...props}
+    >
       {rows.map((rowIndex) => (
         <div
           key={rowIndex}
