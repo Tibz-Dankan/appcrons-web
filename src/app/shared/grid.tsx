@@ -35,14 +35,14 @@ export const Grid: React.FC<GridProps> = (props) => {
         <div
           key={rowIndex}
           className={`flex items-center
-           ${rowIndex === 0 && "[&>*]:border-t-[1px]"}`}
+           ${rowIndex === 1 && "[&>*]:border-t-[1px]"}`}
         >
           {columns.map((colIndex) => (
             <div
               key={`${rowIndex}-${colIndex}`}
               className={`border-b-[1px] border-r-[1px] 
-              ${colIndex === 0 && "border-l-[1px]"} 
-              border-color-border-primary w-full aspect-square cursor-pointer`}
+              ${colIndex === 1 && "border-l-[1px]"} 
+              border-color-border-primary w-full aspect-square`}
             ></div>
           ))}
         </div>
