@@ -14,7 +14,14 @@ export default function Home() {
             max-w-[768px] gap-5 z-10 mt-[10%]"
           >
             <h1 className="w-full text-5xl font-bold text-center text-color-text-primary">
-              Optimize uptime for your free backend instance on Render.
+              Optimize uptime for your free backend instance on
+              <Link
+                href="https://render.com"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <span className="text-[#7048e8] ml-2">Render</span>.
+              </Link>
             </h1>
             <p className="text-center text-lg w-4/5">
               Appcrons sends automated requests to prevent annoying cold starts
