@@ -23,7 +23,7 @@ export default function Home() {
                 <span className="text-[#7048e8] ml-2">Render</span>.
               </Link>
             </h1>
-            <p className="text-center text-lg w-4/5">
+            <p className="text-center text-color-text-secondary text-lg w-4/5">
               Appcrons sends automated requests to prevent annoying cold starts
               and provides the capability to keep within free usage limits.
             </p>
