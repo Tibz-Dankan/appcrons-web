@@ -7,7 +7,7 @@ body {
   color: #343a40; /*gray-8 open colors*/
   background: #f8f9fa; /*gray-0 open colors*/
   --color-text-primary: #343a40; /*gray-8 open colors*/
-  --color-text-secondary: #adb5bd; /*gray-5 open colors*/
+  --color-text-secondary: #495057; /*gray-7 open colors*/
   --color-border-primary: #dee2e6; /*gray-3 open colors*/
   --color-bg-primary: #f8f9fa; /*gray-0 open colors*/
   --color-bg-secondary: #f1f3f5; /*gray-1 open colors*/
@@ -21,7 +21,7 @@ body {
 [data-theme="dark"] body {
   color: #ced4da;
   background: #161b22f2;
-  --color-text-primary: #ced4da; /*gray-4 open colors*/
+  --color-text-primary: #f1f3f5; /*gray-1 open colors*/
   --color-text-secondary: #868e96; /*gray-6 open colors*/
   --color-border-primary: #495057; /*gray-7 open colors*/
   --color-bg-primary: #161b22f2;
