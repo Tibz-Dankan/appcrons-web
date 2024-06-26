@@ -2,10 +2,14 @@ import { Hero } from "@/app/home/hero";
 import Button from "@/app/shared/button";
 import Link from "next/link";
 import { NavBar } from "@/app/home/navbar";
+import { Features } from "@/app/home/features";
 
 export default function Home() {
   return (
-    <div className="overflow-x-hidden">
+    <div
+      className="w-full h-auto space-y-16 p-4 px-4 
+       sm:px-16 lg:px-28"
+    >
       <Hero>
         <div className="w-full h-full flex flex-col items-center justify-center">
           <NavBar />
@@ -37,6 +41,7 @@ export default function Home() {
           </div>
         </div>
       </Hero>
+      <Features />
     </div>
   );
 }
