@@ -3,6 +3,7 @@ import Button from "@/app/shared/button";
 import Link from "next/link";
 import { NavBar } from "@/app/home/navbar";
 import { Features } from "@/app/home/features";
+import { WhyAppcrons } from "@/app/home/whyAppcrons";
 
 export default function Home() {
   return (
@@ -41,6 +42,7 @@ export default function Home() {
           </div>
         </div>
       </Hero>
+      <WhyAppcrons />
       <Features />
     </div>
   );
