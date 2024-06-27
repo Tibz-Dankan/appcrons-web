@@ -18,11 +18,11 @@ export const UpdateAppCard: React.FC<UpdateAppCardProps> = (props) => {
        border-color-border-primary rounded-md p-8"
     >
       <div className="flex flex-col gap-2 ">
-        <p className="text-xl font-semibold text-color-text-primary">
+        <p className="text-xl text-color-text-primary">
           <span>Update Application Info</span>
         </p>
         <p>
-          <span>
+          <span className="text-color-text-secondary">
             You can update the details of your application to ensure everything
             is accurate and up-to-date.
           </span>

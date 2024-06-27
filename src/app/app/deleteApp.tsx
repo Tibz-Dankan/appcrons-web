@@ -102,11 +102,11 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
      border-color-border-primary rounded-md p-8"
     >
       <div className="flex flex-col gap-2 ">
-        <p className="text-xl font-semibold text-color-text-primary">
+        <p className="text-xl  text-color-text-primary">
           <span>Delete this Application</span>
         </p>
         <p>
-          <span>
+          <span className=" text-color-text-secondary">
             Once you delete an application, there is no going back. Please be
             certain.
           </span>

@@ -22,7 +22,7 @@ export const EnableDisableAppCard: React.FC<EnableDisableAppProps> = (
        border-color-border-primary rounded-md p-8"
     >
       <div className="flex flex-col gap-2 ">
-        <p className="text-xl font-semibold text-color-text-primary">
+        <p className="text-xl text-color-text-primary">
           {isEnabled ? (
             <span>Disable Application</span>
           ) : (
@@ -31,12 +31,12 @@ export const EnableDisableAppCard: React.FC<EnableDisableAppProps> = (
         </p>
         <p>
           {isEnabled ? (
-            <span>
+            <span className="text-color-text-second">
               Once an application is disabled, it can no longer receive requests
               but you can always enable it again.
             </span>
           ) : (
-            <span>
+            <span className="text-color-text-secondary">
               Once an application is enabled, it receives requests at specified
               interval.
             </span>
