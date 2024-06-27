@@ -7,6 +7,7 @@ import { NavBar } from "@/app/home/navbar";
 import { Features } from "@/app/home/features";
 import { WhyAppcrons } from "@/app/home/whyAppcrons";
 import { FAQ } from "./home/faq";
+import { CreatorsWords } from "@/app/home/creatorWords";
 
 export default function Home() {
   return (
@@ -47,6 +48,7 @@ export default function Home() {
       </Hero>
       <WhyAppcrons />
       <Features />
+      <CreatorsWords />
       <FAQ />
     </div>
   );
