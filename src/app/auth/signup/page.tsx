@@ -9,7 +9,8 @@ import { InputField } from "@/app/shared/inputField";
 import Button from "@/app/shared/button";
 import { TSignupInput } from "@/types/auth";
 import { AuthService } from "@/services/auth.service";
-import Link from "next/link";
+// import Link from "next/link";
+import { Link } from "@/lib/router-events";
 import { useAppDispatch } from "@/hooks/redux";
 import {
   hideCardNotification,

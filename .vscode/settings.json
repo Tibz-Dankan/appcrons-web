@@ -7,6 +7,7 @@
     "enableapp",
     "formik",
     "headlessui",
+    "nprogress",
     "Pokecog",
     "reduxjs",
     "Signin",
