@@ -1,18 +1,25 @@
 import { usePathname, useSearchParams } from "next/navigation";
 import { Suspense, useEffect } from "react";
-import { onComplete } from "./events";
+import { useAppDispatch } from "@/hooks/redux";
+import { hidePageLoader } from "@/store/actions/pageLoader";
 
-function HandleOnCompleteChild() {
+const OnPageLoadCompleteHandler = () => {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  useEffect(() => onComplete(), [pathname, searchParams]);
-  return null;
-}
+  const dispatch: any = useAppDispatch();
 
-export function HandleOnComplete() {
+  const hidePageLoaderHandler = () => {
+    dispatch(hidePageLoader());
+  };
+
+  useEffect(() => hidePageLoaderHandler(), [pathname, searchParams]);
+  return null;
+};
+
+export const OnPageLoadComplete = () => {
   return (
     <Suspense>
-      <HandleOnCompleteChild />
+      <OnPageLoadCompleteHandler />
     </Suspense>
   );
-}
+};

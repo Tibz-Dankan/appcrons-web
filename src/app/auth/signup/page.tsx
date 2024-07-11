@@ -9,7 +9,6 @@ import { InputField } from "@/app/shared/inputField";
 import Button from "@/app/shared/button";
 import { TSignupInput } from "@/types/auth";
 import { AuthService } from "@/services/auth.service";
-// import Link from "next/link";
 import { Link } from "@/lib/router-events";
 import { useAppDispatch } from "@/hooks/redux";
 import {
@@ -17,7 +16,7 @@ import {
   showCardNotification,
 } from "@/store/actions/notification";
 import Image from "next/image";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/router-events";
 import { authenticate } from "@/store/actions/auth";
 
 const SignUp: React.FC = () => {

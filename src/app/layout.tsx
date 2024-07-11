@@ -7,7 +7,7 @@ import { AppLayout } from "@/app/layouts/appLayout";
 import { ThemeAppProvider } from "@/providers/themeProvider";
 import { PHProvider } from "@/providers/postHog";
 import dynamic from "next/dynamic";
-import { HandleOnComplete } from "@/lib/router-events";
+import { OnPageLoadComplete } from "@/lib/router-events";
 
 const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
   ssr: false,
@@ -30,9 +30,7 @@ export default function RootLayout({
       <html lang="en" suppressHydrationWarning>
         <PHProvider>
           <body className={inter.className}>
-            <div className={"z-[500]"}>
-              <HandleOnComplete />
-            </div>
+            <OnPageLoadComplete />
             <PostHogPageView />
             <ThemeAppProvider>
               <NotificationInitializer />
