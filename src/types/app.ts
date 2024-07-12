@@ -95,8 +95,8 @@ export type TApp = {
   url: string;
   requestInterval: string;
   isDisabled: boolean;
-  requests: TRequest[] | null;
-  requestTimes: TRequestTime[] | null;
+  requests: TRequest[];
+  requestTimes: TRequestTime[];
   createdAt: string;
   updatedAt: string;
   deletedAt: string | null;
