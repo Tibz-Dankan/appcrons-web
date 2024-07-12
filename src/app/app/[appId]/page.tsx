@@ -24,6 +24,7 @@ import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
 import { UpdateAppCard } from "@/app/app/updateAppCard";
 import { FiEdit } from "react-icons/fi";
 import { addOneApp, updateOneApp } from "@/store/actions/app";
+import Button from "@/app/shared/button";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -136,13 +137,24 @@ const MyApp: React.FC = () => {
             </div>
           </div>
           <div>
-            <PostRequestTimeRange
-              app={app}
-              // appId={app.id}
-              // requestTime={app.requestTimes!}
-              // onPost={() => {}}
-              onPost={onPostRequestTimeHandler}
-            />
+            <div
+              className="w-52 border-[1px] border-color-border-primary 
+               rounded-md p-4 flex flex-col gap-4"
+            >
+              <p className="text-sm text-color-text-secondary">
+                Add new request time frame for the app
+              </p>
+              <Modal
+                openModalElement={
+                  <Button label={"New"} type={"button"} className="w-full" />
+                }
+              >
+                <PostRequestTimeRange
+                  app={app}
+                  onPost={onPostRequestTimeHandler}
+                />
+              </Modal>
+            </div>
           </div>
         </div>
       )}
