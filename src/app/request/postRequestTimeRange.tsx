@@ -27,7 +27,7 @@ import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 
 interface PostRequestTimeRangeProps {
   app: TApp;
-  onPost: () => void;
+  onPost: (requestTime: TRequestTime) => void;
 }
 
 export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
@@ -60,7 +60,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     onSuccess: async (response: any) => {
       console.log("postRequestTimeRange response: ", response);
 
-      // props.onPost(response.app);
+      props.onPost(response.requestTime);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
