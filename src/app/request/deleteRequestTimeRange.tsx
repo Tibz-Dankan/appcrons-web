@@ -15,6 +15,7 @@ import * as Yup from "yup";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { RequestService } from "@/services/request.service";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
+import { updateOneApp } from "@/store/actions/app";
 
 interface DeleteRequestTimeRangeProps {
   requestTimeId: string;
@@ -39,12 +40,22 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
     ) as TRequestTime;
   };
 
+  const onDeleteRequestTimeHandler = () => {
+    const currentApp = app as TApp;
+    const candidateRequestTime = getCurrentRequestTime();
+
+    const requestTimes = currentApp.requestTimes.filter((requestTime) => {
+      return requestTime.id !== candidateRequestTime.id;
+    });
+    currentApp.requestTimes = requestTimes;
+
+    dispatch(updateOneApp({ app: currentApp }));
+  };
+
   const { isLoading, mutate } = useMutation({
     mutationFn: new RequestService().deleteRequestTimeRange,
     onSuccess: async (response: any) => {
-      console.log("deleteRequestTimeRange response: ", response);
-
-      // props.onDelete(response.app);
+      onDeleteRequestTimeHandler();
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
@@ -54,7 +65,6 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
-      console.log("Error: ", error.message);
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
