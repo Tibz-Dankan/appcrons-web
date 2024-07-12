@@ -24,6 +24,7 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
 import { truncateString } from "@/utils/truncateString";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
+import { updateOneApp } from "@/store/actions/app";
 
 interface UpdateRequestTimeRangeProps {
   requestTimeId: string;
@@ -37,7 +38,6 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
 ) => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  console.log("accessToken:->:", accessToken);
   const app = props.app;
   const hasTimeZone: boolean =
     app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
@@ -71,12 +71,24 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
     );
   };
 
+  const onUpdateRequestTimeHandler = (candidateRequestTime: TRequestTime) => {
+    const currentApp = app as TApp;
+
+    const requestTimeIndex = currentApp.requestTimes.findIndex(
+      (requestTime) => {
+        return requestTime.id === candidateRequestTime.id;
+      }
+    ) as number;
+    if (requestTimeIndex === -1) return;
+
+    currentApp.requestTimes[requestTimeIndex] = candidateRequestTime;
+    dispatch(updateOneApp({ app: currentApp }));
+  };
+
   const { isLoading, mutate } = useMutation({
     mutationFn: new RequestService().updateRequestTimeRange,
     onSuccess: async (response: any) => {
-      console.log("postRequestTimeRange response: ", response);
-
-      // props.onUpdate(response.app);
+      onUpdateRequestTimeHandler(response.requestTime);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
