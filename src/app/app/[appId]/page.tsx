@@ -1,5 +1,5 @@
 "use client";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { IconContext } from "react-icons";
 import { GiPokecog } from "react-icons/gi";
 import Link from "next/link";
@@ -16,13 +16,14 @@ import {
 } from "@/store/actions/notification";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { Spinner } from "@/app/shared/loader/spinner";
-import { TApp } from "@/types/app";
+import { TApp, TRequestTime } from "@/types/app";
 import { UpdateApp } from "../updateApp";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Modal } from "@/app/shared/modal";
 import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
 import { UpdateAppCard } from "@/app/app/updateAppCard";
 import { FiEdit } from "react-icons/fi";
+import { addOneApp, updateOneApp } from "@/store/actions/app";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -39,6 +40,7 @@ const MyApp: React.FC = () => {
     onSuccess: (response) => {
       console.log("response: ", response);
       setApp(() => response.data.app);
+      dispatch(addOneApp({ app: response.data.app }));
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -53,6 +55,14 @@ const MyApp: React.FC = () => {
   };
 
   // TODO: add on delete handler here
+
+  const onPostRequestTimeHandler = (requestTime: TRequestTime) => {
+    const currentApp = app as TApp;
+    currentApp?.requestTimes?.push(requestTime);
+    setApp(() => currentApp);
+
+    dispatch(updateOneApp({ app: currentApp }));
+  };
 
   const showRequestTimesRange = (app: TApp): boolean => {
     const isNull: boolean = app.requestTimes === null;
@@ -130,7 +140,8 @@ const MyApp: React.FC = () => {
               app={app}
               // appId={app.id}
               // requestTime={app.requestTimes!}
-              onPost={() => {}}
+              // onPost={() => {}}
+              onPost={onPostRequestTimeHandler}
             />
           </div>
         </div>

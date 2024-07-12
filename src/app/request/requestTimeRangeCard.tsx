@@ -7,6 +7,7 @@ import { IconContext } from "react-icons";
 import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { DeleteRequestTimeRange } from "./deleteRequestTimeRange";
+import { useAppSelector } from "@/hooks/redux";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -15,7 +16,11 @@ interface RequestTimeRangeCardProps {
 export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
   props
 ) => {
-  const requestTimeList = props.app.requestTimes as TRequestTime[];
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id === props.app.id)
+  ) as TApp;
+
+  const requestTimeList = app.requestTimes as TRequestTime[];
 
   return (
     <div className="border-[1px] border-color-border-primary rounded-md">
