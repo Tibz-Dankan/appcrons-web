@@ -24,19 +24,19 @@ import { IoMdCheckmarkCircleOutline } from "react-icons/io";
 import { MdErrorOutline } from "react-icons/md";
 import { truncateString } from "@/utils/truncateString";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
+import { updateOneApp } from "@/store/actions/app";
 
 interface PostRequestTimeRangeProps {
   app: TApp;
-  onPost: (requestTime: TRequestTime) => void;
 }
 
 export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
   props
 ) => {
+  const [app, setApp] = useState<TApp>(JSON.parse(JSON.stringify(props.app)));
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
   console.log("accessToken:->:", accessToken);
-  const app = props.app;
   const hasTimeZone: boolean =
     app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
 
@@ -55,12 +55,17 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     return "";
   };
 
+  const onUpdateRequestTimeHandler = (candidateRequestTime: TRequestTime) => {
+    app.requestTimes.push(candidateRequestTime);
+
+    setApp(() => app);
+    dispatch(updateOneApp({ app: app }));
+  };
+
   const { isLoading, mutate } = useMutation({
     mutationFn: new RequestService().postRequestTimeRange,
     onSuccess: async (response: any) => {
-      console.log("postRequestTimeRange response: ", response);
-
-      props.onPost(response.requestTime);
+      onUpdateRequestTimeHandler(response.requestTime);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
