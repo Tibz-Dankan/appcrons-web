@@ -28,9 +28,11 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
 ) => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  const app = useAppSelector((state) =>
+  const currentApp = useAppSelector((state) =>
     state.app.apps.find((app) => app.id === props.app.id)
   )!;
+
+  const app = JSON.parse(JSON.stringify(currentApp));
 
   const requestTimeList = app.requestTimes as TRequestTime[];
 
