@@ -37,9 +37,10 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
 ) => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  const app = useAppSelector((state) =>
+  const currentApp = useAppSelector((state) =>
     state.app.apps.find((app) => app.id === props.app.id)
   )!;
+  const [app, setApp] = useState<TApp>(JSON.parse(JSON.stringify(currentApp)));
   const hasTimeZone: boolean =
     app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
 
@@ -73,17 +74,13 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
   };
 
   const onUpdateRequestTimeHandler = (candidateRequestTime: TRequestTime) => {
-    const currentApp = app as TApp;
-
-    const requestTimeIndex = currentApp.requestTimes.findIndex(
-      (requestTime) => {
-        return requestTime.id === candidateRequestTime.id;
-      }
-    ) as number;
+    const requestTimeIndex = app.requestTimes.findIndex((requestTime) => {
+      return requestTime.id === candidateRequestTime.id;
+    }) as number;
     if (requestTimeIndex === -1) return;
 
-    currentApp.requestTimes[requestTimeIndex] = candidateRequestTime;
-    dispatch(updateOneApp({ app: currentApp }));
+    app.requestTimes[requestTimeIndex] = candidateRequestTime;
+    dispatch(updateOneApp({ app: app }));
   };
 
   const onSuccessHandler = (succeeded: true) => {
