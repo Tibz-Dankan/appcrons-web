@@ -28,6 +28,7 @@ import { updateOneApp } from "@/store/actions/app";
 
 interface PostRequestTimeRangeProps {
   app: TApp;
+  onSuccess: (succeeded: boolean) => void;
 }
 
 export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
@@ -36,9 +37,8 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
   const [app, setApp] = useState<TApp>(JSON.parse(JSON.stringify(props.app)));
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  console.log("accessToken:->:", accessToken);
-  const hasTimeZone: boolean =
-    app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
+
+  const hasTimeZone: boolean = !!app.requestTimes[0]?.timeZone;
 
   const timeOptions = times.times;
   const [validateReqTimeRange, setValidateReqTimeRange] = useState<{
@@ -47,12 +47,8 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
   }>({ isValid: false, message: "" });
 
   const getAppTimezone = (): string => {
-    if (hasTimeZone) {
-      return app.requestTimes !== null
-        ? app.requestTimes && app.requestTimes[0]?.timeZone
-        : "";
-    }
-    return "";
+    if (!hasTimeZone) return "";
+    return app.requestTimes[0]?.timeZone;
   };
 
   const onUpdateRequestTimeHandler = (candidateRequestTime: TRequestTime) => {
@@ -60,6 +56,10 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
 
     setApp(() => app);
     dispatch(updateOneApp({ app: app }));
+  };
+
+  const onSuccessHandler = (succeeded: true) => {
+    props.onSuccess(succeeded);
   };
 
   const { isLoading, mutate } = useMutation({
@@ -72,6 +72,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      onSuccessHandler(true);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
