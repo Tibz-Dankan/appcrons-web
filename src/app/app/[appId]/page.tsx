@@ -16,14 +16,14 @@ import {
 } from "@/store/actions/notification";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { Spinner } from "@/app/shared/loader/spinner";
-import { TApp, TRequestTime } from "@/types/app";
+import { TApp } from "@/types/app";
 import { UpdateApp } from "../updateApp";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Modal } from "@/app/shared/modal";
 import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
 import { UpdateAppCard } from "@/app/app/updateAppCard";
 import { FiEdit } from "react-icons/fi";
-import { addOneApp, updateOneApp } from "@/store/actions/app";
+import { addOneApp } from "@/store/actions/app";
 import Button from "@/app/shared/button";
 
 const MyApp: React.FC = () => {
@@ -53,16 +53,6 @@ const MyApp: React.FC = () => {
 
   const onUpdateAppHandler = (app: TApp) => {
     setApp(() => app);
-  };
-
-  // TODO: add on delete handler here
-
-  const onPostRequestTimeHandler = (requestTime: TRequestTime) => {
-    const currentApp = app as TApp;
-    currentApp?.requestTimes?.push(requestTime);
-    setApp(() => currentApp);
-
-    dispatch(updateOneApp({ app: currentApp }));
   };
 
   const showRequestTimesRange = (app: TApp): boolean => {
@@ -149,10 +139,7 @@ const MyApp: React.FC = () => {
                   <Button label={"New"} type={"button"} className="w-full" />
                 }
               >
-                <PostRequestTimeRange
-                  app={app}
-                  onPost={onPostRequestTimeHandler}
-                />
+                <PostRequestTimeRange app={app} />
               </Modal>
             </div>
           </div>
