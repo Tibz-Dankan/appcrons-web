@@ -1,5 +1,5 @@
 "use client";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { TApp, TRequestTime } from "@/types/app";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 import { UpdateRequestTimeRange } from "@/app/request/updateRequestTimeRange";
@@ -8,6 +8,7 @@ import { FiEdit } from "react-icons/fi";
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { DeleteRequestTimeRange } from "./deleteRequestTimeRange";
 import { useAppSelector } from "@/hooks/redux";
+import { Modal } from "../shared/modal";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -16,9 +17,24 @@ interface RequestTimeRangeCardProps {
 export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
   props
 ) => {
+  const [isClosedModal, setIsClosedModal] = useState(false);
   const app = useAppSelector((state) =>
     state.app.apps.find((app) => app.id === props.app.id)
   ) as TApp;
+
+  const modalCloseHandler = (close: boolean) => {
+    setIsClosedModal(() => close);
+  };
+
+  useEffect(() => {
+    // Update 'isClosedModal' to it's default
+    // value 'false' After 1 second
+    const timeoutId = setTimeout(() => {
+      setIsClosedModal(() => false);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [isClosedModal]);
 
   const requestTimeList = app.requestTimes as TRequestTime[];
 
@@ -48,9 +64,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
                gap-2"
             >
               {/* Delete Time Range */}
-              <DeleteRequestTimeRange
-                requestTimeId={requestTime.id}
-                app={props.app}
+              <Modal
                 openModalElement={
                   <span className="w-auto h-auto cursor-pointer">
                     <IconContext.Provider
@@ -63,12 +77,18 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
                     </IconContext.Provider>
                   </span>
                 }
-                onDelete={() => {}}
-              />
+                closed={isClosedModal}
+              >
+                <DeleteRequestTimeRange
+                  requestTimeId={requestTime.id}
+                  app={props.app}
+                  onSuccess={modalCloseHandler}
+                  onCancel={modalCloseHandler}
+                />
+              </Modal>
+
               {/* Edit Time Range */}
-              <UpdateRequestTimeRange
-                requestTimeId={requestTime.id}
-                app={props.app}
+              <Modal
                 openModalElement={
                   <span className="grid h-auto w-auto place-items-center cursor-pointer">
                     <IconContext.Provider
@@ -81,8 +101,14 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
                     </IconContext.Provider>
                   </span>
                 }
-                onUpdate={() => {}}
-              />
+                closed={isClosedModal}
+              >
+                <UpdateRequestTimeRange
+                  requestTimeId={requestTime.id}
+                  app={props.app}
+                  onSuccess={modalCloseHandler}
+                />
+              </Modal>
             </div>
           </div>
         ))}

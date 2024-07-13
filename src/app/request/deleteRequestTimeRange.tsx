@@ -1,8 +1,7 @@
 "use client";
 
-import React, { ReactNode, useState } from "react";
+import React from "react";
 import Button from "@/app/shared/button";
-import { Modal } from "@/app/shared/modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -20,17 +19,18 @@ import { updateOneApp } from "@/store/actions/app";
 interface DeleteRequestTimeRangeProps {
   requestTimeId: string;
   app: TApp;
-  openModalElement: ReactNode;
-  onDelete: () => void;
+  onSuccess: (succeeded: boolean) => void;
+  onCancel: (cancelled: boolean) => void;
 }
 
 export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
   props
 ) => {
-  const [isClosedModal, setIsClosedModal] = useState(false);
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  const app = props.app;
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id === props.app.id)
+  )!;
 
   const requestTimeList = app.requestTimes as TRequestTime[];
 
@@ -52,6 +52,14 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
     dispatch(updateOneApp({ app: currentApp }));
   };
 
+  const onSuccessHandler = (succeeded: true) => {
+    props.onSuccess(succeeded);
+  };
+
+  const onCancelHandler = (cancelled: true) => {
+    props.onSuccess(cancelled);
+  };
+
   const { isLoading, mutate } = useMutation({
     mutationFn: new RequestService().deleteRequestTimeRange,
     onSuccess: async (response: any) => {
@@ -62,6 +70,7 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      onSuccessHandler(true);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -92,50 +101,48 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
   });
 
   return (
-    <Modal openModalElement={props.openModalElement} closed={isClosedModal}>
-      <form
-        onSubmit={formik.handleSubmit}
-        className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-         rounded-md z-[1] p-4 sm:p-8"
-      >
-        <div className="w-full flex items-center gap-4 justify-between">
-          <p className="text-start">
-            <span className="mr-2">
-              Are you sure that you want to delete Time Range
-            </span>
-            <span className="font-semibold mr-1">
-              {convertTo12HourFormat(getCurrentRequestTime().start)}
-            </span>
-            <span className="font-semibold mr-1">-</span>
-            <span className="font-semibold">
-              {convertTo12HourFormat(getCurrentRequestTime().end)}
-            </span>
-            <span>?</span>
-          </p>
-        </div>
-        <div className="w-full flex items-center justify-between gap-4 mt-6">
-          <Button
-            label={"Cancel"}
-            type="button"
-            disabled={isLoading}
-            onClick={() => setIsClosedModal(() => true)}
-            className="w-32 font-semibold bg-gray-600"
-          />
-          <Button
-            label={
-              <>
-                {!isLoading && <span>Delete</span>}
-                {isLoading && (
-                  <Spinner label="deleting" className="w-5 h-5 text-gray-100" />
-                )}
-              </>
-            }
-            type="submit"
-            disabled={isLoading}
-            className="w-32 font-semibold bg-[#D9534F]"
-          />
-        </div>
-      </form>
-    </Modal>
+    <form
+      onSubmit={formik.handleSubmit}
+      className="flex flex-col gap-0 items-center w-[90%] sm:w-96
+       rounded-md z-[1] p-4 sm:p-8"
+    >
+      <div className="w-full flex items-center gap-4 justify-between">
+        <p className="text-start">
+          <span className="mr-2">
+            Are you sure that you want to delete Time Range
+          </span>
+          <span className="font-semibold mr-1">
+            {convertTo12HourFormat(getCurrentRequestTime()?.start)}
+          </span>
+          <span className="font-semibold mr-1">-</span>
+          <span className="font-semibold">
+            {convertTo12HourFormat(getCurrentRequestTime()?.end)}
+          </span>
+          <span>?</span>
+        </p>
+      </div>
+      <div className="w-full flex items-center justify-between gap-4 mt-6">
+        <Button
+          label={"Cancel"}
+          type="button"
+          disabled={isLoading}
+          onClick={() => onCancelHandler(true)}
+          className="w-32 font-semibold bg-gray-600"
+        />
+        <Button
+          label={
+            <>
+              {!isLoading && <span>Delete</span>}
+              {isLoading && (
+                <Spinner label="deleting" className="w-5 h-5 text-gray-100" />
+              )}
+            </>
+          }
+          type="submit"
+          disabled={isLoading}
+          className="w-32 font-semibold bg-[#D9534F]"
+        />
+      </div>
+    </form>
   );
 };
