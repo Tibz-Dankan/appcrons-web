@@ -31,6 +31,7 @@ const MyApp: React.FC = () => {
   // TODO: To apply the application name in the favicon
   const [app, setApp] = useState<TApp>();
   const appId = useParams()["appId"] as string;
+  const [isClosedModal, setIsClosedModal] = useState(false);
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 
@@ -39,7 +40,6 @@ const MyApp: React.FC = () => {
     queryFn: () =>
       new AppService().get({ appId: appId, accessToken: accessToken }),
     onSuccess: (response) => {
-      console.log("response: ", response);
       setApp(() => response.data.app);
       dispatch(addOneApp({ app: response.data.app }));
     },
@@ -55,12 +55,23 @@ const MyApp: React.FC = () => {
     setApp(() => app);
   };
 
-  const showRequestTimesRange = (app: TApp): boolean => {
-    const isNull: boolean = app.requestTimes === null;
-    const haveNoFirstElement =
-      app.requestTimes && app.requestTimes[0] == undefined;
+  const modalCloseHandler = (close: boolean) => {
+    setIsClosedModal(() => close);
+  };
 
-    if (isNull || haveNoFirstElement) return false;
+  // Update 'isClosedModal' to it's default
+  // value 'false' After 1 second
+  useEffect(() => {
+    const timeoutId = setTimeout(() => {
+      setIsClosedModal(() => false);
+    }, 1000);
+
+    return () => clearTimeout(timeoutId);
+  }, [isClosedModal]);
+
+  const showRequestTimesRange = (app: TApp): boolean => {
+    const hasNoRequestTimes = app.requestTimes.length === 0;
+    if (hasNoRequestTimes) return false;
     return true;
   };
 
@@ -138,8 +149,9 @@ const MyApp: React.FC = () => {
                 openModalElement={
                   <Button label={"New"} type={"button"} className="w-full" />
                 }
+                closed={isClosedModal}
               >
-                <PostRequestTimeRange app={app} />
+                <PostRequestTimeRange app={app} onSuccess={modalCloseHandler} />
               </Modal>
             </div>
           </div>
