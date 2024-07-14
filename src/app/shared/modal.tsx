@@ -27,7 +27,7 @@ interface ModalProps {
 const ModalOverlay: React.FC<ModalOverlayProps> = (props) => {
   return (
     <div
-      className="fixed top-0 left-0 z-[70] h-full w-full bg-gray-500 opacity-20"
+      className="fixed top-0 left-0 z-[70] h-full w-full bg-[rgba(0,0,0,0.5)]"
       onClick={props.onClose}
     />
   );
