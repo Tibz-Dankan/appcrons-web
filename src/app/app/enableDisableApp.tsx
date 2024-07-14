@@ -16,7 +16,9 @@ interface EnableDisableAppProps {
 }
 
 export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
-  const app = props.app;
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id === props.app.id)
+  )!;
   const [isEnabled, setIsEnabled] = useState<boolean>(!app.isDisabled);
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 

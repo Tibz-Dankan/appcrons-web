@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { TApp } from "@/types/app";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
+import { useAppSelector } from "@/hooks/redux";
 
 interface EnableDisableAppProps {
   app: TApp;
@@ -9,7 +10,10 @@ interface EnableDisableAppProps {
 export const EnableDisableAppCard: React.FC<EnableDisableAppProps> = (
   props
 ) => {
-  const app = props.app;
+
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id === props.app.id)
+  )!;
   const [isEnabled, setIsEnabled] = useState<boolean>(!app.isDisabled);
 
   const onEnableDisableHandler = (app: TApp) => {

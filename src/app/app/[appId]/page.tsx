@@ -22,9 +22,9 @@ import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Modal } from "@/app/shared/modal";
 import { EnableDisableAppCard } from "@/app/app/enableDisableAppCard";
 import { UpdateAppCard } from "@/app/app/updateAppCard";
-import { FiEdit } from "react-icons/fi";
 import { addOneApp } from "@/store/actions/app";
 import Button from "@/app/shared/button";
+import { EditIcon } from "@/app/shared/Icons/editIcon";
 
 const MyApp: React.FC = () => {
   // TODO: To dynamically change the icon color basing on the theme
@@ -106,16 +106,10 @@ const MyApp: React.FC = () => {
               <Modal
                 openModalElement={
                   <p className="flex items-center gap-2 cursor-pointer">
-                    <span>
-                      <IconContext.Provider
-                        value={{
-                          size: "1.0rem",
-                          color: "#868e96",
-                        }}
-                      >
-                        <FiEdit />
-                      </IconContext.Provider>
-                    </span>
+                    <EditIcon
+                      className="w-[18px] h-[18px] text-color-text-secondary 
+                     cursor-pointer"
+                    />
                     <span className="text-sm">Update</span>
                   </p>
                 }

@@ -1,9 +1,8 @@
 import React from "react";
 import { TApp } from "@/types/app";
 import { UpdateApp } from "@/app/app/updateApp";
-import { IconContext } from "react-icons";
 import { Modal } from "@/app/shared/modal";
-import { FiEdit } from "react-icons/fi";
+import { EditIcon } from "@/app/shared/Icons/editIcon";
 
 interface UpdateAppCardProps {
   app: TApp;
@@ -35,16 +34,10 @@ export const UpdateAppCard: React.FC<UpdateAppCardProps> = (props) => {
         <Modal
           openModalElement={
             <p className="flex items-center gap-2 cursor-pointer">
-              <span>
-                <IconContext.Provider
-                  value={{
-                    size: "1.0rem",
-                    color: "#868e96",
-                  }}
-                >
-                  <FiEdit />
-                </IconContext.Provider>
-              </span>
+              <EditIcon
+                className="w-[18px] h-[18px] text-color-text-secondary 
+                 cursor-pointer"
+              />
               <span className="text-sm">Update</span>
             </p>
           }

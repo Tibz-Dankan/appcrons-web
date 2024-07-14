@@ -3,12 +3,11 @@ import React, { useEffect, useState } from "react";
 import { TApp, TRequestTime } from "@/types/app";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 import { UpdateRequestTimeRange } from "@/app/request/updateRequestTimeRange";
-import { IconContext } from "react-icons";
-import { FiEdit } from "react-icons/fi";
-import { RiDeleteBin6Line } from "react-icons/ri";
 import { DeleteRequestTimeRange } from "./deleteRequestTimeRange";
 import { useAppSelector } from "@/hooks/redux";
-import { Modal } from "../shared/modal";
+import { Modal } from "@/app/shared/modal";
+import { EditIcon } from "@/app/shared/Icons/editIcon";
+import { DeleteIcon } from "@/app/shared/Icons/deleteIcon";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -26,9 +25,9 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
     setIsClosedModal(() => close);
   };
 
+  // Update 'isClosedModal' to it's default
+  // value 'false' After 1 second
   useEffect(() => {
-    // Update 'isClosedModal' to it's default
-    // value 'false' After 1 second
     const timeoutId = setTimeout(() => {
       setIsClosedModal(() => false);
     }, 1000);
@@ -66,16 +65,10 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
               {/* Delete Time Range */}
               <Modal
                 openModalElement={
-                  <span className="w-auto h-auto cursor-pointer">
-                    <IconContext.Provider
-                      value={{
-                        size: "1rem",
-                        color: "#868e96",
-                      }}
-                    >
-                      <RiDeleteBin6Line />
-                    </IconContext.Provider>
-                  </span>
+                  <DeleteIcon
+                    className="w-[18px] h-[18px] text-color-text-secondary 
+                     cursor-pointer"
+                  />
                 }
                 closed={isClosedModal}
               >
@@ -90,16 +83,10 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
               {/* Edit Time Range */}
               <Modal
                 openModalElement={
-                  <span className="grid h-auto w-auto place-items-center cursor-pointer">
-                    <IconContext.Provider
-                      value={{
-                        size: "1rem",
-                        color: "#868e96",
-                      }}
-                    >
-                      <FiEdit />
-                    </IconContext.Provider>
-                  </span>
+                  <EditIcon
+                    className="w-[18px] h-[18px] text-color-text-secondary 
+                     cursor-pointer"
+                  />
                 }
                 closed={isClosedModal}
               >
