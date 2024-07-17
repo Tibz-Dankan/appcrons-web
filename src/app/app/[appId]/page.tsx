@@ -1,7 +1,5 @@
 "use client";
 import React, { useEffect, useState } from "react";
-import { IconContext } from "react-icons";
-import { GiPokecog } from "react-icons/gi";
 import Link from "next/link";
 import { RequestTimeRangeCard } from "@/app/request/requestTimeRangeCard";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
@@ -25,9 +23,9 @@ import { UpdateAppCard } from "@/app/app/updateAppCard";
 import { addOneApp } from "@/store/actions/app";
 import Button from "@/app/shared/button";
 import { EditIcon } from "@/app/shared/Icons/editIcon";
+import { PokecogIcon } from "@/app/shared/Icons/pokecogIcon";
 
 const MyApp: React.FC = () => {
-  // TODO: To dynamically change the icon color basing on the theme
   // TODO: To apply the application name in the favicon
   const [app, setApp] = useState<TApp>();
   const appId = useParams()["appId"] as string;
@@ -91,16 +89,7 @@ const MyApp: React.FC = () => {
           <div className="flex flex-col items-start justify-center">
             <div className="w-40 flex items-center justify-between gap-4">
               <p className="flex items-center gap-2">
-                <span>
-                  <IconContext.Provider
-                    value={{
-                      size: "1.2rem",
-                      color: "#868e96",
-                    }}
-                  >
-                    <GiPokecog />
-                  </IconContext.Provider>
-                </span>
+                <PokecogIcon className="text-color-text-secondary" />
                 <span className="text-sm uppercase">Application</span>
               </p>
               <Modal
