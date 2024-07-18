@@ -9,7 +9,9 @@ import { useRouter } from "@/lib/router-events";
 import { LastRequestItem } from "@/app/request/lastRequestItem";
 import { EnableDisableApp } from "@/app/app/enableDisableApp";
 import { useAppSelector } from "@/hooks/redux";
-import { NextRequestTime } from "../request/nextRequestTime";
+import { NextRequestTime } from "@/app/request/nextRequestTime";
+import { ToolTip } from "@/app/shared/toolTip";
+import { InfoIcon } from "../shared/Icons/infoIcon";
 
 interface AppListProps {
   showListHead?: boolean;
@@ -47,22 +49,70 @@ export const AppList: React.FC<AppListProps> = (props) => {
           <thead>
             <tr
               className="[&>*]:bg-color-bg-secondary [&>*]:border-y-[1px] 
-               [&>*]:border-color-border-primary uppercase text-[12px]"
+               [&>*]:border-color-border-primary text-[12px]"
             >
               <th
                 className="px-2 pl-4 py-4 text-start border-l-[1px] 
                 border-color-border-primary rounded-tl-md"
               >
-                Application Name
+                <span className="uppercase">Application Name</span>
               </th>
-              <th className="px-2 py-4 text-start">URL</th>
-              <th className="px-2 py-4 text-start">Last Request</th>
-              <th className="px-2 py-4 text-start">Next Request</th>
+              <th className="px-2 py-4 text-start">
+                <span className="uppercase">URL</span>
+              </th>
+              <th className="px-2 py-4 text-start">
+                <div className="flex items-center gap-2">
+                  <span className="uppercase">Last Request</span>
+                  <span data-tooltip-id="last-request">
+                    <InfoIcon className="w-[18px] h-[18px]" />
+                  </span>
+                  <ToolTip
+                    id={"last-request"}
+                    content={
+                      <span className="text-sm font-[500]">
+                        Last request is the most latest time an application
+                        received a request
+                      </span>
+                    }
+                  />
+                </div>
+              </th>
+              <th className="px-2 py-4 text-start">
+                <div className="flex items-center gap-2">
+                  <span className="uppercase">Next Request</span>
+                  <span data-tooltip-id="next-request">
+                    <InfoIcon className="w-[18px] h-[18px]" />
+                  </span>
+                  <ToolTip
+                    id={"next-request"}
+                    content={
+                      <span className="text-sm font-[500]">
+                        Next request is the time an application will receive a
+                        request
+                      </span>
+                    }
+                  />
+                </div>
+              </th>
               <th
                 className="px-2 py-4 text-start border-r-[1px] 
                 border-color-border-primary rounded-tr-md"
               >
-                Enabled
+                <div className="flex items-center gap-2">
+                  <span className="uppercase">Enabled</span>
+                  <span data-tooltip-id="enabled">
+                    <InfoIcon className="w-[18px] h-[18px]" />
+                  </span>
+                  <ToolTip
+                    id={"enabled"}
+                    content={
+                      <span className="text-sm font-[500]">
+                        Enabled indicates the status whether an application is
+                        able to receive requests or not
+                      </span>
+                    }
+                  />
+                </div>
               </th>
             </tr>
           </thead>
