@@ -28,10 +28,15 @@ const config: Config = {
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
+        slideUp: "slideUp 0.5s ease-in-out forwards",
       },
       keyframes: {
         slideDown: {
           "0%": { opacity: "0", transform: "translateY(-150px)" },
+          "100%": { opacity: "1", transform: "translateY(0px)" },
+        },
+        slideUp: {
+          "0%": { opacity: "0", transform: "translateY(50px)" },
           "100%": { opacity: "1", transform: "translateY(0px)" },
         },
       },
