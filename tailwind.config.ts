@@ -21,6 +21,10 @@ const config: Config = {
         "color-divide-primary": "var(--color-divide-primary)",
         "header-tab-bg": "var(--color-header-tab-bg-active)",
         "header-tab-text": "var(--color-header-tab-text-active)",
+        success: "#55C57A",
+        error: "#D9534F",
+        info: "#5BC0DE",
+        warning: "#F0AD4E",
       },
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
