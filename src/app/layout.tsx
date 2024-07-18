@@ -8,6 +8,7 @@ import { ThemeAppProvider } from "@/providers/themeProvider";
 import { PHProvider } from "@/providers/postHog";
 import dynamic from "next/dynamic";
 import { OnPageLoadComplete } from "@/lib/router-events";
+import "react-tooltip/dist/react-tooltip.css";
 
 const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
   ssr: false,
