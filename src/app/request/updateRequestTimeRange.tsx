@@ -19,12 +19,14 @@ import times from "@/app/request/data/times.json";
 import { TimeZoneSelect } from "@/app/shared/timeZoneSelect";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
-import { IconContext } from "react-icons";
-import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-import { MdErrorOutline } from "react-icons/md";
+// import { IconContext } from "react-icons";
+// import { IoMdCheckmarkCircleOutline } from "react-icons/io";
+// import { MdErrorOutline } from "react-icons/md";
 import { truncateString } from "@/utils/truncateString";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 import { updateOneApp } from "@/store/actions/app";
+import { CheckIcon } from "@/app/shared/Icons/checkIcon";
+import { ErrorIcon } from "@/app/shared/Icons/errorIcon";
 
 interface UpdateRequestTimeRangeProps {
   requestTimeId: string;
@@ -235,7 +237,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
               className="border-[1px] border-color-border-primary rounded-md
               p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
-              <span>
+              {/* <span>
                 <IconContext.Provider
                   value={{
                     size: "1.2rem",
@@ -244,8 +246,9 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
                 >
                   <IoMdCheckmarkCircleOutline />
                 </IconContext.Provider>
-              </span>
-              <p className="text-[#55C57A] text-[14px] text-start">
+              </span> */}
+              <CheckIcon className="text-success" />
+              <p className="text-success text-[14px] text-start">
                 {validateReqTimeRange.message}
               </p>
             </div>
@@ -255,17 +258,8 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
               className="border-[1px] border-color-border-primary rounded-md
               p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
-              <span>
-                <IconContext.Provider
-                  value={{
-                    size: "1.2rem",
-                    color: "#D9534F",
-                  }}
-                >
-                  <MdErrorOutline />
-                </IconContext.Provider>
-              </span>
-              <p className="text-[#D9534F] text-[14px] text-start">
+              <ErrorIcon className="text-error" />
+              <p className="text-error text-[14px] text-start">
                 {validateReqTimeRange.message}
               </p>
             </div>

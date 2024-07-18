@@ -1,6 +1,6 @@
 import React, { Fragment, useState } from "react";
-import { IconContext } from "react-icons";
-import { PiEyeLight, PiEyeSlashLight } from "react-icons/pi";
+import { EyeIcon } from "@/app/shared/Icons/eyeIcon";
+import { EyeSlashIcon } from "@/app/shared/Icons/eyeSlashIcon";
 
 interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   formik?: any;
@@ -58,31 +58,10 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
                   className="cursor-pointer"
                   onClick={() => showPasswordHandler()}
                 >
-                  <IconContext.Provider
-                    value={{
-                      size: "1.4rem",
-                      color: "#868e96",
-                    }}
-                  >
-                    <PiEyeLight />
-                  </IconContext.Provider>
+                  <EyeIcon className="text-[#868e96]" />
                 </span>
               )}
-              {showPassword && (
-                <span
-                  className="cursor-pointer"
-                  onClick={() => showPasswordHandler()}
-                >
-                  <IconContext.Provider
-                    value={{
-                      size: "1.4rem",
-                      color: "#868e96",
-                    }}
-                  >
-                    <PiEyeSlashLight />
-                  </IconContext.Provider>
-                </span>
-              )}
+              {showPassword && <EyeSlashIcon className="text-[#868e96]" />}
             </div>
           )}
         </div>
