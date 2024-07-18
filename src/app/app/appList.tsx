@@ -31,10 +31,8 @@ export const AppList: React.FC<AppListProps> = (props) => {
   };
 
   const showLastRequest = (app: TApp): boolean => {
-    const isNull: boolean = app.requests === null;
-    const haveNoFirstElement = app.requests && app.requests[0] == undefined;
-
-    if (isNull || haveNoFirstElement) return false;
+    const hasNoRequestTimes = app.requestTimes.length === 0;
+    if (hasNoRequestTimes) return false;
     return true;
   };
 
