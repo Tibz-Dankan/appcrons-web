@@ -3,9 +3,8 @@
 import React, { useState, Fragment, ReactNode, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { twMerge } from "tailwind-merge";
-import { IconContext } from "react-icons";
-import { IoClose } from "react-icons/io5";
 import { useIsClient } from "@/hooks/useIsClient";
+import { CloseIcon } from "@/app/shared/Icons/closeIcon";
 
 interface ModalOverlayProps {
   onClose: () => void;
@@ -46,14 +45,7 @@ const ModalContent: React.FC<ModalContentProps> = (props) => {
         className="absolute right-4 top-4 z-[2000] cursor-pointer"
         onClick={props.onClose}
       >
-        <IconContext.Provider
-          value={{
-            size: "1.4rem",
-            color: "#868e96",
-          }}
-        >
-          <IoClose />
-        </IconContext.Provider>
+        <CloseIcon className="text-[#868e96] w-6 h-6" />
       </span>
       {props.content}
     </div>
