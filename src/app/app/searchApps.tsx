@@ -5,8 +5,6 @@ import { useFormik } from "formik";
 import * as Yup from "yup";
 import Button from "@/app/shared/button";
 import { Spinner } from "@/app/shared/loader/spinner";
-import { CiSearch } from "react-icons/ci";
-import { IconContext } from "react-icons";
 import { useMutation } from "@tanstack/react-query";
 import { useAppDispatch } from "@/hooks/redux";
 import { AppService } from "@/services/app.service";
@@ -14,6 +12,7 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
+import { SearchIcon } from "@/app/shared/Icons/searchIcon";
 
 interface SearchAppsProps {
   onSuccess: (data: any) => void;
@@ -82,16 +81,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
           <Button
             label={
               <>
-                {!isLoading && (
-                  <IconContext.Provider
-                    value={{
-                      size: "1.4rem",
-                      color: "#868e96",
-                    }}
-                  >
-                    <CiSearch />
-                  </IconContext.Provider>
-                )}
+                {!isLoading && <SearchIcon className="text-[#868e96]" />}
                 {isLoading && <Spinner className="w-5 h-5 text-[#868e96]" />}
               </>
             }
