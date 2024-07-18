@@ -62,6 +62,9 @@ dependencies:
   react-timezone-select:
     specifier: 3.2.5
     version: 3.2.5(react-dom@18.3.1)(react-select@5.8.0)(react@18.3.1)
+  react-tooltip:
+    specifier: ^5.27.1
+    version: 5.27.1(react-dom@18.3.1)(react@18.3.1)
   tailwind-merge:
     specifier: ^2.3.0
     version: 2.3.0
@@ -1087,6 +1090,10 @@ packages:
     optionalDependencies:
       fsevents: 2.3.3
     dev: true
+
+  /classnames@2.5.1:
+    resolution: {integrity: sha512-saHYOzhIQs6wy2sVxTM6bUDsQO4F50V9RQ22qBpEdCW+I+/Wmke2HOl6lS6dTpdxVhb88/I6+Hs+438c3lfUow==}
+    dev: false
 
   /client-only@0.0.1:
     resolution: {integrity: sha512-IV3Ou0jSMzZrd3pZ48nLkT9DA7Ag1pnPzaiQhpW7c3RbcqqzvzzVu+L8gfqMp/8IM2MQtSiqaCxrrcfu8I8rMA==}
@@ -2916,6 +2923,18 @@ packages:
       react-select: 5.8.0(@types/react@18.3.2)(react-dom@18.3.1)(react@18.3.1)
       spacetime: 7.6.0
       timezone-soft: 1.5.2
+    dev: false
+
+  /react-tooltip@5.27.1(react-dom@18.3.1)(react@18.3.1):
+    resolution: {integrity: sha512-a+micPXcMOMt11CYlwJD4XShcqGziasHco4NPe1OFw298WBTILMyzUgNC1LAFViAe791JdHNVSJIpzhZm2MvDA==}
+    peerDependencies:
+      react: '>=16.14.0'
+      react-dom: '>=16.14.0'
+    dependencies:
+      '@floating-ui/dom': 1.6.5
+      classnames: 2.5.1
+      react: 18.3.1
+      react-dom: 18.3.1(react@18.3.1)
     dev: false
 
   /react-transition-group@4.4.5(react-dom@18.3.1)(react@18.3.1):
