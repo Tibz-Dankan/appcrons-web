@@ -1,8 +1,6 @@
 "use client";
 
 import React from "react";
-import { IconContext } from "react-icons";
-import { TbMessage } from "react-icons/tb";
 import Button from "@/app/shared/button";
 import { Modal } from "@/app/shared/modal";
 import { useMutation } from "@tanstack/react-query";
@@ -19,6 +17,8 @@ import { FeedService } from "@/services/feedback.service";
 import { TPostFeedback } from "@/types/feedback";
 import { InputTextArea } from "@/app/shared/inputTextArea";
 import { AppRating } from "@/app/shared/rating";
+import { ArrowForwardIcon } from "@/app/shared/Icons/arrowForwardIcon";
+import { ArrowBackIcon } from "@/app/shared/Icons/arrowBackIcon";
 
 export const PostFeedback: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -83,16 +83,10 @@ export const PostFeedback: React.FC = () => {
   return (
     <Modal
       openModalElement={
-        <div className="flex items-center justify-center gap-2">
-          <span className="cursor-pointer">
-            <IconContext.Provider
-              value={{
-                size: "1.3rem",
-                color: "#868e96",
-              }}
-            >
-              <TbMessage />
-            </IconContext.Provider>
+        <div className="flex items-center justify-center gap-1">
+          <span className="cursor-pointer flex flex-col items-center justify-center -space-y-3">
+            <ArrowForwardIcon className="text-color-text-secondary" />
+            <ArrowBackIcon className="text-color-text-secondary" />
           </span>
           <span className="text-color-text-secondary text-sm">Feedback</span>
         </div>
