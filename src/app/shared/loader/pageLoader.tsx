@@ -6,39 +6,35 @@ export const PageLoader: React.FC = () => {
   useEffect(() => {
     let currentProgress = 0;
     const interval = setInterval(() => {
-      if (currentProgress < 10) {
-        currentProgress += 10;
-        setProgress(currentProgress);
-      } else if (currentProgress < 100) {
-        currentProgress += 5;
-        setProgress(currentProgress);
+      let increment = 0;
+      if (currentProgress >= 0 && currentProgress < 20) {
+        increment = 10;
+      } else if (currentProgress >= 20 && currentProgress < 50) {
+        increment = 4;
+      } else if (currentProgress >= 50 && currentProgress < 80) {
+        increment = 2;
+      } else if (currentProgress >= 80 && currentProgress < 99) {
+        increment = 0.5;
       } else {
-        clearInterval(interval);
+        increment = 0;
       }
+
+      currentProgress += increment;
+      if (currentProgress >= 100) {
+        clearInterval(interval);
+        currentProgress = 100;
+      }
+      setProgress(currentProgress);
     }, 1000);
 
     return () => clearInterval(interval);
   }, []);
 
-  useEffect(() => {
-    const handleRouteChange = () => {
-      setProgress(100);
-      setTimeout(() => {
-        setProgress(0);
-      }, 1000);
-    };
-
-    window.addEventListener("load", handleRouteChange);
-
-    return () => {
-      window.removeEventListener("load", handleRouteChange);
-    };
-  }, []);
-
   return (
     <div
-      className={`fixed top-0 left-0 w-full h-[3px] bg-primary-light`}
-      style={{ width: `${progress}%`, transition: "width 1s ease-in" }}
+      id="progressbar"
+      className="fixed top-0 left-0 w-full h-[3px] bg-primary-light"
+      style={{ width: `${progress}%`, transition: "all 0.4s ease" }}
     />
   );
 };
