@@ -17,8 +17,8 @@ const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Keep Active",
-  description: "Keep Active default page",
+  title: "Appcrons",
+  description: "Optimize uptime for your free backend instance onRender",
 };
 
 export default function RootLayout({
