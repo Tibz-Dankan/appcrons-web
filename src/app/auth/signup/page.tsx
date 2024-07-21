@@ -87,12 +87,12 @@ const SignUp: React.FC = () => {
   return (
     <Fragment>
       <div
-        className="flex flex-col items-center justify-center gap-12
+        className="flex flex-col items-center justify-center gap-4
          min-h-[100vh] min-w-[100vw]"
       >
-        <div className="w-full flex flex-col items-center">
+        <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
-            <Image src="/logo.png" width={100} height={100} alt="logo" />
+            <Image src="/logo.png" width={80} height={80} alt="logo" />
           </Link>
           <p className="text-center flex flex-col">
             <span className="text-2xl">Welcome to AppCrons</span>
