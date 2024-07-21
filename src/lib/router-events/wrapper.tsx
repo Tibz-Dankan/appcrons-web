@@ -9,7 +9,16 @@ const OnPageLoadCompleteHandler = () => {
   const dispatch: any = useAppDispatch();
 
   const hidePageLoaderHandler = () => {
-    dispatch(hidePageLoader());
+    const progressBar = document.getElementById("progressbar")!;
+    if (!progressBar) return;
+
+    progressBar.style.transition = "all 0.8s ease";
+    progressBar.style.width = "100vw";
+    progressBar.style.opacity = "0";
+
+    setTimeout(() => {
+      dispatch(hidePageLoader());
+    }, 10000);
   };
 
   useEffect(() => hidePageLoaderHandler(), [pathname, searchParams]);
