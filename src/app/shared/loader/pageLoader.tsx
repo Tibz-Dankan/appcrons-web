@@ -33,7 +33,7 @@ export const PageLoader: React.FC = () => {
   return (
     <div
       id="progressbar"
-      className="fixed top-0 left-0 w-full h-[3px] bg-primary-light"
+      className="fixed top-0 left-0 w-full h-[3px] bg-primary-light z-[500]"
       style={{ width: `${progress}%`, transition: "all 0.4s ease" }}
     />
   );
