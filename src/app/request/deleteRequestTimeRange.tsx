@@ -62,7 +62,7 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
     props.onSuccess(cancelled);
   };
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new RequestService().deleteRequestTimeRange,
     onSuccess: async (response: any) => {
       onDeleteRequestTimeHandler();
@@ -127,21 +127,21 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
         <Button
           label={"Cancel"}
           type="button"
-          disabled={isLoading}
+          disabled={isPending}
           onClick={() => onCancelHandler(true)}
           className="w-32 font-semibold bg-gray-600"
         />
         <Button
           label={
             <>
-              {!isLoading && <span>Delete</span>}
-              {isLoading && (
+              {!isPending && <span>Delete</span>}
+              {isPending && (
                 <Spinner label="deleting" className="w-5 h-5 text-gray-100" />
               )}
             </>
           }
           type="submit"
-          disabled={isLoading}
+          disabled={isPending}
           className="w-32 font-semibold bg-[#D9534F]"
         />
       </div>

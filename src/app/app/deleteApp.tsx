@@ -29,7 +29,7 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
   const app = props.app;
   const router = useRouter();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AppService().delete,
     onSuccess: (response: any) => {
       dispatch(deleteOneApp(app.id));
@@ -94,7 +94,7 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
     updateAppNameHandler();
   }, [formik.values]);
 
-  const isBtnDisabled: boolean = isLoading || !isMatchingAppName;
+  const isBtnDisabled: boolean = isPending || !isMatchingAppName;
 
   return (
     <div
@@ -157,7 +157,7 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
             <Button
               label={"Cancel"}
               type="button"
-              disabled={isLoading}
+              disabled={isPending}
               onClick={() => setIsClosedModal(() => true)}
               className="w-32 font-semibold bg-gray-600
               disabled:opacity-60"
@@ -165,8 +165,8 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
             <Button
               label={
                 <>
-                  {!isLoading && <span>Delete</span>}
-                  {isLoading && (
+                  {!isPending && <span>Delete</span>}
+                  {isPending && (
                     <Spinner
                       label="deleting"
                       className="w-5 h-5 text-gray-100"
