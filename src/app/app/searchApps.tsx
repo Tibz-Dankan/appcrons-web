@@ -21,7 +21,7 @@ interface SearchAppsProps {
 export const SearchApps: React.FC<SearchAppsProps> = (props) => {
   const dispatch = useAppDispatch();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AppService().search,
     onSuccess: async (data: any) => {
       console.log("data:: ", data);
@@ -81,12 +81,12 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
           <Button
             label={
               <>
-                {!isLoading && <SearchIcon className="text-[#868e96]" />}
-                {isLoading && <Spinner className="w-5 h-5 text-[#868e96]" />}
+                {!isPending && <SearchIcon className="text-[#868e96]" />}
+                {isPending && <Spinner className="w-5 h-5 text-[#868e96]" />}
               </>
             }
             type="submit"
-            aria-disabled={isLoading}
+            aria-disabled={isPending}
             className="px-0 py-0 h-auto absolute top-2 right-2
             bg-color-bg-primary"
           />
