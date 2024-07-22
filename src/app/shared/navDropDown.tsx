@@ -40,8 +40,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
         <MenuButton
           className="inline-flex w-full justify-center gap-x-1.5 
            rounded-md bg-whites bg-transparent px-3s py-2s text-sm font-semibold
-           text-color-text-primary shadow-sm ring-1s ring-insets ring-gray-300s
-           hover:bg-color-bg-secondarys"
+           text-color-text-primary"
         >
           {props.children}
         </MenuButton>
