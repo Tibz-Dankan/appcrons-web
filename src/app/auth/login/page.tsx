@@ -33,6 +33,10 @@ const Login: React.FC = () => {
       await authenticate(auth.accessToken, auth.user);
       setIsRedirecting(() => false);
       router.push("/dashboard");
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 2000);
     },
     onError: (error: any) => {
       setIsRedirecting(() => false);
