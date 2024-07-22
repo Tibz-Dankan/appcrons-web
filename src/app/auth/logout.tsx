@@ -19,10 +19,9 @@ export const LogOut: React.FC = () => {
 
   const dispatch: any = useAppDispatch();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().logOut,
     onSuccess: async (_: any) => {
-
       dispatch(logout());
       router.push("/auth/login");
     },
@@ -66,13 +65,13 @@ export const LogOut: React.FC = () => {
       <Button
         label={
           <>
-            {!isLoading && (
+            {!isPending && (
               <div className="flex items-center justify-start gap-4">
                 <LogoutIcon />
                 <span>Log out</span>
               </div>
             )}
-            {isLoading && (
+            {isPending && (
               <Spinner label="logging out" className="w-5 h-5 text-gray-100" />
             )}
           </>
