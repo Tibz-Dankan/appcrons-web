@@ -20,13 +20,20 @@ import { useRouter } from "@/lib/router-events";
 // import { Logo } from "@/app/shared/logo";
 
 import { authenticate } from "@/store/actions/auth";
+import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+const metadata: Metadata = {
+  title: "Login ",
+  description: "Log into your appcrons account",
+};
 
 const Login: React.FC = () => {
   const dispatch = useAppDispatch();
   const router = useRouter();
   const [isRedirecting, setIsRedirecting] = useState<boolean>(false);
 
-  const {  isPending, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().signIn,
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);

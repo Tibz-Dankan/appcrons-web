@@ -12,6 +12,13 @@ import { updateApps } from "@/store/actions/app";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Notification } from "@/app/shared/notification";
 import { Welcome } from "@/app/app/welcome";
+import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+const metadata: Metadata = {
+  title: "Dashboard",
+  description: "Displays a summary of user's applications on appcrons",
+};
 
 const Dashboard: React.FC = () => {
   const [apps, setApps] = useState<TApp[]>([]);

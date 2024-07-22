@@ -18,6 +18,13 @@ import {
 import Image from "next/image";
 import { useRouter } from "@/lib/router-events";
 import { authenticate } from "@/store/actions/auth";
+import { Metadata } from "next";
+
+// export const metadata: Metadata = {
+const metadata: Metadata = {
+  title: "Sign up - Lets create your appcrons account",
+  description: "create your appcrons account",
+};
 
 const SignUp: React.FC = () => {
   const dispatch = useAppDispatch();
