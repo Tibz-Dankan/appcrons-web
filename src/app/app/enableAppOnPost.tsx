@@ -31,7 +31,7 @@ export const EnableAppOnPost: React.FC<EnableAppOnPost> = (props) => {
 
   const dispatch = useAppDispatch();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AppService().enable,
     onSuccess: async (response: any) => {
       setIsEnabled(() => !response.app.isDisabled);
@@ -85,7 +85,7 @@ export const EnableAppOnPost: React.FC<EnableAppOnPost> = (props) => {
            pb-1 bg-color-bg-secondary flex justify-end text-end"
         >
           <ToggleSwitch
-            disabled={isLoading}
+            disabled={isPending}
             onCheck={onCheckHandler}
             checked={isEnabled}
             checkedIcon={<div />}
@@ -98,7 +98,7 @@ export const EnableAppOnPost: React.FC<EnableAppOnPost> = (props) => {
             height={12}
             width={40}
           />
-          {isLoading && (
+          {isPending && (
             <div
               className="w-full h-full absolute -top-1 left-1 grid
                place-items-center cursor-not-allowed"
