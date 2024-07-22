@@ -4,7 +4,7 @@ import React from "react";
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { ThemeController } from "@/app/shared/themeController";
-import Link from "next/link";
+import { Link } from "@/lib/router-events";
 import { DocumentIcon } from "@/app/shared/Icons/documentIcon";
 
 export const NavBar: React.FC = () => {
@@ -19,13 +19,15 @@ export const NavBar: React.FC = () => {
       bg-color-bg-primary fixed top-0 left-0 z-[100]"
     >
       <div className="flex items-center gap-2">
-        <Image src="/logo.png" width={40} height={40} alt="logo" />
-        <span
-          className="text-color-text-primary 
-          font-semibold"
-        >
-          AppCrons
-        </span>
+        <Link href="/" className="flex items-center gap-2">
+          <Image src="/logo.png" width={30} height={30} alt="logo" />
+          <span
+            className="text-color-text-primary 
+            font-[500] text-2xl"
+          >
+            Appcrons
+          </span>
+        </Link>
       </div>
 
       <div className="flex items-center gap-4">
