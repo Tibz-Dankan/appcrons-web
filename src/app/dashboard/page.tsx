@@ -1,21 +1,17 @@
 "use client";
 
 import React, { useEffect, useState } from "react";
-// import { PostApp } from "@/app/app/postApp";
 import { SearchApps } from "@/app/app/searchApps";
 import { AppList } from "@/app/app/appList";
 import { useQuery } from "@tanstack/react-query";
 import { AppService } from "@/services/app.service";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import {
-  hideCardNotification,
-  showCardNotification,
-} from "@/store/actions/notification";
 import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { updateApps } from "@/store/actions/app";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 import { Notification } from "@/app/shared/notification";
+import { Welcome } from "@/app/app/welcome";
 
 const Dashboard: React.FC = () => {
   const [apps, setApps] = useState<TApp[]>([]);
@@ -69,9 +65,8 @@ const Dashboard: React.FC = () => {
 
   if (!data || !data.data.apps) {
     return (
-      <div className="w-full h-[40vh] flex items-center justify-center">
-        {/* TODO: To display action to help user create the first app */}
-        <span className="text-xl">No Applications</span>
+      <div className="w-full min-h-[80vh] flex items-center justify-center">
+        <Welcome />
       </div>
     );
   }
