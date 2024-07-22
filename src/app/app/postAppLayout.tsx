@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { ReactNode, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { Modal } from "@/app/shared/modal";
 import Button from "@/app/shared/button";
@@ -9,7 +9,11 @@ import { PostAppProgress } from "@/app/app/postAppProgress";
 import { EnableAppOnPost } from "@/app/app/enableAppOnPost";
 import { PostAppExit } from "@/app/app/postAppExit";
 
-export const PostAppLayout: React.FC = () => {
+interface PostAppLayoutProps {
+  postLabel?: ReactNode;
+}
+
+export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
   const [isClosedModal, setIsClosedModal] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
@@ -63,20 +67,27 @@ export const PostAppLayout: React.FC = () => {
     return label;
   };
 
+  const hasPropsLabel = !!props.postLabel;
+
   return (
     <div>
       <Modal
         openModalElement={
-          <Button
-            type="button"
-            label={
-              <div className="flex items-center justify-center gap-2">
-                <PlusIcon className="text-gray-200 h-6 w-6" />
-                <span>New</span>
-              </div>
-            }
-            className="h-auto py-1 px-3"
-          />
+          <>
+            {!hasPropsLabel && (
+              <Button
+                type="button"
+                label={
+                  <div className="flex items-center justify-center gap-2">
+                    <PlusIcon className="text-gray-200 h-6 w-6" />
+                    <span>New</span>
+                  </div>
+                }
+                className="h-auto py-1 px-3"
+              />
+            )}
+            {hasPropsLabel && props.postLabel}
+          </>
         }
         closed={isClosedModal}
       >
