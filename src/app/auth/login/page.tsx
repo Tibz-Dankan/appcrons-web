@@ -34,9 +34,9 @@ const Login: React.FC = () => {
       setIsRedirecting(() => false);
       router.push("/dashboard");
 
-      setTimeout(() => {
-        window.location.reload();
-      }, 2000);
+      // setTimeout(() => {
+      //   window.location.reload();
+      // }, 2000);
     },
     onError: (error: any) => {
       setIsRedirecting(() => false);

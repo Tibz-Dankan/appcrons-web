@@ -27,7 +27,7 @@ export const Header: React.FC = () => {
           bg-color-bg-tertiary"
         >
           <div>
-            <Link href="/dashboard" className="flex items-center gap-2">
+            <Link href="/dashboard" className="flex items-center gap-1">
               <Image src="/logo.png" width={30} height={30} alt="logo" />
               <span
                 className="text-color-text-primary 

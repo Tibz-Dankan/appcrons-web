@@ -19,7 +19,7 @@ export const NavBar: React.FC = () => {
       bg-color-bg-primary fixed top-0 left-0 z-[100]"
     >
       <div className="flex items-center gap-2">
-        <Link href="/" className="flex items-center gap-2">
+        <Link href="/" className="flex items-center gap-1">
           <Image src="/logo.png" width={30} height={30} alt="logo" />
           <span
             className="text-color-text-primary 
