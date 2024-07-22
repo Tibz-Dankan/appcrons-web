@@ -40,6 +40,10 @@ const SignUp: React.FC = () => {
         setIsRedirecting(() => false);
         router.push("/dashboard");
       }, 5000);
+
+      setTimeout(() => {
+        window.location.reload();
+      }, 7000);
     },
     onError: (error: any) => {
       setIsRedirecting(() => false);
