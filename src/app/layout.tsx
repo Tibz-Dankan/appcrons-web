@@ -17,8 +17,24 @@ const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Appcrons",
-  description: "Optimize uptime for your free backend instance onRender",
+  title:
+    "Appcrons: Lets you optimize uptime for your free backend instance on Render",
+  description: "Optimize uptime for your free backend instance on Render",
+  openGraph: {
+    type: "website",
+    url: "https://www.appcrons.com/",
+    title: "Appcrons - Keep Your Backend Servers Awake",
+    description:
+      "Appcrons prevents your backend servers hosted on render.com's free/hobby plan from shutting down due to inactivity. Keep your servers awake with periodic requests.",
+    images: [
+      {
+        url: "https://www.appcrons.com/images/og-image.png",
+        width: 800,
+        height: 600,
+        alt: "Appcrons",
+      },
+    ],
+  },
 };
 
 export default function RootLayout({

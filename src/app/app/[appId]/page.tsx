@@ -22,6 +22,36 @@ import { EditIcon } from "@/app/shared/Icons/editIcon";
 import { PokecogIcon } from "@/app/shared/Icons/pokecogIcon";
 import { Notification } from "@/app/shared/notification";
 
+import type { Metadata, ResolvingMetadata } from "next";
+
+type Props = {
+  params: { appId: string };
+  searchParams: { [key: string]: string | string[] | undefined };
+};
+
+// export async function generateMetadata(
+async function generateMetadata(
+  { params, searchParams }: Props,
+  parent: ResolvingMetadata
+): Promise<Metadata> {
+  // read route params
+  const appId = params.appId;
+
+  // fetch data
+  const product = await fetch(`https://.../${appId}`).then((res) => res.json());
+  // TODO: to make api call to the golang server to fetch application details
+
+  // optionally access and extend (rather than replace) parent metadata
+  const previousImages = (await parent).openGraph?.images || [];
+
+  return {
+    title: product.title,
+    openGraph: {
+      images: ["/some-specific-page-image.jpg", ...previousImages],
+    },
+  };
+}
+
 const MyApp: React.FC = () => {
   // TODO: To apply the application name in the favicon
   const [app, setApp] = useState<TApp>();
