@@ -64,7 +64,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     props.onSuccess(succeeded);
   };
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new RequestService().postRequestTimeRange,
     onSuccess: async (response: any) => {
       onUpdateRequestTimeHandler(response.requestTime);
@@ -153,7 +153,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
     validateReqTimeRange.isValid && !!validateReqTimeRange.message;
   const showTimeRangeErrorMessage =
     !validateReqTimeRange.isValid && !!validateReqTimeRange.message;
-  const isDisabledSubmitBtn = isLoading || showTimeRangeErrorMessage;
+  const isDisabledSubmitBtn = isPending || showTimeRangeErrorMessage;
 
   return (
     <div
@@ -273,14 +273,14 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
         <Button
           label={
             <>
-              {!isLoading && (
+              {!isPending && (
                 <span
                   className={`${showTimeRangeErrorMessage && "text-[#adb5bd]"}`}
                 >
                   Submit
                 </span>
               )}
-              {isLoading && (
+              {isPending && (
                 <Spinner label="processing" className="w-5 h-5 text-gray-100" />
               )}
             </>
