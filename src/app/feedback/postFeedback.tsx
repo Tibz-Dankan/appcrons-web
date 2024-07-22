@@ -25,7 +25,7 @@ export const PostFeedback: React.FC = () => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const userId = useAppSelector((state) => state.auth.user.id);
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new FeedService().post,
     onSuccess: async (response: any) => {
       console.log("postFeedback response: ", response);
@@ -94,17 +94,17 @@ export const PostFeedback: React.FC = () => {
     >
       <div
         className="flex flex-col gap-4 items-center w-[90%] sm:w-96
-            border-[1px]  border-color-border-primary p-8
-            bg-color-bg-secondary rounded-md max-h-[70vh] overflow-x-auto"
+          border-[1px]  border-color-border-primary p-8
+          bg-color-bg-secondary rounded-md max-h-[70vh] overflow-x-auto"
       >
         <form
           onSubmit={formik.handleSubmit}
           className="flex flex-col gap-0 items-center w-[90%] sm:w-full
-              bg-color-bg-secondary rounded-md z-[1]"
+           bg-color-bg-secondary rounded-md z-[1]"
         >
           <div
             className="w-full mb-4 p-4 border-[1px] border-color-border-primary
-                 rounded-md text-center space-y-2"
+            rounded-md text-center space-y-2"
           >
             <p className="text-3xl font-semibold text-color-text-primary">
               Give us feedback
@@ -116,7 +116,7 @@ export const PostFeedback: React.FC = () => {
           <div className="w-full mb-2 flex flex-col items-start gap-4">
             <p
               className="text-sm text-color-text-primary
-                   p-2s border-[1px]s border-color-border-primary rounded-md"
+              p-2s border-[1px]s border-color-border-primary rounded-md"
             >
               How satisfied are you with Appcrons in regards to managing the
               availability of your backend servers on render.com? Give us a
@@ -132,8 +132,8 @@ export const PostFeedback: React.FC = () => {
           <Button
             label={
               <>
-                {!isLoading && <span className={""}>Submit</span>}
-                {isLoading && (
+                {!isPending && <span className={""}>Submit</span>}
+                {isPending && (
                   <Spinner
                     label="submitting"
                     className="w-5 h-5 text-gray-100"
@@ -142,7 +142,7 @@ export const PostFeedback: React.FC = () => {
               </>
             }
             type="submit"
-            disabled={isLoading}
+            disabled={isPending}
             className="w-full mt-6 font-semibold"
           />
         </form>
