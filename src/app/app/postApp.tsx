@@ -28,7 +28,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
 
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AppService().post,
     onSuccess: async (response: any) => {
       props.onPost(response.app);
@@ -103,14 +103,14 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       <Button
         label={
           <>
-            {!isLoading && <span>Create</span>}
-            {isLoading && (
+            {!isPending && <span>Create</span>}
+            {isPending && (
               <Spinner label="creating" className="w-5 h-5 text-gray-100" />
             )}
           </>
         }
         type="submit"
-        disabled={isLoading}
+        disabled={isPending}
         className="w-full mt-6 font-semibold"
       />
     </form>

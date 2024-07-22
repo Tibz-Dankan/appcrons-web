@@ -27,7 +27,7 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
 
   const accessToken = useAppSelector((state) => state.auth.accessToken);
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: new AppService().update,
     onSuccess: async (response: any) => {
       props.onUpdate(response.app);
@@ -111,14 +111,14 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
         <Button
           label={
             <>
-              {!isLoading && <span>Save Changes</span>}
-              {isLoading && (
+              {!isPending && <span>Save Changes</span>}
+              {isPending && (
                 <Spinner label="saving" className="w-5 h-5 text-gray-100" />
               )}
             </>
           }
           type="submit"
-          disabled={isLoading}
+          disabled={isPending}
           className="w-full mt-6 font-semibold"
         />
       </form>

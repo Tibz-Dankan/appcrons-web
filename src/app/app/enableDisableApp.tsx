@@ -24,7 +24,7 @@ export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
 
   const dispatch = useAppDispatch();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: isEnabled ? new AppService().disable : new AppService().enable,
     onSuccess: async (response: any) => {
       setIsEnabled(() => !response.app.isDisabled);
@@ -57,7 +57,7 @@ export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
   return (
     <div className="relative inline-block">
       <ToggleSwitch
-        disabled={isLoading}
+        disabled={isPending}
         onCheck={onCheckHandler}
         checked={isEnabled}
         checkedIcon={<div />}
@@ -70,7 +70,7 @@ export const EnableDisableApp: React.FC<EnableDisableAppProps> = (props) => {
         height={12}
         width={40}
       />
-      {isLoading && (
+      {isPending && (
         <div
           className="w-full h-full absolute -top-1 left-1 grid
            place-items-center cursor-not-allowed"

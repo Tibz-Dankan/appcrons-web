@@ -15,6 +15,7 @@ import { Spinner } from "@/app/shared/loader/spinner";
 import { TApp } from "@/types/app";
 import { updateApps } from "@/store/actions/app";
 import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
+import { Notification } from "@/app/shared/notification";
 
 const Dashboard: React.FC = () => {
   const [apps, setApps] = useState<TApp[]>([]);
@@ -24,22 +25,6 @@ const Dashboard: React.FC = () => {
 
   const dispatch = useAppDispatch();
 
-  const { isLoading } = useQuery({
-    queryKey: [`apps-${userId}`],
-    queryFn: () =>
-      new AppService().getByUser({ userId: userId, accessToken: accessToken }),
-    onSuccess: (response) => {
-      setApps(() => response.data.apps);
-      dispatch(updateApps({ apps: response.data.apps }));
-    },
-    onError: (error: any) => {
-      dispatch(showCardNotification({ type: "error", message: error.message }));
-      setTimeout(() => {
-        dispatch(hideCardNotification());
-      }, 5000);
-    },
-  });
-
   const onPostAppHandler = (app: TApp) => {
     setIsPosted(() => true);
   };
@@ -47,18 +32,56 @@ const Dashboard: React.FC = () => {
   // Trigger component re-render to update appList
   useEffect(() => {}, [apps, setApps, isPosted]);
 
+  const { isPending, isError, data, error } = useQuery({
+    queryKey: [`apps-${userId}`],
+    queryFn: () =>
+      new AppService().getByUser({ userId: userId, accessToken: accessToken }),
+  });
+
+  useEffect(() => {
+    const updateUserApplicationsHandler = () => {
+      if (!data) return;
+
+      dispatch(updateApps({ apps: data.data.apps }));
+    };
+    updateUserApplicationsHandler();
+  }, [data]);
+
+  if (isPending) {
+    return (
+      <div className="w-full h-[60vh] flex items-center justify-center">
+        <Spinner className="w-10 h-10" />
+      </div>
+    );
+  }
+
+  if (isError) {
+    return (
+      <div className="w-full h-[60vh] flex items-center justify-center">
+        <Notification
+          type={"error"}
+          message={error.message}
+          onClose={() => {}}
+        />
+      </div>
+    );
+  }
+
+  if (!data || !data.data.apps) {
+    return (
+      <div className="w-full h-[40vh] flex items-center justify-center">
+        {/* TODO: To display action to help user create the first app */}
+        <span className="text-xl">No Applications</span>
+      </div>
+    );
+  }
+
   return (
     <div className="w-full min-h-[90vh]">
       <div className="mt-8">
         <SearchApps onSuccess={onPostAppHandler} />
       </div>
-      {/*TODO: Temporary Loading spinner (To be removed)  */}
-      {isLoading && (
-        <div className="w-full grid place-items-center">
-          <Spinner className="w-10 h-10" />
-        </div>
-      )}
-      {apps[0] && <AppList />}
+      <AppList />
     </div>
   );
 };
