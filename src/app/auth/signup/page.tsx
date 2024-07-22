@@ -95,7 +95,7 @@ const SignUp: React.FC = () => {
             <Image src="/logo.png" width={80} height={80} alt="logo" />
           </Link>
           <p className="text-center flex flex-col">
-            <span className="text-2xl">Welcome to AppCrons</span>
+            <span className="text-2xl">Welcome to Appcrons</span>
             <span className="text-color-text-secondary">
               Let's create your account
             </span>

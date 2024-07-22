@@ -86,7 +86,7 @@ const Login: React.FC = () => {
             <Image src="/logo.png" width={80} height={80} alt="logo" />
             {/* <Logo /> */}
           </Link>
-          <p className="text-center text-2xl">Log in to AppCrons</p>
+          <p className="text-center text-2xl">Log in to Appcrons</p>
         </div>
         <form
           onSubmit={formik.handleSubmit}

@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { ThemeController } from "@/app/shared/themeController";
 import { CurrentUser } from "@/app/shared/currentUser";
 import { useAppSelector } from "@/hooks/redux";
-// import Link from "next/link";
 import { Link } from "@/lib/router-events";
 import { DashboardIcon } from "@/app/shared/Icons/dashboardIcon";
 import { DocumentIcon } from "@/app/shared/Icons/documentIcon";
@@ -27,14 +26,16 @@ export const Header: React.FC = () => {
           p-4 border-b-[1px] border-color-border-primary
           bg-color-bg-tertiary"
         >
-          <div className="flex items-center gap-2">
-            <Image src="/logo.png" width={40} height={40} alt="logo" />
-            <span
-              className="text-color-text-primary 
-              font-semibold"
-            >
-              AppCrons
-            </span>
+          <div>
+            <Link href="/dashboard" className="flex items-center gap-2">
+              <Image src="/logo.png" width={30} height={30} alt="logo" />
+              <span
+                className="text-color-text-primary 
+              font-[500] text-2xl"
+              >
+                Appcrons
+              </span>
+            </Link>
           </div>
           <div
             className="flex items-center justify-center gap-2 border-[1px]
