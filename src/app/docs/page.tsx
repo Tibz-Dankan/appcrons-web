@@ -1,14 +1,13 @@
 import React from "react";
 import { Metadata } from "next";
 
-// export const metadata: Metadata = {
-const metadata: Metadata = {
+export const metadata: Metadata = {
   title: "Documentation",
   description: "Appcrons official documentation",
 };
 
-const Docs = () => {
+const Page: React.FC = () => {
   return <div>Docs</div>;
 };
 
-export default Docs;
+export default Page;
