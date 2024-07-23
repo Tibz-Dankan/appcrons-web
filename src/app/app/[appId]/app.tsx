@@ -1,5 +1,5 @@
 "use client";
-import React, { useEffect, useState } from "react";
+import React, { ReactNode, useEffect, useState } from "react";
 import Link from "next/link";
 import { RequestTimeRangeCard } from "@/app/request/requestTimeRangeCard";
 import { PostRequestTimeRange } from "@/app/request/postRequestTimeRange";
@@ -21,6 +21,13 @@ import Button from "@/app/shared/button";
 import { EditIcon } from "@/app/shared/Icons/editIcon";
 import { PokecogIcon } from "@/app/shared/Icons/pokecogIcon";
 import { Notification } from "@/app/shared/notification";
+import { InfoIcon } from "@/app/shared/Icons/infoIcon";
+import { LastRequestItem } from "@/app/request/lastRequestItem";
+import { convertMillisecondsToSeconds } from "@/utils/convertMillisecondsToSeconds";
+import { CheckFilledIcon } from "@/app/shared/Icons/checkFilledIcon";
+import { ErrorIconFilled } from "@/app/shared/Icons/errorFilledIcon";
+import { getStatusCodeLabel } from "@/utils/getStatusCodeLabel";
+import { NextRequestTime } from "@/app/request/nextRequestTime";
 
 const App: React.FC = () => {
   const [app, setApp] = useState<TApp>();
@@ -31,6 +38,16 @@ const App: React.FC = () => {
 
   const onUpdateAppHandler = (app: TApp) => {
     setApp(() => app);
+  };
+
+  const getStatusCodeIcon = (statusCode: number): ReactNode => {
+    const code = statusCode.toString();
+
+    const isSuccessCode = code.startsWith("2");
+    const isErrorCode = code.startsWith("4") || code.startsWith("5");
+
+    if (isSuccessCode) return <CheckFilledIcon className="text-success" />;
+    if (isErrorCode) return <ErrorIconFilled className="text-error" />;
   };
 
   const modalCloseHandler = (close: boolean) => {
@@ -104,25 +121,15 @@ const App: React.FC = () => {
         className="flex items-start justify-between gap-4
          border-b-[1px] border-color-border-primary pb-8"
       >
-        <div className="flex flex-col items-start justify-center">
+        <div
+          className="flex flex-col items-start justify-center
+           border-[1px] border-color-border-primary p-8 rounded-md"
+        >
           <div className="w-40 flex items-center justify-between gap-4">
             <p className="flex items-center gap-2">
               <PokecogIcon className="text-color-text-secondary" />
               <span className="text-sm uppercase">Application</span>
             </p>
-            <Modal
-              openModalElement={
-                <p className="flex items-center gap-2 cursor-pointer">
-                  <EditIcon
-                    className="w-[18px] h-[18px] text-color-text-secondary 
-                     cursor-pointer"
-                  />
-                  <span className="text-sm">Update</span>
-                </p>
-              }
-            >
-              <UpdateApp app={app} onUpdate={onUpdateAppHandler} />
-            </Modal>
           </div>
           <div className="flex flex-col justify-center gap-2 mt-2">
             <p className="text-xl font-semibold">{app.name}</p>
@@ -135,9 +142,59 @@ const App: React.FC = () => {
                 {app.url}
               </Link>
             </p>
-            {showRequestTimesRange(app) && <RequestTimeRangeCard app={app} />}
+            <p>
+              <span className="mr-2">Request Interval:</span>
+              <span>{app.requestInterval} minutes</span>
+            </p>
           </div>
         </div>
+        <div
+          className="flex flex-col items-start justify-center gap-0
+           border-[1px] border-color-border-primary  rounded-md"
+        >
+          <div
+            className="w-full flex items-center justify-start gap-2
+             px-8 text-base bg-color-bg-secondary rounded-t-md py-2
+             border-b-[1px] border-color-border-primary"
+          >
+            <InfoIcon className="text-color-text-secondarys" />
+            <span>Last Request Info</span>
+          </div>
+          <div
+            className="w-full flex items-center justify-start gap-2
+             px-8 bg-green-500s h-10 mt-1s"
+          >
+            <span className="mr-4">Made:</span>
+            <LastRequestItem app={app} />
+          </div>
+          <div
+            className="w-full flex items-center justify-start gap-2
+             px-8"
+          >
+            <span>Latency:</span>
+            <span>
+              {convertMillisecondsToSeconds(app.requests[0].duration)}s
+            </span>
+            <InfoIcon className="text-color-text-secondary" />
+          </div>
+          <div
+            className="w-full flex items-center justify-start gap-2
+             px-8 mt-2"
+          >
+            <span className="mr-2">Status:</span>
+            <span>{getStatusCodeIcon(app.requests[0].statusCode)}</span>
+            <span>{app.requests[0].statusCode}</span>
+            <span>{getStatusCodeLabel(app.requests[0].statusCode)}</span>
+          </div>
+          <div
+            className="w-full flex items-center justify-start gap-2
+             px-8 mt-2 border-t-[1px] border-color-border-primary py-2"
+          >
+            <span>Next Request:</span>
+            <NextRequestTime appId={app.id} />
+          </div>
+        </div>
+
         <div>
           <div
             className="w-52 border-[1px] border-color-border-primary 
@@ -157,6 +214,11 @@ const App: React.FC = () => {
           </div>
         </div>
       </div>
+      {/* TODO: To modify the RequestTimeRangeCard styles */}
+      <div>
+        {showRequestTimesRange(app) && <RequestTimeRangeCard app={app} />}
+      </div>
+
       <div className="space-y-8">
         <RequestList appId={app.id} />
         <UpdateAppCard app={app} />
