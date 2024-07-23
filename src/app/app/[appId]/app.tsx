@@ -46,7 +46,8 @@ const App: React.FC = () => {
     const isSuccessCode = code.startsWith("2");
     const isErrorCode = code.startsWith("4") || code.startsWith("5");
 
-    if (isSuccessCode) return <CheckFilledIcon className="text-success" />;
+    if (isSuccessCode)
+      return <CheckFilledIcon className="text-success w-[18px] h-[18px]" />;
     if (isErrorCode) return <ErrorIconFilled className="text-error" />;
   };
 
