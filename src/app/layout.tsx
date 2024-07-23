@@ -17,8 +17,7 @@ const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title:
-    "Appcrons: Lets you optimize uptime for your free backend instance on Render",
+  title: "Appcrons - Optimize uptime for your free backend instance on Render",
   description: "Optimize uptime for your free backend instance on Render",
   openGraph: {
     type: "website",
