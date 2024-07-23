@@ -141,10 +141,14 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     );
   }
 
-  if (!data) {
+  console.log("requests :", requests);
+
+  if (!data || requests.length === 0) {
     return (
       <div className="w-full h-[40vh] flex items-center justify-center">
-        <span className="text-xl">No requests for application</span>
+        <span className="text-base">
+          This is application hasn't received requests for the past 12 hours{" "}
+        </span>
       </div>
     );
   }
