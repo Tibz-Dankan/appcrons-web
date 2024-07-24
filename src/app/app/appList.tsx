@@ -38,7 +38,7 @@ export const AppList: React.FC<AppListProps> = (props) => {
 
   // TODO: to cater for no last request when rendering the progress loader
   return (
-    <div className="p-4">
+    <div className="">
       <table
         className="border-separate border-spacing-0 
          w-full overflow-x-auto"

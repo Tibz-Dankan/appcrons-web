@@ -72,11 +72,11 @@ const Dashboard: React.FC = () => {
   }
 
   return (
-    <div className="w-full min-h-[90vh]">
-      <div className="mt-8">
+    <div className="w-full min-h-[90vh] flex items-center justify-center">
+      <div className="w-full px-10 max-w-[1280px] mt-14 space-y-12">
         <SearchApps onSuccess={onPostAppHandler} />
+        <AppList />
       </div>
-      <AppList />
     </div>
   );
 };

@@ -61,7 +61,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
     },
   });
   return (
-    <div className="w-full flex items-center justify-center p-4">
+    <div className="w-full flex items-center justify-center">
       <div className="relative w-full">
         <form onSubmit={formik.handleSubmit} className="w-full relative">
           <input

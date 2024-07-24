@@ -14,7 +14,7 @@ export const CurrentUser: React.FC = () => {
       <div className="flex items-center justify-center gap-2">
         <span
           className="cursor-pointer grid place-items-center bg-gray-300s p-1
-           w-10s h-10s w-8 h-8 rounded-[50%] text-gray-100 first-letter:uppercase text-xls 
+           w-8 h-8 rounded-[50%] text-gray-100 first-letter:uppercase
            bg-gradient-to-r from-cyan-700 via-teal-900  to-blue-600
            font-semibold"
         >
@@ -23,7 +23,7 @@ export const CurrentUser: React.FC = () => {
         <span className="font-normal text-color-text-primary">
           {truncateString(user.name, 18)}
         </span>
-        <ChevronDownIcon />
+        <ChevronDownIcon className="w-7 h-7" />
       </div>
     </NavDropDown>
   );
