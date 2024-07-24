@@ -14,52 +14,57 @@ export const NavBar: React.FC = () => {
 
   return (
     <nav
-      className="w-full flex items-center justify-between 
-      p-4 border-b-[1px] border-color-border-primary
+      className="w-full flex items-center justify-center 
+      border-b-[1px] border-color-border-primary
       bg-color-bg-primary fixed top-0 left-0 z-[100]"
     >
-      <div className="flex items-center gap-2">
-        <Link href="/" className="flex items-center gap-1">
-          <Image src="/logo.png" width={30} height={30} alt="logo" />
-          <span
-            className="text-color-text-primary 
-            font-[500] text-2xl"
-          >
-            Appcrons
-          </span>
-        </Link>
-      </div>
+      <div
+        className="flex items-center justify-between 
+         py-4 px-4 sm:px-8 lg:px-8 w-full  max-w-[1280px]"
+      >
+        <div className="flex items-center gap-2">
+          <Link href="/" className="flex items-center gap-1">
+            <Image src="/logo.png" width={30} height={30} alt="logo" />
+            <span
+              className="text-color-text-primary 
+              font-[500] text-2xl"
+            >
+              Appcrons
+            </span>
+          </Link>
+        </div>
 
-      <div className="flex items-center gap-4">
-        <Link
-          href="/docs"
-          className={`flex items-center justify-center gap-2
+        <div className="flex items-center gap-4">
+          <Link
+            href="/docs"
+            className={`flex items-center justify-center gap-2
            rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}
            hover:text-primary focus:text-primary`}
-        >
-          <DocumentIcon
-            className="text-header-tab-text hover:text-inherit
+          >
+            <DocumentIcon
+              className="text-header-tab-text hover:text-inherit
             focus:text-inherit"
-          />
-          <span className="hover:text-inherit focus:text-inherit">Docs</span>
-        </Link>
+            />
+            <span className="hover:text-inherit focus:text-inherit">Docs</span>
+          </Link>
 
-        <ThemeController />
-        <Link
-          href="/auth/login"
-          className={`py-1 px-3 border-[1px] border-color-border-primary
+          <ThemeController />
+          <Link
+            href="/auth/login"
+            className={`py-1 px-3 border-[1px] border-color-border-primary
            rounded-md hover:text-primary focus:text-primary`}
-        >
-          <span>Log In</span>
-        </Link>
-        <Link
-          href="/auth/signup"
-          className={`py-1 px-3 border-[1px]s border-color-border-primary
+          >
+            <span>Log In</span>
+          </Link>
+          <Link
+            href="/auth/signup"
+            className={`py-1 px-3 border-[1px]s border-color-border-primary
            rounded-md bg-primary text-gray-50 hover:bg-primary-light
            focus:text-primary-light`}
-        >
-          <span>Sign Up</span>
-        </Link>
+          >
+            <span>Sign Up</span>
+          </Link>
+        </div>
       </div>
     </nav>
   );
