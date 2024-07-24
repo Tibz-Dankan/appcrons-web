@@ -141,8 +141,6 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     );
   }
 
-  console.log("requests :", requests);
-
   if (!data || requests.length === 0) {
     return (
       <div className="w-full h-[40vh] flex items-center justify-center">
@@ -154,7 +152,7 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
   }
 
   return (
-    <div className="p-4 space-y-8">
+    <div className="space-y-8">
       <table
         className="border-separate border-spacing-0 
          w-full overflow-x-auto"
