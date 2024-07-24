@@ -32,33 +32,34 @@ export const AppLastRequestDetailsCard: React.FC<
 
   return (
     <div
-      className="w-full flex flex-col items-start justify-center gap-0
-      border-[1px] border-color-border-primary rounded-md"
+      className="w-full flex flex-col items-start justify-center
+       gap-0 border-[1px] border-color-border-primary rounded-md 
+       bg-color-bg-primary shadow-sm"
     >
       <div
         className="w-full flex items-center justify-start gap-2
-        px-8 text-base bg-color-bg-secondary rounded-t-md py-2
+        px-6 text-base bg-color-bg-secondary rounded-t-md py-2
         border-b-[1px] border-color-border-primary"
       >
         <span className="text-base font-semibold">Last Request Info</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 h-10"
+         px-6 h-10"
       >
         <span className="mr-4">Made:</span>
         <LastRequestItem app={app} />
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8"
+         px-6"
       >
         <span>Latency:</span>
         <span>{convertMillisecondsToSeconds(app.requests[0].duration)}s</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 mt-2"
+         px-6 mt-2"
       >
         <span className="mr-2">Status:</span>
         <span>{getStatusCodeIcon(app.requests[0].statusCode)}</span>
@@ -67,7 +68,7 @@ export const AppLastRequestDetailsCard: React.FC<
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 mt-2 border-t-[1px] border-color-border-primary py-3"
+         px-6 mt-2 border-t-[1px] border-color-border-primary py-3"
       >
         <span>Next Request:</span>
         <NextRequestTime appId={app.id} />

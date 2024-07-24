@@ -15,12 +15,13 @@ export const AppDetailsCard: React.FC<AppDetailsCardProps> = (props) => {
   )!;
   return (
     <div
-      className="w-full flex flex-col items-start justify-center gap-0
-      border-[1px] border-color-border-primary rounded-md"
+      className="w-full flex flex-col items-start justify-center 
+      gap-0 border-[1px] border-color-border-primary rounded-md 
+      bg-color-bg-primary shadow-sm"
     >
       <div
         className="w-full flex items-center justify-start gap-2
-        px-8 text-base bg-color-bg-secondary rounded-t-md py-2
+        px-6 text-base bg-color-bg-secondary rounded-t-md py-2
         border-b-[1px] border-color-border-primary"
       >
         <span className="text-base font-semibold">
@@ -29,7 +30,7 @@ export const AppDetailsCard: React.FC<AppDetailsCardProps> = (props) => {
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 mt-3"
+         px-6 mt-2"
       >
         <Link
           href={`${app.url}`}
@@ -42,21 +43,21 @@ export const AppDetailsCard: React.FC<AppDetailsCardProps> = (props) => {
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 mt-3"
+         px-6 mt-3"
       >
         <span className="">Request Interval:</span>
         <span>{app.requestInterval} minutes</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 mt-3"
+         px-6 mt-3"
       >
         <span className="">Added:</span>
         <span>{elapsedTime(app.createdAt)}</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
-         px-8 my-3"
+         px-6 mt-3 mb-4"
       >
         <span className="">Last updated:</span>
         <span>{elapsedTime(app.updatedAt)}</span>

@@ -35,7 +35,7 @@ export const PostRequestTimeRangeCard: React.FC<
   return (
     <div
       className="w-full border-[1px] border-color-border-primary 
-        rounded-md"
+        rounded-md bg-color-bg-primary shadow-sm"
     >
       <div
         className="w-full flex items-center justify-between gap-2
@@ -62,8 +62,8 @@ export const PostRequestTimeRangeCard: React.FC<
           <PostRequestTimeRange app={app} onSuccess={modalCloseHandler} />
         </Modal>
       </div>
-      <div className="w-full p-8">
-        <p>
+      <div className="w-full p-6">
+        <p className="leading-[23px]">
           Request Time Frame allows you to add time range(s) in which your
           server should receive requests in your preferred timezone. You can add
           multiple RTFs for a single application.

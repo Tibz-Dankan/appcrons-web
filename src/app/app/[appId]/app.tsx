@@ -81,16 +81,21 @@ const App: React.FC = () => {
     >
       <div
         className="w-full flex flex-col gap-8 lg:flex-row
-         lg:items-start p-10 max-w-[1280px]"
+          lg:items-start p-10 max-w-[1280px]"
       >
         <AppDetailsCard appId={app.id} />
         <AppLastRequestDetailsCard appId={app.id} />
         <PostRequestTimeRangeCard appId={app.id} />
       </div>
       <div
-        className="border-b-[1px] border-color-border-primary
-         w-full mb-16"
-      />
+        className="w-full max-w-[1280px] px-10 flex 
+        items-center justify-center"
+      >
+        <div
+          className="border-b-[1px] border-color-border-primary
+           w-full mb-16"
+        />
+      </div>
 
       {/* TODO: To modify the RequestTimeRangeCard styles */}
       <div>
