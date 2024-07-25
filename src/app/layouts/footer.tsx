@@ -1,5 +1,9 @@
 import React from "react";
 import { PostFeedback } from "@/app/feedback/postFeedback";
+import { Link } from "@/lib/router-events";
+import { FoldedHandsIcon } from "@/app/shared/Icons/foldedHandsIcon";
+import { WarningIcon } from "@/app/shared/Icons/warningIcon";
+import { DocumentIcon } from "../shared/Icons/documentIcon";
 
 export const Footer: React.FC = () => {
   return (
@@ -8,7 +12,7 @@ export const Footer: React.FC = () => {
        justify-center mt-16"
     >
       <div
-        className="w-full max-w-[1280px]s px-10s flex 
+        className="w-full max-w-[1280px] px-10 flex 
         items-center justify-center"
       >
         <div
@@ -18,13 +22,38 @@ export const Footer: React.FC = () => {
       </div>
       <div
         className="w-full px-10 max-w-[1280px] flex items-center
-        justify-start py-6 gap-4"
+        justify-between py-6 gap-4"
       >
-        <PostFeedback />
-        <div className="text-color-text-secondary space-x-2 text-sm">
-          <span className="-mr-2">Appcrons&copy;</span>
-          <span>{new Date().getFullYear()}.</span>
+        <div className="text-color-text-secondary space-x-1 text-sm">
+          <span className="-mr-2s">&copy;</span>
+          <span>{new Date().getFullYear()}</span>
+          <span>Appcrons.</span>
           <span>All rights reserved</span>
+        </div>
+        <div className="flex items-center justify-center gap-4">
+          <Link href="/docs" className="flex items-start justify-center gap-1">
+            <DocumentIcon className="text-color-text-secondary" />
+            <span className="text-color-text-secondary">Docs</span>
+          </Link>
+          <PostFeedback />
+          <Link
+            href="/acknowledgement"
+            className="flex items-start justify-center gap-1"
+          >
+            <FoldedHandsIcon className="text-color-text-secondary w-4 h-4" />
+            <span className="text-color-text-secondary text-sm">
+              Acknowledgement
+            </span>
+          </Link>
+          <Link
+            href="/disclaimer"
+            className="flex items-start justify-center gap-1"
+          >
+            <WarningIcon className="text-color-text-secondary w-4 h-4" />
+            <span className="text-color-text-secondary text-sm">
+              Disclaimer
+            </span>
+          </Link>
         </div>
       </div>
     </footer>
