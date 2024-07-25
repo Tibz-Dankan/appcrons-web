@@ -4,12 +4,14 @@ import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { RequestService } from "@/services/request.service";
 import { TRequest } from "@/types/app";
 import { Spinner } from "@/app/shared/loader/spinner";
-import { AppDate } from "@/utils/date";
 import { useRouter, useSearchParams } from "next/navigation";
 import Button from "@/app/shared/button";
 import { ArrowForwardIcon } from "@/app/shared/Icons/arrowForwardIcon";
 import { ArrowBackIcon } from "@/app/shared/Icons/arrowBackIcon";
 import { Notification } from "@/app/shared/notification";
+import { RequestTable } from "@/app/request/requestTable";
+import { RequestLineChart } from "@/app/request/requestLineChart";
+import { InfoIcon } from "../shared/Icons/infoIcon";
 
 interface RequestListProps {
   appId: string;
@@ -43,14 +45,6 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
 
   const requests: TRequest[] = data && data.data.requests;
   const appRequestCount: number = data && data.data.count;
-
-  const isLastElement = (list: any[], index: number): boolean => {
-    return index === list.length - 1;
-  };
-
-  const requestMadeAt = (date: Date | string): string => {
-    return new AppDate(date).dateTime();
-  };
 
   const getTotalNumPages = () => Math.ceil(appRequestCount / 10);
   const getCurrentPage = () => (page ? parseInt(page) : 1);
@@ -153,57 +147,23 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
 
   return (
     <div className="space-y-8">
-      <table
-        className="border-separate border-spacing-0 
-         w-full overflow-x-auto"
+      <div
+        className="flex items-center justify-start gap-2 p-4 
+        rounded-md bg-[#0ca678]/[0.3]"
       >
-        {/* <caption className=""></caption> */}
-        <thead>
-          <tr
-            className="[&>*]:bg-color-bg-secondary [&>*]:border-y-[1px] 
-              [&>*]:border-color-border-primary uppercase text-[12px]"
-          >
-            <th
-              className="px-2 pl-4 py-4 text-start border-l-[1px] 
-               border-color-border-primary rounded-tl-md"
-            >
-              Made at
-            </th>
-            <th className="px-2 py-4 text-start">Status code</th>
-            <th
-              className="px-2 py-4 text-start border-r-[1px] 
-              border-color-border-primary rounded-tr-md"
-            >
-              Duration
-            </th>
-          </tr>
-        </thead>
-        <tbody className="">
-          {requests.map((request, index) => {
-            return (
-              <tr
-                className="h-14 [&>*]:border-b-[1px] 
-                 [&>*]:border-color-border-primary text-sm"
-                key={index}
-              >
-                <td
-                  className={`px-2 pl-4 border-l-[1px] border-color-border-primary
-                   ${isLastElement(requests, index) && "rounded-bl-md"}`}
-                >
-                  {requestMadeAt(request.startedAt)}
-                </td>
-                <td className="px-2">{request.statusCode}</td>
-                <td
-                  className={`px-2 border-r-[1px] border-color-border-primary
-                   ${isLastElement(requests, index) && "rounded-br-md"}`}
-                >
-                  {request.duration} ms
-                </td>
-              </tr>
-            );
-          })}
-        </tbody>
-      </table>
+        <InfoIcon />
+        <span>
+          For every application, only the request history from the past 12 hours
+          is retained.
+        </span>
+      </div>
+      <div
+        className="w-full flex flex-col items-center justify-end
+         lg:flex-row lg:items-end lg:justify-center gap-8"
+      >
+        <RequestTable requests={requests} />
+        <RequestLineChart requests={requests} />
+      </div>
       <div className="w-full flex items-center justify-end gap-4">
         <Button
           label={
