@@ -17,12 +17,12 @@ export const AppDetailsCard: React.FC<AppDetailsCardProps> = (props) => {
     <div
       className="w-full flex flex-col items-start justify-center 
       gap-0 border-[1px] border-color-border-primary rounded-md 
-      bg-color-bg-primary"
+      bg-color-bg-primary text-color-text-secondary"
     >
       <div
         className="w-full flex items-center justify-start gap-2
         px-6 text-base bg-color-bg-secondary rounded-t-md py-2
-        border-b-[1px] border-color-border-primary"
+        border-b-[1px] border-color-border-primary text-color-text-primary"
       >
         <span className="text-base font-semibold">
           {truncateString(app.name, 30)}
