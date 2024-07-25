@@ -38,14 +38,23 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
   const requestTimeList = app.requestTimes as TRequestTime[];
 
   return (
-    <div className="border-[1px] border-color-border-primary rounded-md">
+    <div
+      className="w-full border-[1px] border-color-border-primary
+       rounded-md flex items-center justify-start"
+    >
       <div
-        className="border-b-[1px] border-color-border-primary p-4
-         bg-color-bg-secondary flex items-center justify-center rounded-t-md"
+        className="border-r-[1px] border-color-border-primary p-6
+         bg-color-bg-secondary flex items-center justify-center gap-2
+        rounded-l-md h-full"
       >
-        <span>{requestTimeList[0]?.timeZone}</span>
+        <span className="font-semibold">{requestTimeList[0]?.timeZone}</span>
+        <EditIcon
+          className="w-[18px] h-[18px] text-color-text-primary 
+           cursor-pointer"
+        />
       </div>
-      <div className="grid grid-cols-2 gap-2 p-4">
+      {/* TODO: use any number of columns with horizontal scrolling */}
+      <div className="grid grid-cols-4 gap-2 p-4">
         {requestTimeList.map((requestTime, index) => (
           <div
             key={index}
