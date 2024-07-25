@@ -9,17 +9,8 @@ export const Footer: React.FC = () => {
   return (
     <footer
       className="w-full flex flex-col items-center 
-       justify-center mt-16"
+       justify-center mt-12"
     >
-      <div
-        className="w-full max-w-[1280px] px-10 flex 
-        items-center justify-center"
-      >
-        <div
-          className="border-b-[1px] border-color-border-primary
-           w-full"
-        />
-      </div>
       <div
         className="w-full px-10 max-w-[1280px] flex items-center
         justify-between py-6 gap-4"

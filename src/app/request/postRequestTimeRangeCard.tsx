@@ -35,7 +35,7 @@ export const PostRequestTimeRangeCard: React.FC<
   return (
     <div
       className="w-full border-[1px] border-color-border-primary 
-        rounded-md bg-color-bg-primary shadow-sm"
+        rounded-md bg-color-bg-primary"
     >
       <div
         className="w-full flex items-center justify-between gap-2

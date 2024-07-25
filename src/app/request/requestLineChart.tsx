@@ -61,7 +61,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
     >
       <div className="w-full h-96">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ right: 32 }}>
+          <LineChart data={data} margin={{ top: 32, right: 32 }}>
             <XAxis
               dataKey="name"
               tick={{ fill: chartColors.tickLine }}
