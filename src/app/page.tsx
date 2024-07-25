@@ -2,7 +2,6 @@
 
 import { Hero } from "@/app/home/hero";
 import Button from "@/app/shared/button";
-// import Link from "next/link";
 import { Link } from "@/lib/router-events";
 import { NavBar } from "@/app/home/navbar";
 import { Features } from "@/app/home/features";

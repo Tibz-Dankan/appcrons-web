@@ -83,7 +83,7 @@ export const PostFeedback: React.FC = () => {
   return (
     <Modal
       openModalElement={
-        <div className="flex items-center justify-center gap-1">
+        <div className="flex items-center justify-center gap-1 cursor-pointer">
           <span className="cursor-pointer flex flex-col items-center justify-center -space-y-3">
             <ArrowForwardIcon className="text-color-text-secondary" />
             <ArrowBackIcon className="text-color-text-secondary" />
