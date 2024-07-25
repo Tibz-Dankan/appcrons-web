@@ -35,12 +35,12 @@ export const PostRequestTimeRangeCard: React.FC<
   return (
     <div
       className="w-full border-[1px] border-color-border-primary 
-        rounded-md bg-color-bg-primary"
+        rounded-md bg-color-bg-primary text-color-text-secondary"
     >
       <div
         className="w-full flex items-center justify-between gap-2
         p-1 text-base bg-color-bg-secondary rounded-t-md
-        border-b-[1px] border-color-border-primary"
+        border-b-[1px] border-color-border-primary text-color-text-primary"
       >
         <span className="ml-7 text-base font-semibold">
           Request Time Frame(RTF)
