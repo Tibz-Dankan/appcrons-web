@@ -34,7 +34,7 @@ export const AppLastRequestDetailsCard: React.FC<
     <div
       className="w-full flex flex-col items-start justify-center
        gap-0 border-[1px] border-color-border-primary rounded-md 
-       bg-color-bg-primary shadow-sm"
+       bg-color-bg-primary"
     >
       <div
         className="w-full flex items-center justify-start gap-2

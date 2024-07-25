@@ -87,17 +87,6 @@ const App: React.FC = () => {
         <AppLastRequestDetailsCard appId={app.id} />
         <PostRequestTimeRangeCard appId={app.id} />
       </div>
-      {!showRequestTimesRange(app) && (
-        <div
-          className="w-full max-w-[1280px] px-10 flex 
-            items-center justify-center"
-        >
-          <div
-            className="border-b-[1px] border-color-border-primary
-             w-full mb-16"
-          />
-        </div>
-      )}
 
       {showRequestTimesRange(app) && (
         <div className="w-full flex items-center justify-center mb-16">
@@ -110,8 +99,10 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <div className="space-y-8 w-full p-10 pt-0 max-w-[1280px]">
-        <RequestList appId={app.id} />
+      <div className="space-y-8 w-full px-10 max-w-[1280px]">
+        <div className="w-full mb-16">
+          <RequestList appId={app.id} />
+        </div>
         <UpdateAppCard app={app} />
         <EnableDisableAppCard app={app} />
         <DeleteApp app={app} />
