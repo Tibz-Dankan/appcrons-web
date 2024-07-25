@@ -31,6 +31,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
 };
 
 export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
+  const requests: TRequest[] = JSON.parse(JSON.stringify(props.requests));
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
@@ -42,7 +43,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
   };
 
   // Sort the requests by startedAt in ascending order
-  const sortedRequests = props.requests.sort(
+  const sortedRequests = requests.sort(
     (a, b) => new Date(a.startedAt).getTime() - new Date(b.startedAt).getTime()
   );
 
