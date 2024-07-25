@@ -87,20 +87,28 @@ const App: React.FC = () => {
         <AppLastRequestDetailsCard appId={app.id} />
         <PostRequestTimeRangeCard appId={app.id} />
       </div>
-      <div
-        className="w-full max-w-[1280px] px-10 flex 
-        items-center justify-center"
-      >
+      {!showRequestTimesRange(app) && (
         <div
-          className="border-b-[1px] border-color-border-primary
-           w-full mb-16"
-        />
-      </div>
+          className="w-full max-w-[1280px] px-10 flex 
+            items-center justify-center"
+        >
+          <div
+            className="border-b-[1px] border-color-border-primary
+             w-full mb-16"
+          />
+        </div>
+      )}
 
-      {/* TODO: To modify the RequestTimeRangeCard styles */}
-      <div>
-        {showRequestTimesRange(app) && <RequestTimeRangeCard app={app} />}
-      </div>
+      {showRequestTimesRange(app) && (
+        <div className="w-full flex items-center justify-center mb-16">
+          <div className="w-full max-w-[1280px] px-10">
+            <div className="">
+              <p className="text-base mb-2">Request Time Frames</p>
+              <RequestTimeRangeCard app={app} />
+            </div>
+          </div>
+        </div>
+      )}
 
       <div className="space-y-8 w-full p-10 pt-0 max-w-[1280px]">
         <RequestList appId={app.id} />
