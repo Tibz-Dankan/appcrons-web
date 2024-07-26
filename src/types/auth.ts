@@ -20,3 +20,10 @@ export type TAuth = {
   user: TUser;
   accessToken: string;
 };
+
+export type TUpdateUser = {
+  id: string;
+  email: string;
+  name: string;
+  accessToken: string;
+};

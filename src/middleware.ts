@@ -10,7 +10,8 @@ export const middleware = (request: NextRequest) => {
 
   const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
   const isAppRoute = request.nextUrl.pathname.startsWith("/app");
-  const protectedRoute = isDashboardRoute || isAppRoute;
+  const isSettingsRoute = request.nextUrl.pathname.startsWith("/settings");
+  const protectedRoute = isDashboardRoute || isAppRoute || isSettingsRoute;
 
   if (protectedRoute) {
     const session = request.cookies.get("session")?.value;
