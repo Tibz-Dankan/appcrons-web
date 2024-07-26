@@ -83,7 +83,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
             <MenuItem>
               {({ focus }) => (
                 <Link
-                  href="/account"
+                  href="/settings"
                   className={classNames(
                     focus
                       ? "bg-gray-100s bg-color-bg-secondary text-gray-900s"
