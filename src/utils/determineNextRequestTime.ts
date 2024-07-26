@@ -5,6 +5,7 @@ import { TDateStatus } from "@/types/date";
 
 const sortRequestTimes = (requestTimes: TRequestTime[]): TRequestTime[] => {
   const sortedRequestTimes = [...requestTimes];
+  if (requestTimes.length === 0) return [];
 
   return sortedRequestTimes.sort((a, b) => {
     const timeA = a.start.split(":").map(Number);
