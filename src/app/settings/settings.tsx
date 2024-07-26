@@ -1,11 +1,14 @@
+"use client";
+
 import React from "react";
 import { TPageLink } from "@/types/page";
 import { SettingsPageLayout } from "@/app/layouts/settingsPageLayout";
 import { UpdatePersonalDetails } from "@/app/auth/updatePersonalDetails";
 import { ChangePassword } from "@/app/auth/changePassword";
 import { DeleteAccount } from "@/app/auth/deleteAccount";
+import { PageAuthWrapper } from "@/app/auth/pageAuthWrapper";
 
-export const Settings: React.FC = () => {
+const Settings: React.FC = () => {
   const pageLinks: TPageLink[] = [
     {
       linkName: "Personal Details",
@@ -32,3 +35,5 @@ export const Settings: React.FC = () => {
     </div>
   );
 };
+
+export default PageAuthWrapper(Settings);

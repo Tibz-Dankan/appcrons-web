@@ -1,5 +1,5 @@
 import { backendURL, clientURL } from "@/constants";
-import { TSigninInPut, TSignupInput } from "@/types/auth";
+import { TSigninInPut, TSignupInput, TUpdateUser } from "@/types/auth";
 
 export class AuthService {
   signIn = async ({ email, password }: TSigninInPut) => {
@@ -92,5 +92,25 @@ export class AuthService {
 
     // return await response.json();
     return {};
+  };
+
+  updateUserDetails = async ({ id, email, name, accessToken }: TUpdateUser) => {
+    const response = await fetch(`${backendURL}/auth/user/update/${id}`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        email,
+        name,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
   };
 }
