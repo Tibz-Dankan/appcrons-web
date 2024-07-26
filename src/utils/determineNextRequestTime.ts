@@ -8,8 +8,8 @@ const sortRequestTimes = (requestTimes: TRequestTime[]): TRequestTime[] => {
   if (requestTimes.length === 0) return [];
 
   return sortedRequestTimes.sort((a, b) => {
-    const timeA = a.start.split(":").map(Number);
-    const timeB = b.start.split(":").map(Number);
+    const timeA = a.start?.split(":").map(Number);
+    const timeB = b.start?.split(":").map(Number);
 
     for (let i = 0; i < timeA.length; i++) {
       if (timeA[i] !== timeB[i]) {
@@ -81,7 +81,7 @@ export const determineNextRequestTime = (
   const requestTimes = sortRequestTimes(app.requestTimes!);
 
   for (let i = 0; i < requestTimes.length; i++) {
-    const startParts = requestTimes[i].start.split(":");
+    const startParts = requestTimes[i].start?.split(":");
     const endParts = requestTimes[i].end.split(":");
 
     const startInMinutes =
@@ -104,8 +104,8 @@ export const determineNextRequestTime = (
     // element of the array if the current element
     // in iteration is last
     const nextStartParts = isLastRequestTime
-      ? requestTimes[0].start.split(":")
-      : requestTimes[i + 1]?.start.split(":");
+      ? requestTimes[0].start?.split(":")
+      : requestTimes[i + 1].start?.split(":");
     const nextStartInMinutes =
       parseInt(nextStartParts[0], 10) * 60 + parseInt(nextStartParts[1], 10);
 
