@@ -27,3 +27,10 @@ export type TUpdateUser = {
   name: string;
   accessToken: string;
 };
+
+export type TChangePassword = {
+  id: string;
+  currentPassword: string;
+  newPassword: string;
+  accessToken: string;
+};
