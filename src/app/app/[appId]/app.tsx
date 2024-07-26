@@ -19,7 +19,6 @@ import { AppDetailsCard } from "@/app/app/appDetailsCard";
 import { PostRequestTimeRangeCard } from "@/app/request/postRequestTimeRangeCard";
 
 const App: React.FC = () => {
-  const [app, setApp] = useState<TApp>();
   const appId = useParams()["appId"] as string;
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth.accessToken);
@@ -40,11 +39,14 @@ const App: React.FC = () => {
     const updateApplicationHandler = () => {
       if (!data) return;
 
-      setApp(() => data.data.app);
       dispatch(addOneApp({ app: data.data.app }));
     };
     updateApplicationHandler();
   }, [data]);
+
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id === appId)
+  )!;
 
   if (isPending) {
     return (
