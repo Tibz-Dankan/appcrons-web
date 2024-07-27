@@ -132,7 +132,7 @@ export class AuthService {
     const response = await fetch(
       `${backendURL}/auth/user/update-password/${id}`,
       {
-        method: "POST",
+        method: "PATCH",
         body: JSON.stringify({
           currentPassword,
           newPassword,
