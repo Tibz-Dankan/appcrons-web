@@ -21,13 +21,11 @@ export const UpdatePersonalDetails: React.FC = () => {
   // TODO: to make api call to get the user details || all settings details
   // probably using another component
   const user = useAppSelector((state) => state.auth).user;
-  console.log("user: ", user);
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().updateUserDetails,
     onSuccess: async (response: any) => {
       // TODO: to update the user details on the client side in redux
-      console.log("response: ", response);
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );
