@@ -34,3 +34,9 @@ export type TChangePassword = {
   newPassword: string;
   accessToken: string;
 };
+
+export type TResetPassword = {
+  resetToken: string;
+  newPassword: string;
+  confirmPassword: string;
+};
