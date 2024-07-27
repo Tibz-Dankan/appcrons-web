@@ -1,6 +1,7 @@
 import { backendURL, clientURL } from "@/constants";
 import {
   TChangePassword,
+  TResetPassword,
   TSigninInPut,
   TSignupInput,
   TUpdateUser,
@@ -64,11 +65,14 @@ export class AuthService {
     return await response.json();
   };
 
-  resetPassword = async ({ resetToken }: { resetToken: string }) => {
+  resetPassword = async ({ resetToken, newPassword }: TResetPassword) => {
     const response = await fetch(
       `${backendURL}/auth/reset-password/${resetToken}`,
       {
         method: "PATCH",
+        body: JSON.stringify({
+          password: newPassword,
+        }),
         headers: {
           "Content-type": "application/json",
         },
