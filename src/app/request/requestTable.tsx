@@ -38,17 +38,15 @@ export const RequestTable: React.FC<RequestTableProps> = (props) => {
         className="border-separate border-spacing-0 
          w-full overflow-x-auto"
       >
-        {/* <caption className=""></caption> */}
         <thead>
           <tr
             className="[&>*]:bg-color-bg-secondary [&>*]:border-y-[1px] 
-              [&>*]:border-color-border-primary uppercases text-sm"
+              [&>*]:border-color-border-primary  text-sm"
           >
             <th
               className="px-2 pl-4 py-3 text-start border-l-[1px] 
                border-color-border-primary rounded-tl-md"
             >
-              {/* Made at */}
               Time
             </th>
             <th className="px-2 py-3 text-start">Status code</th>
