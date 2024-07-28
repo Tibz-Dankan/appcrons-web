@@ -1,6 +1,6 @@
 import React from "react";
 import { LogoutIcon } from "@/app/shared/Icons/logoutIcon";
-import { useRouter } from "next/navigation";
+import { useRouter } from "@/lib/router-events";
 import { useAppDispatch } from "@/hooks/redux";
 import { AuthService } from "@/services/auth.service";
 import {
@@ -51,15 +51,9 @@ export const LogOut: React.FC = () => {
     },
   });
 
-  //   const logoutHandler = () => {
-  //     router.push("/auth/logout");
-  //   };
-
   return (
     <form
-      className={
-        "w-full block px-4 py-2 text-sm text-color-text-primary cursor-pointer"
-      }
+      className={"w-full block px-4 py-2 cursor-pointer"}
       onSubmit={formik.handleSubmit}
     >
       <Button
@@ -72,11 +66,15 @@ export const LogOut: React.FC = () => {
               </div>
             )}
             {isPending && (
-              <Spinner label="logging out" className="w-5 h-5 text-gray-100" />
+              <Spinner
+                label="logging out"
+                className="w-5 h-5 text-color-text-primary"
+              />
             )}
           </>
         }
-        className={"bg-transparent h-full px-0 py-0"}
+        className="bg-transparent h-full text-color-text-primary
+         px-0 py-0 text-sm"
         type={"submit"}
       />
     </form>
