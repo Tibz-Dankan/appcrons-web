@@ -1,17 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAppDispatch, useAppSelector } from "@/hooks/redux";
+import { useAppSelector } from "@/hooks/redux";
 import { RequestService } from "@/services/request.service";
 import { TRequest } from "@/types/app";
 import { Spinner } from "@/app/shared/loader/spinner";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
+import { useRouter } from "@/lib/router-events";
 import Button from "@/app/shared/button";
 import { ArrowForwardIcon } from "@/app/shared/Icons/arrowForwardIcon";
 import { ArrowBackIcon } from "@/app/shared/Icons/arrowBackIcon";
 import { Notification } from "@/app/shared/notification";
 import { RequestTable } from "@/app/request/requestTable";
 import { RequestLineChart } from "@/app/request/requestLineChart";
-import { InfoIcon } from "../shared/Icons/infoIcon";
+import { InfoIcon } from "@/app/shared/Icons/infoIcon";
 
 interface RequestListProps {
   appId: string;
@@ -19,7 +20,6 @@ interface RequestListProps {
 }
 
 export const RequestList: React.FC<RequestListProps> = (props) => {
-  const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const router = useRouter();
   const searchParams = useSearchParams();
@@ -28,8 +28,6 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
 
   const before = searchParams.get("before") ? searchParams.get("before")! : "";
   const page = searchParams.get("page") ? searchParams.get("page")! : "";
-  console.log("before: ", before);
-  console.log("page: ", page);
 
   const appId = props.appId;
 
