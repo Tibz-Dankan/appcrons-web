@@ -12,10 +12,8 @@ import { useAppSelector } from "@/hooks/redux";
 import { PersonIcon } from "@/app/shared/Icons/personIcon";
 import { ReactNode } from "react";
 import { SettingsIcon } from "@/app/shared/Icons/settingsIcon";
-// import { LogoutIcon } from "@/app/shared/Icons/logoutIcon";
 import { useRouter } from "next/navigation";
 import { truncateString } from "@/utils/truncateString";
-// import { clearSession } from "@/app/auth/actions";
 import { LogOut } from "@/app/auth/logout";
 
 interface NavDropDownProps {
@@ -109,15 +107,8 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
                       : "text-gray-700s ",
                     ""
                   )}
-                  // onClick={() => {
-                  //   clearSession(), logoutHandler();
-                  // }}
                 >
                   <LogOut />
-                  {/* <div className="flex items-center justify-start gap-4">
-                    <LogoutIcon />
-                    <span>Log out</span>
-                  </div> */}
                 </div>
               )}
             </MenuItem>
