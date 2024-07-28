@@ -1,8 +1,8 @@
 "use client";
 
-import React, { ReactNode, useEffect, useState } from "react";
+import React, { useEffect, useState } from "react";
 import Button from "@/app/shared/Button";
-import { Modal } from "@/app/shared/modal";
+import { Modal } from "@/app/shared/Modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -16,12 +16,8 @@ import { Spinner } from "@/app/shared/loader/Spinner";
 import { RequestService } from "@/services/request.service";
 import { InputSelect } from "@/app/shared/InputSelect";
 import times from "@/app/request/data/times.json";
-import { TimeZoneSelect } from "@/app/shared/TimeZoneSelect";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
-// import { IconContext } from "react-icons";
-// import { IoMdCheckmarkCircleOutline } from "react-icons/io";
-// import { MdErrorOutline } from "react-icons/md";
 import { truncateString } from "@/utils/truncateString";
 import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
 import { updateOneApp } from "@/store/actions/app";
