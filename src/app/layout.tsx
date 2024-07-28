@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
-import { Providers } from "@/providers";
-import NotificationInitializer from "@/app/shared/notificationInitializer";
-import { AppLayout } from "@/app/layouts/appLayout";
-import { ThemeAppProvider } from "@/providers/themeProvider";
-import { PHProvider } from "@/providers/postHog";
+import { Providers } from "@/providers/Index";
+import NotificationInitializer from "@/app/shared/NotificationInitializer";
+import { AppLayout } from "@/app/layouts/AppLayout";
+import { ThemeAppProvider } from "@/providers/ThemeProvider";
+import { PHProvider } from "@/providers/PostHog";
 import dynamic from "next/dynamic";
 import { OnPageLoadComplete } from "@/lib/router-events";
 import "react-tooltip/dist/react-tooltip.css";

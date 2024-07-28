@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import Settings from "@/app/settings/settings";
+import Settings from "@/app/settings/Settings";
 
 export const metadata: Metadata = {
   title: "Settings",

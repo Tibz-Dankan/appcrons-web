@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import Dashboard from "@/app/dashboard/dashboard";
+import Dashboard from "@/app/dashboard/Dashboard";
 
 export const metadata: Metadata = {
   title: "Dashboard",
