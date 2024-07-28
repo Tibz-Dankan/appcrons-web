@@ -1,6 +1,6 @@
 import React from "react";
 import { Metadata } from "next";
-import { LogIn } from "@/app/auth/login/login";
+import { LogIn } from "@/app/auth/login/Login";
 
 export const metadata: Metadata = {
   title: "Log into your account",

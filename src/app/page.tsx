@@ -1,13 +1,13 @@
 "use client";
 
-import { Hero } from "@/app/home/hero";
-import Button from "@/app/shared/button";
+import { Hero } from "@/app/home/Hero";
+import Button from "@/app/shared/Button";
 import { Link } from "@/lib/router-events";
-import { NavBar } from "@/app/home/navbar";
-import { Features } from "@/app/home/features";
-import { WhyAppcrons } from "@/app/home/whyAppcrons";
-import { FAQ } from "./home/faq";
-import { CreatorsWords } from "@/app/home/creatorWords";
+import { NavBar } from "@/app/home/Navbar";
+import { Features } from "@/app/home/Features";
+import { WhyAppcrons } from "@/app/home/WhyAppcrons";
+import { FAQ } from "./home/Faq";
+import { CreatorsWords } from "@/app/home/CreatorWords";
 
 export default function Home() {
   return (

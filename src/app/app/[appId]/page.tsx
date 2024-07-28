@@ -1,6 +1,6 @@
 import React from "react";
 import type { Metadata } from "next";
-import App from "@/app/app/[appId]/app";
+import App from "@/app/app/[appId]/App";
 import { AppService } from "@/services/app.service";
 import { Session } from "@/lib/session";
 
