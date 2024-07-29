@@ -5,13 +5,18 @@ import { convertMillisecondsToSeconds } from "@/utils/convertMillisecondsToSecon
 import { CheckFilledIcon } from "@/app/shared/Icons/CheckFilledIcon";
 import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
 import { getStatusCodeLabel } from "@/utils/getStatusCodeLabel";
+import { useAppSelector } from "@/hooks/redux";
 
 interface RequestTableProps {
   requests: TRequest[];
 }
 
 export const RequestTable: React.FC<RequestTableProps> = (props) => {
-  const requests: TRequest[] = props.requests;
+  const requests = useAppSelector((state) =>
+    state.request.requests.filter(
+      (request) => request.appId === props.requests[0].appId
+    )
+  )!;
 
   const isLastElement = (list: any[], index: number): boolean => {
     return index === list.length - 1;

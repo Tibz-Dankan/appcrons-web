@@ -3,6 +3,7 @@ import { notificationSlice } from "./reducers/notification";
 import { authSlice } from "./reducers/auth";
 import { appLiveRequestSlice } from "./reducers/appLiveRequests";
 import { appSlice } from "./reducers/app";
+import { requestSlice } from "./reducers/request";
 import { pageLoaderSlice } from "./reducers/pageLoader";
 
 export const makeStore = () => {
@@ -11,6 +12,7 @@ export const makeStore = () => {
       auth: authSlice.reducer,
       notification: notificationSlice.reducer,
       app: appSlice.reducer,
+      request: requestSlice.reducer,
       appLiveRequest: appLiveRequestSlice.reducer,
       pageLoader: pageLoaderSlice.reducer,
     },
@@ -26,5 +28,6 @@ export type AppDispatch = AppStore["dispatch"];
 export const authActions = authSlice.actions;
 export const notificationActions = notificationSlice.actions;
 export const appActions = appSlice.actions;
+export const requestActions = requestSlice.actions;
 export const appLiveRequestActions = appLiveRequestSlice.actions;
 export const pageLoaderActions = pageLoaderSlice.actions;
