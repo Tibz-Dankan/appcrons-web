@@ -55,10 +55,10 @@ export type TRequest = {
   deletedAt: string | null;
 };
 
-// "appId": "4c370145-f8dc-4cd8-833f-3ca74d6ea033",
-// "start": "4:00:00",
-// "end": "5:00:00",
-// "timeZone": "Africa/Nairobi"
+export type TRequestPayload = {
+  appId: string;
+  requests: TRequest[];
+};
 
 export type TPostRequestTime = {
   appId: string;

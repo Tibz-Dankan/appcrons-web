@@ -1,9 +1,15 @@
-import { TRequest } from "@/types/app";
+import { TRequest, TRequestPayload } from "@/types/app";
 import { requestActions } from "../index";
 
-export const updateRequestList = (requests: TRequest[]) => {
+export const updateRequestList = ({ appId, requests }: TRequestPayload) => {
   return async (dispatch: any) => {
-    dispatch(requestActions.update({ requests: requests }));
+    dispatch(requestActions.update({ appId: appId, requests: requests }));
+  };
+};
+
+export const addOneRequest = (request: TRequest) => {
+  return async (dispatch: any) => {
+    dispatch(requestActions.AddOne({ request: request }));
   };
 };
 
