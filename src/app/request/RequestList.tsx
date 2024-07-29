@@ -119,7 +119,7 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     const updateRequestListHandler = () => {
       if (!data) return;
 
-      dispatch(updateRequestList(requests));
+      dispatch(updateRequestList({ appId: appId, requests: requests }));
     };
     updateRequestListHandler();
 

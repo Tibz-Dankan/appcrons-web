@@ -10,6 +10,7 @@ import { EventSourcePolyfill } from "event-source-polyfill";
 import { TAppLiveRequest } from "@/types/app";
 import { useAppDispatch, useAppSelector } from "./redux";
 import { updateAppLiveRequest } from "@/store/actions/appLiveRequests";
+import { addOneRequest } from "@/store/actions/request";
 
 export const useGetAppLiveRequest = async () => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
@@ -39,6 +40,7 @@ export const useGetAppLiveRequest = async () => {
 
       parsedData.arrivedAt = new Date(Date.now()).toISOString();
       dispatch(updateAppLiveRequest({ appId: parsedData.id, app: parsedData }));
+      dispatch(addOneRequest(parsedData.requests[0]));
     };
 
     const onerror = async (error: any) => {
