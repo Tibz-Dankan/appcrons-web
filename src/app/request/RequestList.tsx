@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { useQuery } from "@tanstack/react-query";
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { RequestService } from "@/services/request.service";
 import { TRequest } from "@/types/app";
 import { Spinner } from "@/app/shared/loader/Spinner";
@@ -13,6 +13,7 @@ import { Notification } from "@/app/shared/Notification";
 import { RequestTable } from "@/app/request/RequestTable";
 import { RequestLineChart } from "@/app/request/RequestLineChart";
 import { InfoIcon } from "@/app/shared/Icons/InfoIcon";
+import { updateRequestList, clearRequestList } from "@/store/actions/request";
 
 interface RequestListProps {
   appId: string;
@@ -22,6 +23,7 @@ interface RequestListProps {
 export const RequestList: React.FC<RequestListProps> = (props) => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const router = useRouter();
+  const dispatch: any = useAppDispatch();
   const searchParams = useSearchParams();
   const [disableNextHandler, setDisableNextHandler] = useState(false);
   const [disablePrevHandler, setDisablePrevHandler] = useState(false);
@@ -113,6 +115,17 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     updateNavButtonDisabilityHandler();
   }, [page, before]);
 
+  useEffect(() => {
+    const updateRequestListHandler = () => {
+      if (!data) return;
+
+      dispatch(updateRequestList(requests));
+    };
+    updateRequestListHandler();
+
+    return () => dispatch(clearRequestList());
+  }, [data, dispatch]);
+
   if (isPending) {
     return (
       <div className="w-full h-[60vh] flex items-center justify-center">
@@ -145,6 +158,9 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
 
   return (
     <div className="space-y-8">
+      <div className="flex items-center justify-start -mb-6">
+        <p className="text-base">Request History</p>
+      </div>
       <div
         className="flex items-center justify-start gap-2 p-4 
         rounded-md bg-[#0ca678]/[0.3]"

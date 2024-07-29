@@ -1,3 +1,4 @@
+import { useAppSelector } from "@/hooks/redux";
 import { TRequest } from "@/types/app";
 import { convertMillisecondsToSeconds } from "@/utils/convertMillisecondsToSeconds";
 import { AppDate } from "@/utils/date";
@@ -31,7 +32,11 @@ const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
 };
 
 export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
-  const requests: TRequest[] = JSON.parse(JSON.stringify(props.requests));
+  const requests = useAppSelector((state) =>
+    state.request.requests.filter(
+      (request) => request.appId === props.requests[0].appId
+    )
+  )!;
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
 
