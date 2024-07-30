@@ -41,7 +41,7 @@ export const AppLastRequestDetailsCard: React.FC<
         px-6 text-base bg-color-bg-secondary rounded-t-md py-2
         border-b-[1px] border-color-border-primary text-color-text-primary"
       >
-        <span className="text-base font-semibold">Latest Request</span>
+        <span className="text-base font-semibold">Last request</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2

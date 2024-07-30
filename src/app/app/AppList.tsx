@@ -4,23 +4,19 @@ import React from "react";
 import { TApp } from "@/types/app";
 import { truncateString } from "@/utils/truncateString";
 import { clientURL } from "@/constants";
-// import { useRouter } from "next/navigation";
 import { useRouter } from "@/lib/router-events";
 import { LastRequestItem } from "@/app/request/LastRequestItem";
 import { EnableDisableApp } from "@/app/app/EnableDisableApp";
 import { useAppSelector } from "@/hooks/redux";
 import { NextRequestTime } from "@/app/request/NextRequestTime";
 import { ToolTip } from "@/app/shared/ToolTip";
-import { InfoIcon } from "../shared/Icons/InfoIcon";
+import { InfoIcon } from "@/app/shared/Icons/InfoIcon";
+import { useGetWindowWidth } from "@/hooks/UseGetWindowWidth";
 
-interface AppListProps {
-  showListHead?: boolean;
-}
-
-export const AppList: React.FC<AppListProps> = (props) => {
-  const showListHead = props.showListHead ? props.showListHead : true;
+export const AppList: React.FC = () => {
   const router = useRouter();
   const apps = useAppSelector((state) => state.app.apps);
+  const { width } = useGetWindowWidth();
 
   const isLastElement = (list: any[], index: number): boolean => {
     return index === list.length - 1;
@@ -36,51 +32,77 @@ export const AppList: React.FC<AppListProps> = (props) => {
     return true;
   };
 
-  // TODO: to cater for no last request when rendering the progress loader
+  const getApplicationName = (name: string): string => {
+    if (width < 450) {
+      return truncateString(name, 5);
+    }
+    if (width < 480) {
+      return truncateString(name, 10);
+    }
+    if (width < 520) {
+      return truncateString(name, 15);
+    }
+    return name;
+  };
+
+  const showURLEndpoint: boolean = width >= 1024;
+  const showNextRequest: boolean = width >= 600;
+  const showApplicationNameTitle: boolean = width >= 450;
+  const showToolTip: boolean = width >= 450;
+
   return (
-    <div className="">
+    <div>
       <table
-        className="border-separate border-spacing-0 
-         w-full overflow-x-auto"
+        className="border-separate border-spacing-0 w-full
+         overflow-x-auto"
       >
-        {showListHead && (
-          <thead>
-            <tr
-              className="[&>*]:bg-color-bg-secondary [&>*]:border-y-[1px] 
-               [&>*]:border-color-border-primary text-[12px]"
+        <thead>
+          <tr
+            className="[&>*]:bg-color-bg-secondary [&>*]:border-y-[1px] 
+             [&>*]:border-color-border-primary text-sm"
+          >
+            <th
+              className="px-2 pl-4 py-4 text-start border-l-[1px] 
+              border-color-border-primary rounded-tl-md"
             >
-              <th
-                className="px-2 pl-4 py-4 text-start border-l-[1px] 
-                border-color-border-primary rounded-tl-md"
-              >
-                <span className="uppercase">Application Name</span>
-              </th>
+              <span>
+                <span>Application</span>
+                {showApplicationNameTitle && <span className="ml-1">name</span>}
+              </span>
+            </th>
+            {showURLEndpoint && (
               <th className="px-2 py-4 text-start">
-                <span className="uppercase">URL</span>
+                <span>URL endpoint</span>
               </th>
-              <th className="px-2 py-4 text-start">
-                <div className="flex items-center gap-2">
-                  <span className="uppercase">Last Request</span>
+            )}
+            <th className="px-2 py-4 text-start">
+              <div className="flex items-center gap-2">
+                <span>Last request</span>
+                {showToolTip && (
                   <span data-tooltip-id="last-request">
                     <InfoIcon className="w-[18px] h-[18px]" />
                   </span>
-                  <ToolTip
-                    id={"last-request"}
-                    content={
-                      <span className="text-sm font-[500]">
-                        Last request is the most latest time an application
-                        received a request
-                      </span>
-                    }
-                  />
-                </div>
-              </th>
+                )}
+                <ToolTip
+                  id={"last-request"}
+                  content={
+                    <span className="text-sm font-[500]">
+                      Last request is the most latest time an application
+                      received a request
+                    </span>
+                  }
+                />
+              </div>
+            </th>
+            {showNextRequest && (
               <th className="px-2 py-4 text-start">
                 <div className="flex items-center gap-2">
-                  <span className="uppercase">Next Request</span>
-                  <span data-tooltip-id="next-request">
-                    <InfoIcon className="w-[18px] h-[18px]" />
-                  </span>
+                  <span>Next request</span>
+                  {showToolTip && (
+                    <span data-tooltip-id="next-request">
+                      <InfoIcon className="w-[18px] h-[18px]" />
+                    </span>
+                  )}
                   <ToolTip
                     id={"next-request"}
                     content={
@@ -92,30 +114,32 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   />
                 </div>
               </th>
-              <th
-                className="px-2 py-4 text-start border-r-[1px] 
-                border-color-border-primary rounded-tr-md"
-              >
-                <div className="flex items-center gap-2">
-                  <span className="uppercase">Enabled</span>
+            )}
+            <th
+              className="px-2 py-4 text-start border-r-[1px] 
+              border-color-border-primary rounded-tr-md"
+            >
+              <div className="flex items-center gap-2">
+                <span>Enabled</span>
+                {showToolTip && (
                   <span data-tooltip-id="enabled">
                     <InfoIcon className="w-[18px] h-[18px]" />
                   </span>
-                  <ToolTip
-                    id={"enabled"}
-                    content={
-                      <span className="text-sm font-[500]">
-                        Enabled indicates the status whether an application is
-                        able to receive requests or not
-                      </span>
-                    }
-                  />
-                </div>
-              </th>
-            </tr>
-          </thead>
-        )}
-        <tbody className="">
+                )}
+                <ToolTip
+                  id={"enabled"}
+                  content={
+                    <span className="text-sm font-[500]">
+                      Enabled indicates the status whether an application is
+                      able to receive requests or not
+                    </span>
+                  }
+                />
+              </div>
+            </th>
+          </tr>
+        </thead>
+        <tbody>
           {apps.map((app, index) => {
             return (
               <tr
@@ -129,14 +153,16 @@ export const AppList: React.FC<AppListProps> = (props) => {
                   ${isLastElement(apps, index) && "rounded-bl-md"}`}
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  {app.name}
+                  {getApplicationName(app.name)}
                 </td>
-                <td
-                  className="px-2 cursor-pointer"
-                  onClick={() => navigateToAppPage(app.id)}
-                >
-                  {truncateString(app.url, 50)}
-                </td>
+                {showURLEndpoint && (
+                  <td
+                    className="px-2 cursor-pointer"
+                    onClick={() => navigateToAppPage(app.id)}
+                  >
+                    {truncateString(app.url, 50)}
+                  </td>
+                )}
                 <td
                   className="px-2 cursor-pointer"
                   onClick={() => navigateToAppPage(app.id)}
@@ -146,12 +172,14 @@ export const AppList: React.FC<AppListProps> = (props) => {
                     <span className="font-semibold">N/A</span>
                   )}
                 </td>
-                <td
-                  className="px-2 cursor-pointer"
-                  onClick={() => navigateToAppPage(app.id)}
-                >
-                  <NextRequestTime appId={app.id} />
-                </td>
+                {showNextRequest && (
+                  <td
+                    className="px-2 cursor-pointer"
+                    onClick={() => navigateToAppPage(app.id)}
+                  >
+                    <NextRequestTime appId={app.id} />
+                  </td>
+                )}
                 <td
                   className={`px-2 border-r-[1px] border-color-border-primary
                   ${isLastElement(apps, index) && "rounded-br-md"}`}
