@@ -12,7 +12,7 @@ export const Footer: React.FC = () => {
        justify-center mt-12"
     >
       <div
-        className="w-full px-10 max-w-[1280px] flex items-center
+        className="w-full px-4 md:px-8 max-w-[1280px] flex items-center
         justify-between py-6 gap-4"
       >
         <div className="text-color-text-secondary space-x-1 text-sm">
