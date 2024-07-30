@@ -60,35 +60,48 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
       }
     },
   });
+
+  const hasSearchQuery = !!formik.values["search"];
+
   return (
     <div className="w-full flex items-center justify-center">
       <div className="relative w-full">
         <form onSubmit={formik.handleSubmit} className="w-full relative">
           <input
-            type="search"
+            type="text"
             id="search"
             required
             onBlur={formik.handleBlur}
             onChange={formik.handleChange}
             value={formik.values["search"]}
-            placeholder={"Search apps"}
-            className="p-2 pl-2s pr-9  py-2s outline-none rounded-md border-[1px]
+            placeholder={"Search applications"}
+            className="pl-3 py-[10px] pr-9 outline-none rounded-md border-[1px]
             border-color-border-primary focus:border-[1px] focus:border-primary
             transition-all text-sm w-full focus:outline-none
             focus:shadow-[0px_0px_0px_4px_rgba(12,166,120,0.3)]
-            text-color-text-primary bg-color-bg-primary"
+            text-color-text-primary bg-color-bg-primary appearance-none"
           />
           <Button
             label={
               <>
-                {!isPending && <SearchIcon className="text-[#868e96]" />}
-                {isPending && <Spinner className="w-5 h-5 text-[#868e96]" />}
+                {!isPending && (
+                  <SearchIcon
+                    className={`${
+                      hasSearchQuery
+                        ? "text-color-text-primary"
+                        : "text-[#868e96]"
+                    }`}
+                  />
+                )}
+                {isPending && (
+                  <Spinner className="w-5 h-5 text-color-text-primary -mr-2" />
+                )}
               </>
             }
             type="submit"
             aria-disabled={isPending}
-            className="px-0 py-0 h-auto absolute top-2 right-2
-            bg-color-bg-primary"
+            className={`px-2 pr-0s py-[6px] h-auto absolute top-[5px] right-1
+             ${hasSearchQuery ? "bg-primary" : "bg-color-bg-primary"}`}
           />
         </form>
       </div>
