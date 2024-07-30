@@ -11,7 +11,7 @@ export const CurrentUser: React.FC = () => {
 
   return (
     <NavDropDown>
-      <div className="flex items-center justify-center gap-2">
+      <div className="flex items-center justify-center lg:gap-2">
         <span
           className="cursor-pointer grid place-items-center bg-gray-300s p-1
            w-8 h-8 rounded-[50%] text-gray-100 first-letter:uppercase
@@ -20,10 +20,10 @@ export const CurrentUser: React.FC = () => {
         >
           {getFirstLetter(user.name)}
         </span>
-        <span className="font-normal text-color-text-primary">
+        <span className="font-normal text-color-text-primary hidden lg:block">
           {truncateString(user.name, 18)}
         </span>
-        <ChevronDownIcon className="w-7 h-7" />
+        <ChevronDownIcon className="w-7 h-7 hidden lg:block" />
       </div>
     </NavDropDown>
   );
