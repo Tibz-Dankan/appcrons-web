@@ -74,7 +74,7 @@ const Dashboard: React.FC = () => {
   return (
     <div className="w-full min-h-[90vh] flex items-center justify-center">
       <div
-        className="w-full px-4 md:px-8 max-w-[1280px] mt-14 space-y-12
+        className="w-full px-4 md:px-8 pt-2 max-w-[1280px] mt-12 space-y-12
          overflow-x-hidden"
       >
         <SearchApps onSuccess={onPostAppHandler} />
