@@ -32,7 +32,9 @@ export const Header: React.FC = () => {
           >
             <div>
               <Link href="/dashboard" className="flex items-center gap-1">
-                <Image src="/logo.png" width={40} height={40} alt="logo" />
+                <div className="w-10">
+                  <Image src="/logo.png" width={40} height={40} alt="logo" />
+                </div>
                 <span
                   className="text-color-text-primary 
                    font-[500] text-2xl hidden md:block"
@@ -73,7 +75,7 @@ export const Header: React.FC = () => {
                 <PostAppLayout />
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <ThemeController />
               <CurrentUser />
             </div>

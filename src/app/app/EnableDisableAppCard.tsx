@@ -22,7 +22,7 @@ export const EnableDisableAppCard: React.FC<EnableDisableAppProps> = (
   return (
     <div
       className="flex items-center justify-between border-[1px]
-       border-color-border-primary rounded-md p-8"
+       border-color-border-primary rounded-md gap-2 p-4 md:p-8"
     >
       <div className="flex flex-col gap-2 ">
         <p className="text-xl text-color-text-primary">
