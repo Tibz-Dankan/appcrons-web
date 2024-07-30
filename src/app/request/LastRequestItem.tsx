@@ -68,13 +68,13 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
     <div className="flex items-center justify-start w-36">
       {inProgress && (
         <div
-          className="flex items-center justify-center bg-color-bg-secondary 
-           rounded-md p-2 w-32"
+          className="flex items-center justify-center
+           bg-[#1098ad]/[0.3] rounded-md px-2 py-[6px]"
         >
           <SettingsLoaderIcon
             label={"In progress"}
-            className="w-5 h-5"
-            labelClassName="font-semibold"
+            className="w-4 h-4"
+            labelClassName=""
           />
         </div>
       )}
