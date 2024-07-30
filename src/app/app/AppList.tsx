@@ -33,11 +33,14 @@ export const AppList: React.FC = () => {
   };
 
   const getApplicationName = (name: string): string => {
+    if (width < 400) {
+      return truncateString(name, 6);
+    }
     if (width < 450) {
-      return truncateString(name, 5);
+      return truncateString(name, 10);
     }
     if (width < 480) {
-      return truncateString(name, 10);
+      return truncateString(name, 12);
     }
     if (width < 520) {
       return truncateString(name, 15);
@@ -51,7 +54,7 @@ export const AppList: React.FC = () => {
   const showToolTip: boolean = width >= 450;
 
   return (
-    <div>
+    <div className="overflow-x-auto">
       <table
         className="border-separate border-spacing-0 w-full
          overflow-x-auto"
