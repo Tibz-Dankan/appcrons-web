@@ -80,7 +80,7 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
                 label={
                   <div className="flex items-center justify-center gap-2">
                     <PlusIcon className="text-gray-200 h-6 w-6" />
-                    <span>New</span>
+                    <span className="hidden md:block">New</span>
                   </div>
                 }
                 className="h-auto py-1 px-3"

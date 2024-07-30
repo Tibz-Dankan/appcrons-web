@@ -165,7 +165,9 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
         className="flex items-center justify-start gap-2 p-4 
         rounded-md bg-[#0ca678]/[0.3]"
       >
-        <InfoIcon />
+        <span className="w-5 h-5">
+          <InfoIcon />
+        </span>
         <span>
           For every application, only the request history from the past 12 hours
           is retained.

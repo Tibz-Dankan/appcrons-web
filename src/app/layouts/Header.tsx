@@ -28,14 +28,16 @@ export const Header: React.FC = () => {
         >
           <div
             className="w-full flex items-center justify-between 
-             py-4 px-10 max-w-[1280px]"
+             py-4 px-4 md:px-8 max-w-[1280px]"
           >
             <div>
               <Link href="/dashboard" className="flex items-center gap-1">
-                <Image src="/logo.png" width={30} height={30} alt="logo" />
+                <div className="w-10">
+                  <Image src="/logo.png" width={40} height={40} alt="logo" />
+                </div>
                 <span
                   className="text-color-text-primary 
-                   font-[500] text-2xl"
+                   font-[500] text-2xl hidden md:block"
                 >
                   Appcrons
                 </span>
@@ -49,27 +51,31 @@ export const Header: React.FC = () => {
                 <Link
                   href="/dashboard"
                   className={`flex items-center justify-center gap-2
-                rounded-md p-1 px-3 ${isDashboardPath && "bg-header-tab-bg"}`}
+                  rounded-md py-[6px] md:py-1 px-3 ${
+                    isDashboardPath && "bg-header-tab-bg"
+                  }`}
                 >
                   <DashboardIcon className="text-header-tab-text" />
-                  <span>Dashboard</span>
+                  <span className="hidden md:block">Dashboard</span>
                 </Link>
               </div>
               <div>
                 <Link
                   href="/docs"
                   className={`flex items-center justify-center gap-2
-                 rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}`}
+                  rounded-md py-[6px] md:py-1 px-3 ${
+                    isDocsPath && "bg-header-tab-bg"
+                  }`}
                 >
                   <DocumentIcon className="text-header-tab-text" />
-                  <span>Docs</span>
+                  <span className="hidden md:block">Docs</span>
                 </Link>
               </div>
               <div>
                 <PostAppLayout />
               </div>
             </div>
-            <div className="flex items-center gap-4">
+            <div className="flex items-center gap-2 sm:gap-4">
               <ThemeController />
               <CurrentUser />
             </div>

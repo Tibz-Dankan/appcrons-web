@@ -83,7 +83,7 @@ const App: React.FC = () => {
     >
       <div
         className="w-full flex flex-col gap-8 lg:flex-row
-          lg:items-start p-10 max-w-[1280px]"
+          lg:items-start py-10 px-4 md:px-8 max-w-[1280px]"
       >
         <AppDetailsCard appId={app.id} />
         <AppLastRequestDetailsCard appId={app.id} />
@@ -101,7 +101,7 @@ const App: React.FC = () => {
         </div>
       )}
 
-      <div className="space-y-8 w-full px-10 max-w-[1280px]">
+      <div className="space-y-8 w-full px-4 md:px-8 max-w-[1280px]">
         <div className="w-full mb-16">
           <RequestList appId={app.id} />
         </div>
