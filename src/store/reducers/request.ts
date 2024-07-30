@@ -27,7 +27,9 @@ export const requestSlice = createSlice({
       if (candidateRequest) return;
 
       requestList.unshift(action.payload.request);
-      requestList.pop();
+      if (state.requests.length >= 10) {
+        requestList.pop();
+      }
 
       state.requests = requestList;
     },
