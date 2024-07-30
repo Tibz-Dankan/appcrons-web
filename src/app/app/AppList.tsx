@@ -4,7 +4,7 @@ import React from "react";
 import { TApp } from "@/types/app";
 import { truncateString } from "@/utils/truncateString";
 import { clientURL } from "@/constants";
-import { useRouter } from "@/lib/router-events";
+import { Link, useRouter } from "@/lib/router-events";
 import { LastRequestItem } from "@/app/request/LastRequestItem";
 import { EnableDisableApp } from "@/app/app/EnableDisableApp";
 import { useAppSelector } from "@/hooks/redux";
@@ -146,40 +146,41 @@ export const AppList: React.FC = () => {
           {apps.map((app, index) => {
             return (
               <tr
-                className="h-14 [&>*]:border-b-[1px] 
+                className="h-14s h-12 [&>*]:border-b-[1px] 
                 [&>*]:border-color-border-primary text-sm"
                 key={index}
               >
                 <td
                   className={`px-2 pl-4 border-l-[1px] 
                   border-color-border-primary cursor-pointer
+                  hover:bg-[#0ca678]/[0.2] focus:bg-[#0ca678]/[0.2]
                   ${isLastElement(apps, index) && "rounded-bl-md"}`}
                   onClick={() => navigateToAppPage(app.id)}
                 >
-                  {getApplicationName(app.name)}
+                  <span className="underline">
+                    {getApplicationName(app.name)}
+                  </span>
                 </td>
                 {showURLEndpoint && (
-                  <td
-                    className="px-2 cursor-pointer"
-                    onClick={() => navigateToAppPage(app.id)}
-                  >
-                    {truncateString(app.url, 50)}
+                  <td className="px-2 cursor-pointer">
+                    <Link
+                      href={`${app.url}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-blue-400 hover:underline focus:underline"
+                    >
+                      <span>{truncateString(app.url, 50)}</span>
+                    </Link>
                   </td>
                 )}
-                <td
-                  className="px-2 cursor-pointer"
-                  onClick={() => navigateToAppPage(app.id)}
-                >
+                <td className="px-2">
                   {showLastRequest(app) && <LastRequestItem app={app} />}
                   {!showLastRequest(app) && (
                     <span className="font-semibold">N/A</span>
                   )}
                 </td>
                 {showNextRequest && (
-                  <td
-                    className="px-2 cursor-pointer"
-                    onClick={() => navigateToAppPage(app.id)}
-                  >
+                  <td className="px-2">
                     <NextRequestTime appId={app.id} />
                   </td>
                 )}
