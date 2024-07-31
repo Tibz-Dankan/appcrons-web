@@ -29,6 +29,7 @@ const config: Config = {
       animation: {
         slideDown: "slideDown 0.5s ease-out forwards",
         slideUp: "slideUp 0.5s ease-in-out forwards",
+        spin: "spin 1.5s linear infinite",
       },
       keyframes: {
         slideDown: {
@@ -38,6 +39,10 @@ const config: Config = {
         slideUp: {
           "0%": { opacity: "0", transform: "translateY(50px)" },
           "100%": { opacity: "1", transform: "translateY(0px)" },
+        },
+        spin: {
+          "0%": { transform: "rotate(0deg)" },
+          "100%": { transform: "rotate(360deg)" },
         },
       },
     },
