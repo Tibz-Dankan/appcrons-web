@@ -6,7 +6,7 @@ import React, { useEffect, useState } from "react";
 import { SettingsLoaderIcon } from "@/app/shared/loader/SettingsLoader";
 import { LastRequestTime } from "@/app/request/LastRequestTime";
 import { updateAppLiveRequest } from "@/store/actions/appLiveRequests";
-import { Spinner } from "@/app/shared/loader/Spinner";
+import { SkeletonLoader } from "@/app/shared/loader/SkeletonLoader";
 
 interface LastRequestItemProps {
   app: TApp;
@@ -67,16 +67,13 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
   return (
     <div className="flex items-center justify-start w-36">
-      {isLoadingRequest && (
-        <div
-          className="flex items-center justify-center
-           bg-color-bg-secondary rounded-md px-2 py-[6px]"
-        >
-          <Spinner className="w-4 h-4" label="Loading" />
+      {!isLoadingRequest && (
+        <div className="w-28 h-8">
+          <SkeletonLoader />
         </div>
       )}
 
-      {!isLoadingRequest && (
+      {isLoadingRequest && (
         <>
           {inProgress && (
             <div
