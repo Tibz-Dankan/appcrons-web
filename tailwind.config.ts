@@ -21,6 +21,10 @@ const config: Config = {
         "color-divide-primary": "var(--color-divide-primary)",
         "header-tab-bg": "var(--color-header-tab-bg-active)",
         "header-tab-text": "var(--color-header-tab-text-active)",
+        "color-skeleton-bg": "var(--color-skeleton-bg)",
+        "color-skeleton-from": "var(--color-skeleton-from)",
+        "color-skeleton-to": "var(--color-skeleton-to)",
+        "color-skeleton-via": "var(--color-skeleton-via)",
         success: "#55C57A",
         error: "#D9534F",
         info: "#5BC0DE",
@@ -30,6 +34,7 @@ const config: Config = {
         slideDown: "slideDown 0.5s ease-out forwards",
         slideUp: "slideUp 0.5s ease-in-out forwards",
         spin: "spin 1.5s linear infinite",
+        moveInnerLoaderToRight: "moveInnerLoaderToRight 1s infinite ease-out",
       },
       keyframes: {
         slideDown: {
@@ -43,6 +48,10 @@ const config: Config = {
         spin: {
           "0%": { transform: "rotate(0deg)" },
           "100%": { transform: "rotate(360deg)" },
+        },
+        moveInnerLoaderToRight: {
+          "0%": { left: "0%" },
+          "100%": { left: "45%" },
         },
       },
     },
