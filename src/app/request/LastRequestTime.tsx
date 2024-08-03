@@ -12,7 +12,14 @@ export const LastRequestTime: React.FC<LastRequestTimeProps> = (props) => {
     state.app.apps.find((app) => app.id == props.appId)
   ) as TApp;
 
-  const startedAt = app.requests ? app.requests[0]?.startedAt : "";
+  const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
+  const liveApp = appLiveRequest?.apps[`${props.appId}`] as TApp;
+
+  const currentApp = liveApp ? liveApp : app;
+
+  const startedAt = currentApp.requests
+    ? currentApp.requests[0]?.startedAt
+    : "";
   const [elapseTime, setElapseTime] = useState(elapsedTime(startedAt));
 
   // update startedAt value at the
