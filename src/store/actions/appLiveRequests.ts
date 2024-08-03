@@ -1,11 +1,24 @@
 import { appLiveRequestActions } from "../index";
-import { TAppLiveRequestPayload } from "@/types/app";
+import {
+  TAppLiveRequestLoadingStatus,
+  TAppLiveRequestPayload,
+} from "@/types/app";
 
 export const updateAppLiveRequest = (
   appLiveRequest: TAppLiveRequestPayload
 ) => {
   return async (dispatch: any) => {
     dispatch(appLiveRequestActions.update(appLiveRequest));
+  };
+};
+
+export const updateAppLiveLoadingStatus = ({
+  isLoading,
+}: TAppLiveRequestLoadingStatus) => {
+  return async (dispatch: any) => {
+    dispatch(
+      appLiveRequestActions.updateLoadingStatus({ isLoading: isLoading })
+    );
   };
 };
 

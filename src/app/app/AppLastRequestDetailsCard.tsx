@@ -7,6 +7,7 @@ import { CheckFilledIcon } from "@/app/shared/Icons/CheckFilledIcon";
 import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
 import { getStatusCodeLabel } from "@/utils/getStatusCodeLabel";
 import { NextRequestTime } from "@/app/request/NextRequestTime";
+import { useGetAppsLastRequest } from "@/hooks/UseGetAppsLastRequest";
 
 interface AppLastRequestDetailsCardProps {
   appId: string;
@@ -18,6 +19,8 @@ export const AppLastRequestDetailsCard: React.FC<
   const app = useAppSelector((state) =>
     state.app.apps.find((app) => app.id === props.appId)
   )!;
+
+  useGetAppsLastRequest();
 
   const getStatusCodeIcon = (statusCode: number): ReactNode => {
     const code = statusCode.toString();

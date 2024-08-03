@@ -113,16 +113,21 @@ export type TAppListPayload = {
 export type TAppLiveRequest = TApp & {
   userId: string;
   message: string;
-  arrivedAt: string;
+  inProgress: boolean;
 };
 
 // JS object containing key-value
 // of the apps live requests
 export type TAppLiveRequestMap = {
   apps: any;
+  isLoading: boolean;
 };
 
 export type TAppLiveRequestPayload = {
   appId: string;
   app: TAppLiveRequest;
+};
+
+export type TAppLiveRequestLoadingStatus = {
+  isLoading: boolean;
 };

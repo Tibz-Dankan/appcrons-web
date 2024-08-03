@@ -12,11 +12,14 @@ import { NextRequestTime } from "@/app/request/NextRequestTime";
 import { ToolTip } from "@/app/shared/ToolTip";
 import { InfoIcon } from "@/app/shared/Icons/InfoIcon";
 import { useGetWindowWidth } from "@/hooks/UseGetWindowWidth";
+import { useGetAppsLastRequest } from "@/hooks/UseGetAppsLastRequest";
 
 export const AppList: React.FC = () => {
   const router = useRouter();
   const apps = useAppSelector((state) => state.app.apps);
   const { width } = useGetWindowWidth();
+
+  useGetAppsLastRequest();
 
   const isLastElement = (list: any[], index: number): boolean => {
     return index === list.length - 1;
