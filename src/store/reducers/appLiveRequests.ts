@@ -1,8 +1,13 @@
-import { TAppLiveRequestMap, TAppLiveRequestPayload } from "@/types/app";
+import {
+  TAppLiveRequestLoadingStatus,
+  TAppLiveRequestMap,
+  TAppLiveRequestPayload,
+} from "@/types/app";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 
 const initialState: TAppLiveRequestMap = {
   apps: {},
+  isLoading: false,
 };
 
 export const appLiveRequestSlice = createSlice({
@@ -11,6 +16,12 @@ export const appLiveRequestSlice = createSlice({
   reducers: {
     update(state, action: PayloadAction<TAppLiveRequestPayload>) {
       state.apps[`${action.payload.appId}`] = action.payload.app;
+    },
+    updateLoadingStatus(
+      state,
+      action: PayloadAction<TAppLiveRequestLoadingStatus>
+    ) {
+      state.isLoading = action.payload.isLoading;
     },
     clear(state, action) {
       delete state.apps[`${action.payload.appId}`];

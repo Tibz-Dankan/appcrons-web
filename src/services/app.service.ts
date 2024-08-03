@@ -112,6 +112,25 @@ export class AppService {
     return await response.json();
   };
 
+  getAppsLastRequestByUser = async ({ userId, accessToken }: TGetAppByUser) => {
+    const response = await fetch(
+      `${backendURL}/apps/get-apps-last-request-by-user?userId=${userId}`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
+      }
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
   enable = async ({ appId, accessToken }: TEnableApp) => {
     const response = await fetch(`${backendURL}/apps/enable/${appId}`, {
       method: "PATCH",
