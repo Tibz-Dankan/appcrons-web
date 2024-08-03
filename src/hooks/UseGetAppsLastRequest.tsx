@@ -36,10 +36,10 @@ export const useGetAppsLastRequest = () => {
         return;
       }
       // Delay updating lastRequestLoader by
-      // 1 seconds when isPending is false
+      // 2 seconds when isPending is false
       const timeoutId = setTimeout(() => {
         dispatch(updateAppLiveLoadingStatus({ isLoading: isPending }));
-      }, 1000);
+      }, 2000);
       return () => clearTimeout(timeoutId);
     };
     updateAppsLoadingStatusHandler();

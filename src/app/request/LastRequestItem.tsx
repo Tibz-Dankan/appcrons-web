@@ -67,13 +67,13 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
   return (
     <div className="flex items-center justify-start w-36">
-      {!isLoadingRequest && (
+      {isLoadingRequest && (
         <div className="w-28 h-8">
           <SkeletonLoader />
         </div>
       )}
 
-      {isLoadingRequest && (
+      {!isLoadingRequest && (
         <>
           {inProgress && (
             <div
