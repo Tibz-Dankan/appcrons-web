@@ -1,5 +1,5 @@
 import { useAppSelector } from "@/hooks/redux";
-import { TApp } from "@/types/app";
+import { TApp, TAppLiveRequest } from "@/types/app";
 import { AppDate } from "@/utils/date";
 import { determineNextRequestTime } from "@/utils/determineNextRequestTime";
 import React from "react";
@@ -13,8 +13,12 @@ export const NextRequestTime: React.FC<NextRequestTimeProps> = (props) => {
     state.app.apps.find((app) => app.id == props.appId)
   ) as TApp;
 
+  const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
+  const liveApp = appLiveRequest?.apps[`${app.id}`] as TApp;
+
   const getNextRequestSchedule = (): string => {
-    const nextRequestTime = determineNextRequestTime(app);
+    const currentApp = liveApp ? liveApp : app;
+    const nextRequestTime = determineNextRequestTime(currentApp);
     if (nextRequestTime.date === "N/A") return nextRequestTime.date;
     if (nextRequestTime.status === "tomorrow") {
       // return ` ${new AppDate(nextRequestTime.date).time()} ${
