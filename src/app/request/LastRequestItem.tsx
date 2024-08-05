@@ -1,12 +1,13 @@
 "use client";
 
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
-import { TApp, TAppLiveRequest } from "@/types/app";
+import { TApp, TAppLiveRequest, TRequest } from "@/types/app";
 import React, { useEffect, useState } from "react";
 import { SettingsLoaderIcon } from "@/app/shared/loader/SettingsLoader";
 import { LastRequestTime } from "@/app/request/LastRequestTime";
 import { updateAppLiveRequest } from "@/store/actions/appLiveRequests";
 import { SkeletonLoader } from "@/app/shared/loader/SkeletonLoader";
+import { updateOneApp } from "@/store/actions/app";
 
 interface LastRequestItemProps {
   app: TApp;
@@ -23,6 +24,11 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
   const isLoadingRequest: boolean = appLiveRequest.isLoading;
 
   const dispatch: any = useAppDispatch();
+
+  const updateAppWithLatestRequestHandler = (request: TRequest) => {
+    app.requests[0] = request;
+    dispatch(updateOneApp({ app: app }));
+  };
 
   useEffect(() => {
     const updateRequestInProgressHandler = () => {
@@ -58,6 +64,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
       if (canStopInProgressLoader) {
         const timeoutId = setTimeout(() => {
           setInProgress(() => false);
+          updateAppWithLatestRequestHandler(updatedApp.requests[0]);
         }, 5000);
         return () => clearTimeout(timeoutId);
       }
