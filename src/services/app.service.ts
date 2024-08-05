@@ -58,9 +58,9 @@ export class AppService {
     return await response.json();
   };
 
-  search = async ({ userId, search, accessToken }: TSearchInput) => {
+  search = async ({ userId, query, accessToken }: TSearchInput) => {
     const response = await fetch(
-      `${backendURL}/app/search?userId=${userId}&search=${search}`,
+      `${backendURL}/apps/search?query=${query}&userId=${userId}`,
       {
         method: "GET",
         headers: {
