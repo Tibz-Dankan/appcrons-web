@@ -1,6 +1,6 @@
 export type TSearchInput = {
   userId: string;
-  search: string;
+  query: string;
   accessToken: string;
 };
 
