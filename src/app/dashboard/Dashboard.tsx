@@ -12,21 +12,22 @@ import { updateApps } from "@/store/actions/app";
 import { Notification } from "@/app/shared/Notification";
 import { Welcome } from "@/app/app/Welcome";
 import { PageAuthWrapper } from "@/app/auth/PageAuthWrapper";
+import { useSearchParams } from "next/navigation";
+import { AppSearchResultList } from "../app/AppSearchResultList";
 
 const Dashboard: React.FC = () => {
-  const [apps, setApps] = useState<TApp[]>([]);
-  const [isPosted, setIsPosted] = useState<boolean>(false);
+  const [appSearchResults, setAppSearchResults] = useState<TApp[]>([]);
+  const [hasSearchCompleted, setHasSearchCompleted] = useState<boolean>(false);
+  const searchParams = useSearchParams();
+  const searchQuery = searchParams.get("query")!;
+  const [hasSearchQuery, setHasSearchQuery] = useState<boolean>(!!searchQuery);
+
+  // TODO: To add state for telling whether app search
+  // result list to perform query action or not
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const userId = useAppSelector((state) => state.auth.user.id);
 
   const dispatch = useAppDispatch();
-
-  const onPostAppHandler = (app: TApp) => {
-    setIsPosted(() => true);
-  };
-
-  // Trigger component re-render to update appList
-  useEffect(() => {}, [apps, setApps, isPosted]);
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: [`apps-${userId}`],
@@ -42,6 +43,22 @@ const Dashboard: React.FC = () => {
     };
     updateUserApplicationsHandler();
   }, [data]);
+
+  const onSearchSuccessHandler = (apps: TApp[]) => {
+    setAppSearchResults(() => apps);
+    setHasSearchCompleted(() => true);
+  };
+
+  const onQueryValueHandler = (hasQueryValue: boolean) => {
+    setHasSearchQuery(() => hasQueryValue);
+    if (!hasQueryValue) {
+      setHasSearchCompleted(() => false);
+    }
+  };
+
+  const onSearchResultCloseHandler = (isClosed: boolean) => {
+    setHasSearchCompleted(() => !isClosed);
+  };
 
   if (isPending) {
     return (
@@ -71,14 +88,29 @@ const Dashboard: React.FC = () => {
     );
   }
 
+  const showAppList: boolean = !hasSearchCompleted;
+  const showSearchResults: boolean = hasSearchCompleted;
+
+  console.log("hasSearchQuery:", hasSearchQuery);
+  console.log("hasSearchCompleted:", hasSearchCompleted);
+
   return (
-    <div className="w-full min-h-[90vh] flex items-center justify-center">
+    <div className="w-full min-h-[90vh] flex items-start justify-center">
       <div
         className="w-full px-4 md:px-8 pt-2 max-w-[1280px] mt-8 space-y-12
          overflow-x-hidden"
       >
-        <SearchApps onSuccess={onPostAppHandler} />
-        <AppList />
+        <SearchApps
+          onSuccess={onSearchSuccessHandler}
+          onQueryValue={onQueryValueHandler}
+        />
+        {showSearchResults && (
+          <AppSearchResultList
+            apps={appSearchResults}
+            onClose={onSearchResultCloseHandler}
+          />
+        )}
+        {showAppList && <AppList />}
       </div>
     </div>
   );

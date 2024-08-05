@@ -13,22 +13,25 @@ import {
   showCardNotification,
 } from "@/store/actions/notification";
 import { SearchIcon } from "@/app/shared/Icons/SearchIcon";
-import { TSearchInput } from "@/types/app";
+import { TApp, TSearchInput } from "@/types/app";
+import { useSearchParams, useRouter } from "next/navigation";
 
 interface SearchAppsProps {
-  onSuccess: (data: any) => void;
+  onSuccess: (apps: TApp[]) => void;
+  onQueryValue: (hasQueryValue: boolean) => void;
 }
 
 export const SearchApps: React.FC<SearchAppsProps> = (props) => {
+  const searchParams = useSearchParams();
+  const router = useRouter();
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const userId = useAppSelector((state) => state.auth.user.id);
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AppService().search,
-    onSuccess: async (data: any) => {
-      console.log("data:: ", data);
-      props.onSuccess(data);
+    onSuccess: async (response: any) => {
+      props.onSuccess(response.data.apps);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -53,8 +56,12 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
 
     onSubmit: async (values, helpers) => {
       try {
-        // TODO: To get userId and accessToken on the client side from a cookie
         mutate(values);
+
+        const currentParams = new URLSearchParams(searchParams.toString());
+        const query = values.query;
+        currentParams.set("query", query);
+        router.push(`?${currentParams.toString()}`, { scroll: false });
       } catch (err: any) {
         helpers.setStatus({ success: false });
         helpers.setSubmitting(false);
@@ -65,6 +72,23 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
       }
     },
   });
+
+  const updateSearchParamsOnChangeHandler = (
+    event: React.ChangeEvent<HTMLInputElement>
+  ) => {
+    const currentParams = new URLSearchParams(searchParams.toString());
+    const query = event.target.value;
+
+    props.onQueryValue(!!event.target.value);
+
+    if (!query) {
+      currentParams.delete("query");
+      router.push(`?${currentParams.toString()}`, { scroll: false });
+      return;
+    }
+    currentParams.set("query", query);
+    router.push(`?${currentParams.toString()}`, { scroll: false });
+  };
 
   const hasSearchQuery = !!formik.values["query"];
 
@@ -77,7 +101,10 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
             id="query"
             required
             onBlur={formik.handleBlur}
-            onChange={formik.handleChange}
+            onChange={(event) => {
+              formik.handleChange(event),
+                updateSearchParamsOnChangeHandler(event);
+            }}
             value={formik.values["query"]}
             placeholder={"Search applications"}
             className="pl-3 py-[10px] pr-9 outline-none rounded-md border-[1px]
@@ -104,7 +131,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
               </>
             }
             type="submit"
-            aria-disabled={isPending}
+            disabled={isPending}
             className={`px-2 pr-0s py-[6px] h-auto absolute top-[5px] right-1
              ${hasSearchQuery ? "bg-primary" : "bg-color-bg-primary"}`}
           />
