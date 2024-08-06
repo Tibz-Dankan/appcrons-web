@@ -8,6 +8,7 @@ import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
 import { getStatusCodeLabel } from "@/utils/getStatusCodeLabel";
 import { NextRequestTime } from "@/app/request/NextRequestTime";
 import { useGetAppsLastRequest } from "@/hooks/UseGetAppsLastRequest";
+import { TRequest } from "@/types/app";
 
 interface AppLastRequestDetailsCardProps {
   appId: string;
@@ -31,6 +32,12 @@ export const AppLastRequestDetailsCard: React.FC<
     if (isSuccessCode)
       return <CheckFilledIcon className="text-success w-[18px] h-[18px]" />;
     if (isErrorCode) return <ErrorIconFilled className="text-error" />;
+  };
+
+  const getRequestDuration = (request: TRequest[]): string => {
+    const hasRequest = request.length > 0;
+    if (!hasRequest) return "N/A";
+    return `${convertMillisecondsToSeconds(request[0].duration)}s`;
   };
 
   return (
@@ -58,7 +65,7 @@ export const AppLastRequestDetailsCard: React.FC<
          px-6"
       >
         <span>Latency:</span>
-        <span>{convertMillisecondsToSeconds(app.requests[0].duration)}s</span>
+        <span>{getRequestDuration(app.requests)}s</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
