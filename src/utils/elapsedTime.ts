@@ -53,7 +53,7 @@ export const elapsedTime = (dateStr: string) => {
   );
 
   if (millSecDiff < ONE_MIN_MILL_SEC || seconds(millSecDiff) === 0) {
-    return "a few seconds";
+    return "a few seconds ago";
   }
 
   if (millSecDiff < ONE_HOUR_MILL_SEC) {
