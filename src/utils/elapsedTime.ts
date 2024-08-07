@@ -57,32 +57,32 @@ export const elapsedTime = (dateStr: string) => {
   }
 
   if (millSecDiff < ONE_HOUR_MILL_SEC) {
-    if (minutes(millSecDiff) === 1) return "1 minute ago";
+    if (minutes(millSecDiff) === 1) return "a minute ago";
     return `${minutes(millSecDiff)} minutes ago`;
   }
 
   if (millSecDiff < ONE_DAY_MILL_SEC) {
-    if (hours(millSecDiff) === 1) return "1 hour ago";
+    if (hours(millSecDiff) === 1) return "an hour ago";
     return `${hours(millSecDiff)} hours ago`;
   }
 
   if (millSecDiff < ONE_WEEK_MILL_SEC) {
-    if (days(millSecDiff) === 1) return "1 day ago";
+    if (days(millSecDiff) === 1) return "a day ago";
     return `${days(millSecDiff)} days ago`;
   }
 
   if (millSecDiff < ONE_MONTH_MILL_SEC) {
-    if (weeks(millSecDiff) === 1) return "1 week ago";
+    if (weeks(millSecDiff) === 1) return "a week ago";
     return `${weeks(millSecDiff)} weeks ago`;
   }
 
   if (millSecDiff < ONE_YEAR_MILL_SEC) {
-    if (months(millSecDiff) === 1) return "1 month ago";
+    if (months(millSecDiff) === 1) return "a month ago";
     return `${months(millSecDiff)} months ago`;
   }
 
   if (millSecDiff >= ONE_YEAR_MILL_SEC) {
-    if (years(millSecDiff) === 1) return "1 year ago";
+    if (years(millSecDiff) === 1) return "a year ago";
     return `${years(millSecDiff)} years ago`;
   }
 };
