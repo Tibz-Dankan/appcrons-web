@@ -1,5 +1,6 @@
 import React, { ReactNode, useState } from "react";
 import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter as useEnhancedRouter } from "@/lib/router-events";
 import { Modal } from "@/app/shared/Modal";
 import Button from "@/app/shared/Button";
 import { PlusIcon } from "@/app/shared/Icons/PlusIcon";
@@ -17,6 +18,7 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
   const [isClosedModal, setIsClosedModal] = useState(false);
   const searchParams = useSearchParams();
   const router = useRouter();
+  const enhancedRouter = useEnhancedRouter();
 
   const action = searchParams.get("action") as string;
   const step = searchParams.get("step") as string;
@@ -56,7 +58,7 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
     if (!isFinished) return;
 
     setIsClosedModal(() => isFinished);
-    router.push(`/app/${appId}`);
+    enhancedRouter.push(`/app/${appId}`);
   };
 
   const getLabel = (inputStep: number): string => {
