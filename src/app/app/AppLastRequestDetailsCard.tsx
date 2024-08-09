@@ -23,9 +23,11 @@ export const AppLastRequestDetailsCard: React.FC<
 
   useGetAppsLastRequest();
 
-  const getStatusCodeIcon = (statusCode: number): ReactNode => {
-    const code = statusCode.toString();
+  const getStatusCodeIcon = (request: TRequest[]): ReactNode => {
+    const hasRequest = request.length > 0;
+    if (!hasRequest) return "N/A";
 
+    const code = request[0].statusCode.toString();
     const isSuccessCode = code.startsWith("2");
     const isErrorCode = code.startsWith("4") || code.startsWith("5");
 
@@ -39,6 +41,8 @@ export const AppLastRequestDetailsCard: React.FC<
     if (!hasRequest) return "N/A";
     return `${convertMillisecondsToSeconds(request[0].duration)}s`;
   };
+
+  const hasRequest = app.requests.length > 0;
 
   return (
     <div
@@ -65,16 +69,21 @@ export const AppLastRequestDetailsCard: React.FC<
          px-6"
       >
         <span>Latency:</span>
-        <span>{getRequestDuration(app.requests)}s</span>
+        <span>{getRequestDuration(app.requests)}</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
          px-6 mt-2"
       >
         <span className="mr-2">Status:</span>
-        <span>{getStatusCodeIcon(app.requests[0].statusCode)}</span>
-        <span>{app.requests[0].statusCode}</span>
-        <span>{getStatusCodeLabel(app.requests[0].statusCode)}</span>
+        {hasRequest && (
+          <div className="flex items-center justify-start gap-2">
+            <span>{getStatusCodeIcon(app.requests)}</span>
+            <span>{app.requests[0].statusCode}</span>
+            <span>{getStatusCodeLabel(app.requests[0].statusCode)}</span>
+          </div>
+        )}
+        {!hasRequest && <span>N/A</span>}
       </div>
       <div
         className="w-full flex items-center justify-start gap-2

@@ -20,13 +20,17 @@ export const LastRequestTime: React.FC<LastRequestTimeProps> = (props) => {
   const startedAt = currentApp.requests
     ? currentApp.requests[0]?.startedAt
     : "";
-  const [elapseTime, setElapseTime] = useState(elapsedTime(startedAt));
+
+  const [elapseTime, setElapseTime] = useState(
+    startedAt ? elapsedTime(startedAt) : "N/A"
+  );
 
   // update startedAt value at the
   // start of every minute and after
   // every 30 seconds
   useEffect(() => {
     const updateElapsedTime = () => {
+      if (!startedAt) return;
       setElapseTime(() => elapsedTime(startedAt));
     };
 

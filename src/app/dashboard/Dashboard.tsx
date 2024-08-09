@@ -13,7 +13,7 @@ import { Notification } from "@/app/shared/Notification";
 import { Welcome } from "@/app/app/Welcome";
 import { PageAuthWrapper } from "@/app/auth/PageAuthWrapper";
 import { useSearchParams } from "next/navigation";
-import { AppSearchResultList } from "../app/AppSearchResultList";
+import { AppSearchResultList } from "@/app/app/AppSearchResultList";
 
 const Dashboard: React.FC = () => {
   const [appSearchResults, setAppSearchResults] = useState<TApp[]>([]);
@@ -90,9 +90,6 @@ const Dashboard: React.FC = () => {
 
   const showAppList: boolean = !hasSearchCompleted;
   const showSearchResults: boolean = hasSearchCompleted;
-
-  console.log("hasSearchQuery:", hasSearchQuery);
-  console.log("hasSearchCompleted:", hasSearchCompleted);
 
   return (
     <div className="w-full min-h-[90vh] flex items-start justify-center">
