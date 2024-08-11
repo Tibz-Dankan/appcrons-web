@@ -6,6 +6,7 @@ import { usePathname } from "next/navigation";
 import { ThemeController } from "@/app/shared/ThemeController";
 import { Link } from "@/lib/router-events";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
+import { MobileNavMenu } from "@/app/home/MobileNavMenu";
 
 export const NavBar: React.FC = () => {
   const pathname = usePathname();
@@ -34,16 +35,20 @@ export const NavBar: React.FC = () => {
           </Link>
         </div>
 
-        <div className="flex items-center gap-4">
+        <div className="md:hidden">
+          <MobileNavMenu />
+        </div>
+
+        <div className="hidden md:flex items-center gap-4">
           <Link
             href="/docs"
             className={`flex items-center justify-center gap-2
-           rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}
-           hover:text-primary focus:text-primary`}
+             rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}
+             hover:text-primary focus:text-primary`}
           >
             <DocumentIcon
               className="text-header-tab-text hover:text-inherit
-            focus:text-inherit"
+              focus:text-inherit"
             />
             <span className="hover:text-inherit focus:text-inherit">Docs</span>
           </Link>
@@ -52,15 +57,15 @@ export const NavBar: React.FC = () => {
           <Link
             href="/auth/login"
             className={`py-1 px-3 border-[1px] border-color-border-primary
-           rounded-md hover:text-primary focus:text-primary`}
+            rounded-md hover:text-primary focus:text-primary`}
           >
             <span>Log In</span>
           </Link>
           <Link
             href="/auth/signup"
             className={`py-1 px-3 border-[1px]s border-color-border-primary
-           rounded-md bg-primary text-gray-50 hover:bg-primary-light
-           focus:text-primary-light`}
+            rounded-md bg-primary text-gray-50 hover:bg-primary-light
+            focus:text-primary-light`}
           >
             <span>Sign Up</span>
           </Link>
