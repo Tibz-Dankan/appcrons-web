@@ -35,6 +35,8 @@ const config: Config = {
         slideUp: "slideUp 0.5s ease-in-out forwards",
         spin: "spin 1.5s linear infinite",
         moveInnerLoaderToRight: "moveInnerLoaderToRight 1s infinite ease-out",
+        heightZeroToFull: "heightZeroToFull 0.5s ease-out forwards",
+        opacityZeroToFull: "opacityZeroToFull 0.5s ease-out forwards",
       },
       keyframes: {
         slideDown: {
@@ -52,6 +54,14 @@ const config: Config = {
         moveInnerLoaderToRight: {
           "0%": { left: "0%" },
           "100%": { left: "45%" },
+        },
+        heightZeroToFull: {
+          "0%": { height: "0%", opacity: "0" },
+          "100%": { height: "100%", opacity: "1" },
+        },
+        opacityZeroToFull: {
+          "0%": { opacity: "0" },
+          "100%": { opacity: "1" },
         },
       },
     },
