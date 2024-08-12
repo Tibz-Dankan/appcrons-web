@@ -8,6 +8,7 @@ import { Features } from "@/app/home/Features";
 import { WhyAppcrons } from "@/app/home/WhyAppcrons";
 import { FAQ } from "./home/Faq";
 import { CreatorsWords } from "@/app/home/CreatorWords";
+import { Footer } from "@/app/home/Footer";
 
 export default function Home() {
   return (
@@ -49,6 +50,7 @@ export default function Home() {
         <Features />
         <CreatorsWords />
         <FAQ />
+        <Footer />
       </div>
     </div>
   );
