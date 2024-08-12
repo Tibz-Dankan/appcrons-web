@@ -17,7 +17,7 @@ export const CreatorsWords: React.FC = () => {
       <div className="w-full flex flex-col justify-start items-center sm:flex-row  sm:items-start sm:justify-center gap-4">
         <div
           className="w-full bg-color-bg-secondary rounded-xl p-6 py-4 lg:py-3 relative
-           before:absolute before:top-0 before:left-0 before:w-2
+           before:absolute before:top-0 before:left-0 before:w-2 shadow
            before:h-full before:rounded-l-2xl before:bg-secondary"
         >
           <p>

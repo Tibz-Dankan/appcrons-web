@@ -122,7 +122,7 @@ export const FAQ: React.FC = () => {
                 className="w-full bg-color-bg-secondary rounded-xl relative
                 before:absolute before:top-0 before:left-0 before:w-2
                 before:h-full before:rounded-l-2xl before:bg-secondary
-                before:animate-heightZeroToFull"
+                before:animate-heightZeroToFull shadow"
               >
                 <p
                   className="text-start text-base text-color-text-secondary

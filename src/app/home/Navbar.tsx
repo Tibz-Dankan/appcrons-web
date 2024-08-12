@@ -25,7 +25,7 @@ export const NavBar: React.FC = () => {
       >
         <div className="flex items-center gap-2">
           <Link href="/" className="flex items-center gap-1">
-            <Image src="/logo.png" width={30} height={30} alt="logo" />
+            <Image src="/logo.png" width={40} height={40} alt="logo" />
             <span
               className="text-color-text-primary 
               font-[500] text-2xl"
@@ -44,13 +44,10 @@ export const NavBar: React.FC = () => {
             href="/docs"
             className={`flex items-center justify-center gap-2
              rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}
-             hover:text-primary focus:text-primary`}
+             text-color-text-primary hover:text-primary focus:text-primary`}
           >
-            <DocumentIcon
-              className="text-header-tab-text hover:text-inherit
-              focus:text-inherit"
-            />
-            <span className="hover:text-inherit focus:text-inherit">Docs</span>
+            <DocumentIcon className="text-inherit" />
+            <span className="text-inherit">Docs</span>
           </Link>
 
           <ThemeController />
