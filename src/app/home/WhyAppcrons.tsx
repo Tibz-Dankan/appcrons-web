@@ -1,4 +1,7 @@
 import React from "react";
+import { WarningIcon } from "@/app/shared/Icons/WarningIcon";
+import { CheckIcon } from "@/app/shared/Icons/CheckIcon";
+import { DotIcon } from "@/app/shared/Icons/DotIcon";
 
 export const WhyAppcrons: React.FC = () => {
   const AppCronSolutions = [
@@ -32,6 +35,10 @@ export const WhyAppcrons: React.FC = () => {
     return index === list.length - 1;
   };
 
+  const isFirstElement = (index: number): boolean => {
+    return index === 0;
+  };
+
   return (
     <div className="w-full mt-16 space-y-16">
       <div className="w-full text-center space-y-2">
@@ -51,17 +58,26 @@ export const WhyAppcrons: React.FC = () => {
                [&>*]:border-color-border-primary uppercase text-sm"
             >
               <th
-                className="px-2 pl-4 py-4 text-center border-x-[1px] 
+                className="px-2 pl-4 py-4 text-centers border-x-[1px] 
                 border-color-border-primary rounded-tl-md"
               >
-                Limitations
+                <p className="flex items-center justify-start gap-2">
+                  <span>
+                    <WarningIcon />
+                  </span>
+                  <span>Limitations</span>
+                </p>
               </th>
-
               <th
-                className="px-2 py-4 text-center border-r-[1px] 
+                className="px-2 py-4 text-centers border-r-[1px] 
                 border-color-border-primary rounded-tr-md"
               >
-                Solutions
+                <p className="flex items-center justify-start gap-2 pl-[6px]">
+                  <span>
+                    <CheckIcon />
+                  </span>
+                  <span>Solutions</span>
+                </p>
               </th>
             </tr>
           </thead>
@@ -80,8 +96,16 @@ export const WhyAppcrons: React.FC = () => {
                       isLastElement(AppCronSolutions, index) && "rounded-bl-md"
                     }`}
                   >
-                    <p className="text-base text-color-text-primary">
-                      {AppCronSolution.limitation.title}
+                    <p
+                      className={`text-base bg-[rgba(255,143,0,0.1)]
+                      text-[#ff8f00] flex items-center pl-1 p-1 rounded-3xl ${
+                        isFirstElement(index) ? "max-w-44" : "max-w-40"
+                      }`}
+                    >
+                      <span>
+                        <DotIcon className="text-[#ff8f00] w-9 h-9" />
+                      </span>
+                      <span>{AppCronSolution.limitation.title}</span>
                     </p>
                     <p className="text-sm text-color-text-secondary">
                       {AppCronSolution.limitation.description}
@@ -93,8 +117,16 @@ export const WhyAppcrons: React.FC = () => {
                      space-y-2
                   ${isLastElement(AppCronSolutions, index) && "rounded-br-md"}`}
                   >
-                    <p className="text-base text-color-text-primary">
-                      {AppCronSolution.solution.title}
+                    <p
+                      className={`text-base bg-[rgba(51,214,159,0.1)]
+                      text-[#33d69f] flex items-center pl-1 p-1 rounded-3xl ${
+                        isFirstElement(index) ? "max-w-60" : "max-w-64"
+                      }`}
+                    >
+                      <span>
+                        <DotIcon className="text-[#33d69f] w-9 h-9" />
+                      </span>
+                      <span>{AppCronSolution.solution.title}</span>
                     </p>
                     <p className="text-sm text-color-text-secondary">
                       {AppCronSolution.solution.description}
