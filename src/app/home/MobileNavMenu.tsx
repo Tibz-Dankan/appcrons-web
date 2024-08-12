@@ -27,7 +27,7 @@ export const MobileNavMenu: React.FC = () => {
          rounded-md bg-transparent p-4s text-sm font-semibold
          text-color-text-primary"
         >
-          <MenuIcon />
+          <MenuIcon className="w-6 h-6" />
         </MenuButton>
       </div>
 

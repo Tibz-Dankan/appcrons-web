@@ -14,13 +14,18 @@ export const CreatorsWords: React.FC = () => {
           A Word from the Creator
         </p>
       </div>
-      <div className="w-full flex items-start justify-center gap-4">
-        <div className="w-full">
+      <div className="w-full flex flex-col justify-start items-center sm:flex-row  sm:items-start sm:justify-center gap-4">
+        <div
+          className="w-full bg-color-bg-secondary rounded-xl p-6 py-4 lg:py-3 relative
+           before:absolute before:top-0 before:left-0 before:w-2 shadow
+           before:h-full before:rounded-l-2xl before:bg-secondary"
+        >
           <p>
-            "As a developer, I faced the frustration of slow cold starts with
-            Render's free tier. Appcrons was born out of the need to keep my
-            applications responsive and within free usage limits. It's a
-            solution by developers, for developers." – John Doe
+            "As a developer, who loves tinkering with various project ideas, I
+            felt like there was need for a tool that enables free backend
+            instances provided by platforms like Render to have guaranteed
+            uptime for any given customizable period of time and that kick
+            started Appcrons." – Tibesigwa Dankan
           </p>
         </div>
         <div
