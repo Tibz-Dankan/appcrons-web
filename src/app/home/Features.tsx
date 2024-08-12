@@ -33,12 +33,13 @@ export const Features: React.FC = () => {
           Discover how Appcrons enhances your server uptime
         </p>
       </div>
-      <div className="w-full flex items-start gap-4 ">
+      <div className="w-full gap-4 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4">
         {features.map((feature, index) => (
           <Card
             key={index}
-            className="space-y-4 bg-color-bg-secondary 
-             p-8 rounded-2xl"
+            className="space-y-4 bg-color-bg-secondary  p-8 rounded-md rounded-b-xl
+            relative before:absolute before:top-0 before:left-0 before:w-full
+            before:h-2 before:rounded-t-2xl before:bg-primary"
           >
             <p className="text-xl text-color-text-primary text-center">
               {feature.title}
