@@ -70,7 +70,9 @@ export const RequestList: React.FC<RequestListProps> = (props) => {
     currentParams.set("before", createdAtBefore);
     currentParams.set("page", nextPage.toString());
 
-    router.push(`?page=${nextPage}&before=${createdAtBefore}`);
+    router.push(`?page=${nextPage}&before=${createdAtBefore}`, {
+      scroll: false,
+    });
   };
 
   const prevPageHandler = () => {
