@@ -1,27 +1,32 @@
 import React, { Fragment } from "react";
 import { TriangleDownIcon } from "@/app/shared/Icons/TriangleDownIcon";
+import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
 
 interface InputSelectProps extends React.HTMLAttributes<HTMLSelectElement> {
   formik?: any;
   label?: string;
   options: string[];
+  selectLabel?: string;
 }
 
 export const InputSelect: React.FC<InputSelectProps> = (props) => {
   const formik = props.formik;
   const options = props.options;
   const label = props.label;
+  const selectLabel = props.selectLabel ? props.selectLabel : "";
+
+  const hasError = formik.errors[`${label}`] && formik.touched[`${label}`];
 
   return (
     <Fragment>
       <div
-        className="relative pt-6 flex flex-col items-start 
+        className="relative pb-5 flex flex-col items-start 
          justify-center gap-1 w-full text-color-text-primary"
       >
-        {formik.errors[`${label}`] && formik.touched[`${label}`] && (
-          <p className="absolute top-0 left-0 text-sm text-red-500 first-letter:uppercase">
-            {formik.errors[`${label}`]}
-          </p>
+        {selectLabel && (
+          <label className={`text-sm first-letter:uppercase font-[400] mb-1`}>
+            {selectLabel}
+          </label>
         )}
         <div className="w-full relative">
           <select
@@ -47,6 +52,15 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
             <TriangleDownIcon className="w-3 h-3" />
           </div>
         </div>
+        {hasError && (
+          <p
+            className="absolute bottom-0 left-0 text-sms text-red-500
+             first-letter:uppercase text-[12px] flex items-center gap-1"
+          >
+            <ErrorIconFilled className="text-inherit w-4 h-4" />
+            <span> {formik.errors[`${label}`]}</span>
+          </p>
+        )}
       </div>
     </Fragment>
   );
