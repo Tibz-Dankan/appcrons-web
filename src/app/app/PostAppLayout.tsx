@@ -98,7 +98,7 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
             <p className="text-2xl font">Steps</p>
             <div
               className="w-64 p-4 border-[1px] border-color-border-primary 
-               rounded-md bg-color-bg-secondary"
+               rounded-md"
             >
               <PostAppProgress />
             </div>
