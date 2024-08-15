@@ -17,24 +17,24 @@ export const InfoIcon: React.FC<InfoIconProps> = (props) => {
       <path
         fill="none"
         stroke="currentColor"
-        stroke-miterlimit="10"
-        stroke-width="32"
+        strokeMiterlimit="10"
+        strokeWidth="32"
         d="M248 64C146.39 64 64 146.39 64 248s82.39 184 184 184s184-82.39 184-184S349.61 64 248 64Z"
       />
       <path
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeLinejoin="round"
+        strokeWidth="32"
         d="M220 220h32v116"
       />
       <path
         fill="none"
         stroke="currentColor"
-        stroke-linecap="round"
-        stroke-miterlimit="10"
-        stroke-width="32"
+        strokeLinecap="round"
+        strokeMiterlimit="10"
+        strokeWidth="32"
         d="M208 340h88"
       />
       <path
