@@ -8,6 +8,7 @@ import { useAppSelector } from "@/hooks/redux";
 import { Modal } from "@/app/shared/Modal";
 import { EditIcon } from "@/app/shared/Icons/EditIcon";
 import { DeleteIcon } from "@/app/shared/Icons/DeleteIcon";
+import { CurrentTimeInTimeZone } from "@/app/shared/CurrentTimeInTimeZone";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -43,15 +44,18 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
        rounded-md flex items-center justify-start"
     >
       <div
-        className="border-r-[1px] border-color-border-primary p-6
-         bg-color-bg-secondary flex items-center justify-center gap-2
+        className="border-r-[1px] border-color-border-primary px-6s py-3s p-4
+         bg-color-bg-secondary flex flex-col items-center justify-center gap-2
         rounded-l-md h-full"
       >
-        <span className="font-semibold">{requestTimeList[0]?.timeZone}</span>
-        <EditIcon
-          className="w-[18px] h-[18px] text-color-text-primary 
+        <div className="flex items-center justify-center gap-2">
+          <span className="font-semibold">{requestTimeList[0]?.timeZone}</span>
+          <EditIcon
+            className="w-[18px] h-[18px] text-color-text-primary 
            cursor-pointer"
-        />
+          />
+        </div>
+        <CurrentTimeInTimeZone timeZone={requestTimeList[0]?.timeZone} />
       </div>
       {/* TODO: use any number of columns with horizontal scrolling */}
       <div className="grid grid-cols-4 gap-2 p-4">
@@ -67,10 +71,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
               <span>-</span>
               <span>{convertTo12HourFormat(requestTime?.end)}</span>
             </p>
-            <div
-              className="absolutes bottom-1 right-2 flex items-center justify-center 
-               gap-2"
-            >
+            <div className="flex items-center justify-center gap-2">
               {/* Delete Time Range */}
               <Modal
                 openModalElement={
