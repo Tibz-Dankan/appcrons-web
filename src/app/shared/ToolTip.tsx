@@ -8,6 +8,8 @@ interface ToolTipProps {
   variant?: "success" | "error" | "info" | "warning";
   content: ReactNode;
   element?: ReactNode;
+  width?: string;
+  height?: string;
 }
 
 /**
@@ -17,6 +19,8 @@ export const ToolTip: React.FC<ToolTipProps> = (props) => {
   const place = props.place ? props.place : "bottom";
   const variant = props.variant ? props.variant : undefined;
   const hasElement = !!props.element;
+  const height = props.height ? props.height : "";
+  const width = props.width ? props.width : "";
 
   const { theme } = useTheme();
   const isDarkMode = theme === "dark";
@@ -31,6 +35,8 @@ export const ToolTip: React.FC<ToolTipProps> = (props) => {
         style={{
           backgroundColor: isDarkMode ? "#ced4da" : "",
           color: isDarkMode ? "#343a40" : "",
+          width: width,
+          height: height,
         }}
       >
         {props.content}
