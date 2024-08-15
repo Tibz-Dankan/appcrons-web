@@ -26,8 +26,9 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
   const dispatch: any = useAppDispatch();
 
   const updateAppWithLatestRequestHandler = (request: TRequest) => {
-    app.requests[0] = request;
-    dispatch(updateOneApp({ app: app }));
+    const updatedApp: TApp = JSON.parse(JSON.stringify(app));
+    updatedApp.requests[0] = request;
+    dispatch(updateOneApp({ app: updatedApp }));
   };
 
   useEffect(() => {
