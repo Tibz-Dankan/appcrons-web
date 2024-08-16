@@ -231,16 +231,6 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
               className="border-[1px] border-color-border-primary rounded-md
                p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
-              {/* <span>
-                <IconContext.Provider
-                  value={{
-                    size: "1.2rem",
-                    color: "#D9534F",
-                  }}
-                >
-                  <MdErrorOutline />
-                </IconContext.Provider>
-              </span> */}
               <ErrorIcon className="text-error" />
               <p className="text-error text-[14px] text-start">
                 {validateReqTimeRange.message}
@@ -256,13 +246,13 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
             >
               Start time
             </label>
-            <InputSelect label="start" options={timeOptions} formik={formik} />
+            <InputSelect name="start" options={timeOptions} formik={formik} />
           </div>
           <div className="w-full -space-y-5">
             <label htmlFor="End" className="text-sm text-color-text-secondary">
               End time
             </label>
-            <InputSelect label="end" options={timeOptions} formik={formik} />
+            <InputSelect name="end" options={timeOptions} formik={formik} />
           </div>
         </div>
 

@@ -102,8 +102,8 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
         formik={formik}
       />
       <InputSelect
-        selectLabel="Request Interval"
-        label="requestInterval"
+        label="Request Interval"
+        name="requestInterval"
         options={intervalOptions}
         formik={formik}
       />

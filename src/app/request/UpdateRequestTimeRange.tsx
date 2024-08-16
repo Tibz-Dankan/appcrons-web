@@ -233,16 +233,6 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
               className="border-[1px] border-color-border-primary rounded-md
               p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
-              {/* <span>
-                <IconContext.Provider
-                  value={{
-                    size: "1.2rem",
-                    color: "#55C57A",
-                  }}
-                >
-                  <IoMdCheckmarkCircleOutline />
-                </IconContext.Provider>
-              </span> */}
               <CheckIcon className="text-success" />
               <p className="text-success text-[14px] text-start">
                 {validateReqTimeRange.message}
@@ -269,13 +259,13 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
             >
               Start time
             </label>
-            <InputSelect label="start" options={timeOptions} formik={formik} />
+            <InputSelect name="start" options={timeOptions} formik={formik} />
           </div>
           <div className="w-full -space-y-5">
             <label htmlFor="End" className="text-sm text-color-text-secondary">
               End time
             </label>
-            <InputSelect label="end" options={timeOptions} formik={formik} />
+            <InputSelect name="end" options={timeOptions} formik={formik} />
           </div>
         </div>
 

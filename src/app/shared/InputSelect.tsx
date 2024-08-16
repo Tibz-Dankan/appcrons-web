@@ -4,18 +4,32 @@ import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
 
 interface InputSelectProps extends React.HTMLAttributes<HTMLSelectElement> {
   formik?: any;
-  label?: string;
+  name?: string;
   options: string[];
-  selectLabel?: string;
+  defaultOption?: string;
+  label?: string;
 }
 
 export const InputSelect: React.FC<InputSelectProps> = (props) => {
   const formik = props.formik;
   const options = props.options;
-  const label = props.label;
-  const selectLabel = props.selectLabel ? props.selectLabel : "";
+  const defaultOption = props.defaultOption ? props.defaultOption : "";
+  const name = props.name;
+  const label = props.label ? props.label : "";
 
-  const hasError = formik.errors[`${label}`] && formik.touched[`${label}`];
+  const noValueSelected =
+    formik.values[`${name}`] === null ||
+    formik.values[`${name}`] === "" ||
+    formik.values[`${name}`] === 0;
+
+  // Set the default value
+  formik.values[`${name}`] = defaultOption
+    ? defaultOption
+    : noValueSelected
+    ? options[0]
+    : formik.values[`${name}`];
+
+  const hasError = formik.errors[`${name}`] && formik.touched[`${name}`];
 
   return (
     <Fragment>
@@ -23,16 +37,16 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
         className="relative pb-5 flex flex-col items-start 
          justify-center gap-1 w-full text-color-text-primary"
       >
-        {selectLabel && (
+        {label && (
           <label className={`text-sm first-letter:uppercase font-[400] mb-1`}>
-            {selectLabel}
+            {label}
           </label>
         )}
         <div className="w-full relative">
           <select
             onChange={formik.handleChange}
-            value={formik.values[`${label}`]}
-            id={label}
+            value={formik.values[`${name}`]}
+            id={name}
             className="appearance-none p-2 outline-none rounded-md border-[1px]
             border-color-border-primary focus:border-[1px] focus:border-primary
             transition-all text-sm w-full focus:outline-none
@@ -58,7 +72,7 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
              first-letter:uppercase text-[12px] flex items-center gap-1"
           >
             <ErrorIconFilled className="text-inherit w-4 h-4" />
-            <span> {formik.errors[`${label}`]}</span>
+            <span> {formik.errors[`${name}`]}</span>
           </p>
         )}
       </div>

@@ -104,7 +104,7 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
         {/* TODO: to add more information about the url */}
         <InputField type="text" name="url" placeholder="URL" formik={formik} />
         <InputSelect
-          label="requestInterval"
+          name="requestInterval"
           options={intervalOptions}
           formik={formik}
         />
