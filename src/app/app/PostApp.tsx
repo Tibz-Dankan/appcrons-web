@@ -90,12 +90,19 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       <InputField
         type="text"
         name="name"
+        label="Application Name"
         placeholder="Application Name"
         formik={formik}
       />
-      {/* TODO: to add more information about the url */}
-      <InputField type="text" name="url" placeholder="URL" formik={formik} />
+      <InputField
+        type="text"
+        name="url"
+        label="URL Endpoint"
+        placeholder="e.g applicationname.com/active"
+        formik={formik}
+      />
       <InputSelect
+        selectLabel="Request Interval"
         label="requestInterval"
         options={intervalOptions}
         formik={formik}
@@ -111,7 +118,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
         }
         type="submit"
         disabled={isPending}
-        className="w-full mt-6 font-semibold"
+        className="w-full mt-5 font-semibold"
       />
     </form>
   );
