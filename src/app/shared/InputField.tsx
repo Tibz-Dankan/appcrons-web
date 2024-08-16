@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from "react";
+import React, { Fragment, ReactNode, useState } from "react";
 import { EyeIcon } from "@/app/shared/Icons/EyeIcon";
 import { EyeSlashIcon } from "@/app/shared/Icons/EyeSlashIcon";
 import { ErrorIconFilled } from "@/app/shared/Icons/ErrorFilledIcon";
@@ -8,7 +8,7 @@ interface InputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
   name: string;
   type: "text" | "password" | "email" | "number" | "date" | "time";
   placeholder?: string;
-  label?: string;
+  label?: ReactNode;
 }
 
 export const InputField: React.FC<InputFieldProps> = (props) => {
