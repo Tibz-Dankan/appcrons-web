@@ -2,7 +2,6 @@
 
 import React, { useEffect, useState } from "react";
 import Button from "@/app/shared/Button";
-import { Modal } from "@/app/shared/Modal";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { useMutation } from "@tanstack/react-query";
 import {
@@ -38,9 +37,9 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
   const currentApp = useAppSelector((state) =>
     state.app.apps.find((app) => app.id === props.app.id)
   )!;
-  const [app, setApp] = useState<TApp>(JSON.parse(JSON.stringify(currentApp)));
-  const hasTimeZone: boolean =
-    app.requestTimes !== null ? !!app.requestTimes[0]?.timeZone : false;
+  const app: TApp = JSON.parse(JSON.stringify(currentApp));
+
+  const hasTimeZone: boolean = !!app.requestTimes[0]?.timeZone;
 
   const timeOptions = times.times;
   const [validateReqTimeRange, setValidateReqTimeRange] = useState<{
@@ -49,12 +48,8 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
   }>({ isValid: false, message: "" });
 
   const getAppTimezone = (): string => {
-    if (hasTimeZone) {
-      return app.requestTimes !== null
-        ? app.requestTimes && app.requestTimes[0]?.timeZone
-        : "";
-    }
-    return "";
+    if (!hasTimeZone) return "";
+    return app.requestTimes[0]?.timeZone;
   };
 
   const requestTimeList = app.requestTimes as TRequestTime[];
@@ -109,8 +104,8 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
   const initialValues: TUpdateRequestTime = {
     requestTimeId: props.requestTimeId,
     appId: app.id,
-    start: getCurrentRequestTime().start,
-    end: getCurrentRequestTime().end,
+    start: convertTo12HourFormat(getCurrentRequestTime().start),
+    end: convertTo12HourFormat(getCurrentRequestTime().end),
     timeZone: getAppTimezone(),
     accessToken: accessToken,
   };
@@ -177,7 +172,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
         <p className="font-semibold">{truncateString(app.name, 40)}</p>
       </div>
       <div className="flex items-center justify-start gap-4 w-full">
-        <p className="text-color-text-secondary text-sm">Edit Time Range</p>
+        <p className="text-color-text-secondary text-sm">Edit Time Frame</p>
         <p
           className="flex items-center justify-between gap-1
           bg-color-bg-secondary p-2 rounded"
@@ -189,7 +184,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
       </div>
       <div className="w-full space-y-1">
         <span className="text-sm text-color-text-secondary">
-          Existing Time Ranges
+          Existing Time Frame
         </span>
         <div
           className="grid grid-cols-2 gap-2 p-4s py-2
@@ -224,7 +219,8 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
             className="text-[12px] text-color-text-primary
             p-2 border-[1px] border-color-border-primary rounded-md"
           >
-            Edit Time Range by selecting your preferred Start and End time below
+            Edit Time Frame by selecting your preferred Start and End time
+            below.
           </p>
         </div>
         <div className="w-full">
@@ -234,7 +230,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
               p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
               <CheckIcon className="text-success" />
-              <p className="text-success text-[14px] text-start">
+              <p className="text-success text-sm text-start">
                 {validateReqTimeRange.message}
               </p>
             </div>
@@ -245,28 +241,27 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
               p-2 w-full mb-2 flex justify-start items-start gap-2"
             >
               <ErrorIcon className="text-error" />
-              <p className="text-error text-[14px] text-start">
+              <p className="text-error text-sm text-start">
                 {validateReqTimeRange.message}
               </p>
             </div>
           )}
         </div>
         <div className="w-full flex items-center gap-4 justify-between">
-          <div className="w-full -space-y-5">
-            <label
-              htmlFor="Start"
-              className="text-sm text-color-text-secondary"
-            >
-              Start time
-            </label>
-            <InputSelect name="start" options={timeOptions} formik={formik} />
-          </div>
-          <div className="w-full -space-y-5">
-            <label htmlFor="End" className="text-sm text-color-text-secondary">
-              End time
-            </label>
-            <InputSelect name="end" options={timeOptions} formik={formik} />
-          </div>
+          <InputSelect
+            label="Start time"
+            name="start"
+            options={timeOptions}
+            defaultOption={convertTo12HourFormat(getCurrentRequestTime().start)}
+            formik={formik}
+          />
+          <InputSelect
+            label="End time"
+            name="end"
+            options={timeOptions}
+            defaultOption={convertTo12HourFormat(getCurrentRequestTime().end)}
+            formik={formik}
+          />
         </div>
 
         <Button
