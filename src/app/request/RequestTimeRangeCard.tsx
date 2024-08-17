@@ -10,6 +10,7 @@ import { EditIcon } from "@/app/shared/Icons/EditIcon";
 import { DeleteIcon } from "@/app/shared/Icons/DeleteIcon";
 import { CurrentTimeInTimeZone } from "@/app/shared/CurrentTimeInTimeZone";
 import { UpdateTimeZone } from "@/app/request/UpdateTimeZone";
+import "../../styles/scrollbar.css";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -45,7 +46,7 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
        rounded-md flex items-center justify-start"
     >
       <div
-        className="border-r-[1px] border-color-border-primary px-6s py-3s p-4
+        className="border-r-[1px] border-color-border-primary p-4
          bg-color-bg-secondary flex flex-col items-center justify-center gap-2
          rounded-l-md h-full"
       >
@@ -72,13 +73,16 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
         <CurrentTimeInTimeZone timeZone={requestTimeList[0]?.timeZone} />
       </div>
       {/* TODO: use any number of columns with horizontal scrolling */}
-      <div className="grid grid-cols-4 gap-2 p-4">
+      <div
+        className="grid grid-cols-4 gap-2 p-4 overflow-x-auto 
+         .scroll-bar mr-2"
+      >
         {requestTimeList.map((requestTime, index) => (
           <div
             key={index}
             className="flex items-center justify-center gap-2 
              p-2 bg-color-bg-secondary border-[1px] border-color-border-primary
-             rounded-md relative"
+             rounded-md relative w-52"
           >
             <p className="flex items-center justify-center gap-1 text-sm">
               <span>{convertTo12HourFormat(requestTime?.start)}</span>
