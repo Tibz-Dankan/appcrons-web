@@ -5,12 +5,17 @@ import { Timezone } from "@/utils/timezone";
 
 interface TimeZoneSelectProps {
   onSelect: (timeZone: string) => void;
+  defaultTimeZone?: string;
 }
 
 export const TimeZoneSelect: React.FC<TimeZoneSelectProps> = (props) => {
   const options = timeZones.allTimeZones;
   const timeZoneInstance = new Timezone(options);
-  const [value, setValue] = useState(timeZoneInstance.getDeviceTimeZone());
+  const defaultTimeZone = props.defaultTimeZone ? props.defaultTimeZone : "";
+
+  const [value, setValue] = useState(
+    defaultTimeZone ? defaultTimeZone : timeZoneInstance.getDeviceTimeZone()
+  );
 
   useEffect(() => {
     props.onSelect(value);

@@ -9,6 +9,7 @@ import { Modal } from "@/app/shared/Modal";
 import { EditIcon } from "@/app/shared/Icons/EditIcon";
 import { DeleteIcon } from "@/app/shared/Icons/DeleteIcon";
 import { CurrentTimeInTimeZone } from "@/app/shared/CurrentTimeInTimeZone";
+import { UpdateTimeZone } from "@/app/request/UpdateTimeZone";
 
 interface RequestTimeRangeCardProps {
   app: TApp;
@@ -46,15 +47,28 @@ export const RequestTimeRangeCard: React.FC<RequestTimeRangeCardProps> = (
       <div
         className="border-r-[1px] border-color-border-primary px-6s py-3s p-4
          bg-color-bg-secondary flex flex-col items-center justify-center gap-2
-        rounded-l-md h-full"
+         rounded-l-md h-full"
       >
-        <div className="flex items-center justify-center gap-2">
-          <span className="font-semibold">{requestTimeList[0]?.timeZone}</span>
-          <EditIcon
-            className="w-[18px] h-[18px] text-color-text-primary 
-           cursor-pointer"
+        <Modal
+          openModalElement={
+            <div className="flex items-center justify-center gap-2">
+              <span className="font-semibold">
+                {requestTimeList[0]?.timeZone}
+              </span>
+              <EditIcon
+                className="w-[18px] h-[18px] text-color-text-secondary 
+                cursor-pointer"
+              />
+            </div>
+          }
+          closed={isClosedModal}
+        >
+          <UpdateTimeZone
+            app={props.app}
+            onSuccess={modalCloseHandler}
+            onCancel={modalCloseHandler}
           />
-        </div>
+        </Modal>
         <CurrentTimeInTimeZone timeZone={requestTimeList[0]?.timeZone} />
       </div>
       {/* TODO: use any number of columns with horizontal scrolling */}
