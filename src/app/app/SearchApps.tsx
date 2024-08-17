@@ -119,9 +119,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
                 {!isPending && (
                   <SearchIcon
                     className={`${
-                      hasSearchQuery
-                        ? "text-color-text-primary"
-                        : "text-[#868e96]"
+                      hasSearchQuery ? "text-gray-200" : "text-[#868e96]"
                     }`}
                   />
                 )}
@@ -132,7 +130,7 @@ export const SearchApps: React.FC<SearchAppsProps> = (props) => {
             }
             type="submit"
             disabled={isPending}
-            className={`px-2 pr-0s py-[6px] h-auto absolute top-[5px] right-1
+            className={`px-2 py-[6px] h-auto absolute top-[5px] right-1
              ${hasSearchQuery ? "bg-primary" : "bg-color-bg-primary"}`}
           />
         </form>

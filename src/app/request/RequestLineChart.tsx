@@ -23,7 +23,7 @@ const CustomTooltip: React.FC<any> = ({ active, payload, label }) => {
     return (
       <div className="custom-tooltip">
         <p className="label text-color-text-primary">{`Time : ${label}`}</p>
-        <p className="label text-[#8884d8]">{`Latency : ${payload[0].value} s`}</p>
+        <p className="label text-[#8884d8]">{`Duration : ${payload[0].value} s`}</p>
       </div>
     );
   }
@@ -56,7 +56,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
     const appDate = new AppDate(request.startedAt);
     return {
       name: appDate.time(),
-      latency: convertMillisecondsToSeconds(request.duration),
+      duration: convertMillisecondsToSeconds(request.duration),
     };
   });
 
@@ -67,7 +67,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
     >
       <div className="w-full h-96">
         <ResponsiveContainer width="100%" height="100%">
-          <LineChart data={data} margin={{ top: 32, right: 32 }}>
+          <LineChart data={data} margin={{ top: 32, right: 32, left: 4 }}>
             <XAxis
               dataKey="name"
               tick={{ fill: chartColors.tickLine }}
@@ -85,7 +85,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
               axisLine={{ stroke: chartColors.axisLine }}
               tickLine={{ stroke: chartColors.tickLine }}
               label={{
-                value: "Latency (s)",
+                value: "Duration (s)",
                 angle: -90,
                 position: "insideLeft",
                 fill: chartColors.axisLabel,
@@ -95,7 +95,7 @@ export const RequestLineChart: React.FC<RequestLineChartProps> = (props) => {
             <Legend />
             <Line
               type="monotone"
-              dataKey="latency"
+              dataKey="duration"
               stroke={chartColors.line}
               activeDot={{ r: 8 }}
             />
