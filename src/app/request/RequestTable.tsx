@@ -54,12 +54,12 @@ export const RequestTable: React.FC<RequestTableProps> = (props) => {
             >
               Time
             </th>
-            <th className="px-2 py-3 text-start">Status code</th>
+            <th className="px-2 py-3 text-start">Status Code</th>
             <th
               className="px-2 py-3 text-start border-r-[1px] 
               border-color-border-primary rounded-tr-md"
             >
-              Latency
+              Duration
             </th>
           </tr>
         </thead>
