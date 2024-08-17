@@ -1,0 +1,49 @@
+/* Firefox */
+/* For Firefox 64 and earlier */
+html {
+  scrollbar-color: #ced4da;
+  scrollbar-width: thin;
+}
+
+/* Edge 12-18 */
+@supports (-ms-accelerator: true) {
+  html {
+    scrollbar-face-color: #74c0fc;
+    scrollbar-track-color: #ced4da;
+  }
+}
+
+/* SCROLLBAR STYLES FOR WEBKIT BROWSERS */
+.scroll-bar::-webkit-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scroll-bar::-webkit-scrollbar-thumb {
+  background: #ced4da;
+  border-radius: 0.4rem;
+}
+.scroll-bar::-webkit-scrollbar-track {
+  background: #f8f9fa;
+}
+
+/* SCROLLBAR STYLES FOR FIREFOX */
+.scroll-bar::-moz-scrollbar {
+  width: 0.4rem;
+  height: auto;
+}
+.scroll-bar::-moz-scrollbar-thumb {
+  background: #ced4da;
+  border-radius: 0.4rem;
+}
+.scroll-bar::-moz-scrollbar-track {
+  background: #f8f9fa;
+}
+
+/* SCROLLBAR STYLES FOR INTERNET EXPLORER */
+.ie ::-ms-thumb {
+  background: #ced4da;
+  border-radius: 0.4rem;
+}
+.ie ::-ms-track {
+  background: #f8f9fa;
+}

@@ -92,7 +92,7 @@ const App: React.FC = () => {
 
       {showRequestTimesRange(app) && (
         <div className="w-full flex items-center justify-center mb-16">
-          <div className="w-full max-w-[1280px] px-10">
+          <div className="w-full px-4 md:px-8 max-w-[1280px]">
             <div className="">
               <p className="text-base mb-2">Request Time Frames</p>
               <RequestTimeRangeCard app={app} />
