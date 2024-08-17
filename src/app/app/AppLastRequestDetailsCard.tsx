@@ -68,14 +68,14 @@ export const AppLastRequestDetailsCard: React.FC<
         className="w-full flex items-center justify-start gap-2
          px-6"
       >
-        <span>Latency:</span>
+        <span>Duration:</span>
         <span>{getRequestDuration(app.requests)}</span>
       </div>
       <div
         className="w-full flex items-center justify-start gap-2
          px-6 mt-2"
       >
-        <span className="mr-2">Status:</span>
+        <span className="mr-3">Status:</span>
         {hasRequest && (
           <div className="flex items-center justify-start gap-2">
             <span>{getStatusCodeIcon(app.requests)}</span>
