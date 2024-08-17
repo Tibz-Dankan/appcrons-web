@@ -77,6 +77,12 @@ export type TDeleteRequestTime = {
   accessToken: string;
 };
 
+export type TUpdateTimeZone = {
+  appId: string;
+  timeZone: string;
+  accessToken: string;
+};
+
 export type TRequestTime = {
   id: string;
   appId: string;

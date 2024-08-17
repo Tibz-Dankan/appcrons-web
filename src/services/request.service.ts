@@ -4,6 +4,7 @@ import {
   TGetRequestsByApp,
   TPostRequestTime,
   TUpdateRequestTime,
+  TUpdateTimeZone,
 } from "@/types/app";
 
 export class RequestService {
@@ -100,6 +101,30 @@ export class RequestService {
         },
       }
     );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  updateTimeZone = async ({
+    appId,
+    timeZone,
+    accessToken,
+  }: TUpdateTimeZone) => {
+    const response = await fetch(`${backendURL}/requests/update-timezone`, {
+      method: "PATCH",
+      body: JSON.stringify({
+        appId: appId,
+        timeZone: timeZone,
+      }),
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       const error = await response.json();
