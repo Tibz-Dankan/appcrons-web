@@ -239,20 +239,30 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
           )}
         </div>
         <div className="w-full flex items-center gap-4 justify-between">
-          <div className="w-full -space-y-5">
-            <label
+          <div className="w-full -space-y-5s">
+            {/* <label
               htmlFor="Start"
               className="text-sm text-color-text-secondary"
             >
               Start time
-            </label>
-            <InputSelect name="start" options={timeOptions} formik={formik} />
+            </label> */}
+            <InputSelect
+              label="Start time"
+              name="start"
+              options={timeOptions}
+              formik={formik}
+            />
           </div>
-          <div className="w-full -space-y-5">
-            <label htmlFor="End" className="text-sm text-color-text-secondary">
+          <div className="w-full -space-y-5s">
+            {/* <label htmlFor="End" className="text-sm text-color-text-secondary">
               End time
-            </label>
-            <InputSelect name="end" options={timeOptions} formik={formik} />
+            </label> */}
+            <InputSelect
+              label="End time"
+              name="end"
+              options={timeOptions}
+              formik={formik}
+            />
           </div>
         </div>
 

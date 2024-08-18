@@ -33,6 +33,14 @@ export const InputSelect: React.FC<InputSelectProps> = (props) => {
     };
 
     setDefaultValueHandler();
+
+    return () => {
+      // const inputSelectCleanUp = () => {
+      //   formik.values[`${name}`] = "";
+      //   formik.errors[`${name}`] = "";
+      // };
+      // inputSelectCleanUp();
+    };
   }, [hasSelectedValue, defaultOption]);
 
   return (
