@@ -63,7 +63,7 @@ export const SignUp: React.FC = () => {
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
-      name: Yup.string().max(255).required("name is required"),
+      name: Yup.string().max(255).required("username is required"),
       email: Yup.string().max(255).required("email is required"),
       password: Yup.string()
         .max(255)
@@ -113,20 +113,23 @@ export const SignUp: React.FC = () => {
         >
           <InputField
             type="text"
+            label="Username"
             name="name"
-            placeholder="Username"
+            placeholder="Your username"
             formik={formik}
           />
           <InputField
             type="email"
+            label="Email"
             name="email"
-            placeholder="Email address"
+            placeholder="Your email address"
             formik={formik}
           />
           <InputField
             type="password"
+            label="Password"
             name="password"
-            placeholder="Password"
+            placeholder="Your password"
             formik={formik}
           />
           <Button

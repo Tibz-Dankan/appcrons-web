@@ -89,21 +89,25 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
         className="flex flex-col gap-0 items-center w-[90%] sm:w-96
          p-8 bg-color-bg-primary rounded-md z-[1]"
       >
-        <div
-          className="border-[1px] border-color-border-primary
-           rounded-md p-4 w-full bg-color-bg-secondary text-center"
-        >
-          <p>Update Application Information</p>
+        <div className="w-full text-centers mb-4">
+          <p className="text-2xl">Update Application Information</p>
         </div>
         <InputField
           type="text"
           name="name"
+          label="Application Name"
           placeholder="Application Name"
           formik={formik}
         />
-        {/* TODO: to add more information about the url */}
-        <InputField type="text" name="url" placeholder="URL" formik={formik} />
+        <InputField
+          type="text"
+          label="URL Endpoint"
+          name="url"
+          placeholder="URL"
+          formik={formik}
+        />
         <InputSelect
+          label="Request Interval"
           name="requestInterval"
           options={intervalOptions}
           formik={formik}
