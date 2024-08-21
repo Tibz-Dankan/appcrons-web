@@ -100,14 +100,16 @@ export const LogIn: React.FC = () => {
         >
           <InputField
             type="email"
+            label="Email"
             name="email"
-            placeholder="Email address"
+            placeholder="Your email address"
             formik={formik}
           />
           <InputField
             type="password"
+            label="Password"
             name="password"
-            placeholder="Password"
+            placeholder="Your password"
             formik={formik}
           />
           <Button

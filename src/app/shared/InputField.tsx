@@ -36,7 +36,10 @@ export const InputField: React.FC<InputFieldProps> = (props) => {
          justify-center gap-1 w-full text-color-text-primary mb-1"
       >
         {label && (
-          <label className={`text-sm first-letter:uppercase font-[400] mb-1`}>
+          <label
+            className={`text-sm first-letter:uppercase font-[400] mb-1 
+            text-color-text-secondary`}
+          >
             {label}
           </label>
         )}
