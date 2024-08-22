@@ -83,7 +83,7 @@ export const LogIn: React.FC = () => {
     <Fragment>
       <div
         className="flex flex-col items-center justify-center gap-4
-         min-h-[100vh] min-w-[100vw]"
+         min-h-[100vh] py-16"
       >
         <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
