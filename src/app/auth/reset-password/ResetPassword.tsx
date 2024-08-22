@@ -55,14 +55,27 @@ export const ResetPassword: React.FC = () => {
     confirmPassword: "",
   };
 
+  const validPasswords = (formik: any): boolean => {
+    const newPassword = formik.values["newPassword"];
+    const confirmPassword = formik.values["confirmPassword"];
+    if (newPassword === confirmPassword) return true;
+
+    formik.errors["confirmPassword"] = "Passwords don't match!";
+    return false;
+  };
+
   const formik = useFormik({
     initialValues: initialValues,
     validationSchema: Yup.object({
       newPassword: Yup.string().max(255).required("New password is required"),
+      confirmPassword: Yup.string()
+        .max(255)
+        .required("Confirm password is required"),
     }),
 
     onSubmit: async (values, helpers) => {
       try {
+        if (!validPasswords(formik)) return;
         mutate(values);
       } catch (err: any) {
         helpers.setStatus({ success: false });
@@ -81,7 +94,7 @@ export const ResetPassword: React.FC = () => {
     <Fragment>
       <div
         className="flex flex-col items-center justify-center gap-4
-         min-h-[100vh] min-w-[100vw]"
+         min-h-[100vh] py-16"
       >
         <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
@@ -95,7 +108,7 @@ export const ResetPassword: React.FC = () => {
           border-[1px]  border-color-border-primary p-8
           bg-color-bg-secondary rounded-md z-[1]"
         >
-          <div>
+          <div className="mb-4">
             <p>
               To complete this process, provide your new password and its
               confirmation.
@@ -104,13 +117,15 @@ export const ResetPassword: React.FC = () => {
           <InputField
             type="password"
             name="newPassword"
-            placeholder="New Password"
+            label="New Password"
+            placeholder="Your new password"
             formik={formik}
           />
           <InputField
             type="password"
+            label="Confirm Password"
             name="confirmPassword"
-            placeholder="Confirm Password"
+            placeholder="Your confirm password"
             formik={formik}
           />
           <Button

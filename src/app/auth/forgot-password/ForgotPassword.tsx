@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment, useState } from "react";
+import React, { Fragment } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -83,7 +83,7 @@ export const ForgotPassword: React.FC = () => {
           border-[1px]  border-color-border-primary p-8
           bg-color-bg-secondary rounded-md z-[1]"
         >
-          <div>
+          <div className="mb-4">
             <p>
               Enter your Appcrons's account email address and we will send you a
               password reset link.
@@ -91,8 +91,9 @@ export const ForgotPassword: React.FC = () => {
           </div>
           <InputField
             type="email"
+            label="Email"
             name="email"
-            placeholder="Email address"
+            placeholder="Your appcrons's email address"
             formik={formik}
           />
           <Button
