@@ -13,6 +13,13 @@ export const ThemeController = () => {
   // useEffect only runs on the client, so now we can safely show the UI
   useEffect(() => {
     setMounted(true);
+
+    const setInitialThemeToggleSwitchValue = () => {
+      const colorScheme = document.documentElement.style.colorScheme;
+      const isDark = colorScheme === "dark";
+      setIsDarkMode(() => isDark);
+    };
+    setInitialThemeToggleSwitchValue();
   }, []);
 
   if (!mounted) {
