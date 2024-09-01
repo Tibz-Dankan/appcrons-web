@@ -3,7 +3,6 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import { Providers } from "@/providers/Index";
 import NotificationInitializer from "@/app/shared/NotificationInitializer";
-import { AppLayout } from "@/app/layouts/AppLayout";
 import { ThemeAppProvider } from "@/providers/ThemeProvider";
 import { PHProvider } from "@/providers/PostHog";
 import dynamic from "next/dynamic";
@@ -50,7 +49,7 @@ export default function RootLayout({
             <PostHogPageView />
             <ThemeAppProvider>
               <NotificationInitializer />
-              <AppLayout>{children}</AppLayout>
+              {children}
             </ThemeAppProvider>
           </body>
         </PHProvider>

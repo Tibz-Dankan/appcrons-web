@@ -5,7 +5,7 @@ import { FoldedHandsIcon } from "@/app/shared/Icons/FoldedHandsIcon";
 import { WarningIcon } from "@/app/shared/Icons/WarningIcon";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 
-export const Footer: React.FC = () => {
+export const DashboardFooter: React.FC = () => {
   return (
     <footer
       className="w-full flex flex-col items-center 

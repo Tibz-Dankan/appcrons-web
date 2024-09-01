@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 import App from "@/app/app/[appId]/App";
 import { AppService } from "@/services/app.service";
 import { Session } from "@/lib/session";
+import { DashboardLayout } from "@/app/layouts/DashboardLayout";
 
 type Props = { params: { appId: string } };
 
@@ -32,7 +33,11 @@ export const generateMetadata = async ({
 };
 
 const Page: React.FC = () => {
-  return <App />;
+  return (
+    <DashboardLayout>
+      <App />
+    </DashboardLayout>
+  );
 };
 
 export default Page;
