@@ -24,6 +24,7 @@ export const authenticate = async (accessToken: string, user: TAuth) => {
 
 export const logout = () => {
   return (dispatch: any) => {
+    localStorage.removeItem("session");
     dispatch(authActions.logout());
   };
 };

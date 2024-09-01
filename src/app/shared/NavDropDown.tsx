@@ -12,7 +12,6 @@ import { useAppSelector } from "@/hooks/redux";
 import { PersonIcon } from "@/app/shared/Icons/PersonIcon";
 import { ReactNode } from "react";
 import { SettingsIcon } from "@/app/shared/Icons/SettingsIcon";
-import { useRouter } from "next/navigation";
 import { truncateString } from "@/utils/truncateString";
 import { LogOut } from "@/app/auth/Logout";
 
@@ -26,18 +25,13 @@ const classNames = (...classes: any[]) => {
 
 export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
   const username = useAppSelector((state) => state.auth.user.name);
-  const router = useRouter();
-
-  const logoutHandler = () => {
-    router.push("/auth/logout");
-  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton
           className="inline-flex w-full justify-center gap-x-1.5 
-           rounded-md bg-whites bg-transparent px-3s py-2s text-sm font-semibold
+           rounded-md bg-transparent text-sm font-semibold
            text-color-text-primary"
         >
           {props.children}
@@ -65,9 +59,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
                 <Link
                   href="/dashboard"
                   className={classNames(
-                    focus
-                      ? "bg-gray-100s bg-color-bg-secondary text-gray-900s"
-                      : "text-gray-700s ",
+                    focus ? "bg-gray-100s bg-color-bg-secondary" : "",
                     "block px-4 py-2 text-sm text-color-text-primary"
                   )}
                 >
@@ -83,9 +75,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
                 <Link
                   href="/settings"
                   className={classNames(
-                    focus
-                      ? "bg-gray-100s bg-color-bg-secondary text-gray-900s"
-                      : "text-gray-700s",
+                    focus ? "bg-gray-100s bg-color-bg-secondary" : "",
                     "block px-4 py-2 text-sm text-color-text-primary"
                   )}
                 >
@@ -102,9 +92,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
               {({ focus }) => (
                 <div
                   className={classNames(
-                    focus
-                      ? "bg-gray-100s bg-color-bg-secondary text-gray-900s"
-                      : "text-gray-700s ",
+                    focus ? "bg-gray-100s bg-color-bg-secondary" : "",
                     ""
                   )}
                 >
