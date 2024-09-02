@@ -1,14 +1,14 @@
 import { Session } from "@/lib/session";
 import React, { ReactNode } from "react";
-import { Header } from "@/app/layouts/Header";
-import { Footer } from "@/app/layouts/Footer";
+import { DashboardHeader } from "@/app/layouts/DashboardHeader";
+import { DashboardFooter } from "@/app/layouts/DashboardFooter";
 import { AuthenticateClient } from "@/app/auth/Index";
 
-interface AppLayoutProps {
+interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-export const AppLayout: React.FC<AppLayoutProps> = (props) => {
+export const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
   const session = new Session().get();
 
   if (!session) {
@@ -18,9 +18,9 @@ export const AppLayout: React.FC<AppLayoutProps> = (props) => {
   return (
     <div className="w-full">
       <AuthenticateClient session={session} />
-      <Header />
+      <DashboardHeader />
       <main>{props.children}</main>
-      <Footer />
+      <DashboardFooter />
     </div>
   );
 };

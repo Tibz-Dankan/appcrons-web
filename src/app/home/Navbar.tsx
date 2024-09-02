@@ -7,9 +7,11 @@ import { ThemeController } from "@/app/shared/ThemeController";
 import { Link } from "@/lib/router-events";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { MobileNavMenu } from "@/app/home/MobileNavMenu";
+import { useAppSelector } from "@/hooks/redux";
 
 export const NavBar: React.FC = () => {
   const pathname = usePathname();
+  const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
 
   const isDocsPath = pathname.startsWith("/docs");
 
@@ -43,7 +45,11 @@ export const NavBar: React.FC = () => {
           <Link
             href="/docs"
             className={`flex items-center justify-center gap-2
-             rounded-md p-1 px-3 ${isDocsPath && "bg-header-tab-bg"}
+             rounded-md p-1 px-3 ${
+               isDocsPath &&
+               `bg-header-tab-bg px-2 py-[6px] rounded-md text-center
+              text-primary`
+             }
              text-color-text-primary hover:text-primary focus:text-primary`}
           >
             <DocumentIcon className="text-inherit" />
@@ -51,21 +57,36 @@ export const NavBar: React.FC = () => {
           </Link>
 
           <ThemeController />
-          <Link
-            href="/auth/login"
-            className={`py-1 px-3 border-[1px] border-color-border-primary
-            rounded-md hover:text-primary focus:text-primary`}
-          >
-            <span>Log In</span>
-          </Link>
-          <Link
-            href="/auth/signup"
-            className={`py-1 px-3 border-[1px]s border-color-border-primary
-            rounded-md bg-primary text-gray-50 hover:bg-primary-light
-            focus:text-primary-light`}
-          >
-            <span>Sign Up</span>
-          </Link>
+          {!isLoggedIn && (
+            <div className="flex items-center justify-center gap-2">
+              <Link
+                href="/auth/login"
+                className={`py-1 px-3 border-[1px] border-color-border-primary
+                rounded-md hover:text-primary focus:text-primary`}
+              >
+                <span>Log In</span>
+              </Link>
+              <Link
+                href="/auth/signup"
+                className={`py-1 px-3 border-[1px]s border-color-border-primary
+                 rounded-md bg-primary text-gray-50 hover:bg-primary-light
+                 focus:text-primary-light`}
+              >
+                <span>Sign Up</span>
+              </Link>
+            </div>
+          )}
+          {isLoggedIn && (
+            <div className="flex items-center justify-center gap-2">
+              <Link
+                href="/dashboard"
+                className={`py-1 px-3 border-[1px] border-color-border-primary
+                rounded-md hover:text-primary focus:text-primary`}
+              >
+                <span>Dashboard</span>
+              </Link>
+            </div>
+          )}
         </div>
       </div>
     </nav>

@@ -11,13 +11,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { MenuIcon } from "@/app/shared/Icons/MenuIcon";
 import { ThemeController } from "@/app/shared/ThemeController";
+import { useAppSelector } from "@/hooks/redux";
 
 export const MobileNavMenu: React.FC = () => {
   const pathname = usePathname();
+  const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
 
   const isDocsPath = pathname.startsWith("/docs");
-
-  // TODO: To show the dashboard when the user isLoggedIn
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -49,8 +49,12 @@ export const MobileNavMenu: React.FC = () => {
               {({ focus }) => (
                 <Link
                   href="/docs"
-                  className={`${isDocsPath && "bg-header-tab-bg"}
-                  hover:text-primary focus:text-primary`}
+                  className={`${
+                    isDocsPath &&
+                    `bg-header-tab-bg px-2 py-[6px] rounded-md text-center
+                     text-primary`
+                  }
+                    hover:text-primary focus:text-primary`}
                 >
                   <span className="hover:text-inherit focus:text-inherit">
                     Documentation
@@ -66,30 +70,46 @@ export const MobileNavMenu: React.FC = () => {
                 </div>
               )}
             </MenuItem>
-            <MenuItem>
-              {({ focus }) => (
-                <Link
-                  href="/auth/login"
-                  className={`py-1 px-3 border-[1px] border-color-border-primary
-                  rounded-md hover:text-primary focus:text-primary
-                  text-center`}
-                >
-                  <span>Log In</span>
-                </Link>
-              )}
-            </MenuItem>
-            <MenuItem>
-              {({ focus }) => (
-                <Link
-                  href="/auth/signup"
-                  className={`py-1 px-3 border-color-border-primary
-                  rounded-md bg-primary text-gray-50 hover:bg-primary-light
-                  focus:bg-primary-light w-full flex items-center justify-center`}
-                >
-                  <span>Sign Up</span>
-                </Link>
-              )}
-            </MenuItem>
+            {!isLoggedIn && (
+              <MenuItem>
+                {({ focus }) => (
+                  <Link
+                    href="/auth/login"
+                    className={`py-1 px-3 border-[1px] border-color-border-primary
+                    rounded-md hover:text-primary focus:text-primary text-center`}
+                  >
+                    <span>Log In</span>
+                  </Link>
+                )}
+              </MenuItem>
+            )}
+            {!isLoggedIn && (
+              <MenuItem>
+                {({ focus }) => (
+                  <Link
+                    href="/auth/signup"
+                    className={`py-1 px-3 border-color-border-primary
+                    rounded-md bg-primary text-gray-50 hover:bg-primary-light
+                    focus:bg-primary-light w-full flex items-center justify-center`}
+                  >
+                    <span>Sign Up</span>
+                  </Link>
+                )}
+              </MenuItem>
+            )}
+            {isLoggedIn && (
+              <MenuItem>
+                {({ focus }) => (
+                  <Link
+                    href="/dashboard"
+                    className={`py-1 px-3 border-[1px] border-color-border-primary
+                    rounded-md hover:text-primary focus:text-primary text-center`}
+                  >
+                    <span>Dashboard</span>
+                  </Link>
+                )}
+              </MenuItem>
+            )}
           </div>
         </MenuItems>
       </Transition>

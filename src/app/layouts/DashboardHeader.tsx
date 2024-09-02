@@ -11,7 +11,7 @@ import { DashboardIcon } from "@/app/shared/Icons/DashboardIcon";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { PostAppLayout } from "@/app/app/PostAppLayout";
 
-export const Header: React.FC = () => {
+export const DashboardHeader: React.FC = () => {
   const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
   const pathname = usePathname();
 
