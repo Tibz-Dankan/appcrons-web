@@ -20,13 +20,13 @@ export const metadata: Metadata = {
   description: "Optimize uptime for your free backend instance on Render",
   openGraph: {
     type: "website",
-    url: "https://www.appcrons.com/",
+    url: "https://appcrons.netlify.app/",
     title: "Appcrons - Keep Your Backend Servers Awake",
     description:
       "Appcrons prevents your backend servers hosted on render.com's free/hobby plan from shutting down due to inactivity. Keep your servers awake with periodic requests.",
     images: [
       {
-        url: "https://www.appcrons.com/images/og-image.png",
+        url: "/logo.png",
         width: 800,
         height: 600,
         alt: "Appcrons",
