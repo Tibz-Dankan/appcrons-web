@@ -62,7 +62,7 @@ export const DocsLayout: React.FC<DocsLayoutProps> = (props) => {
           </span>
           <div className="flex items-center justify-start">
             {pathnameWords.map((word, index) => (
-              <div>
+              <div key={index}>
                 {!isLastWords(pathnameWords, index) && (
                   <div className="flex items-center">
                     <Link
