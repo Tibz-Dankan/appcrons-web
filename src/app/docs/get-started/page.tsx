@@ -3,15 +3,15 @@ import { Metadata } from "next";
 import { DocsLayout } from "@/app/layouts/DocsLayout";
 
 export const metadata: Metadata = {
-  title: "Documentation",
-  description: "Appcrons official documentation",
+  title: "Get started on appcrons",
+  description: "Get started on appcrons",
 };
 
 const Page: React.FC = () => {
   return (
     <DocsLayout>
       <div className="w-[100vh] h-[100vh] grid place-items-center">
-        Documentation
+        Get started on appcrons
       </div>
     </DocsLayout>
   );
