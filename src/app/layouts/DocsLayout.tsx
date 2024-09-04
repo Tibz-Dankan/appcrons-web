@@ -51,7 +51,8 @@ export const DocsLayout: React.FC<DocsLayoutProps> = (props) => {
         <DocsSidebar />
         <main
           className="bg-color-bg-secondary mt-[120px] mb-16 xl:ml-14
-           rounded-lg w-4/5 xl:w-[70%] space-y-4 p-8 pt-6 relative"
+           rounded-lg w-[90%] sm:w-4/5 xl:w-[70%] max-w-[700px] xl:max-w-[auto] 
+           space-y-4 p-8 pt-2 relative border-[1px] border-color-border-primary"
         >
           <span
             className="absolute top-8 right-8 xl:hidden cursor-pointer"
