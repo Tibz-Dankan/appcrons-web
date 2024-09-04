@@ -91,6 +91,13 @@ export const DocsLayout: React.FC<DocsLayoutProps> = (props) => {
               </div>
             ))}
           </div>
+          <div>
+            <h1 className="text-3xl font-semibold">
+              {`${extractLabelFromLink(
+                pathnameWords[pathnameWords.length - 1]
+              )}`}
+            </h1>
+          </div>
           <div>{props.children}</div>
         </main>
       </section>
