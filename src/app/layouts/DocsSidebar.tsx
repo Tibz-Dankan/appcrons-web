@@ -41,8 +41,8 @@ export const DocsSidebar = () => {
     >
       <div
         className="bg-color-bg-secondary ml-14 mt-10 p-8 h-[70vh]
-        rounded-lg relative flex flex-col gap-8 shadow-md
-        border-[1px] border-color-border-primary"
+        rounded-lg relative flex flex-col gap-8 border-[1px]
+        border-color-border-primary"
       >
         <span
           onClick={() => handleCloseSidebar()}
@@ -59,8 +59,9 @@ export const DocsSidebar = () => {
           <span className="text-inherit text-lg">Documentation</span>
         </div>
         <div className="flex flex-col gap-4">
-          {links.map((link) => (
+          {links.map((link, index) => (
             <Link
+              key={index}
               href={`/docs/${link}`}
               className={`first-letter:uppercase hover:text-primary-light
               hover:underline focus:text-primary-light focus:underline ${
