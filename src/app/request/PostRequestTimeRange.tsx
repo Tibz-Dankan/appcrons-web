@@ -153,7 +153,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
 
   return (
     <div
-      className="flex flex-col gap-4 items-center w-[90%] sm:w-96
+      className="flex flex-col gap-4 items-center  w-[90vw] sm:w-96
       p-8 bg-color-bg-primary rounded-md max-h-[70vh] overflow-x-auto"
     >
       <div className="flex items-center justify-between gap-4 w-full">
@@ -183,16 +183,15 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
           Existing Time Ranges
         </span>
         <div
-          className="grid grid-cols-2 gap-2 p-4  border-[1px] 
+          className="w-full grid grid-cols-2 gap-2 p-4 border-[1px] 
            border-color-border-primary rounded-md"
         >
           {/* TODO: organize time ranges based on the start time in ascending order */}
           {requestTimeList.map((requestTime, index) => (
             <p
               key={index}
-              className="flex items-center justify-center gap-1 
-               p-2  border-[1px] border-color-border-primary
-               rounded-md text-[12px]"
+              className="flex items-center justify-center gap-1 p-2 
+              border-[1px] border-color-border-primary rounded-md text-[12px]"
             >
               <span>{convertTo12HourFormat(requestTime?.start)}</span>
               <span>-</span>
@@ -203,8 +202,7 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col gap-0 items-center w-[90%] sm:w-full
-        rounded-md z-[1]"
+        className="w-full flex flex-col gap-0 items-center rounded-md z-[1]"
       >
         <div className="w-full mb-2">
           <p
@@ -240,12 +238,6 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
         </div>
         <div className="w-full flex items-center gap-4 justify-between">
           <div className="w-full -space-y-5s">
-            {/* <label
-              htmlFor="Start"
-              className="text-sm text-color-text-secondary"
-            >
-              Start time
-            </label> */}
             <InputSelect
               label="Start time"
               name="start"
@@ -254,9 +246,6 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
             />
           </div>
           <div className="w-full -space-y-5s">
-            {/* <label htmlFor="End" className="text-sm text-color-text-secondary">
-              End time
-            </label> */}
             <InputSelect
               label="End time"
               name="end"
