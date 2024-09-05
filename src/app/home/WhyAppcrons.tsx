@@ -40,14 +40,14 @@ export const WhyAppcrons: React.FC = () => {
   };
 
   return (
-    <div className="w-full mt-16 space-y-16">
+    <div className="w-full mt-16 sm:mt-8 lg:mt-16 space-y-16">
       <div className="w-full text-center space-y-2">
         <p className="text-3xl font-semibold">Why Appcrons?</p>
         <p className="text-color-text-secondary text-base">
           Tackling Render's Free Tier Limitations
         </p>
       </div>
-      <div className="w-full flex items-start gap-4 ">
+      <div className="w-full flex items-start gap-4">
         <table
           className="border-separate border-spacing-0 
            w-full overflow-x-auto"
