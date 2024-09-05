@@ -15,6 +15,7 @@ export const middleware = (request: NextRequest) => {
   const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
   const isAppRoute = request.nextUrl.pathname.startsWith("/app");
   const isSettingsRoute = request.nextUrl.pathname.startsWith("/settings");
+  const isAuthRoute = request.nextUrl.pathname.startsWith("/auth");
   const protectedRoute = isDashboardRoute || isAppRoute || isSettingsRoute;
 
   if (protectedRoute) {
@@ -34,5 +35,28 @@ export const middleware = (request: NextRequest) => {
     }
 
     return NextResponse.rewrite(new URL(request.nextUrl.pathname, request.url));
+  }
+
+  if (isAuthRoute) {
+    const session = request.cookies.get("session")?.value;
+    if (!session) {
+      return NextResponse.rewrite(
+        new URL(request.nextUrl.pathname, request.url)
+      );
+    }
+
+    const parsedAuth = JSON.parse(session) as TAuth;
+    const decodedToken = jwtDecode(parsedAuth.accessToken);
+
+    const tokenExpInMs = decodedToken.exp! * 1000;
+    const isTokenExpired = new Date(Date.now()) > new Date(tokenExpInMs);
+
+    if (isTokenExpired) {
+      return NextResponse.rewrite(
+        new URL(request.nextUrl.pathname, request.url)
+      );
+    }
+
+    return NextResponse.redirect(new URL("/dashboard", request.url));
   }
 };
