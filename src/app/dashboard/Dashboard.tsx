@@ -80,7 +80,7 @@ const Dashboard: React.FC = () => {
     );
   }
 
-  if (!data || !data.data.apps) {
+  if (data?.data?.apps?.length === 0) {
     return (
       <div className="w-full min-h-[80vh] flex items-center justify-center">
         <Welcome />
