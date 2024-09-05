@@ -8,7 +8,7 @@ export const middleware = (request: NextRequest) => {
 
   // TODO: implement redirectTo, functionality
 
-  if ((request.nextUrl.pathname = "/docs")) {
+  if (request.nextUrl.pathname === "/docs") {
     return NextResponse.redirect(new URL("/docs/get-started", request.url));
   }
 
