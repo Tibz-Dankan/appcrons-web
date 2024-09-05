@@ -163,7 +163,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
 
   return (
     <div
-      className="flex flex-col gap-4 items-center w-[90%] sm:w-96
+      className="flex flex-col gap-4 items-center w-[90vw] sm:w-96
       border-[1px]s  border-color-border-primary p-8
       bg-color-bg-primary rounded-md max-h-[70vh] overflow-x-auto
       shadow-2xl"
@@ -211,7 +211,7 @@ export const UpdateRequestTimeRange: React.FC<UpdateRequestTimeRangeProps> = (
       </div>
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col gap-0 items-center w-[90%] sm:w-full
+        className="flex flex-col gap-0 items-center w-full
         rounded-md z-[1]"
       >
         <div className="w-full mb-2">

@@ -127,17 +127,17 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
       >
         <form
           onSubmit={formik.handleSubmit}
-          className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-           rounded-md z-[1] p-4 sm:p-8"
+          className="flex flex-col gap-0 items-center w-[90vw] sm:w-96
+           rounded-md z-[1] p-8"
         >
           <div className="text-sm w-full flex flex-col gap-4">
             <p className="">
-              All requests and request time ranges associated with{" "}
+              All requests and request time frames associated with{" "}
               <span className="mx-1 font-semibold">{app.name}</span>
-              will be deleted immediately. This action cannot be undone.
+              will be deleted immediately. This action cannot be undone, please
+              be certain.
             </p>
-            <p>Are you sure you want to delete this application?</p>
-            <label htmlFor="roomName" className="">
+            <label htmlFor="appName">
               Type
               <span className="text-[#ff4d4f] ml-1 font-semibold">
                 delete application {" " + app.name + " "}
@@ -145,7 +145,7 @@ export const DeleteApp: React.FC<DeleteAppProps> = (props) => {
               below to confirm.
             </label>
           </div>
-          <div className="w-full">
+          <div className="w-full mt-4">
             <InputField
               type="text"
               name="appName"

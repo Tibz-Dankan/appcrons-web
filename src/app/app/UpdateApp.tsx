@@ -86,7 +86,7 @@ export const UpdateApp: React.FC<PostAppProps> = (props) => {
     <div className="">
       <form
         onSubmit={formik.handleSubmit}
-        className="flex flex-col gap-0 items-center w-[90%] sm:w-96
+        className="flex flex-col gap-0 items-center w-[90vw] sm:w-96
          p-8 bg-color-bg-primary rounded-md z-[1]"
       >
         <div className="w-full text-centers mb-4">
