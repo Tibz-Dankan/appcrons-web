@@ -15,6 +15,7 @@ export const AuthenticateClient: React.FC<AuthenticateClientProps> = (
   const dispatch = useAppDispatch();
   const session = props.session;
 
+  // TODO: to implement auto logout functionality
   useEffect(() => {
     const authenticateClient = async () => {
       dispatch(authActions.authenticate(session));
