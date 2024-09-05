@@ -118,20 +118,22 @@ const Page: React.FC = () => {
               alt="finish-app-step"
             />
           </div>
-          <p className="mt-2">
-            If you want to have multiple applications on the same Render
-            account, consider adding a{" "}
-            <Link
-              href="/docs/add-request-time-frame"
-              className="text-blue-500 hover:underline focus:underline"
-            >
-              Request Time Frame (RTF)
-            </Link>{" "}
-            for your application.
-          </p>
+          <div>
+            <p className="mt-4">
+              If you want to have multiple applications on the same Render
+              account, consider adding a{" "}
+              <Link
+                href="/docs/add-request-time-frame"
+                className="text-blue-500 hover:underline focus:underline"
+              >
+                Request Time Frame (RTF)
+              </Link>{" "}
+              for your application.
+            </p>
+          </div>
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold">Useful Resources</h2>
+          <h2 className="text-xl">Useful Resources</h2>
           <div className="flex flex-col gap-1">
             <Link
               href="/docs/add-request-time-frame"

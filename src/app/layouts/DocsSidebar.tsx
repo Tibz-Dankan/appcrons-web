@@ -53,7 +53,7 @@ export const DocsSidebar = () => {
         </span>
         <div
           className="flex items-center justify-center gap-2 rounded-md
-           border-[1px] border-secondary p-4"
+           border-[1px] border-secondary px-4 py-2"
         >
           <DocumentIcon className="text-inherit" />
           <span className="text-inherit text-lg">Documentation</span>
