@@ -8,6 +8,10 @@ export const middleware = (request: NextRequest) => {
 
   // TODO: implement redirectTo, functionality
 
+  if ((request.nextUrl.pathname = "/docs")) {
+    return NextResponse.redirect(new URL("/docs/get-started", request.url));
+  }
+
   const isDashboardRoute = request.nextUrl.pathname.startsWith("/dashboard");
   const isAppRoute = request.nextUrl.pathname.startsWith("/app");
   const isSettingsRoute = request.nextUrl.pathname.startsWith("/settings");
