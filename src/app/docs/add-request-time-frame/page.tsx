@@ -14,102 +14,88 @@ const Page: React.FC = () => {
     <DocsLayout>
       <div className="w-full min-h-[50vh] space-y-8">
         <div className="space-y-2">
-          <p className="mt-2">
-            To add an application, you can click buttons labelled '+New' in the
-            navbar. There are three steps involved in this process and that is
-            add application basic information, enable application and finish.
+          <h2 className="text-lg">What is Request Time Frame(RTF)?</h2>
+          <p>
+            Request Time Frame(RTF), is time range in which an application
+            receives requests. An example of RFT is 6:00AM - 11:00PM. If an
+            application has a RTF of 6:00AM to 11:00PM, it implies that the
+            application can only receive requests starting from 6:00AM to
+            11:00PM in a day.
+          </p>
+          <p>
+            Request Time Frame(RTF) is timezone based meaning the 6:00AM -
+            11:00PM example above would be the local time of the timezone that
+            was provided when adding the RTF. RTFs can be modified and deleted.
           </p>
         </div>
         <div className="space-y-2">
-          <h3 className="text-lg">Step 1: Add new application</h3>
+          <h2 className="text-lg">
+            Why should I add Request Time Frame(RTF) to my application?
+          </h2>
           <p>
-            This step involves adding application basic information such as
-            application name, URL Endpoint and Request Interval. URL Endpoint
-            should be a path such as
-            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
-              https://appname.onrender.com/active
-            </span>
-            that points a
-            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
-              GET request
-            </span>
-            API endpoint that returns status code of
-            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
-              200
-            </span>{" "}
-            and it shouldn't process anything. The Endpoint is where Appcrons
-            makes requests. The request Interval is always in minutes.
+            Render provides each account free 750 hours of compute every month
+            which is equivalent to running one backend server through out the
+            month without downtime. When you have multiple servers on the same
+            free account running all time, you are most likely to finish to your
+            free compute time within days and Render shutdown all your apps
+            until next calendar month begins.
           </p>
-          <div className="">
+          <p>
+            To stay within the limits of 750 hours, Appcrons provides RFT
+            feature to allow you provide specific request time frames in which
+            your application server can have guaranteed uptime.
+          </p>
+          <p>
+            <span className="mr-2">Note:</span>
+            We highly recommend having one application server that runs all time
+            or most for the part of day per Render account.
+          </p>
+        </div>
+        <div className="space-y-2">
+          <h2 className="text-lg">Add Request Time Frame</h2>
+          <p>
+            To add a request time frame for an application, you will need to go
+            the application details page, click the button labelled "New"
+            located on the "Request Time Frame" card.
+          </p>
+          <div>
             <AppImage
-              src="/docs/add-new-app-step-light.png"
-              lightModeSRC="/docs/add-new-app-step-light.png"
-              darkModeSRC="/docs/add-new-app-step-dark.png"
-              width={1350}
-              height={600}
-              className="mt-4"
-              alt="add-new-app-step"
+              src="/docs/rtf-card-light.png"
+              lightModeSRC="/docs/rtf-card-light.png"
+              darkModeSRC="/docs/rtf-card-dark.png"
+              width={450}
+              height={250}
+              className="mt-4 object-contain"
+              alt="rtf-card"
             />
           </div>
+          <p className="my-8">
+            Then select timezone, start time and End time and submit.
+          </p>
+          <AppImage
+            src="/docs/request-time-frame-light.png"
+            lightModeSRC="/docs/request-time-frame-light.png"
+            darkModeSRC="/docs/request-time-frame-dark.png"
+            width={450}
+            height={250}
+            className="mt-4"
+            alt="request-time-frame"
+          />
         </div>
         <div className="space-y-2">
-          <h3 className="text-lg">Step 2: Enable application</h3>
-          <p>
-            By enabling an application, it's able to receive requests from
-            Appcrons. When an application is added for the first time, it's
-            disabled by default in other words an unable to receive requests and
-            so it to be enabled in this step.
-          </p>
-          <div className="">
-            <AppImage
-              src="/docs/enable-app-step-light.png"
-              lightModeSRC="/docs/enable-app-step-light.png"
-              darkModeSRC="/docs/enable-app-step-dark.png"
-              width={1350}
-              height={600}
-              className="mt-4"
-              alt="enable-app-step"
-            />
-          </div>
-        </div>
-        <div className="space-y-2">
-          <h3 className="text-lg">Step 3: Finish</h3>
-          <p>
-            If you have reached this step congratulations, you have successfully
-            added your first application Appcrons. Go ahead and click button
-            labelled "Finish" which leads to the application details page.
-          </p>
-          <div className="">
-            <AppImage
-              src="/docs/finish-app-step-light.png"
-              lightModeSRC="/docs/finish-app-step-light.png"
-              darkModeSRC="/docs/finish-app-step-dark.png"
-              width={1350}
-              height={600}
-              className="mt-4"
-              alt="finish-app-step"
-            />
-          </div>
-          <p className="mt-2">
-            If have multiple applications on the same Render Account consider
-            adding{" "}
-            <Link
-              href="/docs/add-request-time-frame"
-              className="text-blue-500 hover:underline focus:underline"
-            >
-              Request Time Frame(RTF)
-            </Link>{" "}
-            for your application.
-          </p>
-        </div>
-        <div className="space-y-2">
-          <h2 className="text-xl font-semibold">Useful resources</h2>
+          <h2 className="text-xl">Useful resources</h2>
           <div className="flex flex-col gap-1">
             <Link
-              href="/docs/add-request-time-frame"
+              href="/docs/get-started"
               className="text-blue-500 hover:underline focus:underline"
             >
-              Add request time frame for your application
+              Get started on Appcrons
+            </Link>
+            <Link
+              href="/docs/add-application"
+              className="text-blue-500 hover:underline focus:underline"
+            >
+              Add your application on Appcrons
             </Link>
             <Link
               href="/docs/how-appcrons-work"
