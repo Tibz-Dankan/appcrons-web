@@ -15,9 +15,9 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-import Image from "next/image";
+// import Image from "next/image";
 import { useRouter } from "@/lib/router-events";
-// import { Logo } from "@/app/shared/logo";
+import { Logo } from "@/app/shared/Logo";
 
 import { authenticate } from "@/store/actions/auth";
 
@@ -87,8 +87,8 @@ export const LogIn: React.FC = () => {
       >
         <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
-            <Image src="/logo.png" width={80} height={80} alt="logo" />
-            {/* <Logo /> */}
+            {/* <Image src="/logo.png" width={80} height={80} alt="logo" /> */}
+            <Logo />
           </Link>
           <p className="text-center text-2xl">Log in to Appcrons</p>
         </div>
