@@ -20,12 +20,12 @@ export const CreatorsWords: React.FC = () => {
            before:absolute before:top-0 before:left-0 before:w-2 shadow
            before:h-full before:rounded-l-2xl before:bg-secondary"
         >
-          <p>
-            "As a developer, who loves tinkering with various project ideas, I
-            felt like there was need for a tool that enables free backend
-            instances provided by platforms like Render to have guaranteed
-            uptime for any given customizable period of time and that kick
-            started Appcrons." – Tibesigwa Dankan
+          <p className="lg:leading-[1.85]">
+            "As a developer who loves tinkering with various project ideas, I
+            felt there was a need for a tool that enables free backend instances
+            provided by platforms like Render to have guaranteed uptime for any
+            customizable period of time. That’s how Appcrons was born." –
+            Tibesigwa Dankan
           </p>
         </div>
         <div
