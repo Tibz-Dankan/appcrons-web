@@ -30,15 +30,15 @@ export const Footer: React.FC = () => {
           <span>All rights reserved.</span>
         </div>
         <div className="flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <div className="flex items-start justify-center text-color-text-secondary">
+          {/* <div className="flex items-start justify-center text-color-text-secondary">
             Contact Us
-          </div>
+          </div> */}
           <Link href="/docs" className="flex items-start justify-center">
             <span className="text-color-text-secondary">Documentation</span>
           </Link>
-          <Link href="/caution" className="flex items-start justify-center">
+          {/* <Link href="/caution" className="flex items-start justify-center">
             <span className="text-color-text-secondary">Caution</span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>

@@ -31,8 +31,8 @@ export const DashboardFooter: React.FC = () => {
             <DocumentIcon className="text-color-text-secondary" />
             <span className="text-color-text-secondary">Docs</span>
           </Link>
-          <PostFeedback />
-          <Link
+          {/* <PostFeedback /> */}
+          {/* <Link
             href="/acknowledgement"
             className="flex items-start justify-center gap-1"
           >
@@ -40,8 +40,8 @@ export const DashboardFooter: React.FC = () => {
             <span className="text-color-text-secondary text-sm">
               Acknowledgement
             </span>
-          </Link>
-          <Link
+          </Link> */}
+          {/* <Link
             href="/disclaimer"
             className="flex items-start justify-center gap-1"
           >
@@ -49,7 +49,7 @@ export const DashboardFooter: React.FC = () => {
             <span className="text-color-text-secondary text-sm">
               Disclaimer
             </span>
-          </Link>
+          </Link> */}
         </div>
       </div>
     </footer>
