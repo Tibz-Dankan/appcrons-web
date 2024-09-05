@@ -69,7 +69,7 @@ export const EnableAppOnPost: React.FC<EnableAppOnPost> = (props) => {
 
   return (
     <div
-      className="w-[90%] sm:w-96 flex flex-col items-center 
+      className="w-[70vw] sm:w-96 flex flex-col items-center 
        justify-start gap-4 h-full bg-green-500s flex-1 relative"
     >
       <div className="w-full">
@@ -114,7 +114,7 @@ export const EnableAppOnPost: React.FC<EnableAppOnPost> = (props) => {
         type={"button"}
         className="bg-color-bg-secondary text-color-text-primary outline-none
         hover:text-primary-light focus:text-primary-light absolute
-        -bottom-7 right-0 h-auto py-1"
+         -bottom-2 md:-bottom-7 right-0 h-auto py-1"
       />
     </div>
   );

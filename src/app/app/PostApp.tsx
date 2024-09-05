@@ -85,7 +85,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-0 items-center w-[90%] sm:w-96"
+      className="flex flex-col gap-0 items-center w-[70vw] sm:w-96"
     >
       <InputField
         type="text"
@@ -110,9 +110,9 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
       <Button
         label={
           <>
-            {!isPending && <span>Create</span>}
+            {!isPending && <span>Submit</span>}
             {isPending && (
-              <Spinner label="creating" className="w-5 h-5 text-gray-100" />
+              <Spinner label="submitting" className="w-5 h-5 text-gray-100" />
             )}
           </>
         }
