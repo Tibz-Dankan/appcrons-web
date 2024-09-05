@@ -69,7 +69,7 @@ export const AppImage: React.FC<AppImageProps> = (props) => {
         height={600}
         alt={props.alt!}
         className={twMerge(
-          `w-full h-auto aspect-[4/3] rounded-md bg-gray-300
+          `w-full h-auto aspect-[4/3] rounded-md bg-color-bg-secondary
            object-cover border-[1px] border-secondary`,
           props.className
         )}

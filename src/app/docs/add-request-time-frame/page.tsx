@@ -5,8 +5,8 @@ import { Link } from "@/lib/router-events";
 import { AppImage } from "@/app/shared/AppImage";
 
 export const metadata: Metadata = {
-  title: "Add request time frame for an application on appcrons",
-  description: "Add request time frame for an application on appcrons",
+  title: "Add Request Time Frame for an Application on Appcrons",
+  description: "Add a Request Time Frame for an application on Appcrons",
 };
 
 const Page: React.FC = () => {
@@ -14,49 +14,50 @@ const Page: React.FC = () => {
     <DocsLayout>
       <div className="w-full min-h-[50vh] space-y-8">
         <div className="space-y-2">
-          <h2 className="text-lg">What is Request Time Frame(RTF)?</h2>
+          <h2 className="text-lg">What is a Request Time Frame (RTF)?</h2>
           <p>
-            Request Time Frame(RTF), is time range in which an application
-            receives requests. An example of RFT is 6:00AM - 11:00PM. If an
-            application has a RTF of 6:00AM to 11:00PM, it implies that the
-            application can only receive requests starting from 6:00AM to
-            11:00PM in a day.
+            A Request Time Frame (RTF) is a time range during which an
+            application receives requests. For example, an RTF might be from
+            6:00 AM to 11:00 PM. If an application has an RTF of 6:00 AM to
+            11:00 PM, it means the application can only receive requests between
+            6:00 AM and 11:00 PM each day.
           </p>
           <p>
-            Request Time Frame(RTF) is timezone based meaning the 6:00AM -
-            11:00PM example above would be the local time of the timezone that
-            was provided when adding the RTF. RTFs can be modified and deleted.
+            The Request Time Frame (RTF) is based on the timezone specified when
+            adding the RTF. The 6:00 AM - 11:00 PM example above would be in the
+            local time of the timezone provided. RTFs can be modified or deleted
+            as needed.
           </p>
         </div>
         <div className="space-y-2">
           <h2 className="text-lg">
-            Why should I add Request Time Frame(RTF) to my application?
+            Why Should I Add a Request Time Frame (RTF) to My Application?
           </h2>
           <p>
-            Render provides each account free 750 hours of compute every month
-            which is equivalent to running one backend server through out the
-            month without downtime. When you have multiple servers on the same
-            free account running all time, you are most likely to finish to your
-            free compute time within days and Render shutdown all your apps
-            until next calendar month begins.
+            Render provides each account with 750 free compute hours each month,
+            which is equivalent to running one backend server continuously
+            throughout the month without downtime. If you have multiple servers
+            on the same free account running all the time, you are likely to
+            exhaust your free compute hours within a few days, leading to Render
+            shutting down all your apps until the next calendar month begins.
           </p>
           <p>
-            To stay within the limits of 750 hours, Appcrons provides RFT
-            feature to allow you provide specific request time frames in which
-            your application server can have guaranteed uptime.
+            To stay within the 750-hour limit, Appcrons offers the RTF feature,
+            allowing you to specify request time frames during which your
+            application server can have guaranteed uptime.
           </p>
           <p>
             <span className="mr-2">Note:</span>
-            We highly recommend having one application server that runs all time
-            or most for the part of day per Render account.
+            We highly recommend having one application server that runs all the
+            time or for most of the day per Render account.
           </p>
         </div>
         <div className="space-y-2">
-          <h2 className="text-lg">Add Request Time Frame</h2>
+          <h2 className="text-lg">Add a Request Time Frame</h2>
           <p>
-            To add a request time frame for an application, you will need to go
-            the application details page, click the button labelled "New"
-            located on the "Request Time Frame" card.
+            To add a request time frame for an application, go to the
+            application details page, and click the button labeled "New" located
+            on the "Request Time Frame" card.
           </p>
           <div>
             <AppImage
@@ -65,13 +66,16 @@ const Page: React.FC = () => {
               darkModeSRC="/docs/rtf-card-dark.png"
               width={450}
               height={250}
-              className="mt-4 object-contain"
-              alt="rtf-card"
+              className="mt-4 w-3/5 object-contain"
+              alt="RTF card"
             />
           </div>
-          <p className="my-8">
-            Then select timezone, start time and End time and submit.
-          </p>
+          <div>
+            <p className="my-8">
+              Then, select the timezone, start time, and end time, and submit
+              your choices.
+            </p>
+          </div>
           <AppImage
             src="/docs/request-time-frame-light.png"
             lightModeSRC="/docs/request-time-frame-light.png"
@@ -79,29 +83,29 @@ const Page: React.FC = () => {
             width={450}
             height={250}
             className="mt-4"
-            alt="request-time-frame"
+            alt="Request time frame"
           />
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl">Useful resources</h2>
+          <h2 className="text-xl">Useful Resources</h2>
           <div className="flex flex-col gap-1">
             <Link
               href="/docs/get-started"
               className="text-blue-500 hover:underline focus:underline"
             >
-              Get started on Appcrons
+              Get Started on Appcrons
             </Link>
             <Link
               href="/docs/add-application"
               className="text-blue-500 hover:underline focus:underline"
             >
-              Add your application on Appcrons
+              Add Your Application on Appcrons
             </Link>
             <Link
               href="/docs/how-appcrons-work"
               className="text-blue-500 hover:underline focus:underline"
             >
-              How Appcrons work
+              How Appcrons Works
             </Link>
           </div>
         </div>

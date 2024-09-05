@@ -5,8 +5,8 @@ import { Link } from "@/lib/router-events";
 import { AppImage } from "@/app/shared/AppImage";
 
 export const metadata: Metadata = {
-  title: "Add application on appcrons",
-  description: "Add application on appcrons",
+  title: "Add an application on Appcrons",
+  description: "Add an application on Appcrons",
 };
 
 const Page: React.FC = () => {
@@ -15,32 +15,32 @@ const Page: React.FC = () => {
       <div className="w-full min-h-[50vh] space-y-8">
         <div className="space-y-2">
           <p className="mt-2">
-            To add an application, you can click buttons labelled '+New' in the
-            navbar. There are three steps involved in this process and that is
-            add application basic information, enable application and finish.
+            To add an application, click the '+New' button in the navbar. This
+            process involves three steps: adding application information,
+            enabling the application, and finishing.
           </p>
         </div>
         <div className="space-y-2">
-          <h3 className="text-lg">Step 1: Add new application</h3>
+          <h3 className="text-lg">Step 1: Add New Application</h3>
           <p>
-            This step involves adding application basic information such as
-            application name, URL Endpoint and Request Interval. URL Endpoint
-            should be a path such as
+            In this step, you need to provide basic information, including the
+            application name, URL Endpoint, and Request Interval. The URL
+            Endpoint should be a path like
             <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
               https://appname.onrender.com/active
             </span>
-            that points a
+            that points to a
             <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
               GET request
             </span>
-            API endpoint that returns status code of
+            API endpoint. The endpoint should return a status code of
             <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
               200
             </span>{" "}
-            and it shouldn't process anything. The Endpoint is where Appcrons
-            makes requests. The request Interval is always in minutes.
+            without processing anything. This is where Appcrons will send
+            requests. The Request Interval is set in minutes.
           </p>
-          <div className="">
+          <div>
             <AppImage
               src="/docs/add-new-app-step-light.png"
               lightModeSRC="/docs/add-new-app-step-light.png"
@@ -48,17 +48,16 @@ const Page: React.FC = () => {
               width={1350}
               height={600}
               className="mt-4"
-              alt="add-new-app-step"
+              alt="Add new application step"
             />
           </div>
         </div>
         <div className="space-y-2">
-          <h3 className="text-lg">Step 2: Enable application</h3>
+          <h3 className="text-lg">Step 2: Enable Application</h3>
           <p>
-            By enabling an application, it's able to receive requests from
-            Appcrons. When an application is added for the first time, it's
-            disabled by default in other words an unable to receive requests and
-            so it to be enabled in this step.
+            After adding the application, it's disabled by default, meaning it
+            won't receive requests from Appcrons. You need to enable it in this
+            step to start receiving requests.
           </p>
           <div>
             <AppImage
@@ -68,16 +67,16 @@ const Page: React.FC = () => {
               width={1350}
               height={600}
               className="mt-4"
-              alt="enable-app-step"
+              alt="Enable application step"
             />
           </div>
         </div>
         <div className="space-y-2">
           <h3 className="text-lg">Step 3: Finish</h3>
           <p>
-            If you have reached this step congratulations, you have successfully
-            added your first application Appcrons. Go ahead and click button
-            labelled "Finish" which leads to the application details page.
+            Congratulations! You have successfully added your first application
+            on Appcrons. Click the "Finish" button to proceed to the application
+            details page.
           </p>
           <div>
             <AppImage
@@ -86,36 +85,36 @@ const Page: React.FC = () => {
               darkModeSRC="/docs/finish-app-step-dark.png"
               width={1350}
               height={600}
-              className="mt-4"
-              alt="finish-app-step"
+              className="my-4"
+              alt="Finish application step"
             />
           </div>
-          <p className="mt-2">
-            If have multiple applications on the same Render Account consider
-            adding{" "}
+          <p className="mt-4">
+            If you have multiple applications on the same Render account,
+            consider adding a{" "}
             <Link
               href="/docs/add-request-time-frame"
               className="text-blue-500 hover:underline focus:underline"
             >
-              Request Time Frame(RTF)
+              Request Time Frame (RTF)
             </Link>{" "}
-            for your application.
+            for your applications.
           </p>
         </div>
         <div className="space-y-2">
-          <h2 className="text-xl font-semibold">Useful resources</h2>
+          <h2 className="text-xl">Useful resources</h2>
           <div className="flex flex-col gap-1">
             <Link
               href="/docs/add-request-time-frame"
               className="text-blue-500 hover:underline focus:underline"
             >
-              Add request time frame for your application
+              Add Request Time Frame for your application
             </Link>
             <Link
               href="/docs/how-appcrons-work"
               className="text-blue-500 hover:underline focus:underline"
             >
-              How Appcrons work
+              How Appcrons works
             </Link>
           </div>
         </div>
