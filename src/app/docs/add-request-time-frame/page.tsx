@@ -80,8 +80,8 @@ const Page: React.FC = () => {
             src="/docs/request-time-frame-light.png"
             lightModeSRC="/docs/request-time-frame-light.png"
             darkModeSRC="/docs/request-time-frame-dark.png"
-            width={450}
-            height={250}
+            width={1350}
+            height={600}
             className="mt-4"
             alt="Request time frame"
           />
