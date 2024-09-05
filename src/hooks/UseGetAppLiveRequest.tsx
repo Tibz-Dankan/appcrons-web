@@ -31,7 +31,6 @@ export const useGetAppLiveRequest = async () => {
 
     const onmessage = async (event: any) => {
       const parsedData = JSON.parse(event.data) as TAppLiveRequest;
-      console.log("parsedData:", parsedData);
       const message = parsedData.message;
       if (message === "heartbeat" || message === "warmup") return;
 

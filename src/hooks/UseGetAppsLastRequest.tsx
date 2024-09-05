@@ -48,7 +48,7 @@ export const useGetAppsLastRequest = () => {
   useEffect(() => {
     const updateAppsHandler = () => {
       if (!data) return;
-      const appList: TAppLiveRequest[] = data.data.apps;
+      const appList: TAppLiveRequest[] = data?.data.apps;
 
       appList.map((app) => {
         dispatch(updateAppLiveRequest({ appId: app.id, app: app }));

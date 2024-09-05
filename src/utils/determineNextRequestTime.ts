@@ -49,10 +49,6 @@ export const determineNextRequestTime = (
     .tz(timezone)
     .format();
   const currentTime = new Date(currentTimeStringWithTimezone);
-  console.log("application name:", app.name);
-  console.log("currentTime:", currentTime);
-  console.log("timezone:", timezone);
-  console.log("requestTimes:", app.requestTimes);
 
   // get nextRequestTime in the application timezone
   const nextRequestDate = new Date(
@@ -62,8 +58,6 @@ export const determineNextRequestTime = (
     .tz(timezone)
     .format();
   const nextRequestTime = new Date(nextRequestTimeStringWithTimezone);
-
-  console.log("nextRequestTime:", nextRequestTime);
 
   const nextRequestInMinutes =
     nextRequestTime.getHours() * 60 + nextRequestTime.getMinutes();
