@@ -7,12 +7,18 @@ interface HeroProps {
 
 export const Hero: React.FC<HeroProps> = (props) => {
   return (
-    <header className="w-full h-[100vh] relative bg-transparent">
+    <header
+      className="w-full h-[80vh] sm:h-[80vh] md:h-[100vh]
+      relative bg-transparent"
+    >
       <div className="w-full h-full">{props.children}</div>
       <div className="w-full h-full absolute top-0 left-0 z-[-100]">
         <Grid />
       </div>
-      <div className="w-4/5 h-4/5 absolute top-[25%] left-[10%] z-0 opacity-50">
+      <div
+        className="hidden md:block w-[90%] h-[90%] lg:w-4/5 lg:h-4/5 
+        lg:left-[10%] absolute top-[25%] left-[5%] z-0 opacity-50"
+      >
         <Grid
           rows={4}
           columns={8}
