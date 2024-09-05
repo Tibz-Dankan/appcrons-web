@@ -38,7 +38,21 @@ export const AppImage: React.FC<AppImageProps> = (props) => {
   }, [theme]);
 
   if (!isClient) {
-    return null;
+    return (
+      <Fragment>
+        <Image
+          src={props.src}
+          width={props.width}
+          height={props.height}
+          alt={props.alt!}
+          className={twMerge(
+            `w-full h-auto aspect-[4/3] rounded-md bg-color-bg-secondary
+           object-cover border-[1px] border-secondary`,
+            props.className
+          )}
+        />
+      </Fragment>
+    );
   }
 
   const hasDarkModeImage =
@@ -65,8 +79,8 @@ export const AppImage: React.FC<AppImageProps> = (props) => {
     <Fragment>
       <Image
         src={src!}
-        width={1350}
-        height={600}
+        width={props.width}
+        height={props.height}
         alt={props.alt!}
         className={twMerge(
           `w-full h-auto aspect-[4/3] rounded-md bg-color-bg-secondary
