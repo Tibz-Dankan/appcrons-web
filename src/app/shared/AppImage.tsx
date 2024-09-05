@@ -1,8 +1,10 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect, useState } from "react";
 import { twMerge } from "tailwind-merge";
 import Image from "next/image";
+import { useIsClient } from "@/hooks/UseIsClient";
+import { useTheme } from "next-themes";
 
 interface AppImageProps {
   src: string;
@@ -15,18 +17,43 @@ interface AppImageProps {
 }
 
 export const AppImage: React.FC<AppImageProps> = (props) => {
-  const colorScheme = document.documentElement.style.colorScheme;
-  const isDarkMode = colorScheme === "dark";
+  const { theme, setTheme } = useTheme();
+  const [isDarkMode, setIsDarkMode] = useState(false);
+  const [isLightMode, setIsLightMode] = useState(false);
+  const isClient = useIsClient();
+
+  useEffect(() => {
+    const setDefaultTheme = () => {
+      const colorScheme = document.documentElement.style.colorScheme;
+      const isDarkMode = colorScheme === "dark";
+      const isLightMode = colorScheme === "light";
+
+      setIsDarkMode(() => isDarkMode);
+      setIsLightMode(() => isLightMode);
+    };
+
+    setTimeout(() => {
+      setDefaultTheme();
+    }, 10);
+  }, [theme]);
+
+  if (!isClient) {
+    return null;
+  }
 
   const hasDarkModeImage =
     (isDarkMode && props.darkModeSRC !== null) ||
     (isDarkMode && props.darkModeSRC !== undefined);
 
   const hasLightModeImage =
-    (!isDarkMode && props.lightModeSRC !== null) ||
-    (!isDarkMode && props.lightModeSRC !== undefined);
+    (isLightMode && props.lightModeSRC !== null) ||
+    (isLightMode && props.lightModeSRC !== undefined);
 
-  const hasMultipleModeImages = hasDarkModeImage || hasLightModeImage;
+  const hasMultipleModeImages = hasDarkModeImage
+    ? hasDarkModeImage
+    : hasLightModeImage
+    ? hasLightModeImage
+    : false;
 
   const src = hasMultipleModeImages
     ? hasDarkModeImage
@@ -37,7 +64,7 @@ export const AppImage: React.FC<AppImageProps> = (props) => {
   return (
     <Fragment>
       <Image
-        src={props.src}
+        src={src!}
         width={1350}
         height={600}
         alt={props.alt!}
