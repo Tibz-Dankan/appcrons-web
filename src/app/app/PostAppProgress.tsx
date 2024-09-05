@@ -12,7 +12,7 @@ export const PostAppProgress: React.FC = () => {
   const currentStep = step ? step : "1";
 
   const steps = [
-    { step: 1, label: "Create new application" },
+    { step: 1, label: "Add new application" },
     { step: 2, label: "Enable application" },
     { step: 3, label: "Finish" },
   ];
