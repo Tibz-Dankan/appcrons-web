@@ -8,13 +8,18 @@ import { Link } from "@/lib/router-events";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { MobileNavMenu } from "@/app/home/MobileNavMenu";
 import { TAuth } from "@/types/auth";
+import { useIsClient } from "@/hooks/UseIsClient";
 
 export const NavBar: React.FC = () => {
   const pathname = usePathname();
+  const isClient = useIsClient();
+  let isLoggedIn: boolean = false;
 
-  const strAuthData = localStorage.getItem("session");
-  const parsedAuthData: TAuth = strAuthData && JSON.parse(strAuthData);
-  const isLoggedIn = !!parsedAuthData?.accessToken;
+  if (isClient) {
+    const strAuthData = localStorage.getItem("session");
+    const parsedAuthData: TAuth = strAuthData && JSON.parse(strAuthData);
+    isLoggedIn = !!parsedAuthData?.accessToken;
+  }
 
   const isDocsPath = pathname.startsWith("/docs");
 
