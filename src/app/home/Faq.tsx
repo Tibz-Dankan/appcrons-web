@@ -28,9 +28,9 @@ const faqs = [
     show: false,
   },
   {
-    question: "Can I enable or disable monitoring for specific applications?",
+    question: "Can I enable or disable requests for specific applications?",
     answer:
-      "Absolutely. Appcrons allows you to easily enable or disable monitoring for individual applications, giving you full control over which servers receive automated requests.",
+      "Absolutely. Appcrons allows you to easily enable or disable requests for individual applications, giving you full control over which servers receive automated requests.",
     show: false,
   },
   {
@@ -47,7 +47,7 @@ const faqs = [
   {
     question: "What if I need help using Appcrons?",
     answer:
-      "If you need assistance, you can contact our support team via email at support@appcrons.com or visit our help center on the Appcrons website for guides and tutorials.",
+      "If you need assistance, feel free to reach out to the creator via his socials, which can be found in the creator's section above.",
     show: false,
   },
 ];
