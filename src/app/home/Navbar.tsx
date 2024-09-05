@@ -7,11 +7,14 @@ import { ThemeController } from "@/app/shared/ThemeController";
 import { Link } from "@/lib/router-events";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { MobileNavMenu } from "@/app/home/MobileNavMenu";
-import { useAppSelector } from "@/hooks/redux";
+import { TAuth } from "@/types/auth";
 
 export const NavBar: React.FC = () => {
   const pathname = usePathname();
-  const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
+
+  const strAuthData = localStorage.getItem("session");
+  const parsedAuthData: TAuth = strAuthData && JSON.parse(strAuthData);
+  const isLoggedIn = !!parsedAuthData?.accessToken;
 
   const isDocsPath = pathname.startsWith("/docs");
 
