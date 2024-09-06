@@ -18,15 +18,43 @@ const Page: React.FC = () => {
           <p>
             A Request Time Frame (RTF) is a time range during which an
             application receives requests. For example, an RTF might be from
-            6:00 AM to 11:00 PM. If an application has an RTF of 6:00 AM to
-            11:00 PM, it means the application can only receive requests between
-            6:00 AM and 11:00 PM each day.
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              6:00 AM
+            </span>
+            to
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              11:00 PM
+            </span>
+            . If an application has an RTF of
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              6:00 AM
+            </span>
+            to
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              11:00 PM
+            </span>
+            , it means the application can only receive requests between
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              6:00 AM
+            </span>
+            and
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              11:00 PM
+            </span>
+            each day.
           </p>
           <p>
             The Request Time Frame (RTF) is based on the timezone specified when
-            adding the RTF. The 6:00 AM - 11:00 PM example above would be in the
-            local time of the timezone provided. RTFs can be modified or deleted
-            as needed.
+            adding the RTF. The
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              6:00 AM
+            </span>
+            -
+            <span className="border-[1px] border-color-border-primary mx-1 px-1 rounded">
+              11:00 PM
+            </span>
+            example above would be in the local time of the timezone provided.
+            RTFs can be modified or deleted as needed.
           </p>
         </div>
         <div className="space-y-2">

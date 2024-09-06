@@ -94,7 +94,7 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
         closed={isClosedModal}
       >
         <div className="flex items-start justify-center gap-2">
-          <div className="p-8 pt-6 pr-0 space-y-4">
+          <div className="p-8 pt-6 pr-0 space-y-4 hidden md:block">
             <p className="text-2xl font">Steps</p>
             <div
               className="w-64 p-4 border-[1px] border-color-border-primary 
@@ -103,14 +103,13 @@ export const PostAppLayout: React.FC<PostAppLayoutProps> = (props) => {
               <PostAppProgress />
             </div>
           </div>
-          <div className="p-8 pt-6 flex flex-col gap-4 min-h-[54vh] h-full bg-blue-500s">
+          <div className="min-h-[54vh] h-full p-8 pt-6 flex flex-col gap-4">
             <h4 className="text-2xl">{getLabel(parseInt(step))}</h4>
             {showPostAppForm && <PostApp onPost={onPostHandler} />}
             {showEnableAppOnPost && (
               <EnableAppOnPost onEnable={onEnableAppHandler} />
             )}
             {showPostAppExit && <PostAppExit onExit={onExitHandler} />}
-            {/*  */}
           </div>
         </div>
       </Modal>

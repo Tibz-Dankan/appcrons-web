@@ -54,42 +54,46 @@ export const DocsLayout: React.FC<DocsLayoutProps> = (props) => {
            rounded-lg w-[90%] sm:w-4/5 xl:w-[70%] max-w-[700px] xl:max-w-[auto] 
            space-y-4 p-8 pt-2 relative border-[1px] border-color-border-primary"
         >
-          <span
-            className="absolute top-8 right-8 xl:hidden cursor-pointer"
-            onClick={() => handleOpenCloseSidebar()}
-          >
-            <MenuIcon />
-          </span>
-          <div className="flex items-center justify-start">
-            {pathnameWords.map((word, index) => (
-              <div key={index}>
-                {!isLastWords(pathnameWords, index) && (
-                  <div className="flex items-center">
+          <div className="flex items-center justify-between gap-4">
+            <div className="flex items-center justify-start">
+              {pathnameWords.map((word, index) => (
+                <div key={index}>
+                  {!isLastWords(pathnameWords, index) && (
+                    <div className="flex items-center">
+                      <Link
+                        href={`/docs`}
+                        className="text-color-text-secondary first-letter:uppercase
+                       hover:text-primary-light hover:underline focus:text-primary-light
+                       focus:underline"
+                      >
+                        {`${extractLabelFromLink(word)}`}
+                      </Link>
+                      <span>
+                        <ChevronDownIcon className="w-8 h-8 text-color-text-secondary -rotate-90" />
+                      </span>
+                    </div>
+                  )}
+                  {isLastWords(pathnameWords, index) && (
                     <Link
-                      href={`/docs`}
-                      className="text-color-text-secondary first-letter:uppercase
+                      href={`${clientURL}${pathname}`}
+                      className="text-color-text-primary first-letter:uppercase
                        hover:text-primary-light hover:underline focus:text-primary-light
                        focus:underline"
                     >
                       {`${extractLabelFromLink(word)}`}
                     </Link>
-                    <span>
-                      <ChevronDownIcon className="w-8 h-8 text-color-text-secondary -rotate-90" />
-                    </span>
-                  </div>
-                )}
-                {isLastWords(pathnameWords, index) && (
-                  <Link
-                    href={`${clientURL}${pathname}`}
-                    className="text-color-text-primary first-letter:uppercase
-                    hover:text-primary-light hover:underline focus:text-primary-light
-                    focus:underline"
-                  >
-                    {`${extractLabelFromLink(word)}`}
-                  </Link>
-                )}
-              </div>
-            ))}
+                  )}
+                </div>
+              ))}
+            </div>
+            <div>
+              <span
+                className="absolutes top-8 right-8 xl:hidden cursor-pointer"
+                onClick={() => handleOpenCloseSidebar()}
+              >
+                <MenuIcon />
+              </span>
+            </div>
           </div>
           <div>
             <h1 className="text-3xl font-semibold">

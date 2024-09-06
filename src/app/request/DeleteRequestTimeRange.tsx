@@ -105,8 +105,8 @@ export const DeleteRequestTimeRange: React.FC<DeleteRequestTimeRangeProps> = (
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-0 items-center w-[90%] sm:w-96
-       rounded-md z-[1] p-4 sm:p-8"
+      className="flex flex-col gap-0 items-center w-[90vw] sm:w-96
+       rounded-md z-[1] p-8"
     >
       <div className="w-full flex items-center gap-4 justify-between">
         <p className="text-start">

@@ -98,8 +98,8 @@ export const UpdateTimeZone: React.FC<UpdateTimeZoneProps> = (props) => {
   return (
     <form
       onSubmit={formik.handleSubmit}
-      className="flex flex-col gap-4 items-center w-[90%] sm:w-96
-       rounded-md z-[1] p-4 sm:p-8"
+      className="flex flex-col gap-4 items-center w-[90vw] sm:w-96
+       rounded-md z-[1] p-8"
     >
       <div className="flex items-center justify-between w-full">
         <p className="font-semibold">{truncateString(app.name, 40)}</p>
@@ -126,7 +126,12 @@ export const UpdateTimeZone: React.FC<UpdateTimeZoneProps> = (props) => {
         <Button
           label={
             <>
-              {!isPending && <span>Save Changes</span>}
+              {!isPending && (
+                <>
+                  <span className="hidden md:block">Save Changes</span>
+                  <span className="sm:hidden">Save</span>
+                </>
+              )}
               {isPending && (
                 <Spinner label="saving" className="w-5 h-5 text-gray-100" />
               )}
@@ -134,7 +139,7 @@ export const UpdateTimeZone: React.FC<UpdateTimeZoneProps> = (props) => {
           }
           type="submit"
           disabled={isPending}
-          className="w-36 font-semibold"
+          className="w-28 sm:w-36 font-semibold"
         />
       </div>
     </form>
