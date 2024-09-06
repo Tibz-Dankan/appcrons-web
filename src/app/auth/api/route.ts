@@ -7,6 +7,9 @@ export async function GET(request: Request) {
   const accessToken = searchParams.get("accessToken")!;
   const user = JSON.parse(searchParams.get("user")!);
 
+  console.log("accessToken:", accessToken);
+  console.log("user:", user);
+
   const sessionCookie = new Session().create({
     accessToken: accessToken,
     user: user,
