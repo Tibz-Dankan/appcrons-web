@@ -5,6 +5,7 @@ export async function GET(request: Request) {
   const { searchParams } = new URL(request.url);
 
   console.log("request.url: ", request.url);
+  console.log("searchParams: ", searchParams);
 
   const accessToken = searchParams.get("accessToken")!;
   const user = JSON.parse(searchParams.get("user")!);

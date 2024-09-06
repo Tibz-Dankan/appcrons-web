@@ -5,6 +5,7 @@ import { jwtDecode } from "jwt-decode";
 
 export const middleware = (request: NextRequest) => {
   console.log("req pathname: ", request.nextUrl.pathname);
+  console.log("request.url: ", request.url);
 
   // TODO: implement redirectTo, functionality
 
@@ -16,6 +17,7 @@ export const middleware = (request: NextRequest) => {
   const isAppRoute = request.nextUrl.pathname.startsWith("/app");
   const isSettingsRoute = request.nextUrl.pathname.startsWith("/settings");
   const isAuthRoute = request.nextUrl.pathname.startsWith("/auth");
+  const isAuthAPI = request.nextUrl.pathname === "/auth/api";
   const protectedRoute = isDashboardRoute || isAppRoute || isSettingsRoute;
 
   if (protectedRoute) {
@@ -37,7 +39,7 @@ export const middleware = (request: NextRequest) => {
     return NextResponse.rewrite(new URL(request.nextUrl.pathname, request.url));
   }
 
-  if (isAuthRoute) {
+  if (isAuthRoute && !isAuthAPI) {
     const session = request.cookies.get("session")?.value;
     if (!session) {
       return NextResponse.rewrite(
