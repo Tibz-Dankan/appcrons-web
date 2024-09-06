@@ -49,16 +49,9 @@ export class AuthService {
   };
 
   authenticateClient = async (accessToken: string, user: TAuth) => {
-    console.log("accessToken:", accessToken);
-    console.log("user:", user);
     if (!accessToken || !user) {
       throw new Error("No user details or accessToken!");
     }
-    // const response = await fetch(
-    //   `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
-    //     user
-    //   )}`
-    // );
     const response = await fetch(
       `${clientURL}/auth/api?accessToken=${accessToken}&user=${JSON.stringify(
         user
@@ -68,9 +61,7 @@ export class AuthService {
     if (!response.ok) {
       // const error = await response.json();
       // throw new Error(error.message);
-      console.log("response status:", response.status);
-      console.log("response error:", response);
-      throw new Error("Something went wrong when authenticating client");
+      throw new Error("Something went wrong while authenticating client!");
     }
 
     localStorage.setItem(
