@@ -54,8 +54,13 @@ export class AuthService {
     if (!accessToken || !user) {
       throw new Error("No user details or accessToken!");
     }
+    // const response = await fetch(
+    //   `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
+    //     user
+    //   )}`
+    // );
     const response = await fetch(
-      `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
+      `${clientURL}/auth/api?accessToken=${accessToken}&user=${JSON.stringify(
         user
       )}`
     );
