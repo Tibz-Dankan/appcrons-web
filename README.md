@@ -19,9 +19,9 @@ To install the Appcrons frontend repo locally, follow these steps:
 1. **Clone the repository**:
 
    ```sh
-   https://github.com/Tibz-Dankan/keep-active-web.git
+   https://github.com/Tibz-Dankan/appcrons-web.git
 
-   cd keep-active-web
+   cd appcrons-web
    ```
 
 1. **Install dependencies**:
