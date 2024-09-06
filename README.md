@@ -1,6 +1,6 @@
-# <img src="public/logo.png" alt="Appcrons Logo" style="width: 40px; height: 36px; border-radius: 5px;margin-bottom:-6px;" /> Appcrons
+# <img src="public/logo.png" alt="Appcrons Logo" style="width: 40px; height: 36px; border-radius: 5px;margin-bottom:-12px;" /> Appcrons
 
-Appcrons optimizes the uptime of your free backend instance on Render by sending automated requests, preventing it from shutting down due to inactivity. To find out more, visit [appcrons.netlify.app](https//appcrons.netlify.app).
+Appcrons optimizes the uptime of your free backend instance on Render by sending automated requests, preventing it from shutting down due to inactivity. To find out more, visit [appcrons.netlify.app](https://appcrons.netlify.app).
 
 ## Installation
 
