@@ -18,21 +18,21 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "Appcrons - Optimize uptime for your free backend instance on Render",
   description: "Optimize uptime for your free backend instance on Render",
-  openGraph: {
-    type: "website",
-    url: "https://appcrons.netlify.app/",
-    title: "Appcrons - Keep Your Backend Servers Awake",
-    description:
-      "Appcrons prevents your backend servers hosted on render.com's free/hobby plan from shutting down due to inactivity. Keep your servers awake with periodic requests.",
-    images: [
-      {
-        url: "/logo.png",
-        width: 800,
-        height: 600,
-        alt: "Appcrons",
-      },
-    ],
-  },
+  // openGraph: {
+  //   type: "website",
+  //   url: "https://appcrons.netlify.app/",
+  //   title: "Appcrons - Keep Your Backend Servers Awake",
+  //   description:
+  //     "Appcrons prevents your backend servers hosted on render.com's free/hobby plan from shutting down due to inactivity. Keep your servers awake with periodic requests.",
+  //   images: [
+  //     {
+  //       url: "/logo.png",
+  //       width: 800,
+  //       height: 600,
+  //       alt: "Appcrons",
+  //     },
+  //   ],
+  // },
 };
 
 export default function RootLayout({
