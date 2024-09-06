@@ -56,8 +56,11 @@ export class AuthService {
     );
 
     if (!response.ok) {
-      const error = await response.json();
-      throw new Error(error.message);
+      // const error = await response.json();
+      // throw new Error(error.message);
+      console.log("response status:", response.status);
+      console.log("response error:", response);
+      throw new Error("Something went wrong when authenticating client");
     }
 
     localStorage.setItem(
