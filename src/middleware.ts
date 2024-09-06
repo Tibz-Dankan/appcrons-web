@@ -5,7 +5,6 @@ import { jwtDecode } from "jwt-decode";
 
 export const middleware = (request: NextRequest) => {
   console.log("req pathname: ", request.nextUrl.pathname);
-  console.log("request.url: ", request.url);
 
   // TODO: implement redirectTo, functionality
 
