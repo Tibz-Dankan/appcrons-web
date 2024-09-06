@@ -49,6 +49,11 @@ export class AuthService {
   };
 
   authenticateClient = async (accessToken: string, user: TAuth) => {
+    console.log("accessToken:", accessToken);
+    console.log("user:", user);
+    if (!accessToken || !user) {
+      throw new Error("No user details or accessToken!");
+    }
     const response = await fetch(
       `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
         user
