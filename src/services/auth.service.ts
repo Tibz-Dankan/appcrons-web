@@ -1,5 +1,6 @@
 import { backendURL, clientURL } from "@/constants";
 import {
+  TAuth,
   TChangePassword,
   TResetPassword,
   TSigninInPut,
@@ -45,6 +46,26 @@ export class AuthService {
       throw new Error(error.message);
     }
     return await response.json();
+  };
+
+  authenticateClient = async (accessToken: string, user: TAuth) => {
+    const response = await fetch(
+      `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
+        user
+      )}`
+    );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+
+    localStorage.setItem(
+      "session",
+      JSON.stringify({ accessToken: accessToken, user: user })
+    );
+
+    // return await response.json();
   };
 
   forgotPassword = async ({ email }: { email: string }) => {

@@ -14,10 +14,8 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-// import Image from "next/image";
 import { TResetPassword } from "@/types/auth";
 import { useParams } from "next/navigation";
-import { authenticate } from "@/store/actions/auth";
 import { Logo } from "@/app/shared/Logo";
 
 export const ResetPassword: React.FC = () => {
@@ -28,16 +26,16 @@ export const ResetPassword: React.FC = () => {
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().resetPassword,
-    onSuccess: async (response: any) => {
+    onSuccess: async (auth: any) => {
       dispatch(
-        showCardNotification({ type: "success", message: response.message })
+        showCardNotification({ type: "success", message: auth.message })
       );
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
 
       setIsRedirecting(() => true);
-      await authenticate(response.accessToken, response.user);
+      await new AuthService().authenticateClient(auth.accessToken, auth.user);
       setIsRedirecting(() => false);
       router.push("/dashboard");
     },

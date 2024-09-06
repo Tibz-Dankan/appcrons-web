@@ -15,11 +15,8 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-// import Image from "next/image";
 import { useRouter } from "@/lib/router-events";
 import { Logo } from "@/app/shared/Logo";
-
-import { authenticate } from "@/store/actions/auth";
 
 export const LogIn: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -30,13 +27,9 @@ export const LogIn: React.FC = () => {
     mutationFn: new AuthService().signIn,
     onSuccess: async (auth: any) => {
       setIsRedirecting(() => true);
-      await authenticate(auth.accessToken, auth.user);
+      await new AuthService().authenticateClient(auth.accessToken, auth.user);
       setIsRedirecting(() => false);
       router.push("/dashboard");
-
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 2000);
     },
     onError: (error: any) => {
       setIsRedirecting(() => false);
@@ -87,7 +80,6 @@ export const LogIn: React.FC = () => {
       >
         <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
-            {/* <Image src="/logo.png" width={80} height={80} alt="logo" /> */}
             <Logo />
           </Link>
           <p className="text-center text-2xl">Log in to Appcrons</p>
@@ -131,7 +123,7 @@ export const LogIn: React.FC = () => {
               </>
             }
             type="submit"
-            aria-disabled={isPending || isRedirecting}
+            disabled={isPending || isRedirecting}
             className="w-full mt-6 font-semibold"
           />
           <div className="w-full mt-4 space-y-4s flex justify-between gap-4">

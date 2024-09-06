@@ -10,10 +10,11 @@ import {
 import Link from "next/link";
 import { useAppSelector } from "@/hooks/redux";
 import { PersonIcon } from "@/app/shared/Icons/PersonIcon";
-import { ReactNode } from "react";
+import { ReactNode, useState } from "react";
 import { SettingsIcon } from "@/app/shared/Icons/SettingsIcon";
 import { truncateString } from "@/utils/truncateString";
 import { LogOut } from "@/app/auth/Logout";
+import { useLogOut } from "@/hooks/useLogOut";
 
 interface NavDropDownProps {
   children: ReactNode;
@@ -25,6 +26,13 @@ const classNames = (...classes: any[]) => {
 
 export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
   const username = useAppSelector((state) => state.auth.user.name);
+  const [triggerLogOut, setTriggerLogOut] = useState(false);
+
+  const {} = useLogOut({ triggerLogOut: triggerLogOut });
+
+  const onTriggerLogoutHandler = (triggered: boolean) => {
+    setTriggerLogOut(() => triggered);
+  };
 
   return (
     <Menu as="div" className="relative inline-block text-left">
@@ -96,7 +104,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
                     ""
                   )}
                 >
-                  <LogOut />
+                  <LogOut onTrigger={onTriggerLogoutHandler} />
                 </div>
               )}
             </MenuItem>

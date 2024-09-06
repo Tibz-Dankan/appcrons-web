@@ -15,9 +15,7 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
-// import Image from "next/image";
 import { useRouter } from "@/lib/router-events";
-import { authenticate } from "@/store/actions/auth";
 import { Logo } from "@/app/shared/Logo";
 
 export const SignUp: React.FC = () => {
@@ -36,15 +34,11 @@ export const SignUp: React.FC = () => {
       }, 5000);
 
       setIsRedirecting(() => true);
-      await authenticate(auth.accessToken, auth.user);
+      await new AuthService().authenticateClient(auth.accessToken, auth.user);
       setTimeout(() => {
         setIsRedirecting(() => false);
         router.push("/dashboard");
       }, 5000);
-
-      // setTimeout(() => {
-      //   window.location.reload();
-      // }, 7000);
     },
     onError: (error: any) => {
       setIsRedirecting(() => false);
@@ -97,7 +91,6 @@ export const SignUp: React.FC = () => {
       >
         <div className="w-full flex flex-col items-center gap-8">
           <Link href="/">
-            {/* <Image src="/logo.png" width={80} height={80} alt="logo" /> */}
             <Logo />
           </Link>
           <p className="text-center flex flex-col">
@@ -150,7 +143,7 @@ export const SignUp: React.FC = () => {
               </>
             }
             type="submit"
-            aria-disabled={isPending || isRedirecting}
+            disabled={isPending || isRedirecting}
             className="w-full mt-6 font-semibold"
           />
           <div className="w-full mt-4 flex justify-center">

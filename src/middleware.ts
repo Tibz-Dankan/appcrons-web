@@ -45,6 +45,12 @@ export const middleware = (request: NextRequest) => {
       );
     }
 
+    if (request.nextUrl.pathname === "/auth/api/logout") {
+      return NextResponse.rewrite(
+        new URL(request.nextUrl.pathname, request.url)
+      );
+    }
+
     const parsedAuth = JSON.parse(session) as TAuth;
     const decodedToken = jwtDecode(parsedAuth.accessToken);
 
