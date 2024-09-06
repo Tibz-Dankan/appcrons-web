@@ -2,6 +2,8 @@
 
 Appcrons optimizes the uptime of your free backend instance on Render by sending automated requests, preventing it from shutting down due to inactivity. To find out more, visit [appcrons.netlify.app](https://appcrons.netlify.app).
 
+[![Netlify Status](https://api.netlify.com/api/v1/badges/b8c44552-732f-4793-9827-d84c93ab19c5/deploy-status)](https://app.netlify.com/sites/appcrons/deploys)
+
 ## Installation
 
 To install the Appcrons frontend repo locally, follow these steps:
