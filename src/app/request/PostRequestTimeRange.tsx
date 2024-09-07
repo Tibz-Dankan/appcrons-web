@@ -19,7 +19,7 @@ import { TimeZoneSelect } from "@/app/shared/TimeZoneSelect";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
 import { truncateString } from "@/utils/truncateString";
-import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
+import { convertTo12HourFormat } from "@/utils/convertTo12HourFormat";
 import { updateOneApp } from "@/store/actions/app";
 import { CheckIcon } from "@/app/shared/Icons/CheckIcon";
 import { ErrorIcon } from "@/app/shared/Icons/ErrorIcon";
@@ -83,8 +83,8 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
 
   const initialValues: TPostRequestTime = {
     appId: app.id,
-    start: "",
-    end: "",
+    start: "06:00AM",
+    end: "11:00PM",
     timeZone: getAppTimezone(),
     accessToken: accessToken,
   };
@@ -237,22 +237,20 @@ export const PostRequestTimeRange: React.FC<PostRequestTimeRangeProps> = (
           )}
         </div>
         <div className="w-full flex items-center gap-4 justify-between">
-          <div className="w-full -space-y-5s">
-            <InputSelect
-              label="Start time"
-              name="start"
-              options={timeOptions}
-              formik={formik}
-            />
-          </div>
-          <div className="w-full -space-y-5s">
-            <InputSelect
-              label="End time"
-              name="end"
-              options={timeOptions}
-              formik={formik}
-            />
-          </div>
+          <InputSelect
+            label="Start time"
+            name="start"
+            options={timeOptions}
+            defaultOption={"06:00AM"}
+            formik={formik}
+          />
+          <InputSelect
+            label="End time"
+            name="end"
+            options={timeOptions}
+            defaultOption={"11:00PM"}
+            formik={formik}
+          />
         </div>
 
         <Button

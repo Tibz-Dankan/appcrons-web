@@ -1,5 +1,5 @@
 import { TRequestTime } from "@/types/app";
-import { convertTo12HourFormat } from "./convertTo 12HourFormat";
+import { convertTo12HourFormat } from "./convertTo12HourFormat";
 
 type TValidationResult = {
   isValid: boolean;
