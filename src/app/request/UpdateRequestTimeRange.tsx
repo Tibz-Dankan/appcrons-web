@@ -18,7 +18,7 @@ import times from "@/app/request/data/times.json";
 import { validateTimeRange } from "@/utils/validateTimeRange";
 import { convertTo24HourFormat } from "@/utils/convertTo24HourFormat";
 import { truncateString } from "@/utils/truncateString";
-import { convertTo12HourFormat } from "@/utils/convertTo 12HourFormat";
+import { convertTo12HourFormat } from "@/utils/convertTo12HourFormat";
 import { updateOneApp } from "@/store/actions/app";
 import { CheckIcon } from "@/app/shared/Icons/CheckIcon";
 import { ErrorIcon } from "@/app/shared/Icons/ErrorIcon";
