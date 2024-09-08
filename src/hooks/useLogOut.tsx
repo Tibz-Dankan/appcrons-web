@@ -27,8 +27,8 @@ export const useLogOut = ({ triggerLogOut }: TLogOut) => {
   } = useMutation({
     mutationFn: new AuthService().logOut,
     onSuccess: async (_: any) => {
-      dispatch(logout());
       router.push("/auth/login");
+      dispatch(logout());
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
