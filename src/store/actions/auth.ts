@@ -1,30 +1,16 @@
-import { TAuth } from "@/types/auth";
-import { clientURL } from "@/constants";
-import { authActions } from "@/store";
-
-export const authenticate = async (accessToken: string, user: TAuth) => {
-  const response = await fetch(
-    `${clientURL}/auth/api/?accessToken=${accessToken}&user=${JSON.stringify(
-      user
-    )}`
-  );
-
-  if (!response.ok) {
-    const error = await response.json();
-    throw new Error(error.message);
-  }
-
-  localStorage.setItem(
-    "session",
-    JSON.stringify({ accessToken: accessToken, user: user })
-  );
-
-  // return await response.json();
-};
+import {
+  authActions,
+  appActions,
+  appLiveRequestActions,
+  requestActions,
+} from "@/store";
 
 export const logout = () => {
   return (dispatch: any) => {
     localStorage.removeItem("session");
     dispatch(authActions.logout());
+    dispatch(appActions.clearAll());
+    dispatch(appLiveRequestActions.clearAll());
+    dispatch(requestActions.clear());
   };
 };

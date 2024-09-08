@@ -15,6 +15,7 @@ import { SettingsIcon } from "@/app/shared/Icons/SettingsIcon";
 import { truncateString } from "@/utils/truncateString";
 import { LogOut } from "@/app/auth/Logout";
 import { useLogOut } from "@/hooks/useLogOut";
+import { Spinner } from "@/app/shared/loader/Spinner";
 
 interface NavDropDownProps {
   children: ReactNode;
@@ -28,7 +29,7 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
   const username = useAppSelector((state) => state.auth.user.name);
   const [triggerLogOut, setTriggerLogOut] = useState(false);
 
-  const {} = useLogOut({ triggerLogOut: triggerLogOut });
+  const { isLoggingOut } = useLogOut({ triggerLogOut: triggerLogOut });
 
   const onTriggerLogoutHandler = (triggered: boolean) => {
     setTriggerLogOut(() => triggered);
@@ -38,10 +39,13 @@ export const NavDropDown: React.FC<NavDropDownProps> = (props) => {
     <Menu as="div" className="relative inline-block text-left">
       <div>
         <MenuButton
-          className="inline-flex w-full justify-center gap-x-1.5 
+          className="inline-flex w-full justify-center items-center gap-x-1.5 
            rounded-md bg-transparent text-sm font-semibold
-           text-color-text-primary"
+           text-color-text-primary relative"
         >
+          {isLoggingOut && (
+            <Spinner className="absolute top-1 left-[10px] text-gray-200 w-6 h-6" />
+          )}
           {props.children}
         </MenuButton>
       </div>
