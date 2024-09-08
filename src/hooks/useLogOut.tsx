@@ -1,6 +1,6 @@
 import { useEffect } from "react";
 import { useRouter } from "@/lib/router-events";
-import { useAppDispatch } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { AuthService } from "@/services/auth.service";
 import {
   hideCardNotification,
@@ -10,12 +10,14 @@ import { useMutation } from "@tanstack/react-query";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { logout } from "@/store/actions/auth";
+import { jwtDecode } from "jwt-decode";
 
 type TLogOut = { triggerLogOut: boolean };
 
 export const useLogOut = ({ triggerLogOut }: TLogOut) => {
   const router = useRouter();
   const dispatch: any = useAppDispatch();
+  const accessToken = useAppSelector((state) => state.auth.accessToken);
 
   const {
     isPending: isLoggingOut,
@@ -54,6 +56,7 @@ export const useLogOut = ({ triggerLogOut }: TLogOut) => {
     },
   });
 
+  // Log out user onClick
   useEffect(() => {
     if (!triggerLogOut) return;
 
@@ -62,6 +65,21 @@ export const useLogOut = ({ triggerLogOut }: TLogOut) => {
     };
     logOutHandler();
   }, [triggerLogOut]);
+
+  // Log out user automatically when JWT is expired
+  useEffect(() => {
+    const tryLogOut = () => {
+      const decodedToken = jwtDecode(accessToken);
+      const tokenExpiration = decodedToken.exp! * 1000;
+      const isExpired = new Date(tokenExpiration) <= new Date(Date.now());
+
+      if (!isExpired) return;
+      formik.handleSubmit();
+    };
+    const logOutTimerInterval = setInterval(tryLogOut, 60000);
+
+    return () => clearInterval(logOutTimerInterval);
+  }, []);
 
   return { isLoggingOut, error, isError };
 };
