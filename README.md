@@ -26,7 +26,7 @@ To install the Appcrons frontend repo locally, follow these steps:
 
 ### Prerequisites
 
-- Ensure you have **Node.js 18+ ** installed. You can download it from [nodejs.org](https://nodejs.org/).
+- Ensure you have **Node.js 18+** installed. You can download it from [nodejs.org](https://nodejs.org/).
 - Ensure you have **pnpm** installed. You can install it globally using npm:
   ```sh
   npm install -g pnpm
