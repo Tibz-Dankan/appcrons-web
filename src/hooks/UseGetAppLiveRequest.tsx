@@ -12,7 +12,7 @@ import { useAppDispatch, useAppSelector } from "./redux";
 import { updateAppLiveRequest } from "@/store/actions/appLiveRequests";
 import { addOneRequest } from "@/store/actions/request";
 
-export const useGetAppLiveRequest = async () => {
+export const useGetAppLiveRequest = () => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
   const userId = useAppSelector((state) => state.auth.user.id);
 
