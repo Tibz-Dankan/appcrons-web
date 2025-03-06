@@ -62,6 +62,8 @@ const statusCodes: { [key: number]: string } = {
   508: "Loop Detected",
   510: "Not Extended",
   511: "Network Authentication Required",
+  521: "Web Server Is Down (Cloudflare)",
+  522: "Connection Timed Out (Cloudflare)",
 };
 
 export const getStatusCodeLabel = (statusCode: number): string => {
