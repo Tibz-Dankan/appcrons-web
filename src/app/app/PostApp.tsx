@@ -52,7 +52,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   const initialValues: TPostApp = {
     name: "",
     url: "",
-    requestInterval: "5",
+    requestInterval: "10",
     accessToken: accessToken,
   };
 
@@ -80,7 +80,8 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
     },
   });
 
-  const intervalOptions = ["5", "10", "15"];
+  // const intervalOptions = ["5", "10", "15"];
+  const intervalOptions = ["10", "15"];
 
   return (
     <form
@@ -98,7 +99,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
         type="text"
         name="url"
         label="URL Endpoint"
-        placeholder="e.g applicationname.com/active"
+        placeholder="e.g https://applicationname.com/active"
         formik={formik}
       />
       <InputSelect
