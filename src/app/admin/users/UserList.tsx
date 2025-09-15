@@ -100,10 +100,7 @@ export const UserList: React.FC<UserListProps> = (props) => {
                   border-color-border-primary cursor-pointer
                   ${isLastElement(users, index) && "rounded-bl-md"}`}
                 >
-                  <span className="">
-                    {/* {getApplicationName(user.name)} */}
-                    {user.name}
-                  </span>
+                  <span className="">{user.name}</span>
                 </td>
                 <td className="px-2 cursor-pointer">
                   <span>{user.email}</span>

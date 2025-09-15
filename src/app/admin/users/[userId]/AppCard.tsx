@@ -9,6 +9,8 @@ import { convertMillisecondsToSeconds } from "@/utils/convertMillisecondsToSecon
 import { getStatusCodeLabel } from "@/utils/getStatusCodeLabel";
 import Link from "next/link";
 import { elapsedTime } from "@/utils/elapsedTime";
+import { useRouter } from "@/lib/router-events";
+import { clientURL } from "@/constants";
 
 interface AppCardProps {
   app: TApp;
@@ -16,6 +18,7 @@ interface AppCardProps {
 
 export const AppCard: React.FC<AppCardProps> = (props) => {
   const app = props.app;
+  const router = useRouter();
 
   const getStatusCodeIcon = (request: TRequest[]): ReactNode => {
     const hasRequest = request.length > 0;
@@ -36,6 +39,10 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
     return `${convertMillisecondsToSeconds(request[0].duration)}s`;
   };
 
+  const navigateToUsersPage = () => {
+    router.push(`${clientURL}/admin/users/${app.userId}/app/${app.id}`);
+  };
+
   const hasRequest = app.requests.length > 0;
 
   return (
@@ -48,6 +55,7 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
         py-2 px-4 border-b-[1px] border-color-border-primary
         text-color-text-primary cursor-pointer  hover:bg-[#0ca678]/[0.2]
         focus:bg-[#0ca678]/[0.2]"
+        onClick={() => navigateToUsersPage()}
       >
         <span>{truncateString(app.name, 30)}</span>
       </div>
