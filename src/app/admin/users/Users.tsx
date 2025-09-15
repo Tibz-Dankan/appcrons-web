@@ -14,6 +14,7 @@ import { useSearchParams } from "next/navigation";
 import { AdminService } from "@/services/admin.service";
 import { SearchUsers } from "./SearchUsers";
 import { TUserAPIData } from "@/types/admin";
+import { Statistics } from "../Statistics";
 
 const Users: React.FC = () => {
   const [userSearchResults, setUserSearchResults] = useState<TApp[]>([]);
@@ -89,6 +90,9 @@ const Users: React.FC = () => {
         className="w-full px-4 md:px-8 pt-2 max-w-[1280px] mt-8 space-y-12
         overflow-x-hidden"
       >
+        <div className="w-full mt-4">
+          <Statistics />
+        </div>
         <SearchUsers
           onSuccess={onSearchSuccessHandler}
           onQueryValue={onQueryValueHandler}

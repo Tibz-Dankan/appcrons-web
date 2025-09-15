@@ -1,11 +1,11 @@
 import React from "react";
 import { twMerge } from "tailwind-merge";
 
-interface UserIconProps {
+interface RequestIconProps {
   className?: string;
 }
 
-const UserIcon: React.FC<UserIconProps> = (props) => {
+export const RequestIcon: React.FC<RequestIconProps> = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
@@ -19,11 +19,10 @@ const UserIcon: React.FC<UserIconProps> = (props) => {
         stroke="currentColor"
         strokeLinecap="round"
         strokeLinejoin="round"
+        strokeMiterlimit="10"
         strokeWidth="1.5"
-        d="M5 20v-1a7 7 0 0 1 7-7v0a7 7 0 0 1 7 7v1m-7-8a4 4 0 1 0 0-8a4 4 0 0 0 0 8"
+        d="M18 16v-5.6A4.4 4.4 0 0 0 13.6 6H11m7 10a2 2 0 1 0 0 4a2 2 0 0 0 0-4M11 6l2-2m-2 2l2 2m-7 8a2 2 0 1 0 0 4a2 2 0 0 0 0-4m0 0V8m0 0a2 2 0 1 0 0-4a2 2 0 0 0 0 4"
       />
     </svg>
   );
 };
-
-export default UserIcon;

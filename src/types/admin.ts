@@ -6,6 +6,16 @@ export type TUserAPIData = TUser & {
   updatedAt: string;
 };
 
+export type TStatsAPIData = {
+  userCount: number;
+  appCount: number;
+  requestCount: number;
+};
+
+export type TAdminGetStats = {
+  accessToken: string;
+};
+
 export type TAdminSearchInput = {
   query: string;
   accessToken: string;
