@@ -7,7 +7,7 @@ const initialState: TAuth = {
     id: "",
     name: "",
     email: "",
-    role: "admin",
+    role: "user",
   },
 };
 

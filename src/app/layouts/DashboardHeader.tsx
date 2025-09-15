@@ -10,13 +10,18 @@ import { Link } from "@/lib/router-events";
 import { DashboardIcon } from "@/app/shared/Icons/DashboardIcon";
 import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { PostAppLayout } from "@/app/app/PostAppLayout";
+import UserIcon from "../shared/Icons/UserIcon";
 
 export const DashboardHeader: React.FC = () => {
   const isLoggedIn = useAppSelector((state) => !!state.auth.accessToken);
+  const isAdminUser = useAppSelector(
+    (state) => state.auth.user.role === "sys_admin"
+  );
   const pathname = usePathname();
 
   const isDashboardPath = pathname.startsWith("/dashboard");
   const isDocsPath = pathname.startsWith("/docs");
+  const isUsersPath = pathname.startsWith("/admin/users");
 
   return (
     <>
@@ -45,7 +50,7 @@ export const DashboardHeader: React.FC = () => {
             </div>
             <div
               className="flex items-center justify-center gap-2 border-[1px]
-             border-color-border-primary rounded-md p-1"
+              border-color-border-primary rounded-md p-1"
             >
               <div>
                 <Link
@@ -71,6 +76,20 @@ export const DashboardHeader: React.FC = () => {
                   <span className="hidden md:block">Docs</span>
                 </Link>
               </div>
+              {isAdminUser && (
+                <div>
+                  <Link
+                    href="/admin/users"
+                    className={`flex items-center justify-center gap-2
+                    rounded-md py-[6px] md:py-1 px-3 ${
+                      isUsersPath && "bg-header-tab-bg"
+                    }`}
+                  >
+                    <UserIcon className="text-header-tab-text" />
+                    <span className="hidden md:block">Users</span>
+                  </Link>
+                </div>
+              )}
               <div>
                 <PostAppLayout />
               </div>

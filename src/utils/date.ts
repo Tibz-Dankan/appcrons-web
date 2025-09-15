@@ -47,6 +47,14 @@ export class AppDate {
     return `${month} ${dayOfMonth}, ${year}`;
   }
 
+  shortMonthDayYear() {
+    const year = this.date.getFullYear();
+    const month = this.date.toLocaleDateString("en-US", { month: "short" });
+    const dayOfMonth = this.date.getDate();
+
+    return `${month} ${dayOfMonth}, ${year}`;
+  }
+
   weekdayMonthDate() {
     const dayOfWeek = this.date.toLocaleDateString("en-US", {
       weekday: "short",

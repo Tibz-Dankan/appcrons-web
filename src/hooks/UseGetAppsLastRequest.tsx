@@ -8,7 +8,7 @@ import {
 } from "@/store/actions/appLiveRequests";
 import { TAppLiveRequest } from "@/types/app";
 
-export const useGetAppsLastRequest = () => {
+export const useGetAppsLastRequest = (userID?: string) => {
   const apps = useAppSelector((state) => state.app.apps);
   const dispatch: any = useAppDispatch();
 
@@ -23,7 +23,7 @@ export const useGetAppsLastRequest = () => {
       if (!userId || !hasApps) return;
 
       return new AppService().getAppsLastRequestByUser({
-        userId: userId,
+        userId: userID ? userID : userId,
         accessToken: accessToken,
       });
     },

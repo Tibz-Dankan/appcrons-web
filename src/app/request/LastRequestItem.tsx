@@ -20,7 +20,7 @@ export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
 
   const [inProgress, setInProgress] = useState<boolean>(false);
   const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
-  const updatedApp = appLiveRequest?.apps[`${app.id}`] as TAppLiveRequest;
+  const updatedApp = appLiveRequest?.apps[`${app?.id}`] as TAppLiveRequest;
   const isLoadingRequest: boolean = appLiveRequest.isLoading;
 
   const dispatch: any = useAppDispatch();
