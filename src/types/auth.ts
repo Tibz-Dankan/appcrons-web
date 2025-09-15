@@ -2,7 +2,7 @@ export type TUser = {
   id: string;
   name: string;
   email: string;
-  role: "admin" | "client" | "staff";
+  role: "user" | "sys_admin";
 };
 
 export type TSigninInPut = {
