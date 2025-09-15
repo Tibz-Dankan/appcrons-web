@@ -3,11 +3,28 @@ import {
   TAdminGetAllUsers,
   TAdminGetAppsByUser,
   TAdminGetRequestsByApp,
+  TAdminGetStats,
   TAdminGetUser,
   TAdminSearchInput,
 } from "@/types/admin";
 
 export class AdminService {
+  getStats = async ({ accessToken }: TAdminGetStats) => {
+    const response = await fetch(`${backendURL}/admin/stats`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
   getAllUsers = async ({ accessToken, limit, cursor }: TAdminGetAllUsers) => {
     const response = await fetch(
       `${backendURL}/admin/users?limit=${limit}&cursor=${cursor}`,
