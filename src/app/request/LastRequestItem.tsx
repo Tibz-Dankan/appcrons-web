@@ -14,14 +14,13 @@ interface LastRequestItemProps {
 }
 
 export const LastRequestItem: React.FC<LastRequestItemProps> = (props) => {
-  const app =
-    useAppSelector((state) =>
-      state.app.apps.find((app) => app.id == props.app.id)
-    ) ?? (props.app as TApp);
+  const app = useAppSelector((state) =>
+    state.app.apps.find((app) => app.id == props.app.id)
+  ) as TApp;
 
   const [inProgress, setInProgress] = useState<boolean>(false);
   const appLiveRequest = useAppSelector((state) => state.appLiveRequest);
-  const updatedApp = appLiveRequest?.apps[`${app.id}`] as TAppLiveRequest;
+  const updatedApp = appLiveRequest?.apps[`${app?.id}`] as TAppLiveRequest;
   const isLoadingRequest: boolean = appLiveRequest.isLoading;
 
   const dispatch: any = useAppDispatch();

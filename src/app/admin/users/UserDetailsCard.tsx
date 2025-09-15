@@ -10,7 +10,7 @@ export const UserDetailsCard: React.FC<UserDetailsCardProps> = (props) => {
   const user = props.user;
 
   return (
-    <div className="w-fulls flex items-start gap-4">
+    <div className="w-fulls flex items-start gap-6">
       <div
         className="flex items-center justify-center bg-primary/20
         rounded-full w-20 h-20"

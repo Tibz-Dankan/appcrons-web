@@ -48,7 +48,7 @@ export const AppCard: React.FC<AppCardProps> = (props) => {
   return (
     <div
       className="w-full border-[1px] border-color-border-primary 
-      rounded-md p-4"
+      rounded-md p-6"
     >
       <div
         className="w-full rounded-md bg-color-bg-secondary rounded-t-md

@@ -1,8 +1,8 @@
 "use client";
 
-import React from "react";
+import React, { useEffect } from "react";
 import { Spinner } from "@/app/shared/loader/Spinner";
-import { useAppSelector } from "@/hooks/redux";
+import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import { AdminService } from "@/services/admin.service";
 import { TUserAPIData } from "@/types/admin";
 import { useQuery } from "@tanstack/react-query";
@@ -11,13 +11,18 @@ import { Notification } from "@/app/shared/Notification";
 import { TApp } from "@/types/app";
 import { AppCard } from "./AppCard";
 import { UserDetailsCard } from "../UserDetailsCard";
+import { addOneApp } from "@/store/actions/app";
+import { useGetAppsLastRequest } from "@/hooks/UseGetAppsLastRequest";
 
 const UserApps: React.FC = () => {
   const userId = useParams()["userId"] as string;
   const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const dispatch = useAppDispatch();
+
+  useGetAppsLastRequest(userId);
 
   const { isPending, isError, data, error } = useQuery({
-    queryKey: ["all-users"],
+    queryKey: [`user-apps-${userId}`],
     queryFn: () =>
       new AdminService().getAppsByUser({
         userId: userId,
@@ -29,6 +34,17 @@ const UserApps: React.FC = () => {
 
   const user: TUserAPIData = data?.data?.user ?? {};
   const apps: TApp[] = data?.data?.apps ?? [];
+
+  useEffect(() => {
+    const updateApplicationsHandler = () => {
+      if (!apps) return;
+
+      apps.map((app) => {
+        dispatch(addOneApp({ app: app }));
+      });
+    };
+    updateApplicationsHandler();
+  }, [data]);
 
   if (isPending) {
     return (
@@ -62,7 +78,12 @@ const UserApps: React.FC = () => {
     <div className="w-full flex items-center justify-center">
       <div className="w-full space-y-8 mt-12 px-4 md:px-8 max-w-[1280px]">
         {/* User Details */}
-        <UserDetailsCard user={user} />
+        <div
+          className="inline-block border-[1px] border-color-border-primary
+          rounded-md p-6"
+        >
+          <UserDetailsCard user={user} />
+        </div>
 
         {/* User Applications */}
         <div className="text-lg">
