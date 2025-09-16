@@ -35,7 +35,7 @@ export const Statistics: React.FC = () => {
 
   if (isPending) {
     return (
-      <div className="w-full h-[60vh] flex items-center justify-center">
+      <div className="w-full h-[20vh] flex items-center justify-center">
         <Spinner className="w-8 h-8" />
       </div>
     );
@@ -43,7 +43,7 @@ export const Statistics: React.FC = () => {
 
   if (isError) {
     return (
-      <div className="w-full h-[60vh] flex items-center justify-center">
+      <div className="w-full h-[20vh] flex items-center justify-center">
         <Notification
           type={"error"}
           message={error.message}
