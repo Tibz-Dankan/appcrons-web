@@ -30,7 +30,7 @@ const Users: React.FC = () => {
     queryFn: () =>
       new AdminService().getAllUsers({
         accessToken: accessToken,
-        limit: 25,
+        limit: 30,
         cursor: "",
       }),
   });
