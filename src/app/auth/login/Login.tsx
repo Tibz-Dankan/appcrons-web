@@ -143,7 +143,7 @@ export const LogIn: React.FC = () => {
             </p>
           </div>
         </form>
-        {/* Footer here */}
+        {/* Footer to implemented here */}
       </div>
     </Fragment>
   );
