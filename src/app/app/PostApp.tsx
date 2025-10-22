@@ -80,8 +80,8 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
     },
   });
 
-  // const intervalOptions = ["5", "10", "15"];
-  const intervalOptions = ["10", "15"];
+  const intervalOptions = ["5", "10", "15"];
+  // const intervalOptions = ["10", "15"];
 
   return (
     <form
