@@ -2,6 +2,7 @@ import { backendURL, clientURL } from "@/constants";
 import {
   TAuth,
   TChangePassword,
+  TGetUser,
   TResetPassword,
   TSigninInPut,
   TSignupInput,
@@ -168,6 +169,22 @@ export class AuthService {
         },
       }
     );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  getUserDetails = async ({ id, accessToken }: TGetUser) => {
+    const response = await fetch(`${backendURL}/auth/user/get/${id}`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       const error = await response.json();

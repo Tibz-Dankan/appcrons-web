@@ -8,8 +8,10 @@ interface DashboardLayoutProps {
   children: ReactNode;
 }
 
-export const DashboardLayout: React.FC<DashboardLayoutProps> = (props) => {
-  const session = new Session().get();
+export const DashboardLayout: React.FC<DashboardLayoutProps> = async (
+  props
+) => {
+  const session = await new Session().getSync();
 
   if (!session) {
     return <>{props.children}</>;
