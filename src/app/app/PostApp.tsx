@@ -52,7 +52,7 @@ export const PostApp: React.FC<PostAppProps> = (props) => {
   const initialValues: TPostApp = {
     name: "",
     url: "",
-    requestInterval: "10",
+    requestInterval: "5",
     accessToken: accessToken,
   };
 
