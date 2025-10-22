@@ -14,18 +14,17 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
+import { updateUser } from "@/store/actions/auth";
 
 export const UpdatePersonalDetails: React.FC = () => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
-  // TODO: to make api call to get the user details || all settings details
-  // probably using another component
   const user = useAppSelector((state) => state.auth).user;
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().updateUserDetails,
     onSuccess: async (response: any) => {
-      // TODO: to update the user details on the client side in redux
+      dispatch(updateUser(response.user));
       dispatch(
         showCardNotification({ type: "success", message: response.message })
       );

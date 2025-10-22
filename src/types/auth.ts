@@ -40,3 +40,8 @@ export type TResetPassword = {
   newPassword: string;
   confirmPassword: string;
 };
+
+export type TGetUser = {
+  id: string;
+  accessToken: string;
+};
