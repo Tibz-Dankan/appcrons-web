@@ -33,29 +33,26 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the 'Sign Up' link to open the signup page.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Navigate to http://localhost:3000/auth/signup to start a fresh signup flow.
+        await page.goto("http://localhost:3000/auth/signup")
         
-        # -> Fill the signup form with a UUID-based username and email, submit the form, wait for the signup flow to complete, then verify redirect to the dashboard and authenticated UI.
+        # -> Fill the Username, Email, and Password fields with the UUID-based credentials, submit the form, and wait for the app to redirect to the dashboard.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_3fa85f64-5717-4562-b3fc-2c963f66afa6')
+        await asyncio.sleep(3); await elem.fill('testuser_4a8f2b9e-1c3d-4b6a-9f1e-2d5b7c8a9e0f')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_3fa85f64-5717-4562-b3fc-2c963f66afa6@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_4a8f2b9e-1c3d-4b6a-9f1e-2d5b7c8a9e0f@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Test@1234')
         
-        # -> Click the 'Create' button (index 1061) to submit the signup form, wait for the signup flow to complete, then verify the user is redirected to the dashboard and an authenticated UI is visible (e.g., Dashboard heading, Sign out or user menu).
+        # -> Click the Create button to submit the signup form, wait for the app to redirect, then verify the user lands on the dashboard and sees an authenticated user experience.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)

@@ -12,45 +12,32 @@
 
 ## 2️⃣ Requirement Validation Summary
 
-#### Test TC001 Sign up and be redirected to the dashboard
-- **Test Code:** [TC001_Sign_up_and_be_redirected_to_the_dashboard.py](./TC001_Sign_up_and_be_redirected_to_the_dashboard.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/8fca74ac-432f-43c1-bb6d-1a3f40848143/34aba7ea-0d7b-4834-acf6-435dc93e6b57
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
-
 #### Test TC008 Disabled state remains consistent between dashboard and app details
 - **Test Code:** [TC008_Disabled_state_remains_consistent_between_dashboard_and_app_details.py](./TC008_Disabled_state_remains_consistent_between_dashboard_and_app_details.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/8fca74ac-432f-43c1-bb6d-1a3f40848143/ef7da98e-1603-44d4-afad-9bf604afa11b
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/aeba73bd-42b6-439a-a829-9aa308442d67/d1579402-13de-4598-b358-87c742b7b15b
 - **Status:** ✅ Passed
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
-#### Test TC009 Add a Request Time Frame (RTF) to an application
-- **Test Code:** [TC009_Add_a_Request_Time_Frame_RTF_to_an_application.py](./TC009_Add_a_Request_Time_Frame_RTF_to_an_application.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/8fca74ac-432f-43c1-bb6d-1a3f40848143/49cdda82-ebbf-4fcd-8e49-d5c9918efea5
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
+#### Test TC011 Delete an existing Request Time Frame (RTF) from an application
+- **Test Code:** [TC011_Delete_an_existing_Request_Time_Frame_RTF_from_an_application.py](./TC011_Delete_an_existing_Request_Time_Frame_RTF_from_an_application.py)
+- **Test Error:** TEST BLOCKED
 
-#### Test TC010 Change password successfully from Settings
-- **Test Code:** [TC010_Change_password_successfully_from_Settings.py](./TC010_Change_password_successfully_from_Settings.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/8fca74ac-432f-43c1-bb6d-1a3f40848143/f47152dd-4cee-4b05-97fc-c4128d083992
-- **Status:** ✅ Passed
-- **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
----
+The test cannot proceed because the application's details page (app subdomain) returns an empty response and is not reachable from the browser. This prevents accessing the Request Time Frames UI required by the test.
 
-#### Test TC012 Show pre-populated current values in the update application form
-- **Test Code:** [TC012_Show_pre_populated_current_values_in_the_update_application_form.py](./TC012_Show_pre_populated_current_values_in_the_update_application_form.py)
-- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/8fca74ac-432f-43c1-bb6d-1a3f40848143/b9fc61a4-8c76-4dac-8ad5-b9cda00c2139
-- **Status:** ✅ Passed
+Observations:
+- The dashboard lists the newly created application and shows it enabled.
+- Clicking the application's URL opened one or more app subdomain tabs that show ERR_EMPTY_RESPONSE (empty response) instead of the app UI.
+- The Request Time Frames section is only available in the app details view, which cannot be reached due to the empty-response error.
+- **Test Visualization and Result:** https://www.testsprite.com/dashboard/mcp/tests/aeba73bd-42b6-439a-a829-9aa308442d67/7e4e534f-6ada-4b53-9fbc-89ec42f34b02
+- **Status:** BLOCKED
 - **Analysis / Findings:** {{TODO:AI_ANALYSIS}}.
 ---
 
 
 ## 3️⃣ Coverage & Matching Metrics
 
-- **100.00** of tests passed
+- **50.00** of tests passed
 
 | Requirement        | Total Tests | ✅ Passed | ❌ Failed  |
 |--------------------|-------------|-----------|------------|

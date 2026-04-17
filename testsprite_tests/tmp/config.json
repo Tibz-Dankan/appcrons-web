@@ -7,18 +7,15 @@
     "projectName": "appcrons-web",
     "projectPath": "/home/tibs/Desktop/Tibz/programming/projects/appcrons/appcrons-web",
     "testIds": [
-      "TC001",
       "TC008",
-      "TC009",
-      "TC010",
-      "TC012"
+      "TC011"
     ],
-    "additionalInstruction": "Re-run ONLY these 5 previously failed tests. DO NOT regenerate the test code — use the existing test files. CRITICAL RULES: 1) Use UUID NOT timestamps for ALL unique values. 2) Every test MUST start with FRESH SIGNUP at /auth/signup. 3) TC008 (Add RTF): Select timezone FIRST from dropdown, then times, then Submit. 4) TC009 (Change Password): After success, toast 'Password changed successfully!' appears, then user is LOGGED OUT and redirected to /auth/login. Fields cleared via formik.resetForm(). 5) TC010 (Delete RTF): Fresh signup, create app, add RTF, then delete it. 6) TC012 (Toggle Theme): Theme toggle is a button/icon in the top navigation bar.",
+    "additionalInstruction": "CRITICAL RULES: 1) Use UUID NOT timestamps for ALL unique values. 2) Every test MUST start with FRESH SIGNUP at /auth/signup. 3) TC008: After signup, create an app, enable it, verify disabled state is consistent between dashboard and app details. 4) TC011: After signup, create an app, add an RTF, then delete it — wait for the confirmation dialog to appear before confirming deletion.",
     "serverMode": "production",
     "envs": {
       "API_KEY": "sk-user-NM1UXMEL3DN7uwrTgSOEtuojPM4mo1_508O45Us3nCOm04HkfTv1dEQ253HB6Sx0-CN_v3KI58SWQiSNyXUpyjp2ukXdpk047a57UtJnqC6XAlLokaRM2eacVsaa58wyTco"
     }
   },
-  "serverPort": 38453,
-  "proxy": "http://187fafa9-943d-40ab-bd59-5d15be273a8b:HRzkNUP2080Eh4JOIiWMe7Uj4146QDHK@tun.testsprite.com:8080"
+  "serverPort": 39895,
+  "proxy": "http://e6899e2f-c52c-409d-832c-f9b9bd669e30:HbHM0ieAxP3DN9Evm33HbzaYBHaiuc09@tun.testsprite.com:8080"
 }
