@@ -1,6 +1,6 @@
 "use client";
 
-import React, { Fragment } from "react";
+import React, { Fragment, useState } from "react";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 import { useMutation } from "@tanstack/react-query";
@@ -14,11 +14,15 @@ import {
   hideCardNotification,
   showCardNotification,
 } from "@/store/actions/notification";
+import { useLogOut } from "@/hooks/useLogOut";
 
 export const ChangePassword: React.FC = () => {
   const dispatch = useAppDispatch();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
   const user = useAppSelector((state) => state.auth).user;
+  const [triggerLogOut, setTriggerLogOut] = useState(false);
+
+  const { isLoggingOut } = useLogOut({ triggerLogOut: triggerLogOut });
 
   const { isPending, mutate } = useMutation({
     mutationFn: new AuthService().changePassword,
@@ -31,6 +35,7 @@ export const ChangePassword: React.FC = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      setTriggerLogOut(() => true);
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
@@ -97,14 +102,14 @@ export const ChangePassword: React.FC = () => {
         <Button
           label={
             <>
-              {!isPending && <span>Submit</span>}
-              {isPending && (
+              {!isPending && !isLoggingOut && <span>Submit</span>}
+              {(isPending || isLoggingOut) && (
                 <Spinner label="processing" className="w-5 h-5 text-gray-100" />
               )}
             </>
           }
           type="submit"
-          disabled={isPending}
+          disabled={isPending || isLoggingOut}
           className="w-full mt-6 font-semibold"
         />
       </form>
