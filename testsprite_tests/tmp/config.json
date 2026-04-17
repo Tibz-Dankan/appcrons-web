@@ -14,18 +14,16 @@
       "TC005",
       "TC006",
       "TC007",
+      "TC008",
       "TC009",
       "TC010",
       "TC011",
-      "TC013",
-      "TC020"
+      "TC012"
     ],
-    "additionalInstruction": "CRITICAL RULES FOR ALL 12 TESTS: 1) Use UUID (uuid4/crypto.randomUUID) NOT timestamps for ALL unique values (email, username, app name, app URL). Tests run in PARALLEL — timestamps WILL collide. 2) Every test requiring authentication MUST start with FRESH SIGNUP at /auth/signup with a new UUID-based email. NEVER try to login with previously used credentials. 3) TC005 (Update App): The updated URL MUST be a BRAND NEW UUID-based URL different from the creation URL. 4) TC006 (Delete App): Start with FRESH SIGNUP. 5) TC004 (Disable from Details): Start with FRESH SIGNUP at /auth/signup. 6) TC011 (Delete RTF): Start with FRESH SIGNUP with UUID email. 7) TC013 (Update Personal Details): Use SHORT username format like 'user-{uuid8}' (first 8 chars of UUID, max 50 chars). Success = toast notification with success message. 8) TC010 (Change Password): Scroll down to Submit button and click it firmly. Success = toast saying 'Password changed successfully!' and BOTH fields cleared (empty) via formik.resetForm(). 9) TC009 (Add RTF): Select timezone FIRST, then times, then click Submit.",
+    "additionalInstruction": "CRITICAL RULES FOR ALL 12 TESTS: 1) Use UUID (uuid4/crypto.randomUUID) NOT timestamps for ALL unique values (email, username, app name, app URL). Tests run in PARALLEL — timestamps WILL collide. 2) Every test requiring authentication MUST start with FRESH SIGNUP at /auth/signup with a new UUID-based email. NEVER try to login with previously used credentials. 3) TC005 (Update App): The updated URL MUST be a BRAND NEW UUID-based URL different from the creation URL. 4) TC006 (Delete App): Start with FRESH SIGNUP. 5) TC004 (Disable from Details): Start with FRESH SIGNUP at /auth/signup. 6) TC010 (Delete RTF): Start with FRESH SIGNUP with UUID email. 7) TC011 (Update Personal Details): Use SHORT username format like 'user-{uuid8}' (first 8 chars of UUID, max 50 chars). Success = toast notification with success message. 8) TC009 (Change Password): Scroll down to Submit button and click it firmly. Success = toast saying 'Password changed successfully!' and BOTH fields cleared (empty) via formik.resetForm(). 9) TC008 (Add RTF): Select timezone FIRST, then times, then click Submit.",
     "serverMode": "production",
     "envs": {
       "API_KEY": "sk-user-NM1UXMEL3DN7uwrTgSOEtuojPM4mo1_508O45Us3nCOm04HkfTv1dEQ253HB6Sx0-CN_v3KI58SWQiSNyXUpyjp2ukXdpk047a57UtJnqC6XAlLokaRM2eacVsaa58wyTco"
     }
-  },
-  "serverPort": 34899,
-  "proxy": "http://05860893-ef60-4152-aa2d-640a1c4117ad:BygOM4vn60d3YpBZFBpkkILAnfwR1C7I@tun.testsprite.com:8080"
+  }
 }
