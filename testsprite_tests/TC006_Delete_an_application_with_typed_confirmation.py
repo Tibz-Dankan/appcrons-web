@@ -33,177 +33,136 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Open the Sign Up page so I can begin a fresh signup (start at /auth/signup).
+        # -> Open the Sign Up page to start a fresh signup (click the 'Sign Up' link).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the username field with a UUID-based username and continue to complete signup (email, password, submit).
+        # -> Fill the signup form with a UUID-based username and email, set a valid password, and submit the form by clicking Create.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_b6f9c7a8-2d4f-4e3a-9c1b-0f7d8e6c5b4a')
+        await asyncio.sleep(3); await elem.fill('testuser_3fa85f64-5717-4562-b3fc-2c963f66afa6')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_b6f9c7a8-2d4f-4e3a-9c1b-0f7d8e6c5b4a@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_3fa85f64-5717-4562-b3fc-2c963f66afa6@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Password123!')
         
-        # -> Submit the signup form by clicking the Create button to complete fresh signup and proceed to dashboard.
+        # -> Click the 'Create' button to submit the signup form and sign up the new user.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the create-application flow by clicking the 'New' button on the dashboard.
+        # -> Submit the signup form by clicking the Create button to complete fresh signup.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/header/div/div[2]/div[3]/div/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the application name and URL, select a request interval, and submit the create-application form.
+        # -> Click the Create button to submit the signup form and wait for the UI to update (look for dashboard or an error).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill the signup form with a new UUID-based username and email, set password, and submit the form.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('testuser_58b6a1e2-9c3d-4f2b-8f6a-0d1b2c3e4f5a')
         
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://myapp-3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d.onrender.com/active')
+        elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('testuser_58b6a1e2-9c3d-4f2b-8f6a-0d1b2c3e4f5a@appcrons-test.com')
         
-        # -> Click the Submit button to create the application and proceed to the next step (observe the dashboard/app details after creation).
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Enable the application (toggle the enable switch) and proceed to the next modal step (use the visible button to continue/finish creation). After the modal closes, locate the created app in the dashboard and open its details to delete it by typing the exact app name.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Skip' / continue button to advance to the final step and finish app creation (close the modal), then locate the created app in the dashboard.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the modal's 'Finish' button to close the creation modal so the dashboard list can be inspected for the created application.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Open the delete confirmation modal by clicking the 'Delete app' button, then type the exact app name into the confirmation input and confirm deletion (verify redirect and that the app is removed). First immediate action: click 'Delete app' button.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[15]/main/div/div/div[2]/div[4]/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Type the exact app name into the confirmation input and click the Delete button to confirm deletion.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[2]/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('Password123!')
         
+        # -> Submit the signup form by clicking the Create button and wait for the UI to update (look for dashboard redirect or an error toast).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Delete app' button to re-open the confirmation modal so I can type the exact app name and confirm deletion.
+        # -> Open the create-application flow by clicking the 'New Application' button on the dashboard.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[15]/main/div/div/div[2]/div[4]/div[2]/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[6]/main/div/div/div/div[3]/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Type the exact app name into the confirmation input and click the Delete button to confirm deletion (then verify redirect to dashboard and that the app is removed).
+        # -> Fill the application name field with a UUID-based name (MyApp_d4e9a2b1-7f6c-4a2b-9c8d-1e2f3a4b5c6d), fill the URL endpoint, then submit the create-application form.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[2]/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('MyApp_d4e9a2b1-7f6c-4a2b-9c8d-1e2f3a4b5c6d')
         
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Type the exact app name into the confirmation input and click the Delete button to confirm deletion (this should redirect to the dashboard and remove the app).
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[2]/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('https://myapp-d4e9a2b1-7f6c-4a2b-9c8d-1e2f3a4b5c6d.onrender.com/active')
         
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the modal's 'Delete' button to confirm deletion (the exact app name is already entered in the confirmation input), then verify redirect to the dashboard and that the app is removed.
+        # -> Enable the application by toggling the enable switch (click the switch). After the page updates, continue to the delete flow.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the modal's Delete button to confirm deletion (the confirmation input already contains the exact app name). After the click, verify the UI redirects to the dashboard and that the application is no longer listed.
+        # -> Advance the create-application modal to the final 'Finish' step (click the Skip/continue button) so the app creation flow completes, then open the created application's details to start the delete flow.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the modal's 'Delete' button to confirm deletion (exact app name already entered), then verify redirect to the dashboard and that the application is removed from the list.
+        # -> Click the 'Finish' button to complete the create-application flow, then open the created application's details to start the delete flow (open delete modal, type exact app name confirmation, confirm deletion, and verify dashboard and app removal).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[7]/div/div[2]/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the modal's Delete button to confirm deletion (exact app name is already entered), then verify redirect to the dashboard and that the application is no longer listed.
+        # -> Open the delete confirmation modal by clicking the 'Delete app' button, then type the exact application name into the confirmation input and confirm deletion. After deletion, verify redirect to the dashboard and that the app no longer appears.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[18]/main/div/div/div[2]/div[4]/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the modal's 'Delete' button to confirm deletion, then verify the UI redirects to the dashboard and that the application is no longer listed.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the modal's Delete button to confirm deletion (exact app name already entered), then verify the UI redirects to the dashboard and that the application is no longer listed.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Type the exact app name into the confirmation input (clear then type) and click the modal's Delete button to confirm deletion, then verify redirect to the dashboard and that the app is removed.
+        # -> Type the exact confirmation phrase into the modal input, click Delete, wait for the UI to update, then verify the dashboard is shown and the app name is no longer present on the page.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[2]/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/form/div[2]/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('delete application MyApp_d4e9a2b1-7f6c-4a2b-9c8d-1e2f3a4b5c6d')
         
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[3]/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/form/div[3]/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Clear and re-type the exact app name into the modal confirmation input, click the modal's Delete button to confirm deletion, then wait for the UI to redirect and show the dashboard (and verify the app is no longer listed).
+        # -> Re-open the delete confirmation modal by clicking the 'Delete app' button so I can type the exact confirmation phrase and confirm deletion.
         frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/form/div[2]/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_3f8d2b1a-9e4c-4f6b-8a2d-7c1e5f9b0a2d')
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[18]/main/div/div/div[2]/div[4]/div[2]/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the Delete button to confirm deletion, wait for the UI to update, then search the page for the application name to verify it was removed and the dashboard is shown.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/form/div[3]/button[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent
         frame = context.pages[-1]

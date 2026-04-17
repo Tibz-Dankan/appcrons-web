@@ -33,51 +33,51 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Open the Sign Up page so we can create a fresh user (navigate via the Sign Up link in the header).
+        # -> Click the 'Sign Up' link in the header to open the signup page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the signup form with a new UUID-based username and email, set password to Test@1234, and submit the form.
+        # -> Fill the signup form (username, email, password) and submit it by clicking Create.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_f47ac10b-58cc-4372-a567-0e02b2c3d479')
+        await asyncio.sleep(3); await elem.fill('testuser_9f7c2bfa-3d1e-4d6b-8c9a-2f4a1b6c7d8e')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_f47ac10b-58cc-4372-a567-0e02b2c3d479@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_9f7c2bfa-3d1e-4d6b-8c9a-2f4a1b6c7d8e@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Test@1234')
         
-        # -> Click the 'Create' button to submit the signup form, then wait for the app to navigate to the dashboard and the UI to settle.
+        # -> Click the 'Create' button to submit the signup form and create the new user account.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the user menu in the dashboard header so the Logout action is visible (click the avatar/menu button).
+        # -> Open the user menu in the dashboard header so we can click Logout.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[3]/header/div/div[3]/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Log out' button in the user menu to return to the login page and wait for the UI to settle.
+        # -> Click the 'Log out' menu item to sign out and reach the login page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[3]/header/div/div[3]/div[2]/div[2]/div[2]/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the login form with the saved email and password, submit the form, and verify the app navigates back to the dashboard.
+        # -> Fill the login form with the created user's email and password, submit, and verify the dashboard loads.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[5]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_f47ac10b-58cc-4372-a567-0e02b2c3d479@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_9f7c2bfa-3d1e-4d6b-8c9a-2f4a1b6c7d8e@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text

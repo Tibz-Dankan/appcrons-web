@@ -33,96 +33,123 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Open the Sign Up page by clicking the 'Sign Up' link
+        # -> Click the 'Sign Up' link to begin a fresh signup at /auth/signup.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the signup form with UUID-based username and email, set a password, then submit the form by clicking the Create button.
+        # -> Fill the signup form with the unique username, email, and password, then submit the Create button.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser-b6f9c3d4-8a71-4f3b-9c2a-0e1d2a3b4c5d')
+        await asyncio.sleep(3); await elem.fill('testuser_f47ac10b-58cc-4372-a567-0e02b2c3d479')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser-b6f9c3d4-8a71-4f3b-9c2a-0e1d2a3b4c5d@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_f47ac10b-58cc-4372-a567-0e02b2c3d479@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Password123!')
         
-        # -> Click the 'Create' button to submit the signup form and begin the authenticated flow.
+        # -> Submit the signup form by clicking the 'Create' button to complete signup and proceed to the dashboard.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the create-application flow by clicking the 'New Application' button on the dashboard.
+        # -> Resubmit the signup form by clicking the Create button and wait for the app to finish signup and redirect to the dashboard (or show an error).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/main/div/div/div/div[3]/div/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the create-application form with a UUID-based application name and URL, set the request interval, and submit the form to create the application.
+        # -> Retry signup using a brand-new UUID-based username and email. Fill username, email, password, then click Create to submit.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp-9a1b2c3d-4e5f-6789-abcd-ef0123456789')
-        
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://myapp-9a1b2c3d-4e5f-6789-abcd-ef0123456789.onrender.com/active')
-        
-        # -> Click the 'Submit' button to create the application, then observe the app list or details to locate the created app for updating its information.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Enable the application by toggling the switch so the app becomes active, then allow the UI to reflect the change before proceeding to finish the creation flow.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Skip' button to close the onboarding modal so the dashboard/app list is visible, then proceed to open the created application's details to update its information.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Click the 'Finish' button to close the onboarding modal so the dashboard and the created app list/details are visible.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Open the Update Application form by clicking the Update control in the 'Update Application Info' section so the edit fields (name, URL, interval) appear.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[15]/main/div/div/div[2]/div[2]/div[2]/div/p').nth(0)
-        await asyncio.sleep(3); await elem.click()
-        
-        # -> Clear and fill the Application Name and URL fields with brand-new UUID-based values, change the Request Interval to 10, click Save Changes, wait for the UI to process, then verify the updated values (and success notification) are visible.
-        frame = context.pages[-1]
-        # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/div/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('UpdatedApp-4c3b2a1f-9d8e-47c6-b2a3-0f1e2d3c4b5a')
+        elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('testuser_c9b1d9f2-3b0a-4f3e-9c72-1a2b3c4d5e6f')
         
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/div/form/div[3]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://updatedapp-4c3b2a1f-9d8e-47c6-b2a3-0f1e2d3c4b5a.onrender.com/active')
+        elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('testuser_c9b1d9f2-3b0a-4f3e-9c72-1a2b3c4d5e6f@appcrons-test.com')
         
-        # -> Click 'Save Changes', wait for the UI to process, then verify a success notification and that the form shows the newly saved name, URL, and interval values.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('Password123!')
+        
+        # -> Submit the new signup by clicking the Create button to authenticate and proceed to the dashboard.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/div/div[2]/div/form/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Start the create-application flow by clicking the 'New Application' button on the dashboard.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[5]/main/div/div/div/div[3]/div/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill Application Name and URL with unique values using UUID 3e7f6a8b-1c2d-4e3f-9a0b-1234567890ab, submit the form, then wait for the UI to reflect the new application.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('MyApp_3e7f6a8b-1c2d-4e3f-9a0b-1234567890ab')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('https://myapp-3e7f6a8b-1c2d-4e3f-9a0b-1234567890ab.onrender.com/active')
+        
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/form/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Toggle the 'Enable application' switch to enable the app, wait for the UI to reflect the change, then proceed to finish the create flow (close modal and confirm application creation).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Finish the create-application flow by clicking 'Skip' (finish/close the modal) so the created application appears on the dashboard, then open the newly created application's details to begin the update flow.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the Finish button on the modal to complete application creation, wait for the dashboard to update, then open the newly created application's details to begin the update flow.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/div/div[2]/div/div[2]/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Open the Update Application Info form by clicking the 'Update' control so the update form fields become visible (then observe the fields before editing).
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[17]/main/div/div/div[2]/div[2]/div[2]/div/p').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Clear and replace the Application Name and URL with BRAND-NEW UUID-based values, select a different Request Interval (change from 5 to 10), then Save Changes to update the application.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[5]/div/div[2]/div/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('UpdatedApp_7b8c9d0e-2f3a-4b5c-8d9e-abcdef012345')
+        
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[5]/div/div[2]/div/form/div[3]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('https://updatedapp-7b8c9d0e-2f3a-4b5c-8d9e-abcdef012345.onrender.com/active')
+        
+        # -> Click the 'Save Changes' button to submit the update, wait for the UI to reflect the change (success toast), then verify the update form shows the newly saved name, URL, and interval.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[5]/div/div[2]/div/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent

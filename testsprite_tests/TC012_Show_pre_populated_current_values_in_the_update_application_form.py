@@ -33,76 +33,72 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Open the Sign Up page (/auth/signup) to begin a fresh signup.
-        frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # -> Open the signup page at /auth/signup so we can create a fresh user account.
+        await page.goto("http://localhost:3000/auth/signup")
         
-        # -> Fill the signup form with unique values and submit to create a new user account.
+        # -> Fill the signup form with UUID-based unique username and email, enter a valid password, and submit the Create form to register a new user (then wait for the app to navigate to the dashboard).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_5f8c2a1b-9d3e-4b0f-8c07-2a1d3e6f9b2c')
+        await asyncio.sleep(3); await elem.fill('testuser-6f0d3b9a')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_5f8c2a1b-9d3e-4b0f-8c07-2a1d3e6f9b2c@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser-6f0d3b9a-8c4e-4f2b-9a1e-2d3c4b5a6f7e@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Password123!')
         
-        # -> Submit the signup form by clicking the Create button, then wait for the dashboard to load.
+        # -> Click the 'Create' button to submit the signup form and wait for the app to navigate to the dashboard.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the New Application modal from the dashboard so the create application flow can be started.
+        # -> Open the create-application modal by clicking the 'New Application' button, then wait for the modal to render so we can fill the application name and URL.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[3]/main/div/div/div/div[3]/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the new application form (name, URL, set request interval = 10) and submit to create the application.
+        # -> Fill the Application Name and URL with UUID-based values, then submit the modal to create the application.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_9b7a4d2e-3f6a-4cbd-8f0a-1b2c3d4e5f6a')
+        await asyncio.sleep(3); await elem.fill('MyApp-4b8f2a1c-3d6e-4f9a-b123-0a1b2c3d4e5f')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://myapp-9b7a4d2e-3f6a-4cbd-8f0a-1b2c3d4e5f6a.onrender.com/active')
+        await asyncio.sleep(3); await elem.fill('https://myapp-4b8f2a1c-3d6e-4f9a-b123-0a1b2c3d4e5f.onrender.com/active')
         
-        # -> Click the Submit button in the 'Add new application' modal to proceed to the next step (enable application) and wait for the UI to update so we can continue the create flow.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the enable switch to enable the application (toggle the checkbox to true) so we can proceed to finish the create flow.
+        # -> Toggle the 'Enable application' switch to enable the app (click the switch at index 1499). After the UI updates, observe for the next button (Finish) or modal change before proceeding to open the app details page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Skip' button (finish the create flow / close modal), wait for the dashboard to update, then open the new application's details page to verify the update form is visible and pre-filled with the application's values. Immediate action: click Skip.
+        # -> Close or finish the create-app modal (click 'Skip' to close this step), then open the new application's details page and verify the update form is visible and pre-populated with the current values.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Finish' button to close the modal so the dashboard updates. After the modal closes, open the new application's details page and verify the update form is visible and pre-filled with the application's values.
+        # -> Click the 'Finish' button to close the modal, then open the newly created application's details page and verify the update form is visible and pre-populated with the current application values.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the 'Update' control to open the update application form, then verify the form fields are visible and pre-filled with the application's current values (name, URL endpoint, request interval, enabled state).
+        # -> Click the 'Update' control to open the Update Application form, then verify the form fields are visible and pre-populated with the current values (Application Name, URL Endpoint, Request Interval = 10). Stop after verification.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[15]/main/div/div/div[2]/div[2]/div[2]/div/p').nth(0)

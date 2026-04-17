@@ -33,66 +33,82 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Click the 'Sign Up' link to open the signup page.
+        # -> Click the 'Sign Up' link to open the fresh signup form.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the signup form (username, email, password) and click Create to perform a fresh signup.
+        # -> Fill the signup form with a UUID-based username/email and password, then submit the Create form to register a fresh user.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_e7a3b9f2-1c4d-4f6a-8b9c-2d3e4f5a6b7c')
+        await asyncio.sleep(3); await elem.fill('user-3f8b2c1d')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_e7a3b9f2-1c4d-4f6a-8b9c-2d3e4f5a6b7c@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('3f8b2c1d-9a7e-4b6c-8d5f-1234567890ab@example.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Test@1234')
         
-        # -> Click the Create button to submit the signup form and wait for the dashboard to load.
+        # -> Submit the signup form by clicking the Create button to register the fresh user.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Open the create-new-application modal by clicking the 'New Application' button so the form fields become visible.
+        # -> Open the profile menu to reveal the Settings option (click the profile/menu button).
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[3]/main/div/div/div/div[3]/div/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[3]/header/div/div[3]/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the Application Name and URL Endpoint fields with UUID-based values, then click Submit to advance the modal to the enable step.
+        # -> Open Account settings to access the change-password form.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[3]/header/div/div[3]/div[2]/div[2]/div/a[2]').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Click the 'Change password' item in the Settings left navigation to open the change-password form.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[6]/main/div/div/div/div/div[2]/aside/ul/li[2]/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Fill Current Password with Test@1234, fill New Password with NewPass@5678, submit the form, then wait for the UI to update so we can verify the success toast and that the password fields are cleared.
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('TestApp_e7a3b9f2-1c4d-4f6a-8b9c-2d3e4f5a6b7c')
+        elem = frame.locator('xpath=/html/body/div[6]/main/div/div/div/div/div[2]/section/div[2]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('Test@1234')
         
         frame = context.pages[-1]
         # Input text
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://testapp-e7a3b9f2-1c4d-4f6a-8b9c-2d3e4f5a6b7c.onrender.com/active')
+        elem = frame.locator('xpath=/html/body/div[6]/main/div/div/div/div/div[2]/section/div[2]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('NewPass@5678')
         
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[6]/main/div/div/div/div/div[2]/section/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Toggle the application enabled switch on by clicking the switch (index 1440), then wait for the modal to reflect the change/advance to the Finish step.
+        # -> Attempt to log in using the new password (NewPass@5678) for the signup email to confirm the password change took effect and observe any toast or messages shown after the change.
         frame = context.pages[-1]
-        # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
-        await asyncio.sleep(3); await elem.click()
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[10]/form/div/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('3f8b2c1d-9a7e-4b6c-8d5f-1234567890ab@example.com')
         
-        # -> Click the Finish button in the modal to complete the flow and navigate to the application details page, then verify the app details and enabled state.
+        frame = context.pages[-1]
+        # Input text
+        elem = frame.locator('xpath=/html/body/div[10]/form/div[2]/div/input').nth(0)
+        await asyncio.sleep(3); await elem.fill('NewPass@5678')
+        
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
+        elem = frame.locator('xpath=/html/body/div[10]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent

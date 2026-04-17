@@ -33,29 +33,29 @@ async def run_test():
         # -> Navigate to http://localhost:3000
         await page.goto("http://localhost:3000")
         
-        # -> Open the Sign Up page so I can perform a fresh signup (click the 'Sign Up' link).
+        # -> Open the signup page (/auth/signup) by clicking the 'Sign Up' link on the home page.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/div/header/div/div/nav/div/div[3]/div[2]/a[2]').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the signup form with unique credentials (UUID-based) and submit the form.
+        # -> Fill the signup form with a unique username and email (using UUID), set a password, and submit the form.
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_7b9c3f5d-2a4e-4f9a-8c1e-0b2d5e6f7a8c')
+        await asyncio.sleep(3); await elem.fill('testuser_3f29b6e2-1bdc-4f0a-9c6a-2e5b7d4f9c12')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('testuser_7b9c3f5d-2a4e-4f9a-8c1e-0b2d5e6f7a8c@appcrons-test.com')
+        await asyncio.sleep(3); await elem.fill('testuser_3f29b6e2-1bdc-4f0a-9c6a-2e5b7d4f9c12@appcrons-test.com')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[2]/form/div[3]/div/input').nth(0)
         await asyncio.sleep(3); await elem.fill('Password123!')
         
-        # -> Submit the signup form by clicking the 'Create' button, then wait for the dashboard to load.
+        # -> Submit the signup form by clicking the Create button to complete the fresh signup.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[2]/form/button').nth(0)
@@ -67,46 +67,55 @@ async def run_test():
         elem = frame.locator('xpath=/html/body/div[3]/main/div/div/div/div[3]/div/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Fill the new application form (unique name and URL), select a request interval, submit the form, then wait for the dashboard to update.
+        # -> Fill the Application Name and URL fields, then submit the form to proceed to the next step (Enable application).
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('MyApp_c1d2e3f4-5a6b-7c8d-9e0f-1234567890ab')
+        await asyncio.sleep(3); await elem.fill('MyApp_9f1d2b3c-4a5e-6f7a-8b9c-0d1e2f3a4b5c')
         
         frame = context.pages[-1]
         # Input text
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/div[2]/div/input').nth(0)
-        await asyncio.sleep(3); await elem.fill('https://myapp-c1d2e3f4-5a6b-7c8d-9e0f-1234567890ab.onrender.com/active')
+        await asyncio.sleep(3); await elem.fill('https://myapp-9f1d2b3c-4a5e-6f7a-8b9c-0d1e2f3a4b5c.onrender.com/active')
         
-        # -> Click the 'Submit' button in the add-application modal to create the application.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/form/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Click the enable switch in the modal to enable the application, then finish the creation modal (use Skip/Next) so the dashboard shows the created app. After that, disable the application from the dashboard list and open its details to verify the disabled state.
+        # -> Toggle the 'Enable application' switch to enable the app (click the switch).
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/div[2]/div/label/div/input').nth(0)
         await asyncio.sleep(3); await elem.click()
         
+        # -> Close/finish the modal (click 'Skip' or the finish control) so the dashboard is visible; then locate the newly created app in the dashboard to disable it and open its details page to verify the disabled state.
         frame = context.pages[-1]
         # Click element
         elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
         await asyncio.sleep(3); await elem.click()
         
-        # -> Return to the dashboard (close or bypass the enable modal), locate the created application in the dashboard list, toggle it from enabled to disabled, then open the app details page and verify the details page shows the disabled state.
-        await page.goto("http://localhost:3000/dashboard")
-        
-        # -> Toggle the application from enabled to disabled in the dashboard list, open its details page, and verify the details page shows the disabled state.
+        # -> Click the Finish button in the modal to close it and return to the dashboard, then locate the newly created app to disable it.
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[2]/main/div/div/div/div[2]/table/tbody/tr/td[5]/div/label/div/input').nth(0)
+        elem = frame.locator('xpath=/html/body/div[4]/div/div[2]/div/div[2]/div/button').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Navigate back to the Dashboard, locate the created application in the dashboard list, toggle it from enabled to disabled, then open the application's details page to verify the details page reflects the disabled state.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[15]/header/div/div[2]/div/a').nth(0)
+        await asyncio.sleep(3); await elem.click()
+        
+        # -> Toggle the application from enabled to disabled in the dashboard list, open the application's details page, and verify the details page reflects the disabled state.
+        frame = context.pages[-1]
+        # Click element
+        elem = frame.locator('xpath=/html/body/div[20]/main/div/div/div/div[2]/table/tbody/tr/td[5]/div/label/div/input').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         frame = context.pages[-1]
         # Click element
-        elem = frame.locator('xpath=/html/body/div[2]/main/div/div/div/div[2]/table/tbody/tr/td/span').nth(0)
+        elem = frame.locator('xpath=/html/body/div[20]/main/div/div/div/div[2]/table/tbody/tr/td').nth(0)
         await asyncio.sleep(3); await elem.click()
         
         # --> Test passed — verified by AI agent
