@@ -1,0 +1,1313 @@
+[
+  {
+    "id": "TC001",
+    "title": "Sign up and be redirected to the dashboard",
+    "description": "Verifies that a new user can create an account and is redirected to the dashboard after successful signup.",
+    "category": "User Signup (TC-01)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the username field with testuser_{{uuid}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with testuser_{{uuid}}@appcrons-test.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with Test@1234"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the signup flow to complete"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the dashboard shows an authenticated user experience"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC002",
+    "title": "Log out and log back in to return to the dashboard",
+    "description": "Verifies that a signed-in user can log out to the login page and then log back in to reach the dashboard again.",
+    "category": "User Login after Signup and Logout (TC-02)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the username field with testuser_{{uuid}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with testuser_{{uuid}}@appcrons-test.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with Test@1234"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the user to land on the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Open the user menu in the dashboard header"
+      },
+      {
+        "type": "action",
+        "description": "Click the logout action"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with testuser_{{uuid}}@appcrons-test.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with Test@1234"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the dashboard"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC003",
+    "title": "Create an application via the 3-step modal and land on the app details page",
+    "description": "Verifies that an authenticated user can create an application, enable it in the modal flow, and arrive on the application details page.",
+    "category": "Create / Add Application (TC-03)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the username field with testuser_{{uuid}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with testuser_{{uuid}}@appcrons-test.com"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with Test@1234"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the user to land on the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Click the create-new-application action to open the modal"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the application name field with TestApp_{{uuid}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the URL endpoint field with https://testapp-{{uuid}}.onrender.com/active"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval option"
+      },
+      {
+        "type": "action",
+        "description": "Submit the create application step"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the modal to advance to the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the application enabled switch on"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the modal to advance to the finish step"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigate-to-application action"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the application details page is displayed for the newly created application"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the application appears as enabled on the details page"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC004",
+    "title": "Disable an enabled application from its details page",
+    "description": "A newly signed-up user can create an enabled application and then disable it from the application details page, with the toggle updating to the disabled state after processing completes.",
+    "category": "Disable Application from App Details Page (TC-07)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based email into the email field (testuser_{uuid}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based username into the username field (testuser_{uuid})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Create a new application from the dashboard using the 3-step create-application modal and keep it enabled through the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the flow to land on the new application details page"
+      },
+      {
+        "type": "action",
+        "description": "Click the enable/disable toggle to disable the application"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the application toggle reflects a disabled/off state after processing completes"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success notification is visible for the disable action"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC005",
+    "title": "Update an application's name, URL, and interval from app details",
+    "description": "An authenticated user can update application information with a brand-new unique URL and see the updated values reflected after saving.",
+    "category": "Update Application Info (TC-04)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Locate the update application information section on the app details page"
+      },
+      {
+        "type": "action",
+        "description": "Clear and fill a new unique application name into the application name field (e.g., UpdatedApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Clear and fill a brand-new unique URL into the URL endpoint field (e.g., https://updatedapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Select a different request interval than the current value"
+      },
+      {
+        "type": "action",
+        "description": "Submit the update application information form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success notification is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the update form shows the newly saved name, URL, and interval values"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC006",
+    "title": "Delete an application with typed confirmation",
+    "description": "A newly signed-up user can delete an application by entering the exact typed confirmation and is redirected to the dashboard with the app removed.",
+    "category": "Delete Application (TC-05)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the delete application section on the app details page"
+      },
+      {
+        "type": "action",
+        "description": "Open the delete application confirmation modal"
+      },
+      {
+        "type": "action",
+        "description": "Type the required delete confirmation phrase exactly as instructed, including the current app name"
+      },
+      {
+        "type": "action",
+        "description": "Confirm deletion in the modal"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the user lands on the dashboard"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the deleted application is not shown in the dashboard list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC007",
+    "title": "Disable an enabled application from the dashboard list",
+    "description": "An authenticated user can disable an enabled application from the dashboard and see the disabled state reflected in the UI.",
+    "category": "Disable Application from Dashboard (TC-06)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to return to the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the application from enabled to disabled in the dashboard list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success notification is visible"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the application shows a disabled state in the dashboard list"
+      }
+    ],
+    "priority": "High"
+  },
+  {
+    "id": "TC008",
+    "title": "Disabled state remains consistent between dashboard and app details",
+    "description": "After disabling an application from the dashboard, the app details page reflects the same disabled state.",
+    "category": "Disable Application from Dashboard (TC-06)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Click the navigation control to return to the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the application from enabled to disabled in the dashboard list"
+      },
+      {
+        "type": "action",
+        "description": "Open the application details page from the dashboard list"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the application shows a disabled state on the app details page"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC009",
+    "title": "Add a Request Time Frame (RTF) to an application",
+    "description": "A newly signed-up user can create an application and add a valid Request Time Frame with timezone, start, and end times, resulting in the new time range appearing in the list.",
+    "category": "Add Request Time Frame / RTF (TC-08)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based email into the email field (testuser_{uuid}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based username into the username field (testuser_{uuid})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Create a new application from the dashboard using the 3-step create-application modal and keep it enabled through the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the flow to land on the new application details page"
+      },
+      {
+        "type": "action",
+        "description": "If the timezone is not set, select a valid timezone in the timezone dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid start time in the start-time dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid end time later than the start time in the end-time dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Submit the Add Request Time Frame form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success notification is visible for adding the time range"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the new request time frame appears in the existing time ranges list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC010",
+    "title": "Change password successfully from Settings",
+    "description": "Verifies an authenticated user can change their password in Settings and sees the success toast with the password fields cleared afterward.",
+    "category": "Change Password in Settings (TC-11)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill Test@1234 into the current password field"
+      },
+      {
+        "type": "action",
+        "description": "Fill NewPass@5678 into the new password field"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the submit button for the change password form"
+      },
+      {
+        "type": "action",
+        "description": "Submit the change password form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success toast notification is visible indicating the password was changed successfully"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify both password fields are cleared"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC011",
+    "title": "Delete an existing Request Time Frame (RTF) from an application",
+    "description": "A newly signed-up user can create an application, add a Request Time Frame, and then delete that time range via the confirmation UI so it is removed from the list.",
+    "category": "Delete Application RTF (TC-09)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based email into the email field (testuser_{uuid}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new UUID-based username into the username field (testuser_{uuid})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Create a new application from the dashboard using the 3-step create-application modal and keep it enabled through the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the flow to land on the new application details page"
+      },
+      {
+        "type": "action",
+        "description": "If the timezone is not set, select a valid timezone in the timezone dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid start time in the start-time dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid end time later than the start time in the end-time dropdown"
+      },
+      {
+        "type": "action",
+        "description": "Submit the Add Request Time Frame form"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the Request Time Frames section"
+      },
+      {
+        "type": "action",
+        "description": "Click the delete action for the request time frame entry just created"
+      },
+      {
+        "type": "action",
+        "description": "Confirm deletion in the request time frame confirmation UI"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success notification is visible for deleting the time range"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the deleted request time frame no longer appears in the existing time ranges list"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC012",
+    "title": "Show pre-populated current values in the update application form",
+    "description": "An authenticated user can open the app details page and see the update form pre-filled with the current application values.",
+    "category": "Update Application Info (TC-04)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the update application information form is visible with pre-populated values"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC013",
+    "title": "Update personal details from Settings",
+    "description": "Verifies an authenticated user can update username and email in Settings and sees a success toast indicating the changes were saved.",
+    "category": "Update Personal Details in Settings (TC-10)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill user-{{uuid8}} into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Fill user-{{uuid8}}@example.com into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the personal details form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a success confirmation toast is visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC014",
+    "title": "Require a new unique URL when updating application info",
+    "description": "An authenticated user cannot save application info updates if the URL endpoint is left empty or invalid and must correct it before saving succeeds.",
+    "category": "Update Application Info (TC-04)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Locate the update application information section on the app details page"
+      },
+      {
+        "type": "action",
+        "description": "Clear the URL endpoint field so it is empty"
+      },
+      {
+        "type": "action",
+        "description": "Submit the update application information form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a URL endpoint validation error is visible"
+      }
+    ],
+    "priority": "Medium"
+  },
+  {
+    "id": "TC015",
+    "title": "Toggle theme and see it persist across pages in the same session",
+    "description": "Verifies that a visitor can switch between light and dark themes and that the selection persists when navigating within the app during the same session.",
+    "category": "Visitor Theme & Marketing Navigation",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Toggle the theme mode"
+      },
+      {
+        "type": "action",
+        "description": "Click a navigation link in the header to move to another section/page and then return to the home view"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the theme appears consistent across the header and main page content after navigation"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the theme remains set to the most recently selected mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC016",
+    "title": "Keep delete confirmation disabled until exact phrase is entered",
+    "description": "A user cannot confirm deletion until the typed confirmation exactly matches the required phrase.",
+    "category": "Delete Application (TC-05)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/signup"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique username into the username field (e.g., testuser_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique email into the email field (e.g., testuser_{{uuid}}@appcrons-test.com)"
+      },
+      {
+        "type": "action",
+        "description": "Fill a valid password into the password field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the signup form"
+      },
+      {
+        "type": "action",
+        "description": "Open the create application flow from the dashboard"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique application name into the application name field (e.g., MyApp_{{uuid}})"
+      },
+      {
+        "type": "action",
+        "description": "Fill a unique URL endpoint into the URL endpoint field (e.g., https://myapp-{{uuid}}.onrender.com/active)"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Select a valid request interval"
+      },
+      {
+        "type": "action",
+        "description": "Proceed to the next step of the modal"
+      },
+      {
+        "type": "action",
+        "description": "Enable the application in the enable step"
+      },
+      {
+        "type": "action",
+        "description": "Finish the create application flow"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the delete application section on the app details page"
+      },
+      {
+        "type": "action",
+        "description": "Open the delete application confirmation modal"
+      },
+      {
+        "type": "action",
+        "description": "Type an incorrect delete confirmation phrase into the confirmation input"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the delete confirmation action remains disabled"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC017",
+    "title": "Personal details fields are pre-populated on Settings",
+    "description": "Verifies an authenticated user sees existing account username and email pre-filled in the Personal Details form on Settings.",
+    "category": "Update Personal Details in Settings (TC-10)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the personal details form shows a pre-populated username value"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the personal details form shows a pre-populated email value"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC018",
+    "title": "Prevent saving personal details with an invalid email format",
+    "description": "Verifies the Settings personal details form blocks submission and shows a validation error when the email format is invalid.",
+    "category": "Update Personal Details in Settings (TC-10)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill not-an-email into the email field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the personal details form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify an email validation error is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC019",
+    "title": "Prevent changing password when required fields are empty",
+    "description": "Verifies the Change Password form blocks submission and shows validation errors when one or both password fields are missing.",
+    "category": "Change Password in Settings (TC-11)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the submit button for the change password form"
+      },
+      {
+        "type": "action",
+        "description": "Submit the change password form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify required-field validation errors are visible for the password inputs"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC020",
+    "title": "Toggle theme between dark and light on the home page",
+    "description": "Verifies a visitor can switch between dark and light themes from the home page and the UI updates accordingly without authentication.",
+    "category": "Toggle Dark / Light Theme (TC-12)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle in the navigation bar"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the page theme to finish updating"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the site is displayed in the opposite theme mode"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle in the navigation bar"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the page theme to finish updating"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the site is displayed back in the original theme mode"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC021",
+    "title": "Prevent saving personal details when username exceeds max length",
+    "description": "Verifies the Settings personal details form shows a validation error when the username is longer than the allowed maximum.",
+    "category": "Update Personal Details in Settings (TC-10)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill a username longer than 50 characters into the username field"
+      },
+      {
+        "type": "action",
+        "description": "Submit the personal details form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a username validation error is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC022",
+    "title": "Prevent changing password when new password violates length constraints",
+    "description": "Verifies the Change Password form shows a validation error when the new password does not meet the allowed length rules.",
+    "category": "Change Password in Settings (TC-11)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /auth/login"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the email field with {{LOGIN_USER}}"
+      },
+      {
+        "type": "action",
+        "description": "Fill in the password field with {{LOGIN_PASSWORD}}"
+      },
+      {
+        "type": "action",
+        "description": "Submit the login form"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to open settings"
+      },
+      {
+        "type": "action",
+        "description": "Fill Test@1234 into the current password field"
+      },
+      {
+        "type": "action",
+        "description": "Fill a new password shorter than the minimum allowed length into the new password field"
+      },
+      {
+        "type": "action",
+        "description": "Scroll to the submit button for the change password form"
+      },
+      {
+        "type": "action",
+        "description": "Submit the change password form"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify a new-password validation error is visible"
+      }
+    ],
+    "priority": "Low"
+  },
+  {
+    "id": "TC023",
+    "title": "Theme selection persists across navigation within the session",
+    "description": "Verifies a visitor’s selected theme persists when navigating away from and back to the home page within the same session.",
+    "category": "Toggle Dark / Light Theme (TC-12)",
+    "steps": [
+      {
+        "type": "action",
+        "description": "Navigate to /"
+      },
+      {
+        "type": "action",
+        "description": "Click the theme toggle in the navigation bar"
+      },
+      {
+        "type": "action",
+        "description": "Wait for the page theme to finish updating"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to go to the login page"
+      },
+      {
+        "type": "action",
+        "description": "Click the link to return to the home page"
+      },
+      {
+        "type": "assertion",
+        "description": "Verify the home page is still displayed in the previously selected theme"
+      }
+    ],
+    "priority": "Low"
+  }
+]

@@ -24,9 +24,9 @@ export const ChangePassword: React.FC = () => {
     mutationFn: new AuthService().changePassword,
     onSuccess: async (response: any) => {
       console.log("response: ", response);
-      formik.values = initialValues;
+      formik.resetForm();
       dispatch(
-        showCardNotification({ type: "success", message: response.message })
+        showCardNotification({ type: "success", message: response.message }),
       );
       setTimeout(() => {
         dispatch(hideCardNotification());
@@ -51,13 +51,13 @@ export const ChangePassword: React.FC = () => {
     initialValues: initialValues,
     validationSchema: Yup.object({
       currentPassword: Yup.string()
-        .max(255)
-        .required("Current password is required"),
-      newPassword: Yup.string()
-        .max(255)
         .min(5)
         .max(30)
-        .required("?New password is required"),
+        .required("Current password is required"),
+      newPassword: Yup.string()
+        .min(5)
+        .max(30)
+        .required("New password is required"),
     }),
 
     onSubmit: async (values, helpers) => {
@@ -83,12 +83,14 @@ export const ChangePassword: React.FC = () => {
         <InputField
           type="password"
           name="currentPassword"
+          label="Current Password"
           placeholder="Current Password"
           formik={formik}
         />
         <InputField
           type="password"
           name="newPassword"
+          label="New Password"
           placeholder="New Password"
           formik={formik}
         />
