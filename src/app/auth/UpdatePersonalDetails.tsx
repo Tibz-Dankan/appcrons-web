@@ -9,6 +9,7 @@ import { InputField } from "@/app/shared/InputField";
 import Button from "@/app/shared/Button";
 import { TUpdateUser } from "@/types/auth";
 import { AuthService } from "@/services/auth.service";
+import { useRouter } from "@/lib/router-events";
 import { useAppDispatch, useAppSelector } from "@/hooks/redux";
 import {
   hideCardNotification,
@@ -18,6 +19,7 @@ import { updateUser } from "@/store/actions/auth";
 
 export const UpdatePersonalDetails: React.FC = () => {
   const dispatch = useAppDispatch();
+  const router = useRouter();
   const accessToken = useAppSelector((state) => state.auth).accessToken;
   const user = useAppSelector((state) => state.auth).user;
 
@@ -31,6 +33,7 @@ export const UpdatePersonalDetails: React.FC = () => {
       setTimeout(() => {
         dispatch(hideCardNotification());
       }, 5000);
+      router.push("/dashboard");
     },
     onError: (error: any) => {
       dispatch(showCardNotification({ type: "error", message: error.message }));
