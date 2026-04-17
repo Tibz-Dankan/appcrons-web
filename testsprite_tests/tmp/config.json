@@ -8,22 +8,17 @@
     "projectPath": "/home/tibs/Desktop/Tibz/programming/projects/appcrons/appcrons-web",
     "testIds": [
       "TC001",
-      "TC002",
-      "TC003",
-      "TC004",
-      "TC005",
-      "TC006",
-      "TC007",
       "TC008",
       "TC009",
       "TC010",
-      "TC011",
       "TC012"
     ],
-    "additionalInstruction": "CRITICAL RULES FOR ALL 12 TESTS: 1) Use UUID (uuid4/crypto.randomUUID) NOT timestamps for ALL unique values (email, username, app name, app URL). Tests run in PARALLEL — timestamps WILL collide. 2) Every test requiring authentication MUST start with FRESH SIGNUP at /auth/signup with a new UUID-based email. NEVER try to login with previously used credentials. 3) TC005 (Update App): The updated URL MUST be a BRAND NEW UUID-based URL different from the creation URL. 4) TC006 (Delete App): Start with FRESH SIGNUP. 5) TC004 (Disable from Details): Start with FRESH SIGNUP at /auth/signup. 6) TC010 (Delete RTF): Start with FRESH SIGNUP with UUID email. 7) TC011 (Update Personal Details): Use SHORT username format like 'user-{uuid8}' (first 8 chars of UUID, max 50 chars). Success = toast notification with success message. 8) TC009 (Change Password): Scroll down to Submit button and click it firmly. Success = toast saying 'Password changed successfully!' and BOTH fields cleared (empty) via formik.resetForm(). 9) TC008 (Add RTF): Select timezone FIRST, then times, then click Submit.",
+    "additionalInstruction": "Re-run ONLY these 5 previously failed tests. DO NOT regenerate the test code — use the existing test files. CRITICAL RULES: 1) Use UUID NOT timestamps for ALL unique values. 2) Every test MUST start with FRESH SIGNUP at /auth/signup. 3) TC008 (Add RTF): Select timezone FIRST from dropdown, then times, then Submit. 4) TC009 (Change Password): After success, toast 'Password changed successfully!' appears, then user is LOGGED OUT and redirected to /auth/login. Fields cleared via formik.resetForm(). 5) TC010 (Delete RTF): Fresh signup, create app, add RTF, then delete it. 6) TC012 (Toggle Theme): Theme toggle is a button/icon in the top navigation bar.",
     "serverMode": "production",
     "envs": {
       "API_KEY": "sk-user-NM1UXMEL3DN7uwrTgSOEtuojPM4mo1_508O45Us3nCOm04HkfTv1dEQ253HB6Sx0-CN_v3KI58SWQiSNyXUpyjp2ukXdpk047a57UtJnqC6XAlLokaRM2eacVsaa58wyTco"
     }
-  }
+  },
+  "serverPort": 38453,
+  "proxy": "http://187fafa9-943d-40ab-bd59-5d15be273a8b:HRzkNUP2080Eh4JOIiWMe7Uj4146QDHK@tun.testsprite.com:8080"
 }
