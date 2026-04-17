@@ -26,7 +26,7 @@ export const UpdatePersonalDetails: React.FC = () => {
     onSuccess: async (response: any) => {
       dispatch(updateUser(response.user));
       dispatch(
-        showCardNotification({ type: "success", message: response.message })
+        showCardNotification({ type: "success", message: response.message }),
       );
       setTimeout(() => {
         dispatch(hideCardNotification());
@@ -51,7 +51,7 @@ export const UpdatePersonalDetails: React.FC = () => {
     initialValues: initialValues,
     validationSchema: Yup.object({
       email: Yup.string().max(255).required("email is required"),
-      name: Yup.string().max(255).min(5).max(30).required("name is required"),
+      name: Yup.string().min(5).max(50).required("name is required"),
     }),
 
     onSubmit: async (values, helpers) => {

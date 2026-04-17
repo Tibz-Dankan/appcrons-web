@@ -1,0 +1,466 @@
+{
+  "meta": {
+    "project": "Appcrons Web",
+    "date": "2026-04-16",
+    "prepared_by": "appcrons_e2e_prd.pdf — TestSprite E2E Specification",
+    "total_test_cases": 12
+  },
+  "product_overview": "Appcrons is a SaaS platform that optimises the uptime of free-tier backend instances (e.g. on Render) by making periodic HTTP requests at defined intervals. The web frontend is built with Next.js App Router, TypeScript, Redux Toolkit for global state management, and React Query for server-state management.",
+  "core_goals": [
+    "Allow new users to register and authenticate so they can manage monitored applications.",
+    "Enable users to create, update, enable/disable, and delete monitored applications.",
+    "Allow users to schedule and delete request time frames (RTFs) for each application with timezone-aware start/end ranges.",
+    "Provide account-level settings: update personal details and change password.",
+    "Allow users to toggle UI theme (light/dark) without authentication."
+  ],
+  "test_data_strategy": {
+    "CRITICAL": "Tests run in PARALLEL. You MUST use UUID (crypto.randomUUID() or uuid4) — NOT timestamps — to generate unique values. Timestamps collide when tests run concurrently. Every email, username, app name, and app URL MUST be globally unique across all parallel test executions.",
+    "email_template": "testuser_{uuid}@appcrons-test.com",
+    "username_template": "testuser_{uuid}",
+    "password": "Test@1234",
+    "app_name_template": "TestApp_{uuid}",
+    "app_url_template": "https://testapp-{uuid}.onrender.com/active",
+    "uuid_generation": "Generate a fresh UUID (e.g. uuid4 short form or crypto.randomUUID()) for EACH test case independently. Do NOT reuse UUIDs across tests. Do NOT use timestamps."
+  },
+  "authentication_handling": "TestSprite should store the authenticated session (cookies/JWT) after a successful signup or login and reuse it across dependent steps within the same test case. Each top-level test case should begin with a fresh signup using unique credentials to ensure test isolation.",
+  "timing_rules": [
+    "After clicking 'Create' on signup form, allow up to 10 seconds for redirect to /dashboard (5-second spinner then redirect).",
+    "After application creation (TC-03 Step 7), the modal auto-advances to Step 2 upon API success — wait for URL to update.",
+    "After application deletion (TC-05), the app shows a success toast, then an info toast, then redirects to /dashboard after ~7 seconds total.",
+    "All toggle (enable/disable) operations should wait for the spinner to disappear before asserting state."
+  ],
+  "features": [
+    {
+      "name": "User Signup (TC-01)",
+      "description": "Verify that a new user can successfully register an account on Appcrons. Each test run uses UUID-based unique email and username.",
+      "user_flows": [
+        "Navigate to /auth/signup -> Signup page loads with form and Appcrons logo visible -> Enter a valid unique username (testuser_{uuid}) in the 'Username' field -> Username value accepted -> Enter a valid unique email (testuser_{uuid}@appcrons-test.com) in the 'Email' field -> Email value accepted -> Enter password 'Test@1234' in the 'Password' field -> Password masked and accepted -> Click the 'Create' button -> Button shows 'Creating' spinner and form disabled -> Wait for spinner ('Creating...' then 'Redirecting...') -> Success notification card appears -> User is redirected to /dashboard within ~5 seconds"
+      ]
+    },
+    {
+      "name": "User Login after Signup and Logout (TC-02)",
+      "description": "Verify that an existing user can log in using credentials created during signup, after logging out. Depends on TC-01.",
+      "user_flows": [
+        "Complete TC-01 (Signup) and land on /dashboard -> Open the user dropdown in the dashboard header -> Click 'Log out' in the dropdown -> Logout action triggered -> User session cleared and lands on /auth/login -> Enter the same email used during signup -> Email field accepts the value -> Enter the same password used during signup -> Password field masked and accepted -> Click the 'Log in' button -> 'Logging in' spinner appears and button disabled -> User is authenticated and redirected to /dashboard"
+      ]
+    },
+    {
+      "name": "Create / Add Application (TC-03)",
+      "description": "Verify the full 3-step flow for creating a new application: form submission, enabling the app, and navigating to the app details page. Depends on TC-01.",
+      "user_flows": [
+        "Sign up (TC-01) and land on /dashboard -> Click the 'New' button (PlusIcon) to open the modal -> Modal opens at Step 1 (?action=createapp&step=1) -> Observe 3-step progress panel with Step 1 active -> Fill 'Application Name' with TestApp_{uuid} -> Fill 'URL Endpoint' with https://testapp-{uuid}.onrender.com/active -> Select 'Request Interval' (5, 10, or 15 minutes) -> Click 'Submit' -> 'Submitting' spinner appears and button disabled -> Wait for success notification -> Modal advances to Step 2 (?action=enableapp&step=2&appId={id}) -> Toggle the enable switch ON -> Toggle switches to enabled (green) with success toast -> Modal advances to Step 3 (?action=finish&step=3&appId={id}) -> Click navigate action -> Modal closes and user navigated to /app/{appId}"
+      ]
+    },
+    {
+      "name": "Update Application Info (TC-04)",
+      "description": "Verify that a user can update the name, URL endpoint, and/or request interval of an existing application from the app details page. Depends on TC-01 + TC-03. CRITICAL: The updated URL MUST be a NEW unique UUID-based URL that does NOT match any existing app URL.",
+      "user_flows": [
+        "Sign up (TC-01) and create application (TC-03) to land on /app/{appId} -> Locate the 'Update Application Information' card/form -> Update form visible with pre-populated current values -> Clear and update the 'Application Name' field with a NEW unique name (e.g. UpdatedApp_{uuid}) -> Clear and update the 'URL Endpoint' field with a BRAND NEW unique URL (e.g. https://updatedapp-{NEW_uuid}.onrender.com/active) — this URL MUST NOT match any previously created app URL -> Change the 'Request Interval' dropdown to a different value -> Click 'Save Changes' -> 'Saving' spinner appears and button disabled -> Success notification and form reflects updated values from server"
+      ]
+    },
+    {
+      "name": "Delete Application (TC-05)",
+      "description": "Verify that a user can permanently delete an application using the confirmation modal with the required typed confirmation. IMPORTANT: This test MUST begin with a FRESH SIGNUP using a new UUID-based email (NOT login). Do NOT attempt to log in with existing credentials. Always start by navigating to /auth/signup.",
+      "user_flows": [
+        "Navigate to /auth/signup -> Sign up with a FRESH UUID-based email (testuser_{uuid}@appcrons-test.com) and unique username (testuser_{uuid}) -> Wait for redirect to /dashboard -> Create application (TC-03 flow) -> Navigate to /app/{appId} -> Scroll to the 'Delete this Application' section -> 'Delete this Application' section shows with 'Delete app' button -> Click the 'Delete app' button (red) to open the modal -> Confirmation modal opens with explanation and typed-input requirement -> Read the confirmation instruction showing app name in red -> Type exactly 'delete application {appName}' in the input -> Input accepts text and validation runs per keystroke -> Observe Delete button becomes enabled only when input exactly matches -> Click the 'Delete' button -> 'Deleting' spinner appears and button disabled -> Wait for success notification -> Success + 'Redirecting to dashboard' info toast appears -> User redirected to /dashboard and application no longer in list"
+      ]
+    },
+    {
+      "name": "Disable Application from Dashboard (TC-06)",
+      "description": "Verify that a user can disable an enabled application directly from the dashboard application list. Depends on TC-01 + TC-03 (enabled app).",
+      "user_flows": [
+        "Sign up (TC-01) and create an enabled application (TC-03) -> Navigate to /dashboard -> Dashboard shows the application list -> Locate the created application card -> Observe the toggle switch is in 'enabled' state (green) -> Click the toggle switch to disable the application -> Spinner appears during API call and toggle non-interactive -> Wait for spinner and API response -> Toggle switches to grey/off with success notification and app state updated in Redux"
+      ]
+    },
+    {
+      "name": "Disable Application from App Details Page (TC-07)",
+      "description": "Verify that a user can disable an enabled application from the application details page. IMPORTANT: This test MUST begin with a FRESH SIGNUP using a new UUID-based email (NOT login). Do NOT attempt to log in. Always start by navigating to /auth/signup.",
+      "user_flows": [
+        "Navigate to /auth/signup -> Sign up with a FRESH UUID-based email (testuser_{uuid}@appcrons-test.com) and unique username (testuser_{uuid}) -> Wait for redirect to /dashboard -> Create an enabled application (TC-03 flow) -> App details page loads with app shown in enabled state -> Locate the enable/disable toggle in EnableDisableAppCard -> Observe toggle is in 'enabled' state (green) -> Click the toggle to disable the application -> Spinner appears and toggle non-interactive during API call -> Wait for spinner and API response -> Toggle switches to grey/off with success notification and global state updated"
+      ]
+    },
+    {
+      "name": "Add Request Time Frame / RTF (TC-08)",
+      "description": "Verify that a user can add a new Request Time Frame (start time, end time, and timezone) for an application. Depends on TC-01 + TC-03.",
+      "user_flows": [
+        "Sign up (TC-01) and create application (TC-03) -> App details page loads and Add RTF card visible -> Locate the 'Add Request Time Frame' card/section -> If no existing timezone: select timezone from the TimeZone dropdown -> Timezone selected and stored in formik state -> Observe the 'Existing Time Ranges' grid -> Select a 'Start time' from the dropdown (e.g. 06:00AM) -> Select an 'End time' from the dropdown (e.g. 11:00PM) -> Observe validation message (green check = valid, red error = conflict) -> Click 'Submit' when validation shows green -> 'Processing' spinner appears and Submit button disabled -> Wait for spinner and API response -> Success notification and new time range appears in grid"
+      ]
+    },
+    {
+      "name": "Delete Application RTF (TC-09)",
+      "description": "Verify that a user can delete an existing Request Time Frame from an application. IMPORTANT: This test MUST begin with a FRESH SIGNUP using a new UUID-based email. Do NOT reuse credentials from other tests.",
+      "user_flows": [
+        "Navigate to /auth/signup -> Sign up with a FRESH UUID-based email (testuser_{uuid}@appcrons-test.com) and unique username (testuser_{uuid}) -> Wait for redirect to /dashboard -> Create app (TC-03 flow) -> Add RTF (TC-08 flow: select timezone, select start time e.g. 06:00AM, select end time e.g. 11:00PM, click Submit) -> App details page loads with RTF section visible with at least one entry -> Scroll to the 'Request Time Frames' section -> RTF section shows all existing time ranges -> Locate the RTF entry to delete -> Target RTF visible with start and end times in 12-hour format -> Click the delete action on the RTF item -> Confirmation form opens showing RTF times to be deleted -> Read the confirmation message identifying RTF by time range -> Click the 'Delete' button (red) to confirm deletion -> 'Deleting' spinner appears and Delete button disabled -> Wait for spinner and API response -> Success notification and RTF removed from list"
+      ]
+    },
+    {
+      "name": "Update Personal Details in Settings (TC-10)",
+      "description": "Verify that a logged-in user can update their username and email address from the Settings page. Success is indicated by a pop-up notification toast with a success message. Username max is 50 chars. When generating a new username for the update, use a SHORT format like 'user-{uuid8}' (first 8 chars of UUID) to stay well under the 50-char limit.",
+      "user_flows": [
+        "Sign up (TC-01) and land on /dashboard -> Navigate to /settings -> Settings page loads with SettingsPageLayout wrapper -> Locate the 'Personal Details' form -> UpdatePersonalDetails form is visible -> Observe fields pre-populated with current user data (user.name and user.email) -> Update the 'Username' field with a new SHORT value (e.g. user-{uuid8}, max 50 chars) -> Update the 'Email' field with a new valid email -> Click 'Save Changes' -> 'Saving' spinner appears and button disabled -> Wait for spinner and API response -> Success notification TOAST appears with success message -> Redux user state updated with new values"
+      ]
+    },
+    {
+      "name": "Change Password in Settings (TC-11)",
+      "description": "Verify that a logged-in user can change their account password from the Settings page. Depends on TC-01. User knows their current password (Test@1234). CRITICAL: After filling both password fields, you MUST scroll down to the Submit button and click it firmly. The Submit button may be below the viewport. Success is indicated by a toast notification that says 'Password changed successfully!' and the form fields are CLEARED (reset to empty) via formik.resetForm().",
+      "user_flows": [
+        "Sign up (TC-01) and land on /dashboard -> Navigate to /settings -> Settings page loads with Change Password form visible -> Locate the 'Change Password' form -> Change Password section visible with two masked password fields labeled 'Current Password' and 'New Password' -> Click on the 'Current Password' input field and type 'Test@1234' -> Current password masked and accepted -> Click on the 'New Password' input field and type a new valid password (e.g. 'NewPass@5678', 5-30 chars) -> New password masked and accepted -> Scroll down to make the Submit button visible -> Click the 'Submit' button directly and firmly -> 'Processing' spinner appears and Submit disabled -> Wait for spinner to disappear and API response -> Success toast notification appears saying 'Password changed successfully!' -> Both password fields are cleared (reset to empty) -> User stays on settings page"
+      ]
+    },
+    {
+      "name": "Toggle Dark / Light Theme (TC-12)",
+      "description": "Verify that the theme toggle switch correctly switches the application between light and dark modes without requiring authentication. No login needed.",
+      "user_flows": [
+        "Navigate to / (home page) -> Page loads in current theme (light or dark) -> Locate the theme toggle switch in the navigation bar -> Theme toggle visible in navbar with appropriate icon -> Observe current theme state -> Click toggle to switch to dark mode -> Toggle switches to dark mode with dark background applied -> Observe page appearance change with all page elements reflecting dark theme -> Click toggle again to switch back to light mode -> Toggle switches back to light mode with light background applied -> Observe all page elements reflect light theme"
+      ]
+    }
+  ],
+  "validation_rules": {
+    "form_validation": {
+      "signup_username": "Required, max 255 chars",
+      "signup_email": "Required, valid email format",
+      "signup_login_password": "Required, min 5, max 30 chars",
+      "login_email": "Required",
+      "app_name": "Required, max 255 chars",
+      "app_url": "Required, max 255 chars",
+      "app_request_interval": "Required; dropdown options: 5, 10, 15",
+      "rtf_start_time": "Required; cross-field validation vs end time",
+      "rtf_end_time": "Required; must not conflict with existing ranges",
+      "settings_username": "Required, min 5, max 50 chars",
+      "settings_email": "Required, max 255 chars",
+      "change_password_current": "Required",
+      "change_password_new": "Required, min 5, max 30 chars",
+      "delete_app_confirm": "Exact match: 'delete application {name}'; Delete button disabled until exact match typed"
+    },
+    "notification_assertions": [
+      "Notification card appears within 3 seconds of API response",
+      "Notification type matches outcome: 'success' (green), 'error' (red), or 'info' (blue)",
+      "Notification auto-dismisses after 5 seconds (some info toasts after 3 seconds)"
+    ],
+    "toggle_assertions": [
+      "Assert the initial state before interaction",
+      "Assert a spinner/loading overlay appears during the API call (prevents double-click)",
+      "Assert the toggle state changes to the expected value after API success",
+      "Assert the toggle reverts if the API call fails"
+    ]
+  },
+  "code_summary": {
+    "version": "2",
+    "type": "frontend",
+    "tech_stack": [
+      "TypeScript",
+      "Next.js 14",
+      "Tailwind CSS",
+      "React 18",
+      "Redux Toolkit",
+      "Zustand",
+      "React Query (TanStack)",
+      "Formik + Yup",
+      "Recharts"
+    ],
+    "routes": [
+      {
+        "path": "/",
+        "file": "src/app/page.tsx",
+        "auth_required": false,
+        "description": "Home page (theme toggle accessible here)"
+      },
+      {
+        "path": "/auth/signup",
+        "file": "src/app/auth/signup/page.tsx",
+        "auth_required": false,
+        "description": "New user registration"
+      },
+      {
+        "path": "/auth/login",
+        "file": "src/app/auth/login/page.tsx",
+        "auth_required": false,
+        "description": "Returning user login"
+      },
+      {
+        "path": "/auth/forgot-password",
+        "file": "src/app/auth/forgot-password/page.tsx",
+        "auth_required": false,
+        "description": "Initiate password reset"
+      },
+      {
+        "path": "/dashboard",
+        "file": "src/app/dashboard/page.tsx",
+        "auth_required": true,
+        "description": "Lists all user applications"
+      },
+      {
+        "path": "/app/{appId}",
+        "file": "src/app/app/[appId]/page.tsx",
+        "auth_required": true,
+        "description": "Application details, RTF, update, delete"
+      },
+      {
+        "path": "/settings",
+        "file": "src/app/settings/page.tsx",
+        "auth_required": true,
+        "description": "Personal details and password change"
+      }
+    ],
+    "features": [
+      {
+        "name": "User Signup",
+        "description": "Register a new account with username, email, and password",
+        "files": [
+          "src/app/auth/signup/Signup.tsx",
+          "src/services/auth.service.ts"
+        ],
+        "entry_route": "/auth/signup",
+        "user_interactions": [
+          "Fill username input field",
+          "Fill email input field",
+          "Fill password input field",
+          "Click Create button to submit",
+          "See 'Creating' spinner then 'Redirecting' spinner",
+          "See success notification and redirect to /dashboard"
+        ],
+        "api_calls": [{ "method": "POST", "endpoint": "/auth/signup" }],
+        "auth_required": false
+      },
+      {
+        "name": "User Login",
+        "description": "Login with email and password credentials",
+        "files": [
+          "src/app/auth/login/Login.tsx",
+          "src/services/auth.service.ts"
+        ],
+        "entry_route": "/auth/login",
+        "user_interactions": [
+          "Fill email input field",
+          "Fill password input field",
+          "Click 'Log in' button to submit",
+          "See 'Logging in' spinner then 'Redirecting' spinner",
+          "Redirect to /dashboard on success"
+        ],
+        "api_calls": [{ "method": "POST", "endpoint": "/auth/signin" }],
+        "auth_required": false
+      },
+      {
+        "name": "Logout",
+        "description": "Log out the current user and clear session",
+        "files": ["src/app/auth/Logout.tsx", "src/services/auth.service.ts"],
+        "entry_route": "/dashboard",
+        "user_interactions": [
+          "Open user dropdown in dashboard header",
+          "Click 'Log out'",
+          "Session cleared and redirect to /auth/login"
+        ],
+        "api_calls": [{ "method": "POST", "endpoint": "/auth/api/logout" }],
+        "auth_required": true
+      },
+      {
+        "name": "Create New App",
+        "description": "3-step flow: form submission, enabling app, navigating to details",
+        "files": [
+          "src/app/app/PostApp.tsx",
+          "src/app/app/PostAppLayout.tsx",
+          "src/app/app/EnableAppOnPost.tsx",
+          "src/services/app.service.ts"
+        ],
+        "entry_route": "/dashboard",
+        "user_interactions": [
+          "Click 'New' button (PlusIcon) to open modal",
+          "Fill 'Application Name'",
+          "Fill 'URL Endpoint'",
+          "Select 'Request Interval' (5, 10, or 15)",
+          "Click 'Submit'",
+          "Toggle enable switch ON at Step 2",
+          "Navigate from Step 3 to /app/{appId}"
+        ],
+        "api_calls": [
+          { "method": "POST", "endpoint": "/apps/post" },
+          { "method": "PATCH", "endpoint": "/apps/enable/:appId" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Update App",
+        "description": "Modify app name, URL endpoint, or request interval from app details",
+        "files": [
+          "src/app/app/UpdateApp.tsx",
+          "src/app/app/UpdateAppCard.tsx",
+          "src/services/app.service.ts"
+        ],
+        "entry_route": "/app/{appId}",
+        "user_interactions": [
+          "Observe update form with pre-populated values",
+          "Modify application name",
+          "Modify URL endpoint",
+          "Change request interval",
+          "Click 'Save Changes'",
+          "See 'Saving' spinner and success notification"
+        ],
+        "api_calls": [{ "method": "PATCH", "endpoint": "/apps/update/:appId" }],
+        "auth_required": true
+      },
+      {
+        "name": "Delete App",
+        "description": "Permanently delete an application with typed confirmation phrase",
+        "files": ["src/app/app/DeleteApp.tsx", "src/services/app.service.ts"],
+        "entry_route": "/app/{appId}",
+        "user_interactions": [
+          "Click 'Delete app' button (red)",
+          "Type exactly 'delete application {appName}'",
+          "Delete button enabled only on exact match",
+          "Click 'Delete'",
+          "See 'Deleting' spinner, success toast, redirect to /dashboard"
+        ],
+        "api_calls": [
+          { "method": "DELETE", "endpoint": "/apps/delete/:appId" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Enable/Disable App from Dashboard",
+        "description": "Toggle app enabled state from dashboard list",
+        "files": [
+          "src/app/app/EnableDisableApp.tsx",
+          "src/app/app/EnableDisableAppCard.tsx",
+          "src/services/app.service.ts"
+        ],
+        "entry_route": "/dashboard",
+        "user_interactions": [
+          "Locate app card with toggle",
+          "Observe initial toggle state (green=enabled)",
+          "Click toggle switch",
+          "Spinner appears during API call",
+          "Toggle changes state with success notification"
+        ],
+        "api_calls": [
+          { "method": "PATCH", "endpoint": "/apps/disable/:appId" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Enable/Disable App from Details",
+        "description": "Toggle app enabled state from app details page",
+        "files": [
+          "src/app/app/EnableDisableApp.tsx",
+          "src/app/app/EnableDisableAppCard.tsx",
+          "src/services/app.service.ts"
+        ],
+        "entry_route": "/app/{appId}",
+        "user_interactions": [
+          "Locate EnableDisableAppCard toggle",
+          "Observe initial toggle state (green=enabled)",
+          "Click toggle",
+          "Spinner appears during API call",
+          "Toggle changes state with success notification"
+        ],
+        "api_calls": [
+          { "method": "PATCH", "endpoint": "/apps/disable/:appId" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Add Request Time Frame (RTF)",
+        "description": "Add a timezone-aware start/end time range for automated requests",
+        "files": [
+          "src/app/request/PostRequestTimeRange.tsx",
+          "src/services/request.service.ts"
+        ],
+        "entry_route": "/app/{appId}",
+        "user_interactions": [
+          "Locate 'Add Request Time Frame' section",
+          "Select timezone if not set",
+          "Select start time from dropdown",
+          "Select end time from dropdown",
+          "Observe validation (green=valid, red=conflict)",
+          "Click 'Submit' when green",
+          "See 'Processing' spinner and success notification"
+        ],
+        "api_calls": [
+          { "method": "POST", "endpoint": "/requests/post-request-time" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Delete Request Time Frame (RTF)",
+        "description": "Delete an existing RTF after confirmation",
+        "files": [
+          "src/app/request/DeleteRequestTimeRange.tsx",
+          "src/services/request.service.ts"
+        ],
+        "entry_route": "/app/{appId}",
+        "user_interactions": [
+          "Locate RTF entry to delete",
+          "Click delete action on RTF item",
+          "Confirmation form opens",
+          "Click 'Delete' button (red)",
+          "See 'Deleting' spinner and success notification",
+          "RTF removed from list"
+        ],
+        "api_calls": [
+          {
+            "method": "DELETE",
+            "endpoint": "/requests/delete-request-time/:requestTimeId"
+          }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Settings - Update Personal Details",
+        "description": "Update username and email from settings page",
+        "files": [
+          "src/app/auth/UpdatePersonalDetails.tsx",
+          "src/services/auth.service.ts"
+        ],
+        "entry_route": "/settings",
+        "user_interactions": [
+          "Navigate to /settings",
+          "Observe pre-populated personal details",
+          "Update username field",
+          "Update email field",
+          "Click 'Save Changes'",
+          "See 'Saving' spinner and success notification"
+        ],
+        "api_calls": [
+          { "method": "PATCH", "endpoint": "/auth/user/update/:id" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Settings - Change Password",
+        "description": "Change account password from settings page",
+        "files": [
+          "src/app/auth/ChangePassword.tsx",
+          "src/services/auth.service.ts"
+        ],
+        "entry_route": "/settings",
+        "user_interactions": [
+          "Navigate to /settings",
+          "Enter current password",
+          "Enter new password (5-30 chars)",
+          "Click 'Submit'",
+          "See 'Processing' spinner and success notification",
+          "Fields reset to empty"
+        ],
+        "api_calls": [
+          { "method": "PATCH", "endpoint": "/auth/user/update-password/:id" }
+        ],
+        "auth_required": true
+      },
+      {
+        "name": "Toggle Dark / Light Theme",
+        "description": "Switch between light and dark modes via toggle in navbar. No authentication required.",
+        "files": ["src/app/shared/ThemeController.tsx"],
+        "entry_route": "/",
+        "user_interactions": [
+          "Locate theme toggle in navbar",
+          "Click toggle to switch to dark mode",
+          "Observe dark theme applied",
+          "Click toggle again to switch to light mode",
+          "Observe light theme applied"
+        ],
+        "api_calls": [],
+        "auth_required": false
+      }
+    ],
+    "known_limitations": []
+  }
+}

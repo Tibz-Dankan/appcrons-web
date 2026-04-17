@@ -1,0 +1,344 @@
+version: "2"
+type: frontend
+tech_stack:
+  - TypeScript
+  - Next.js 14
+  - Tailwind CSS
+  - React 18
+  - Redux Toolkit
+  - Zustand
+  - React Query (TanStack)
+  - Formik + Yup
+  - Recharts
+routes:
+  - path: /
+    file: src/app/page.tsx
+    auth_required: false
+    description: Landing page with hero, features, FAQ, and footer sections
+  - path: /auth/login
+    file: src/app/auth/login/page.tsx
+    auth_required: false
+    description: User login page with email and password
+  - path: /auth/signup
+    file: src/app/auth/signup/page.tsx
+    auth_required: false
+    description: User registration page with name, email, and password
+  - path: /auth/forgot-password
+    file: src/app/auth/forgot-password/page.tsx
+    auth_required: false
+    description: Forgot password page to request a password reset email
+  - path: /auth/reset-password
+    file: src/app/auth/reset-password/page.tsx
+    auth_required: false
+    description: Reset password page using a reset token from email
+  - path: /dashboard
+    file: src/app/dashboard/page.tsx
+    auth_required: true
+    description: Main dashboard showing user's apps list with search functionality
+  - path: /app/[appId]
+    file: src/app/app/[appId]/page.tsx
+    auth_required: true
+    description: Individual app detail page with request time ranges and charts
+  - path: /settings
+    file: src/app/settings/page.tsx
+    auth_required: true
+    description: Settings page with personal details, change password, and delete account
+  - path: /feedback
+    file: src/app/feedback/page.tsx
+    auth_required: true
+    description: Page to submit user feedback with rating and message
+  - path: /admin
+    file: src/app/admin/page.tsx
+    auth_required: true
+    description: Admin statistics and user management dashboard
+  - path: /docs
+    file: src/app/docs/page.tsx
+    auth_required: false
+    description: Documentation pages
+features:
+  - name: User Signup
+    description: Register a new account with username, email, and password
+    files:
+      - src/app/auth/signup/Signup.tsx
+      - src/services/auth.service.ts
+    entry_route: /auth/signup
+    user_interactions:
+      - Fill username input field
+      - Fill email input field
+      - Fill password input field
+      - Click Create button to submit
+      - See success notification and redirect to dashboard
+      - See error message on failed registration
+    api_calls:
+      - method: POST
+        endpoint: /auth/signup
+    auth_required: false
+  - name: User Login
+    description: Login with email and password credentials
+    files:
+      - src/app/auth/login/Login.tsx
+      - src/services/auth.service.ts
+    entry_route: /auth/login
+    user_interactions:
+      - Fill email input field
+      - Fill password input field
+      - Click Log in button to submit
+      - See redirect to dashboard on success
+      - See error notification on invalid credentials
+      - Click Forgot password link
+      - Click Create account link
+    api_calls:
+      - method: POST
+        endpoint: /auth/signin
+    auth_required: false
+  - name: Forgot Password
+    description: Request a password reset email
+    files:
+      - src/app/auth/forgot-password/ForgotPassword.tsx
+      - src/services/auth.service.ts
+    entry_route: /auth/forgot-password
+    user_interactions:
+      - Fill email input field
+      - Click submit button
+      - See success notification
+    api_calls:
+      - method: POST
+        endpoint: /auth/forgot-password
+    auth_required: false
+  - name: Reset Password
+    description: Reset password using a token from the password reset email
+    files:
+      - src/app/auth/reset-password/page.tsx
+      - src/services/auth.service.ts
+    entry_route: /auth/reset-password
+    user_interactions:
+      - Fill new password input
+      - Click submit button
+      - See success notification
+    api_calls:
+      - method: PATCH
+        endpoint: /auth/reset-password/:resetToken
+    auth_required: false
+  - name: Dashboard - App List
+    description: View all user apps with search and app details
+    files:
+      - src/app/dashboard/Dashboard.tsx
+      - src/app/app/AppList.tsx
+      - src/app/app/SearchApps.tsx
+      - src/app/app/AppSearchResultList.tsx
+      - src/services/app.service.ts
+    entry_route: /dashboard
+    user_interactions:
+      - View list of registered apps
+      - Search apps by name or URL
+      - Click on an app to view details
+      - See loading spinner while apps load
+      - See welcome message when no apps registered
+    api_calls:
+      - method: GET
+        endpoint: /apps/get-by-user?userId=:userId
+      - method: GET
+        endpoint: /apps/search?query=:query&userId=:userId
+    auth_required: true
+  - name: Create New App
+    description: Register a new application to monitor
+    files:
+      - src/app/app/PostApp.tsx
+      - src/app/app/PostAppLayout.tsx
+      - src/services/app.service.ts
+    entry_route: /dashboard
+    user_interactions:
+      - Fill application name input
+      - Fill URL endpoint input
+      - Select request interval from dropdown (5, 10, or 15 minutes)
+      - Click Submit button
+      - See success notification
+    api_calls:
+      - method: POST
+        endpoint: /apps/post
+    auth_required: true
+  - name: Update App
+    description: Update an existing application's name, URL, or request interval
+    files:
+      - src/app/app/UpdateApp.tsx
+      - src/services/app.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Modify application name
+      - Modify URL endpoint
+      - Change request interval
+      - Click submit to save changes
+      - See success notification
+    api_calls:
+      - method: PATCH
+        endpoint: /apps/update/:appId
+    auth_required: true
+  - name: Delete App
+    description: Delete an application from monitoring
+    files:
+      - src/app/app/DeleteApp.tsx
+      - src/services/app.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Click delete button
+      - Confirm deletion
+      - See success notification
+    api_calls:
+      - method: DELETE
+        endpoint: /apps/delete/:appId
+    auth_required: true
+  - name: Enable/Disable App
+    description: Toggle an application's enabled/disabled status
+    files:
+      - src/app/app/EnableDisableApp.tsx
+      - src/app/app/EnableDisableAppCard.tsx
+      - src/services/app.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Toggle enable/disable switch
+      - See confirmation notification
+    api_calls:
+      - method: PATCH
+        endpoint: /apps/enable/:appId
+      - method: PATCH
+        endpoint: /apps/disable/:appId
+    auth_required: true
+  - name: Add Request Time Range
+    description: Add a time range for automated requests to an app
+    files:
+      - src/app/request/PostRequestTimeRange.tsx
+      - src/services/request.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Select timezone (if first time)
+      - Select start time from dropdown
+      - Select end time from dropdown
+      - See validation messages for time range overlaps
+      - Click Submit button
+      - See success notification
+    api_calls:
+      - method: POST
+        endpoint: /requests/post-request-time
+    auth_required: true
+  - name: Update Request Time Range
+    description: Modify an existing request time range
+    files:
+      - src/app/request/UpdateRequestTimeRange.tsx
+      - src/services/request.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Select new start time
+      - Select new end time
+      - Click submit to save changes
+    api_calls:
+      - method: PATCH
+        endpoint: /requests/update-request-time/:requestTimeId
+    auth_required: true
+  - name: Delete Request Time Range
+    description: Remove a request time range
+    files:
+      - src/app/request/DeleteRequestTimeRange.tsx
+      - src/services/request.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Click delete button on a time range
+      - Confirm deletion
+    api_calls:
+      - method: DELETE
+        endpoint: /requests/delete-request-time/:requestTimeId
+    auth_required: true
+  - name: Update Timezone
+    description: Change the timezone for request scheduling
+    files:
+      - src/app/request/UpdateTimeZone.tsx
+      - src/services/request.service.ts
+    entry_route: /app/[appId]
+    user_interactions:
+      - Select new timezone from dropdown
+      - Click submit to save
+    api_calls:
+      - method: PATCH
+        endpoint: /requests/update-timezone
+    auth_required: true
+  - name: Settings - Update Personal Details
+    description: Update user name and email
+    files:
+      - src/app/auth/UpdatePersonalDetails.tsx
+      - src/services/auth.service.ts
+    entry_route: /settings
+    user_interactions:
+      - Modify name field
+      - Modify email field
+      - Click submit to save changes
+    api_calls:
+      - method: PATCH
+        endpoint: /auth/user/update/:id
+    auth_required: true
+  - name: Settings - Change Password
+    description: Change account password
+    files:
+      - src/app/auth/ChangePassword.tsx
+      - src/services/auth.service.ts
+    entry_route: /settings
+    user_interactions:
+      - Fill current password field
+      - Fill new password field
+      - Click submit button
+    api_calls:
+      - method: PATCH
+        endpoint: /auth/user/update-password/:id
+    auth_required: true
+  - name: Submit Feedback
+    description: Submit user feedback with a rating and message
+    files:
+      - src/app/feedback/page.tsx
+      - src/services/feedback.service.ts
+    entry_route: /feedback
+    user_interactions:
+      - Select a rating
+      - Write feedback message
+      - Click submit button
+    api_calls:
+      - method: POST
+        endpoint: /feedback/post
+    auth_required: true
+  - name: Admin Dashboard
+    description: View platform statistics and manage users (admin only)
+    files:
+      - src/app/admin/Statistics.tsx
+      - src/app/admin/users/
+      - src/services/admin.service.ts
+    entry_route: /admin
+    user_interactions:
+      - View platform statistics
+      - Browse user list
+      - Search users
+      - View user apps and requests
+    api_calls:
+      - method: GET
+        endpoint: /admin/stats
+      - method: GET
+        endpoint: /admin/users?limit=:limit&cursor=:cursor
+      - method: GET
+        endpoint: /admin/users/:userId
+      - method: GET
+        endpoint: /admin/users/:userId/apps?limit=:limit&cursor=:cursor
+      - method: GET
+        endpoint: /admin/users/:userId/apps/:appId/requests?before=:before
+      - method: GET
+        endpoint: /admin/users/search?query=:query
+    auth_required: true
+  - name: Logout
+    description: Log out the current user and clear session
+    files:
+      - src/app/auth/Logout.tsx
+      - src/services/auth.service.ts
+    entry_route: /dashboard
+    user_interactions:
+      - Click logout button
+      - Get redirected to login page
+    api_calls:
+      - method: POST
+        endpoint: /auth/api/logout
+    auth_required: true
+known_limitations: []
