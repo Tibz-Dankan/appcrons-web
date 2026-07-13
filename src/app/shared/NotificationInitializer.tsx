@@ -4,6 +4,7 @@ import { hideCardNotification } from "@/store/actions/notification";
 import { Notification } from "./Notification";
 import React from "react";
 import { useGetAppLiveRequest } from "@/hooks/UseGetAppLiveRequest";
+import { useGlobalRequestInterceptor } from "@/hooks/UseGlobalRequestInterceptor";
 import { PageLoader } from "@/app/shared/loader/PageLoader";
 
 const NotificationInitializer: React.FC = () => {
@@ -16,6 +17,7 @@ const NotificationInitializer: React.FC = () => {
     (state) => state.pageLoader.showPageLoader
   );
 
+  useGlobalRequestInterceptor();
   useGetAppLiveRequest();
 
   return (
