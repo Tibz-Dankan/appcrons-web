@@ -13,6 +13,10 @@ const PostHogPageView = dynamic(() => import("@/app/PostHogPageView"), {
   ssr: false,
 });
 
+const PageCapturer = dynamic(() => import("@/app/PageCapturer"), {
+  ssr: false,
+});
+
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
@@ -47,6 +51,7 @@ export default function RootLayout({
           <body className={inter.className}>
             <OnPageLoadComplete />
             <PostHogPageView />
+            <PageCapturer />
             <ThemeAppProvider>
               <NotificationInitializer />
               {children}
