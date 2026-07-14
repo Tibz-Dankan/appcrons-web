@@ -9,10 +9,14 @@ import { DocumentIcon } from "@/app/shared/Icons/DocumentIcon";
 import { MobileNavMenu } from "@/app/home/MobileNavMenu";
 import { TAuth } from "@/types/auth";
 import { useIsClient } from "@/hooks/UseIsClient";
+import { useAppSelector } from "@/hooks/redux";
 
 export const NavBar: React.FC = () => {
   const pathname = usePathname();
   const isClient = useIsClient();
+  const isMaintenanceActive = useAppSelector(
+    (state) => state.maintenance.active
+  );
   let isLoggedIn: boolean = false;
 
   if (isClient) {
@@ -25,9 +29,11 @@ export const NavBar: React.FC = () => {
 
   return (
     <nav
-      className="w-full flex items-center justify-center 
+      className={`w-full flex items-center justify-center
       border-b-[1px] border-color-border-primary
-      bg-color-bg-primary fixed top-0 left-0 z-[100]"
+      bg-color-bg-primary fixed left-0 z-[100] ${
+        isMaintenanceActive ? "top-10" : "top-0"
+      }`}
     >
       <div
         className="flex items-center justify-between 
