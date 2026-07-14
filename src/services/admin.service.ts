@@ -2,6 +2,7 @@ import { backendURL } from "@/constants";
 import {
   TAdminGetAllUsers,
   TAdminGetAppsByUser,
+  TAdminGetCountryDistribution,
   TAdminGetRequestsByApp,
   TAdminGetStats,
   TAdminGetUser,
@@ -100,6 +101,24 @@ export class AdminService {
         },
       }
     );
+
+    if (!response.ok) {
+      const error = await response.json();
+      throw new Error(error.message);
+    }
+    return await response.json();
+  };
+
+  getCountryDistribution = async ({
+    accessToken,
+  }: TAdminGetCountryDistribution) => {
+    const response = await fetch(`${backendURL}/admin/users/countries`, {
+      method: "GET",
+      headers: {
+        "Content-type": "application/json",
+        Authorization: `Bearer ${accessToken}`,
+      },
+    });
 
     if (!response.ok) {
       const error = await response.json();

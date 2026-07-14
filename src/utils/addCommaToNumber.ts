@@ -1,7 +1,7 @@
 export const addCommasToNumber = (number: number) => {
-  const numberString = number.toString();
+  const numberString = number?.toString();
 
-  const [integerPart, decimalPart] = numberString.split(".");
+  const [integerPart, decimalPart] = numberString?.split(".") || ["", ""];
 
   const integerArray = integerPart.split("");
 
