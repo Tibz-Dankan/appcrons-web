@@ -10,9 +10,13 @@ import { addCommasToNumber } from "@/utils/addCommaToNumber";
 import UserIcon from "../shared/Icons/UserIcon";
 import { SettingsIcon } from "../shared/Icons/SettingsIcon";
 import { RequestIcon } from "../shared/Icons/RequestIcon";
+import { UserGroupIcon } from "../shared/Icons/UserGroupIcon";
+import { useRouter } from "@/lib/router-events";
+import { clientURL } from "@/constants";
 
 export const Statistics: React.FC = () => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
+  const router = useRouter();
 
   const { isPending, isError, data, error } = useQuery({
     queryKey: ["appcrons-statistics"],
@@ -26,6 +30,11 @@ export const Statistics: React.FC = () => {
     userCount: 0,
     appCount: 0,
     requestCount: 0,
+    countryCount: 0,
+  };
+
+  const navigateToCountriesPage = () => {
+    router.push(`${clientURL}/admin/users/countries`);
   };
 
   const getValue = (valueInt: number) => {
@@ -115,6 +124,32 @@ export const Statistics: React.FC = () => {
           </p>
         </div>
       </Card>
+      <div
+        className="w-full h-auto rounded-md p-4 bg-color-bg-secondary shadow
+        flex flex-col justify-between gap-4 cursor-pointer
+        bg-color-bg-tertiary/0 border-[1px] border-color-border-primary
+        hover:border-primary transition-colors"
+        onClick={navigateToCountriesPage}
+        role="button"
+        tabIndex={0}
+      >
+        <div className="flex items-start justify-between gap-4">
+          <p className="text-sm text-color-text-secondary">
+            User Country Distribution
+          </p>
+          <span
+            className="text-color-text-primary bg-primary/15
+            rounded-md p-2"
+          >
+            <UserGroupIcon className="text-primary w-5 h-5" />
+          </span>
+        </div>
+        <div className="flex flex-col gap-2 text-muted-clr">
+          <p className="font-semibold text-3xl">
+            {getValue(stats.countryCount)}
+          </p>
+        </div>
+      </div>
     </div>
   );
 };

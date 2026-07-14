@@ -10,9 +10,20 @@ export type TStatsAPIData = {
   userCount: number;
   appCount: number;
   requestCount: number;
+  countryCount: number;
 };
 
 export type TAdminGetStats = {
+  accessToken: string;
+};
+
+export type TCountryDistributionItem = {
+  country: string;
+  countryCode: string;
+  userCount: number;
+};
+
+export type TAdminGetCountryDistribution = {
   accessToken: string;
 };
 
