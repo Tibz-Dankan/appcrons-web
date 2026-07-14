@@ -6,6 +6,7 @@ import React from "react";
 import { useGetAppLiveRequest } from "@/hooks/UseGetAppLiveRequest";
 import { useGlobalRequestInterceptor } from "@/hooks/UseGlobalRequestInterceptor";
 import { PageLoader } from "@/app/shared/loader/PageLoader";
+import { MaintenanceBanner } from "@/app/shared/MaintenanceBanner";
 
 const NotificationInitializer: React.FC = () => {
   const dispatch = useAppDispatch();
@@ -22,6 +23,7 @@ const NotificationInitializer: React.FC = () => {
 
   return (
     <div>
+      <MaintenanceBanner />
       {showPageLoader && <PageLoader />}
       {notification.showCardNotification && (
         <div>

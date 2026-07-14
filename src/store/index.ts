@@ -6,6 +6,7 @@ import { appSlice } from "./reducers/app";
 import { requestSlice } from "./reducers/request";
 import { pageLoaderSlice } from "./reducers/pageLoader";
 import { sidebarSlice } from "./reducers/sidebar";
+import { maintenanceSlice } from "./reducers/maintenance";
 
 export const makeStore = () => {
   return configureStore({
@@ -17,6 +18,7 @@ export const makeStore = () => {
       appLiveRequest: appLiveRequestSlice.reducer,
       pageLoader: pageLoaderSlice.reducer,
       sidebar: sidebarSlice.reducer,
+      maintenance: maintenanceSlice.reducer,
     },
   });
 };
@@ -34,3 +36,4 @@ export const requestActions = requestSlice.actions;
 export const appLiveRequestActions = appLiveRequestSlice.actions;
 export const pageLoaderActions = pageLoaderSlice.actions;
 export const sidebarActions = sidebarSlice.actions;
+export const maintenanceActions = maintenanceSlice.actions;
