@@ -35,7 +35,7 @@ export class AdminService {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -75,7 +75,7 @@ export class AdminService {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -99,7 +99,7 @@ export class AdminService {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
@@ -112,13 +112,16 @@ export class AdminService {
   getCountryDistribution = async ({
     accessToken,
   }: TAdminGetCountryDistribution) => {
-    const response = await fetch(`${backendURL}/admin/users/countries`, {
-      method: "GET",
-      headers: {
-        "Content-type": "application/json",
-        Authorization: `Bearer ${accessToken}`,
+    const response = await fetch(
+      `${backendURL}/admin/users/countries/distribution`,
+      {
+        method: "GET",
+        headers: {
+          "Content-type": "application/json",
+          Authorization: `Bearer ${accessToken}`,
+        },
       },
-    });
+    );
 
     if (!response.ok) {
       const error = await response.json();
@@ -136,7 +139,7 @@ export class AdminService {
           "Content-type": "application/json",
           Authorization: `Bearer ${accessToken}`,
         },
-      }
+      },
     );
 
     if (!response.ok) {
