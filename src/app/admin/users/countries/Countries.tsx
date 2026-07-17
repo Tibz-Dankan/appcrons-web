@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { useState } from "react";
 import { useQuery } from "@tanstack/react-query";
 import { useAppSelector } from "@/hooks/redux";
 import { Spinner } from "@/app/shared/loader/Spinner";
@@ -10,6 +10,9 @@ import { AdminService } from "@/services/admin.service";
 import { TCountryDistributionItem } from "@/types/admin";
 import { countryCodeToFlagEmoji } from "@/utils/countryCodeToFlagEmoji";
 import { addCommasToNumber } from "@/utils/addCommaToNumber";
+import { CountryUsersList } from "./CountryUsersList";
+import { ChevronDownIcon } from "@/app/shared/Icons/ChevronDownIcon";
+import { ChevronUpIcon } from "@/app/shared/Icons/ChevronUpIcon";
 
 const Countries: React.FC = () => {
   const accessToken = useAppSelector((state) => state.auth.accessToken);
@@ -21,6 +24,20 @@ const Countries: React.FC = () => {
         accessToken: accessToken,
       }),
   });
+
+  const [expanded, setExpanded] = useState<Set<number>>(new Set());
+
+  const toggleExpanded = (index: number) => {
+    setExpanded((prev) => {
+      const next = new Set(prev);
+      if (next.has(index)) {
+        next.delete(index);
+      } else {
+        next.add(index);
+      }
+      return next;
+    });
+  };
 
   const countries: TCountryDistributionItem[] = data?.data ?? [];
 
@@ -94,29 +111,62 @@ const Countries: React.FC = () => {
             </thead>
             <tbody>
               {countries.map((item, index) => {
+                const users = item.users ?? [];
+                const hasUsers = users.length > 0;
+                const isExpanded = expanded.has(index);
+                const rowIsLast =
+                  isLastElement(countries, index) && !isExpanded;
+
                 return (
-                  <tr
-                    className="h-12 [&>*]:border-b-[1px]
-                    [&>*]:border-color-border-primary text-sm"
-                    key={index}
-                  >
-                    <td
-                      className={`px-2 pl-4 border-l-[1px]
-                      border-color-border-primary text-lg
-                      ${isLastElement(countries, index) && "rounded-bl-md"}`}
+                  <React.Fragment key={index}>
+                    <tr
+                      className={`h-12 [&>*]:border-b-[1px]
+                      [&>*]:border-color-border-primary text-sm
+                      ${hasUsers && "cursor-pointer"}`}
+                      onClick={() => hasUsers && toggleExpanded(index)}
                     >
-                      <span>{countryCodeToFlagEmoji(item.countryCode)}</span>
-                    </td>
-                    <td className="px-2">
-                      <span>{item.country}</span>
-                    </td>
-                    <td
-                      className={`px-2 border-r-[1px] border-color-border-primary
-                      ${isLastElement(countries, index) && "rounded-br-md"}`}
-                    >
-                      {addCommasToNumber(item.userCount)}
-                    </td>
-                  </tr>
+                      <td
+                        className={`px-2 pl-4 border-l-[1px]
+                        border-color-border-primary text-lg
+                        ${rowIsLast && "rounded-bl-md"}`}
+                      >
+                        <span>
+                          {countryCodeToFlagEmoji(item.locInfo.countryCode)}
+                        </span>
+                      </td>
+                      <td className="px-2">
+                        <span>{item.locInfo.country || "Unknown"}</span>
+                      </td>
+                      <td
+                        className={`px-2 border-r-[1px] border-color-border-primary
+                        ${rowIsLast && "rounded-br-md"}`}
+                      >
+                        <div className="flex items-center justify-between gap-2">
+                          <span>{addCommasToNumber(item.userCount)}</span>
+                          {hasUsers &&
+                            (isExpanded ? (
+                              <ChevronUpIcon className="w-4 h-4" />
+                            ) : (
+                              <ChevronDownIcon className="w-4 h-4" />
+                            ))}
+                        </div>
+                      </td>
+                    </tr>
+                    {isExpanded && (
+                      <tr>
+                        <td
+                          colSpan={3}
+                          className={`border-b-[1px] border-l-[1px] border-r-[1px]
+                          border-color-border-primary p-0
+                          ${
+                            isLastElement(countries, index) && "rounded-b-md"
+                          }`}
+                        >
+                          <CountryUsersList users={users} />
+                        </td>
+                      </tr>
+                    )}
+                  </React.Fragment>
                 );
               })}
             </tbody>

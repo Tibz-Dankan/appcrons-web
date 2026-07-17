@@ -17,10 +17,32 @@ export type TAdminGetStats = {
   accessToken: string;
 };
 
-export type TCountryDistributionItem = {
+export type TLocInfo = {
+  status: string;
   country: string;
   countryCode: string;
+  region: string;
+  regionName: string;
+  city: string;
+  zip: string;
+  lat: number;
+  lon: number;
+  timezone: string;
+  isp: string;
+  org: string;
+  as: string;
+  query: string;
+};
+
+export type TCountryDistributionUser = TUser & {
+  createdAt: string;
+  updatedAt: string;
+};
+
+export type TCountryDistributionItem = {
   userCount: number;
+  users: TCountryDistributionUser[];
+  locInfo: TLocInfo;
 };
 
 export type TAdminGetCountryDistribution = {
